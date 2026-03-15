@@ -27,7 +27,19 @@ GSI is a Valve feature that sends real-time game state data to a local HTTP endp
 
 ## Launch options
 
-No special Dota 2 launch options are required for GSI. Optionally add `-console` to enable the in-game console for debugging.
+**How to set:** Steam → Library → Dota 2 → right-click → Properties → General → Launch Options.
+
+| Option | Required | Description |
+|--------|----------|-------------|
+| `-gamestateintegration` | **yes** | Enables GSI. Since March 2022 Valve disabled GSI by default for performance reasons — without this flag the config file is ignored |
+| `-console` | no | Enable in-game developer console (toggle with `` ` ``) |
+| `-condebug` | no | Write console output to `console.log` in the Dota 2 directory |
+| `-toconsole` | no | Open the console automatically on launch |
+
+Example launch options string:
+```
+-gamestateintegration -console -condebug
+```
 
 ## Verify it works
 
