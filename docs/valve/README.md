@@ -4,13 +4,13 @@ GSI is a Valve feature that sends real-time game state data to a local HTTP endp
 
 ## Config file setup
 
-1. Copy the example config to your Dota 2 cfg directory:
+1. Copy the example config to the Dota 2 GSI directory (note the `gamestate_integration/` subfolder):
 
    ```
-   <Steam>/steamapps/common/dota 2 beta/game/dota/cfg/gamestate_integration_trener_misha.cfg
+   <Steam>/steamapps/common/dota 2 beta/game/dota/cfg/gamestate_integration/gamestate_integration_trener_misha.cfg
    ```
 
-   The source file is [`gamestate_integration_trener_misha.cfg.example`](../../gamestate_integration_trener_misha.cfg.example) in the project root. Remove the `.example` suffix when copying.
+   The source file is [`gamestate_integration_trener_misha.cfg.example`](../../gamestate_integration_trener_misha.cfg.example) in the project root. Remove the `.example` suffix when copying. Create the `gamestate_integration/` folder if it doesn't exist.
 
 2. Restart Dota 2 if it was already running.
 
