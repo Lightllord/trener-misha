@@ -2,3 +2,6 @@ node_modules/
 dist/
 .env
 *.log
+
+# Dota 2 GSI config (only .cfg.example is tracked)
+gamestate_integration_trener_misha.cfg
