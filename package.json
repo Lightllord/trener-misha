@@ -1,0 +1,28 @@
+{
+  "name": "trener-misha",
+  "version": "1.0.0",
+  "description": "Dota 2 coaching assistant powered by Game State Integration",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lightllord/trener-misha.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Lightllord/trener-misha/issues"
+  },
+  "homepage": "https://github.com/Lightllord/trener-misha#readme",
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
