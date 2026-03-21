@@ -28,9 +28,9 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
   }
 
   res.writeHead(200);
-  res.end("trener-misha is running");
+  res.end("insight-app is running");
 });
 
 server.listen(PORT, () => {
-  console.log(`[trener-misha] Listening on http://localhost:${PORT}`);
+  console.log(`[insight-app] GSI listener on http://localhost:${PORT}`);
 });

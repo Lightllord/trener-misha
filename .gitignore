@@ -2,6 +2,15 @@ node_modules/
 dist/
 .env
 *.log
+.temp/
+
+# Subproject build artifacts
+frontend/node_modules/
+frontend/dist/
+backend/node_modules/
+backend/dist/
+insight-app/node_modules/
+insight-app/dist/
 
 # Dota 2 GSI config (only .cfg.example is tracked)
 gamestate_integration_trener_misha.cfg

@@ -1,28 +1,55 @@
 # trener-misha
 
-Dota 2 coaching assistant that receives real-time game state via [Game State Integration (GSI)](https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration) and provides coaching feedback.
+Dota 2 real-time voice coaching assistant powered by OpenAI Realtime API.
+
+## Architecture
+
+```
+┌──────────────┐   WebSocket    ┌──────────────┐   WebSocket    ┌──────────────┐
+│   frontend   │◄──────────────►│   backend    │◄──────────────►│   OpenAI     │
+│  :5173       │  PCM16 audio   │  :3000       │  RealtimeAPI   │  Realtime    │
+│  Vite + TS   │  + JSON ctrl   │  Express+WS  │                │              │
+└──────────────┘                └──────────────┘                └──────────────┘
+                                       ▲
+                                       │ (future relay)
+                                       │
+                                ┌──────────────┐
+                                │ insight-app  │◄─── Dota 2 GSI POST
+                                │  :6074       │
+                                │  raw HTTP    │
+                                └──────────────┘
+```
+
+- **[backend/](backend/README.md)** — WS relay between browser and OpenAI, RealtimeAgent + tools
+- **[frontend/](frontend/README.md)** — browser audio client (AudioWorklet mic capture, PCM16 playback)
+- **[insight-app/](insight-app/README.md)** — GSI listener for Dota 2 game state
+
+## Prerequisites
+
+- Node.js v24+ (use [nvm](https://github.com/nvm-sh/nvm) or [nvm-windows](https://github.com/coreybutler/nvm-windows))
+- OpenAI API key with Realtime API access
 
 ## Quick start
 
 ```bash
-npm install
-npm run dev
+# 1. Set up environment
+cp .env.example backend/.env
+# Edit backend/.env — add your OPENAI_API_KEY
+
+# 2. Install & run each subproject (3 terminals)
+
+# Terminal 1 — backend (port 3000)
+cd backend && npm install && npm run dev
+
+# Terminal 2 — frontend (port 5173, proxies /ws → backend)
+cd frontend && npm install && npm run dev
+
+# Terminal 3 — insight-app (port 6074)
+cd insight-app && npm install && npm run dev
 ```
 
-The server starts on `http://localhost:6074`.
-
-## Commands
-
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Dev server with hot reload |
-| `npm run build` | Compile TypeScript to `dist/` |
-| `npm start` | Run compiled output |
+Open `http://localhost:5173`, click Connect, and start speaking.
 
 ## Dota 2 setup
 
-To connect Dota 2 to the server, see the [GSI integration guide](docs/valve/README.md).
-
-## Documentation
-
-See [docs/](docs/README.md) for full documentation index.
+To connect Dota 2 game state to the app, see the [GSI integration guide](docs/valve/README.md).
