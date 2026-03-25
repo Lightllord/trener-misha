@@ -14,3 +14,12 @@ insight-app/dist/
 
 # Dota 2 GSI config (only .cfg.example is tracked)
 gamestate_integration_trener_misha.cfg
+
+# Claude IDE settings
+.claude/
+
+# Python cache
+cv/__pycache__/
+
+# Runtime data
+backend/data/draft.json

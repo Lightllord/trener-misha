@@ -1,6 +1,26 @@
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
+import { MatchStateManager } from "./match-state.js";
+import { DraftDetector } from "./draft-detector.js";
+import type { RawGsiPayload } from "./types.js";
 
 const PORT = 6074;
+
+const matchState = new MatchStateManager();
+const draftDetector = new DraftDetector();
+
+// При смене фазы на pre_game — запускаем детекцию драфта
+matchState.onPhaseChange((newPhase, prevPhase) => {
+  console.log(`[insight-app] Phase: ${prevPhase ?? "none"} → ${newPhase}`);
+
+  if (newPhase === "pre_game" && prevPhase !== "pre_game") {
+    draftDetector.start();
+  }
+
+  // Новый матч или выход — сброс
+  if (newPhase === "hero_selection" && prevPhase === "post_game") {
+    draftDetector.reset();
+  }
+});
 
 function parseBody(req: IncomingMessage): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -15,8 +35,12 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
   if (req.method === "POST") {
     try {
       const raw = await parseBody(req);
-      const data: unknown = JSON.parse(raw);
-      console.log("[GSI]", JSON.stringify(data, null, 2));
+      const data = JSON.parse(raw) as RawGsiPayload;
+
+      console.log("[POST] map:", !!data.map, "player:", !!data.player, "game_state:", data.map?.game_state ?? "none");
+
+      matchState.update(data);
+
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ status: "ok" }));
     } catch (err) {
@@ -24,6 +48,22 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
       res.writeHead(400);
       res.end("Bad Request");
     }
+    return;
+  }
+
+  // GET /state — текущее состояние матча для агента
+  if (req.method === "GET" && req.url === "/state") {
+    const state = matchState.current;
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(state));
+    return;
+  }
+
+  // GET /draft — текущий драфт (составы команд)
+  if (req.method === "GET" && req.url === "/draft") {
+    const draft = draftDetector.current;
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(draft));
     return;
   }
 

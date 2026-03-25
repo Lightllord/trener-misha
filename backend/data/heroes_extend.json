@@ -1,0 +1,919 @@
+[
+  {
+    "id": 1,
+    "displayName": "Anti-Mage",
+    "shortName": "antimage",
+    "notes": "stranges:\n\n* Mana Break damage scales multiplicatively with enemy mana pools\n* Blink enables unmatched mobility, projectile disjointing, and repositioning\n* Counterspell stacks multiplicatively with base magic resistance and can reflect enemy target spells back at them\n* Mana Void deals AoE damage proportional to missing mana, with potential for one-shot kills on mana-depleted enemies\n* Illusions benefit from Mana Break and Counterspell replication, multiplying damage output through multiple mana-burning sources\n\nweaknes:\n\n* Completely ineffective against manaless enemies as primary damage source becomes irrelevant\n* Early game extremely vulnerable with low health pool and melee attack range limitations\n* Positioning dependent - must commit to melee range and becomes vulnerable when Blink is on cooldown\n* Susceptible to physical damage as Counterspell only provides magic defense\n* Mana Void requires team coordination and enemy mana depletion before dealing meaningful damage\n\ncore\\_mecanics:\n\n* Mana manipulation through burning, resistance, and execution based on enemy mana depletion\n* Blink-based mobility framework for positioning, escape, and initiation\n* Illusion synergy that amplifies damage through multiple mana-burning attackers\n* Timing-dependent power curve from weak early farming carry to dominant late game executioner\n\n",
+    "complete": true
+  },
+  {
+    "id": 2,
+    "displayName": "Axe",
+    "shortName": "axe",
+    "notes": "stranges:\n\n* Forces enemy action through taunt mechanics, bypassing opponent agency and positioning completely\n* Pure damage sources that ignore damage reduction, armor, and defensive modifiers\n* Execute capability that bypasses death prevention effects and resets cooldown on successful kills\n* Permanent power scaling through armor accumulation per hero kill\n* Damage multiplier synergy: forced attacks trigger AoE punishment which can be combined with damage reflection\n\nweaknes:\n\n* Completely mobility-dependent - has no built-in gap closer or escape mechanism\n* Reactive damage only - Counter Helix requires enemies to attack Axe to trigger, useless against ranged kiting\n* High mana burden relative to small mana pool and low intelligence growth\n* Initiation exposure - Berserker's Call commits Axe without immediate damage payoff\n\ncore\\_mecanics:\n\n* Berserker's Call + Counter Helix combo: force enemies to attack, guaranteeing AoE pure damage procs during taunt window\n* Culling Blade execution: instantly kill targets below threshold, reset cooldown on kill, provide ally speed and armor buffs\n* Item-dependent initiation: requires Blink Dagger to effectively position for taunts and bypass enemy frontlines\n* Blade Mail synergy during taunts: reflects damage taken to attackers while Counter Helix triggers, creating triple damage source\n\n\n\n",
+    "complete": true
+  },
+  {
+    "id": 3,
+    "displayName": "Bane",
+    "shortName": "bane",
+    "notes": "stranges:\n\n* Pure damage on Brain Sap and Fiend's Grip pierces all damage reduction and immunity\n* Exceptional single-target disable chain providing extended lockdown potential\n* Reliable self-sustain through Brain Sap healing equal to damage dealt\n* Mana drain on Fiend's Grip devastates mana-dependent targets\n* Vision manipulation capabilities (Nightmare reduces vision, Fiend's Grip provides True Sight)\n\nweaknes:\n\n* Fiend's Grip is a channeled ability vulnerable to any interruption\n* High mana dependency on all abilities limits ability to spam spells\n* No built-in mobility spells with below-average movement speed\n* Lacks AoE disables and peel, struggles against multiple attackers\n* Relies on sustained damage over time, incapable of burst kills\n\ncore\\_mecanics:\n\n* Nightmare transfers to attackers\n* Fiend's Grip pierces debuff immunity while draining max mana throughout the channel\n* Brain Sap deals pure damage that cannot be reduced, healing Bane for the full amount\n* Enfeeble severely reduces attack damage while dealing pure damage over time\n\n\n\n",
+    "complete": true
+  },
+  {
+    "id": 4,
+    "displayName": "Bloodseeker",
+    "shortName": "bloodseeker",
+    "notes": "stranges:\n\n* Thirst removes movement speed cap completely, allowing potentially infinite speed\n* Percentage-based damage and healing scales infinitely with enemy health pools\n* Global True Sight vision on low health enemies provides built-in detection system\n* Rupture pure damage ignores standard damage mitigation\n\nweaknes:\n\n* Significant HP costs (bloodrage) create constant vulnerability\n* Combat effectiveness heavily dependent on enemies being below specific health thresholds\n* Core mechanics (rupture, bloodrite) require prediction and have long counterplay windows\n* Abilities are nullified by enemies who can stand still\n\ncore\\_mecanics:\n\n* Movement-based gameplay where speed dictates positioning and chase potential\n* HP management through bloodrage sacrifice and bloodmist drain for enhanced abilities\n* Delayed area control (bloodrite) forcing enemy positioning decisions\n* Movement punishment (rupture) that forces enemies to choose between taking damage or being stationary\n* Percentage-based interactions that scale with game duration rather than items\n\n",
+    "complete": true
+  },
+  {
+    "id": 5,
+    "displayName": "Crystal Maiden",
+    "shortName": "crystal_maiden",
+    "notes": "stranges:\n\n* Global mana regeneration provides consistent team-wide resource generation across entire map\n* Massive AoE magical damage potential in teamfights with slow field coverage\n* Instant projectile disjoint and backward slide for emergency escape(aghanims shard)\n\nweaknes:\n\n* Extremely fragile base survivability with no natural damage reduction or defensive capabilities\n* Lacks innate mobility and escape abilities\n* Ultimate channeling completely interrupted by any stun, silence, or disable\n* Entirely magical damage provides zero impact against spell immunity or magic resistance stacking\n\ncore\\_mecanics:\n\n* Survival maintains global mana regeneration for team; death removes all utility\n* Root disables allow precise follow-up setup for teammates and AoE abilities\n* AoE damage always centers on Crystal Maiden's current position\n* Scepter transforms ultimate from stationary commitment to mobile damage zone\n* Damage effectiveness heavily dependent on magic resistance manipulation from items or teammates\n\n",
+    "complete": true
+  },
+  {
+    "id": 6,
+    "displayName": "Drow Ranger",
+    "shortName": "drow_ranger",
+    "notes": "stranges:\n\n* Precision Aura provides powerful team-wide agility scaling that benefits all ranged allies, creating multiplicative value from agility items\n* Gust combines knockback, silence, True Sight, and self mobility into one versatile control ability\n* Marksmanship ignores enemy base armor to significantly amplify damage output against armored targets\n* Multishot enables high range farming and multi-target teamfight damage while applying attack modifiers\n* Glacier creates high ground terrain advantage for the entire team with bonus attack range and improved vision\n\nweaknes:\n\n* Marksmanship armor penetration disabled when enemy heroes are in proximity, forcing spacing and positioning demands\n* Multishot is channeled and interruptible, requiring Drow to stand still and making her vulnerable to crowd control\n* Lacks built-in escape mobility, becoming easy prey for ganks if slowed or rooted\n* Fragile early game with low base health and armor, requiring items for survivability\n* Precision Aura provides no benefit to melee allies, limiting team composition flexibility\n\ncore\\_mecanics:\n\n* Positioning-based playstyle where maintaining distance from enemies unlocks Marksmanship and high ground bonuses\n* Kiting-focused DPS relying on Frost Arrows slow and ranged advantage to deal damage while avoiding retaliation\n* Farming presence using Multishot to participate in fights and clear waves\n* Terrain manipulation through Glacier to create advantageous positioning and team fight setups\n* Team aura optimization where item choices and team composition amplify shared agility benefits\n\n",
+    "complete": true
+  },
+  {
+    "id": 7,
+    "displayName": "Earthshaker",
+    "shortName": "earthshaker",
+    "notes": "stranges:\n\n* Terrain manipulation via Fissure creates impassable barriers that can isolate enemies, cut off escape routes, and control map movement\n* Exponential damage scaling with Echo Slam through echo mechanics where each hit enemy generates additional damage to all nearby targets\n* Chain crowd control through Aftershock triggering on all spell casts, enabling repeated AOE stuns when chaining abilities\n* Mobility transformation with Aghanim's Scepter, converting Enchant Totem into a long-range repositioning tool for perfect initiation\n* Passive kill pressure from Slugger, creating additional damage projectiles from killed enemies\n\nweaknes:\n\n* Heavy mana dependency on all core abilities requires mana management items to function in prolonged fights\n* Long cast animations and cooldowns leave extended windows of vulnerability and punish poor positioning\n* Echo Slam damage completely reliant on enemy clustering, dealing minimal damage against single targets\n* Melee range with no innate mobility makes initiation item-dependent and vulnerable to kiting\n* Fissure can trap allies and block teammate movement, creating potential for game-losing mistakes\n* All crowd control do not pierces through immunity, allowing enemies to cleanse stuns with BKB\n\ncore\\_mecanics:\n\n* Fissure + Enchant Totem + Echo Slam combo sequence: create terrain barrier to cluster enemies, position aggressively, unleash massive AOE burst with chain stuns\n* Echo Slam exponential scaling mechanic: each enemy hit generates echo waves that damage all nearby units, with heroes counting double for echo calculation\n* Aftershock as passive AOE stun trigger: automatically applies AOE stun and damage on every spell cast, enabling chain disable through ability spam\n* Terrain-based positioning requiring constant awareness of ally positions, cluster detection, and map geometry to maximize Fissure utility without harming own team\n* Mana-gated burst playstyle where resources must be carefully managed to ensure full combo execution during critical moments\n\n",
+    "complete": true
+  },
+  {
+    "id": 8,
+    "displayName": "Juggernaut",
+    "shortName": "juggernaut",
+    "notes": "stranges:\n\n* Blade Fury provides magic immunity, and dispels debuffs while dealing AoE damage\n* Omnislash grants invulnerability and unselectability while executing targeted attacks that proc all on-hit effects\n* Blade Dance critical strikes significantly amplify sustained damage output with pseudo-random reliability\n* Healing Ward provides percentage-based AoE regeneration to sustain allies in fights\n* High move speed and defensive tools allow strong early game presence and split-pushing potential\n\nweaknes:\n\n* Blade Fury negates attack damage, rendering lifesteal, crit, and cleave ineffective during its duration\n* Short attack range and limited Omnislash target options restrict positioning and initiation\n* High mana costs and long cooldowns on core abilities make ability usage punishing if mis-timed\n* Healing Ward is extremely fragile with minimal health and easily destroyed in fights\n* Cannot cast Blade Fury during Omnislash or vice versa, creating ability usage conflicts\n\ncore\\_mecanics:\n\n* Blade Fury: Area-of-effect magical damage with magic immunity and debuff dispel; attack damage is disabled during duration\n* Omnislash: Series of targeted instantaneous attacks that provide invulnerability and can execute abilities/items between jumps\n* Blade Dance: Critical strike mechanic using pseudo-random distribution; critical strikes proc at attack point rather than on damage\n* Healing Ward: Mobile aura providing percentage-based health regeneration; persists briefly for continued healing after destruction\n* Swiftslash (Aghanim's Scepter): Shorter duration Omnislash variant for cleanup scenarios on cooldown reduction\n\n",
+    "complete": true
+  },
+  {
+    "id": 9,
+    "displayName": "Mirana",
+    "shortName": "mirana",
+    "notes": "stranges:\n\n* Long-range stun initiation with travel-time scaling and vision provision\n* Reliable area damage with guaranteed secondary target on closest enemy\n* Multi-charge leap system for high mobility and repositioning\n* Global team invisibility for coordinated attacks and escapes\n\nweaknes:\n\n* Highly mana-dependent with small mana pool limiting spellcasting\n* Physically frail with low base health and no built-in sustain\n* Invisibility activation too slow for reactionary escapes\n* Arrow landing zones ineffective at close range due to minimum stun\n* Long ulti cooldowns require careful usage planning\n\ncore\\_mecanics:\n\n* Sacred Arrow stun duration and damage scale with distance traveled\n* Starstorm's double-hit mechanic guarantees secondary meteor on nearest target\n* Leap charges recharge over time, with buffs applying instantly on cast\n* Moonlight Shadow requires pre-casting due to fade delay, invisibility reapplies if revealed\n* High-kit synergy but requires forward planning due to mobility and commitment trades\n\n",
+    "complete": true
+  },
+  {
+    "id": 10,
+    "displayName": "Morphling",
+    "shortName": "morphling",
+    "notes": "stranges:\n\n* Dynamic attribute redistribution allows adaptation between pure damage output and exceptional survivability\n* Waveform provides invulnerable mobility for initiation, escape, and wave-clearing\n* Ability to copy enemy heroes grants access to their basic abilities for strategic versatility\n* Strong late-game scaling as an agility carry with flexible stat allocation\n\nweaknes:\n\n* Micro-intensive attribute management requires constant attention and precise decision-making under pressure\n* Highly vulnerable when Waveform is on cooldown, creating significant cooldown-dependent windows of weakness\n* Mana-intensive playstyle limits sustainability in prolonged fights through ability costs and stat shifting\n* Early-game struggles due to dependency on proper attribute management and item timing to reach power spikes\n\ncore\\_mecanics:\n\n* Waveform functions as primary mobility tool with invulnerability, serving dual purpose as nuke and escape mechanism\n* Attribute Shift enables real-time conversion between Agility for damage and Strength for HP pool, with mana cost per second\n* Morph ability copies targeted enemy heroes, gaining their basic abilities while allowing instant switch between forms\n* Facet system fundamentally shifts primary attribute focus between damage-oriented (Ebb) and tanky spell-amplified (Flow) playstyles\n\n",
+    "complete": true
+  },
+  {
+    "id": 11,
+    "displayName": "Shadow Fiend",
+    "shortName": "nevermore",
+    "notes": "stranges:\n\n* Insanely high damage potential from Necromastery stack collection and Shadowraze damage amplification\n* Devastating teamfight ultimate that deals massive damage while slowing and reducing magic resistance\n* Armor reduction aura that punishes enemy positioning across entire teamfight\n\nweaknes:\n\n* Loses significant portion of damage capability upon death (soul penalty)\n* Extremely fragile early game with low base health and strength\n* Requires precise positioning for Shadowraze accuracy and optimal Requiem placement\n* Heavily dependent on consistent farming to maintain soul stacks for effectiveness\n\ncore\\_mecanics:\n\n* Necromastery passive collects souls from kills for attack damage bonuses, with severe penalty upon death\n* Three Shadowraze variants at different distances with stacking damage amplifier on hit targets\n* Requiem of Souls ultimate channels then releases lines of damaging energy with slow and magic resistance reduction\n* Feast of Souls consumes soul stacks for temporary burst of attack speed and movement speed\n\n",
+    "complete": true
+  },
+  {
+    "id": 12,
+    "displayName": "Phantom Lancer",
+    "shortName": "phantom_lancer",
+    "notes": "stranges:\n- Exponential illusion growth through Juxtapose - each attack from PL or illusions can create more illusions, rapidly building overwhelming army\n- Phantom Rush provides reliable gap-closing that works on all illusions, creating coordinated swarming effect\n- Doppelganger offers escape, repositioning, and additional illusion generation simultaneously\n- Spirit Lance combines catch potential, slow, damage, and illusion creation in one spell\n- Strong natural late-game scaling - illusions benefit from agility increases through damage and attack speed\n\nweaknes:\n- Extremely vulnerable to AoE damage - entire illusion army can be eliminated quickly by splash/AoE spells\n- Weak early game reliant on melee range and requires significant levels/items to become effective\n- Limited illusion duration - army cannot be maintained indefinitely, requires constant combat engagement\n- Mana依赖 for engagement and survival abilities\n- No burst damage - relies on sustained physical damage through prolonged engagement and overwhelming numbers\n\ncore_mecanics:\n- illusion multiplication through Juxtapose - pseudo-random chance creates exponential army growth with maximum illusion caps\n- Phantom Rush toggle ability for gap-closing - all illusions possess this ability for coordinated swarming\n- Doppelganger removes PL and nearby illusions from battlefield, gathers them, then reappears with additional illusions\n- Continuous combat engagement required to maintain illusion army due to limited duration mechanics\n- Teamfight positioning around building illusions while spreading them to minimize AoE exposure",
+    "complete": true
+  },
+  {
+    "id": 13,
+    "displayName": "Puck",
+    "shortName": "puck",
+    "notes": "stranges:\n\n* Exceptional mobility with multiple escape tools: instant teleportation to orb location, short-range blink with silence, and invulnerability dodge mechanic\n* Powerful multi-purpose control through AoE root that locks enemy positioning and punishes movement with extensive stun duration\n* Consistent magical burst threat with ranged AoE nuke and silence combination for ganking potential\n\nweaknes:\n\n* Mana-intensive abilities with significant cooldown periods create severe vulnerability windows when overextended\n* Extremely fragile with low durability and health pool; inability to survive burst or chain-CC without abilities available\n* Effectiveness heavily positioning-dependent; core control ability requires enemies to break tether for full impact\n\ncore\\_mecanics:\n\n* Illusory Orb + Ethereal Jaunt synergy provides primary mobility and escape through instant teleportation to orb position\n* Phase Shift grants brief but powerful invulnerability window that can dodge any damage type and allows item usage during effect\n* Dream Coil creates tether zones that limit enemy spacing, with root duration punishing movement beyond break distance\n* Waning Rift combines short-range teleport, AoE damage, and silence for repositioning and disruption\n* Facet choice alters playstyle through different orb trajectory patterns or controlled repositioning options\n\n",
+    "complete": true
+  },
+  {
+    "id": 14,
+    "displayName": "Pudge",
+    "shortName": "pudge",
+    "notes": "stranges:\n- Unmatched displacement capability with hook - longest range non-ultimate isolation tool in game\n- Passive strength scaling from enemy deaths provides permanent tankiness independent of items\n- Area denial through rot that controls space and punishes poor positioning\n- Active damage negation to survive burst and critical abilities\n- Strength-based damage scaling that grows stronger over time\n\nweaknes:\n- Extremely low mobility with no escape mechanism - completely positioning dependent\n- Severe mana constraints limit hook usage and require careful resource management\n- Hook requires exceptional prediction and reaction - most accuracy-dependent ability in game\n- Lowest agility gain in game - poor attack speed and armor progression\n- All abilities can be disrupted, baited, or played around by enemy awareness\n\ncore_mecanics:\n- Hook-based displacement as primary initiation and pick-off mechanic\n- Passive strength accumulation that transforms from early disabler to late-game tank\n- Toggleable self-damage curse for area denial and strategic depth\n- Channeled disable that converts strength into damage and healing\n- Timing-dependent active damage mitigation on predictable cooldowns",
+    "complete": true
+  },
+  {
+    "id": 15,
+    "displayName": "Razor",
+    "shortName": "razor",
+    "notes": "stranges:\n- Gains permanent movement speed scaling with hero levels\n- Strong passive damage output triggered by incoming attacks\n- Steals enemy attack damage to simultaneously reduce their threat and amplify own damage\n- Consistent armor reduction against targets\n- Dynamo facet enables attack damage to convert into spell amplification\n\nweaknes:\n- Must maintain close tether to enemies for peak damage output\n- Limited active mobility with no escape mechanisms\n- Damage output relies on being attacked to trigger passive effects\n- Plasma Field effectiveness requires precise positioning relative to enemies\n- Highly vulnerable when Static Link connection breaks\n\ncore_mecanics:\n- Plasma Field: Deploy expanding and contracting wave for AoE damage and slow\n- Static Link: Establish tether that drains enemy attack damage over time\n- Storm Surge: Passive lightning damage and slow procs when attacked\n- Eye of the Storm: Auto-targeting ultimate damaging lowest HP hero while reducing armor",
+    "complete": true
+  },
+  {
+    "id": 16,
+    "displayName": "Sand King",
+    "shortName": "sand_king",
+    "notes": "stranges:\n- Excellent mobility gap-closer that provides consistent initiation opportunities and escape options\n- Devastating teamfight presence through powerful channeling ultimate with dual slow effects\n- Multiple area-of-effect abilities for effective crowd control, zone denial, and waveclear\n- Strong chain damage potential through explosive death mechanic when enemies are clustered\n- Consistent utility through stuns and slows that remain valuable throughout all game stages\n\nweaknes:\n- Ultimate requires uninterrupted channeling, making it highly vulnerable to stuns, silences, and disruption\n- Position-dependent abilities that demand precise timing and execution for maximum effectiveness\n- Low natural survivability and vulnerability during ability cooldown windows\n- Struggles against mobile heroes who can escape AoE zones easily\n- Reduced effectiveness against magic-immune targets who negate majority of damage output\n\ncore_mecanics:\n- Classic Burrowstrike + Epicenter combo: engage with mobility skill, then channel ultimate for maximum damage\n- Caustic Finale chains: attack clusters of enemies to trigger explosive chain reactions when they die\n- Area control with Sand Storm: create zones of damage and slow to force enemy positioning\n- Mobility-based initiator: relies on gap-closer to position for devastating AoE abilities\n- Blink Dagger synergy: essential positioning tool for successful combo execution",
+    "complete": true
+  },
+  {
+    "id": 17,
+    "displayName": "Storm Spirit",
+    "shortName": "storm_spirit",
+    "notes": "stranges:\n\n* Unmatched global mobility enabling cross-map positioning and safe escapes\n* Sustained mana economy with passive regeneration scaling on nearby enemy deaths\n* High burst magic damage with frequent casting enabled by low cooldowns\n* Strong crowd control combining enemy pulls with movement and attack speed slows\n* Excellent ganking and split-pushing presence through superior positioning\n\nweaknes:\n\n* Extreme mana dependency makes positioning errors fatal\n* Completely shut down by silence and mana drain effects\n* Precise mana management required during Ball Lightning to avoid stranding\n* High mechanical complexity amplifies the cost of execution mistakes\n\ncore\\_mecanics:\n\n* Ball Lightning: directional mobility consuming mana continuously over distance traveled\n* Overload: automatic damage and slow effect applied on every spell cast\n* Electric Vortex: short-range channeled pull that disables enemies in place\n* Static Remnant: delayed area explosion for wave clear and burst combos\n* Galvanized: passive mana regeneration accumulating charges from enemy hero deaths\n\n",
+    "complete": true
+  },
+  {
+    "id": 18,
+    "displayName": "Sven",
+    "shortName": "sven",
+    "notes": "stranges:\n\n* Reliable targeted stun with AoE damage provides consistent initiation and setup\n* Built-in cleave and massive damage amplification enable rapid farming and explosive teamfight potential\n* Team-wide mobility buff and passive damage bonus enhance both individual and squad effectiveness\n\nweaknes:\n\n* Melee nature requires close positioning, exposing Sven to disables and damage\n* No innate gap-closing or escape abilities, creating heavy dependence on mobility items\n* Ultimate has significant cooldown, creating extended vulnerability windows\n\ncore\\_mecanics:\n\n* Stun initiation followed by positional cleave damage on follow-up attacks for burst output\n* Timed power spike through ultimate activation requiring coordination with item timing\n* Strength-based scaling where stat investment contributes to both damage and survivability\n* Position-dependent gameplay that rewards aggressive frontline placement with proper support\n\n",
+    "complete": true
+  },
+  {
+    "id": 19,
+    "displayName": "Tiny",
+    "shortName": "tiny",
+    "notes": "stranges:\n\n* Massive multi-instance burst damage\n* Versatile crowd control with stun and slows\n* Long-range initiation capabilities\n* Cleave attacks for farming and teamfight damage\n* Strong scaling damage and tankiness\n\nweaknes:\n\n* Attack speed penalty reduces auto-attack DPS\n* Limited tree durability requires frequent re-grabs(fixed by shard)\n* Unreliable Toss targeting (grabs nearest unit)\n* Mana issues with frequent ability usage\n* Burst heavily depends on proper ability combos\n\ncore\\_mecanics:\n\n* Avalanche: Multi-instance damage area stun\n* Toss: Grabs and throws nearest unit, synergizes with Avalanche\n* Tree Grab: Transforms attacks into ranged with bonus damage and cleave\n* Tree Throw/Volley: Ranged damage with splash and slows\n* Grow: Passive scaling that boosts damage/armor/movement speed but reduces attack speed\n\n",
+    "complete": true
+  },
+  {
+    "id": 20,
+    "displayName": "Vengeful Spirit",
+    "shortName": "vengefulspirit",
+    "notes": "stranges:\n\n* Nether Swap provides instant repositioning control for saves, initiations, or setups\n* Significantly amplifies ally damage output through Vengeance Aura and enemy armor reduction\n* Combines vision control with strong disabling capabilities\n* Versatile role flexibility as support, initiator, disabler, or escape\n* Aghanim's allows you to play more aggressively due to the creation of an illusion after death that can use abilities\n\nweaknes:\n\n* Low survivability with no innate defensive tools and dangerous positioning requirements\n* High mana dependency restricts ability usage frequency without items\n* Limited mobility with Nether Swap as sole reposition option at meaningful cooldown\n* Heavily positioning-dependent; one mistake can be fatal\n\ncore\\_mecanics:\n\n* Magic Missile: targeted single-target stun with damage component\n* Wave of Terror: linear wave that reduces enemy armor and grants vision along path\n* Vengeance Aura: passive damage amplification aura for nearby allies\n* Nether Swap: instantly swaps positions with target unit, can ally-save or enemy-initiate\n* Retribution: debuffs killer with damage amplification against them from Vengeful\n\n",
+    "complete": true
+  },
+  {
+    "id": 21,
+    "displayName": "Windranger",
+    "shortName": "windrunner",
+    "notes": "stranges:\n\n* Unlimited mobility through innate passive preventing slows and capping max speed at 600\n* Windrun provides 100% evasion making immune to all auto-attacks and illusions\n* Shackleshot can deliver massive stuns up to 4+ seconds when positioned behind tree or enemy\n* Focus Fire grants extreme attack speed (350-500) allowing rapid on-hit effect application\n* Gale Force offers long-range area control that repositions enemies to set up plays\n\nweaknes:\n\n* Shackleshot requires precise positioning with tree or enemy directly behind target, failing to short 0.6s stun otherwise\n* Focus Fire reduces attack damage to 75%, limiting overall damage output and forcing single-target focus\n* Powershot is interruptible channel and damage reduces when hitting multiple targets\n* Very position-dependent; without proper angle/tree placement, Shackleshot loses effectiveness\n\ncore\\_mecanics:\n\n* Easy Breezy (Innate) - unconditional mobility floor/ceiling preventing heavy slows and enabling high max movement speed\n* Shackleshot (Q) - cone-based stun behind target requiring tree or second enemy within specific angle\n* Powershot (W) - channeled linear projectile through terrain piercing multiple enemies\n* Windrun (E) - self-buff granting evasion and movement speed, transforming into invisible and physical damage reduction with Aghanim's Scepter\n* Gale Force (D) - vector-targeted pull that drags enemies toward selected direction\n* Focus Fire (R) - single-target attack speed buff with damage penalty, allowing rapid application of attack modifiers\n\n",
+    "complete": true
+  },
+  {
+    "id": 22,
+    "displayName": "Zeus",
+    "shortName": "zuus",
+    "notes": "stranges:\n\n* Global damage presence across entire map through ultimate and Nimbus cloud\n* Percentage-based health damage that remains effective at all game stages\n* Built-in True Sight reveals invisible enemies globally\n* High burst damage from multiple simultaneous spell triggers\n* Consistent sustained damage in extended teamfights\n\nweaknes:\n\n* Extremely fragile with zero defensive abilities\n* Mana-intensive spellcasting requires careful resource management\n* Position-dependent damage requires maintaining optimal range\n* Severely limited mobility with only short-range jump ability\n* Minimal crowd control beyond brief stuns and slow\n\ncore\\_mecanics:\n\n* Static Field applies percentage-based health damage on all spells and attacks globally\n* Arc Lightning bounces through nearby enemies, efficiently farming and applying pressure\n* Lightning Bolt provides targeted damage with temporary vision and True Sight\n* Thundergod's Wrath strikes every enemy hero globally with damage and reveal\n* Lightning Hands adds consistent attack-based damage with no mana cost while toggled\n\n",
+    "complete": true
+  },
+  {
+    "id": 23,
+    "displayName": "Kunkka",
+    "shortName": "kunkka",
+    "notes": "stranges:\n\n* Exceptional control over enemy positioning with X Marks the Spot, allowing forced repositioning or team safety\n* Massive AOE damage and teamfight disruption through Ghostship and Torrent combo\n* Strong survivability with Admiral's Rum passive providing damage reduction and mobility when low on health\n* Powerful initiation potential with spell combinations that catch multiple enemies\n* Flexible role capability as offlane or mid lane with strong teamfight contribution\n\nweaknes:\n\n* Combo execution requires precise timing and skillshot accuracy\n* Mana costs are high, limiting sustained spell effectiveness in extended fights\n* Scales poorly with right-click builds, requiring spell-focused itemization\n* Melee range makes him vulnerable to kiting and requires careful positioning\n\ncore\\_mecanics:\n\n* Spell-based hero prioritizing ability combos over right-click damage\n* Primary combo chain of X Marks the Spot → Ghostship → Torrent for maximum impact\n* Timing-dependent abilities where correct execution outweighs raw power\n* Positioning manipulation utility that can send allies to safety or enemies to danger\n* Battlefield control focus that excels at setting up teamfights on his own terms\n\n",
+    "complete": true
+  },
+  {
+    "id": 25,
+    "displayName": "Lina",
+    "shortName": "lina",
+    "notes": "stranges:\n- Exceptional multi-skill spell damage output\n- Fiery Soul grants stacking attack speed and movement speed\n- Significant magical burst with damage amplification\n- Versatile team positioning (mid or support role)\n- AoE stun and area damage capabilities\n\nweaknes:\n- Low base mobility and survivability\n- Fiery Soul stacks decay over time requiring constant spell usage\n- Primary stun has delay that can be dodged\n- Combustion requires minimum damage threshold to trigger\n- Highly positioning-dependent effectiveness\n\ncore_mecanics:\n- Chain casting abilities to maximize Fiery Soul stacks for increased mobility and attack speed\n- Flame Cloak provides defensive window with spell amplification, instantly maxing Fiery Soul\n- Laguna Blade is single-target burst with optional conversion to barrier via Shard\n- Combustion spreads damage to enemies near damaged targets when threshold exceeded\n- Two playstyles: instant impact (Thermal Runaway) or damage over time (Slow Burn facet)",
+    "complete": true
+  },
+  {
+    "id": 26,
+    "displayName": "Lion",
+    "shortName": "lion",
+    "notes": "stranges:\n- Powerful transformation-based single-target hard disable (Hex)\n- High burst damage combo with execution ultimate that grows stronger throughout the game\n- Multiple crowd control tools enabling chain disable sequences\n- Mana drain ability both harasses enemies and pressures their resources\n\nweaknes:\n- Channeled ability (Mana Drain) creates vulnerability during combat\n- Limited mobility with no innate escape mechanisms\n- Positioning-dependent skill shot requiring precise aim\n- Highly mana-dependent, requiring support items for sustainability\n\ncore_mecanics:\n- Chain disable pattern: line stun into transformation hex for maximum control\n- Execution ultimate scales with hero kills, rewarding successful plays\n- Passive provides temporary spell damage and debuff amplification after respawn\n- Mana drain can be used on allies for restoration and movement speed bonus\n- Abilities synergize through damage amplification and stun-into-disable sequences",
+    "complete": true
+  },
+  {
+    "id": 27,
+    "displayName": "Shadow Shaman",
+    "shortName": "shadow_shaman",
+    "notes": "stranges:\n- Multiple disabling abilities providing extended control\n- Strong lane and tower push with damaging ward summons\n- Self-sustain through channeled ability that heals equal to damage dealt\n\nweaknes:\n- Zero mobility with no escape mechanics\n- Vulnerable channeled disable when positioned poorly\n- Mana-intensive requiring resource management\n\ncore_mecanics:\n- Cone-shaped multi-target nuke for wave clear and teamfight\n- Single-target hard disable that transforms and silences\n- Channeled disable that deals damage while healing caster\n- Ultimate summons multiple attacking wards for objectives and fights\n- Facet choice between passive disable on attack or defensive survival trigger",
+    "complete": true
+  },
+  {
+    "id": 28,
+    "displayName": "Slardar",
+    "shortName": "slardar",
+    "notes": "stranges:\n- Strong initiator with high mobility and phase movement\n- Reliable crowd control through AoE stun and passive bash\n- Corrosive Haze provides True Sight to counter invisibility and evasion\n\nweaknes:\n- Melee combatant requiring close proximity to targets\n- Mana-dependent abilities\n- Vulnerable to kiting and crowd control despite mobility\n- No built-in escape mechanics\n- Relies on physical damage and armor reduction to be effective\n- Impact diminishes if Corrosive Haze cannot be applied\n\ncore_mecanics:\n- Seaborn Sentinel: passive granting defensive and offensive bonuses in water, enhanced with Aghanim's Scepter\n- Guardian Sprint: temporary movement speed boost with phase movement for engagement\n- Slithereen Crush: AoE stun applying slow and creating armor-reducing puddle\n- Bash of the Deep: passive bash triggering on every 4th attack\n- Corrosive Haze: targeted armor reduction with True Sight and area puddle effect",
+    "complete": true
+  },
+  {
+    "id": 29,
+    "displayName": "Tidehunter",
+    "shortName": "tidehunter",
+    "notes": "stranges:\n- Exceptional teamfight initiator with massive AOE crowd control from Ravage\n- Extremely durable against physical damage thanks to Kraken Shell reset mechanic\n- Strong lane presence with Anchor Smash reducing enemy physical damage output\n- Can solo-tank team objectives and draw heavy fire while staying alive\n\nweaknes:\n- Highly vulnerable to magical burst and pure damage (Kraken Shell only mitigates physical)\n- Extremely immobile, struggles to chase or escape without positioning\n- Mana-intensive abilities drain quickly without careful management\n- Entire threat level hinges on landing Ravage; miss and impact drops drastically\n- Needs enemy clump to maximize value; spread enemies negate effectiveness\n\ncore_mecanics:\n- Initiate fights by catching multiple enemies in Ravage's massive AOE stun\n- Use Anchor Smash consistently to suppress enemy physical damage output\n- Position aggressively to absorb damage - Kraken Shell resets at damage threshold\n- Chain Gush onto priority targets to slow and amplify damage for follow-up\n- Tank frontlines after initiating, forcing enemies to overcommit resources",
+    "complete": true
+  },
+  {
+    "id": 30,
+    "displayName": "Witch Doctor",
+    "shortName": "witch_doctor",
+    "notes": "stranges:\n- Devastating combo potential with Maledict and burst damage spells\n- Death Ward provides pure damage output that bypasses enemy armor\n- Sustained team healing through Voodoo Restoration aura\n- Multi-target crowd control ability with ricocheting stuns\n- Early game gold economy advantage from innate ability\n\nweaknes:\n- Extremely vulnerable during Death Ward channeling without defensive options\n- No mobility or escape mechanisms, prone to being caught out\n- Mana-intensive sustain that drains resources quickly\n- Relies heavily on enemy positioning and clustering for full effectiveness\n- Low survivability due to lack of defensive or self-peel abilities\n\ncore_mecanics:\n- Land Paralyzing Cask to set up Maledict for maximum damage output\n- Channel Death Ward uninterrupted while maintaining safe positioning\n- Toggle Voodoo Restoration strategically to balance mana conservation with team healing\n- Time ability combos around enemy health loss to maximize Maledict's effectiveness\n- Position behind team lines to leverage support role without becoming primary target",
+    "complete": true
+  },
+  {
+    "id": 31,
+    "displayName": "Lich",
+    "shortName": "lich",
+    "notes": "stranges:\n- Infinite mana sustainability through Sacrifice while denying enemy experience\n- Powerful teamfight ultimate that bounces between enemies dealing massive damage\n- Strong defensive utility with Frost Shield protecting allies from physical damage\n- Low mana costs enabling constant spell pressure throughout the game\n\nweaknes:\n- Extremely fragile with low survivability and health pool\n- No escape mobility, reliant on positioning and team support\n- Chain Frost effectiveness diminishes if enemies spread out\n- Vulnerable to burst damage due to low base stats\n\ncore_mecanics:\n- Sacrifice (passive) - maintain mana pool while denying enemy creep experience\n- Frost Shield - reactive defensive ability for allies that scales with damage\n- Chain Frost - bouncing ultimate requiring clustered enemies for maximum potential\n- Slow-heavy kit controlling movement and positioning in fights",
+    "complete": true
+  },
+  {
+    "id": 32,
+    "displayName": "Riki",
+    "shortName": "riki",
+    "notes": "stranges:\n- Permanent invisibility for stealth and positioning\n- Massive backstab damage from behind\n- High mobility with Tricks of Trade\n- Strong zoning and silence with Smokescreen\n\nweaknes:\n- Weak to detection (wards, dust, gem)\n- Reliant on positioning behind targets\n- Struggles when revealed in teamfights\n- Loses impact without Smokescreen\n\ncore_mecanics:\n- Approach unseen with permanent invisibility\n- Attack from behind for bonus damage\n- Juke and reposition with mobility skills\n- Zone enemies with Smokescreen",
+    "complete": true
+  },
+  {
+    "id": 33,
+    "displayName": "Enigma",
+    "shortName": "enigma",
+    "notes": "stranges:\n- Devastating teamfight control with Black Hole\n- Percent HP damage kills tanks effectively\n- Strong pushing with Eidolon splits\n- Stun lockdown with Malefice\n\nweaknes:\n- Black Hole is interruptable channel\n- Useless on magic immune targets\n- Squishy support vulnerability\n- Eidolons feed gold when killed\n\ncore_mecanics:\n- Time Black Hole for maximum heroes caught\n- Push towers with Eidolon army\n- Lock down targets with Malefice\n- Use Midnight Pulse with Black Hole",
+    "complete": true
+  },
+  {
+    "id": 34,
+    "displayName": "Tinker",
+    "shortName": "tinker",
+    "notes": "stranges:\n- Infinite spell/item usage via Rearm\n- Global presence with Boots of Travel\n- Superior waveclear with March\n- Repeated spell/item spam in fights\n\nweaknes:\n- Extremely mana dependent\n- Vulnerable when Rearm is disabled\n- Requires massive gold for items\n- No escape without Boots of Travel\n\ncore_mecanics:\n- Rearm spam spells and items repeatedly\n- Teleport globally to pressure lanes\n- Blind targets with Laser\n- Clear waves with March\n- Reset cooldowns with Rearm",
+    "complete": true
+  },
+  {
+    "id": 35,
+    "displayName": "Sniper",
+    "shortName": "sniper",
+    "notes": "stranges:\n- Exceptional attack range creates safe positioning advantage\n- Headshot ministun disrupts channeling and escapes\n- Assassinate provides reliable burst sniping from distance\n- Shrapnel grants vision control and zone denial\n\nweaknes:\n- Extremely fragile with no mobility or escape\n- Punished severely by gap-closing heroes\n- Positioning mistakes are immediately fatal\n- Relies entirely on staying at range to function\n\ncore_mecanics:\n- Abuse positional advantage through maximum range\n- Use Headshot to interrupt channeled abilities\n- Secure kills with Assassinate burst timing\n- Control vision and spacing with Shrapnel placement",
+    "complete": true
+  },
+  {
+    "id": 36,
+    "displayName": "Necrophos",
+    "shortName": "necrolyte",
+    "notes": "stranges:\n- Reaper's Scythe executes low HP enemies instantly\n- Heartstopper aura drastically counters enemy healing\n- Death Pulse provides sustainable self-healing\n- Sadist grants infinite mana scaling as fight continues\n\nweaknes:\n- Complete lack of mobility or escape mechanisms\n- Highly susceptible to being kited and burst\n- Requires staying alive to stack Death Pulse\n- Weak early game before sustain comes online\n\ncore_mecanics:\n- Target the lowest HP enemy for execute damage\n- Position to apply healing reduction aura\n- Time Death Pulse to maximize heal efficiency\n- Stay in fights to stack Sadist mana regeneration",
+    "complete": true
+  },
+  {
+    "id": 37,
+    "displayName": "Warlock",
+    "shortName": "warlock",
+    "notes": "stranges:\n- Chaotic Offering golem creates massive teamfight disruption\n- Fatal Bonds multiplies damage across entire enemy team\n- Shadow Word provides both reliable sustain and damage\n- Upheaval creates devastating slow zones over time\n\nweaknes:\n- Golem can be killed or dispelled quickly\n- Upheaval requires vulnerable channeling setup\n- Position-dependent with no escape abilities\n- Cooldown reliant with limited burst potential\n\ncore_mecanics:\n- Spread damage across enemies with Fatal Bonds timing\n- Use golem to break enemy formations and positioning\n- Maintain allies and damage enemies with Shadow Word\n- Channel Upheaval to lock down movement and escapes",
+    "complete": true
+  },
+  {
+    "id": 38,
+    "displayName": "Beastmaster",
+    "shortName": "beastmaster",
+    "notes": "stranges:\n- Powerful single-target initiation with guaranteed disable\n- Aura grants entire team attack speed\n- Excellent map vision control from hawk\n- Strong damage amplification on single target\n\nweaknes:\n- Inherently immobile with no escape\n- Entirely dependent on positioning for axes effectiveness\n- Summon mechanics require active management\n- Susceptible to kiting without proper vision setup\n\ncore_mecanics:\n- Managing hawk/boar rotation for vision presence and impact\n- Landing axes to maximize damage amplification\n- Timing and positioning for optimal initiation angle\n- Maximizing aura value by fighting near allies",
+    "complete": true
+  },
+  {
+    "id": 39,
+    "displayName": "Queen of Pain",
+    "shortName": "queenofpain",
+    "notes": "stranges:\n- Excellent repositioning through blink\n- High burst damage with spammable spells\n- Spell amplification increases all ability output\n- Significant teamfight impact with large AOE ultimate\n\nweaknes:\n- Extremely squishy without defensive items\n- Vulnerable to lockdown and silences\n- Suicidal playstyle risks feeding\n- Mana-intensive kit with sustain dependency\n\ncore_mecanics:\n- Aggressive positioning using blink for damage and escape\n- Sustain through proximity and mana management\n- Executing burst combos during windows of opportunity\n- Balancing aggression with survival instinct",
+    "complete": true
+  },
+  {
+    "id": 40,
+    "displayName": "Venomancer",
+    "shortName": "venomancer",
+    "notes": "stranges:\n- Creates area denial and zone control through ward placement\n- Persistent damage through poison application\n- Strong pushing and defending capability\n- Reliable damage output with multiple poison layers\n\nweaknes:\n- Vulnerable to AOE damage clearing wards\n- Lacks mobility and escape options\n- Low physical survivability\n- Dependent on enemy positioning for optimal damage\n\ncore_mecanics:\n- Ward placement for vision, pushing, and zoning\n- Poison stacking and spreading through proximity\n- Area control through terrain exploitation\n- Creating pressure through persistent damage",
+    "complete": true
+  },
+  {
+    "id": 41,
+    "displayName": "Faceless Void",
+    "shortName": "faceless_void",
+    "notes": "stranges:\n- Absolute control through chronosphere\n- Highest isolation pickoff potential in game\n- Self-sustain through healing mechanic\n- Potential for uncontrollable bash damage\n\nweaknes:\n- Power entirely concentrated in ultimate\n- Susceptible to mobility-heavy heroes\n- Poor chronosphere positioning punishes entire team\n- Weak when ultimate on cooldown\n\ncore_mecanics:\n- Timing and positioning chronosphere for maximum value\n- Using heal-offensively for repositioning and sustain\n- Prolonged engagement to activate bash potential\n- Mana management through ability timing",
+    "complete": true
+  },
+  {
+    "id": 42,
+    "displayName": "Wraith King",
+    "shortName": "skeleton_king",
+    "notes": "stranges:\n- Guaranteed resurrection with full health and mana restoration through Reincarnation ult\n- Reliable guaranteed critical strike system that avoids RNG dependency\n- Invulnerability mechanic (Wraith Form) that activates on death with movement and attack speed bonuses\n- Consistent lifesteal that works on all attacks including summons\n\nweaknes:\n- Reincarnation requires available mana to function - mana dependency can prevent resurrection\n- No gap-closing abilities and below-average mobility makes hero vulnerable to kiting\n- Predictable threat patterns primarily based on critical strike timing\n\ncore_mecanics:\n- Vampiric Spirit passive provides lifesteal and automatically transforms hero into invulnerable ghost upon taking fatal damage\n- Reincarnation ult reincarnates with full resources after a 3-second delay while applying heavy slow to nearby enemies\n- Mortal Strike provides guaranteed critical damage rather than RNG-based chance\n- Wraithfire Blast offers reliable single-target stun with damage-over-time and movement slow\n- Facet system offers choice between summoning skeletons (Bone Guard) or applying delayed curse damage (Spectral Blade)",
+    "complete": true
+  },
+  {
+    "id": 43,
+    "displayName": "Death Prophet",
+    "shortName": "death_prophet",
+    "notes": "stranges:\n- Exorcism provides massive teamfight damage and self-healing through spirits that attack enemies and structures\n- Witchcraft grants inherent level-based scaling with movement speed and cooldown reduction\n- Spirit Siphon enables multi-target sustain through chaining heals on multiple enemies\n- Strong pushing capability with structure damage from spirits\n\nweaknes:\n- Exorcism has extremely long cooldown, creating timing windows for enemies to engage\n- Spirits cannot attack invisible units and can be kited by high-mobility heroes\n- High mana costs require careful resource management\n- Spirit movement constraints limit effectiveness against enemies who can out-range them\n\ncore_mecanics:\n- Exorcism summons spirits that attack enemies and structures while healing based on damage dealt\n- Witchcraft provides passive scaling of movement speed and cooldown reduction as hero levels up\n- Spirit Siphon drains health from linked enemies and heals DP, with multiple charges for sustainability\n- Crypt Swarm provides conical magic damage and Silence creates area denial for spell-reliant enemies",
+    "complete": true
+  },
+  {
+    "id": 44,
+    "displayName": "Phantom Assassin",
+    "shortName": "phantom_assassin",
+    "notes": "stranges:\n- Proc-based critical strike system with guaranteed crit windows after trigger\n- Instant teleportation to any target with attack speed burst\n- Permanent passive evasion immune to break removal\n- Active 30-second invisibility with movement speed bonus\n- Ranged attack modifier application combining damage and slow\n\nweaknes:\n- Damage output depends on RNG proc timing for guaranteed burst windows\n- All primary damage focused on single-target execution\n- Active invisibility and positioning removed by break\n- Mobility limited by cooldowns without passive refresh\n- Vulnerable to true damage countermeasures against evasion\n\ncore_mecanics:\n- Two-phase attack rhythm: trigger 34% proc → activate guaranteed crit buff\n- Teleport + attack speed creates 2.5-second burst damage windows\n- Active/inactive duality: permanent evasion + controllable invisibility\n- Target selection priority determines fight effectiveness\n- Position-based engagement using blink mechanics to isolate targets",
+    "complete": true
+  },
+  {
+    "id": 45,
+    "displayName": "Pugna",
+    "shortName": "pugna",
+    "notes": "stranges:\n- Massive magic damage amplification through ethereal conversion and magic resistance reduction\n- Zone denial via Nether Ward that punishes spellcasting with mana-cost-scaled damage\n- Exceptional sustain through channeled lifesteal that heals while damaging enemies\n- Can cast items and spells while channeling, enabling multi-tasking during fights\n\nweaknes:\n- Extremely fragile with low armor and zero mobility, demanding perfect positioning\n- Channeled abilities vulnerable to interruptions, requiring team setup\n- Short Nether Ward cast range makes zone control placement difficult\n- High mana costs create tension between spell frequency and availability\n- Decrepify prevents physical damage from allies, creating negative team synergies\n\ncore_mecanics:\n- Nether Blast: delayed AoE magical damage that threatens areas and damages buildings\n- Nether Ward: creates zone where enemies casting spells take damage scaled to their mana cost\n- Decrepify: converts targets to ethereal state, reduces magic resistance, amplifies magical damage\n- Life Drain: channeled lifesteal that damages enemies to heal Pugna or heals allies at self-cost",
+    "complete": true
+  },
+  {
+    "id": 46,
+    "displayName": "Templar Assassin",
+    "shortName": "templar_assassin",
+    "notes": "stranges:\n- Refraction combines damage negation with attack damage bonus for aggressive trading\n- Meld provides invisibility for precise engagement with armor reduction and bonus backstab damage\n- Traps create strategic vision zones and enable global repositioning\n- Psi Blades extends attack range with spill damage for efficient multi-target farming\n\nweaknes:\n- Refraction limited by barrier instances, overwhelmed by multi-source damage\n- Meld forces stationary positioning, making location predictable and vulnerable\n- Mana constraints and cooldown windows create vulnerability windows\n- Relies on favorable early-game matchups to reach power spike\n\ncore_mecanics:\n- Refraction: limited barrier charges negates small damage instances plus attack damage bonus\n- Meld: invisibility breaks on attack, granting armor reduction and bonus backstab damage\n- Psi Blades: passive range extension with splash damage to units behind target\n- Psionic Trap: strategic placement provides vision and charge-based slow with damage\n- Psionic Projection: channels to teleport to nearest trap and trigger area effect",
+    "complete": true
+  },
+  {
+    "id": 47,
+    "displayName": "Viper",
+    "shortName": "viper",
+    "notes": "stranges:\n- Exceptional lane dominance through poison harass and passive retaliation\n- Built-in durability with magic resistance\n- Sustained low-mana engagement capacity\n- Reliable single-target lockdown\n- Strong farm-independent scaling\n\nweaknes:\n- Poor base mobility and vulnerability to kiting\n- Significant cooldown limits lockdown frequency\n- Damage is sustained DPS rather than burst\n- Primary effects dispellable by purification\n- Heavy magic damage focus\n\ncore_mecanics:\n- Poison Attack: stacking poison orb effect that slows\n- Nethertoxin: ground-based damage over time field\n- Corrosive Skin: passive magic resistance and retaliation damage\n- Viper Strike: single-target massive slow and damage\n- Nosedive: targeted diving mobility ability",
+    "complete": true
+  },
+  {
+    "id": 48,
+    "displayName": "Luna",
+    "shortName": "luna",
+    "notes": "stranges:\n- Exceptional farming speed multiplier via bouncing attacks\n- Devastating AoE teamfight burst with Eclipse\n- Strong team-wide damage aura contribution\n- Excellent attack speed and raw damage item scaling\n\nweaknes:\n- Complete dependency on enemy clustering for effective damage\n- Zero innate mobility or defensive escape mechanisms\n- Survival vulnerability when focused by burst damage\n- Severe positioning constraints from Eclipse range limitations\n\ncore_mecanics:\n- Bouncing attack system with damage multiplicatively reduced per bounce\n- Passive team aura providing damage and night vision\n- Multi-beam AoE ultimate requiring enemy proximity\n- Night cycle map control mechanics\n- Facet choices between teamfight or single-target focus",
+    "complete": true
+  },
+  {
+    "id": 49,
+    "displayName": "Dragon Knight",
+    "shortName": "dragon_knight",
+    "notes": "stranges:\n- Multi-purpose form-shifting with three distinct dragon variants providing different tactical advantages\n- Melee-to-ranged transformation during fights enables versatile positioning and combat engagement\n- Exceptional durability from passive HP regeneration and armor scaling, amplified in dragon form\n- Strong teamfight presence from splash damage, reliable instant stun, and sustained frontline presence\n\nweaknes:\n- Slow base attack time limits DPS output and farming efficiency\n- Significant downtime between dragon transformations creates vulnerability windows\n- Complete lack of mobility or escape abilities makes positioning mistakes punishing\n- Reliant on dragon form for full effectiveness, weak during cooldown periods\n\ncore_mecanics:\n- Elder Dragon Form transformation that fundamentally changes attack range, damage type, and combat role\n- Dragon Tail shifts from instant melee stun to ranged projectile based on current form\n- Three facet-based dragon specializations (fire, corrosive, frost) creating different strategic playstyles\n- W and E abilities scale dynamically during dragon form, enhancing crowd control and damage output",
+    "complete": true
+  },
+  {
+    "id": 50,
+    "displayName": "Dazzle",
+    "shortName": "dazzle",
+    "notes": "stranges:\n- Exponential armor stacking through ability usage with Weave\n- Invulnerable soul clone that can cast abilities independently\n- AoE sustain with bouncing physical damage that overlaps and spikes\n- Prevents ally death while amplifying healing on severely wounded targets\n- Cone AoE poison with low-HP execute capability\n\nweaknes:\n- Tether constraints on soul projection limit positional freedom\n- Extremely mana-hungry abilities drain resources quickly\n- Entire kit relies on physical damage, negated by high armor\n- Shallow grave protects only one ally and can be purged\n- Precise timing and positioning required for ability effectiveness\n\ncore_mecanics:\n- Armor stacking system that accumulates based on ability usage frequency\n- Soul separation creating invulnerable casting entity with tether mechanics\n- Bouncing cascade damage/healing that targets enemies and allies\n- Death prevention with healing amplification scaling off missing HP\n- Cone-based poison application with execution threshold on low-health targets",
+    "complete": true
+  },
+  {
+    "id": 51,
+    "displayName": "Clockwerk",
+    "shortName": "rattletrap",
+    "notes": "stranges:\n- Power Cogs guarantee physical containment forcing enemies to destroy barriers to escape\n- Hookshot enables instant long-range targeted engagement and initiation\n- Battery Assault delivers sustained mini-stuns that interrupt channels and attacks\n- Rocket Flare provides global presence and True Sight\n\nweaknes:\n- High mana dependency severely limits ability usage and sustainability\n- Missed Hookshots are extremely punishing with long base cooldown\n- Predictable engagements with visible travel time allowing counterplay\n- Severely countered by magic immunity\n\ncore_mecanics:\n- Multi-stage initiation combo: Hookshot → automatic Cogs → Battery Assault lockdown\n- Power Cogs trap Clockwerk and enemies inside with physical barrier escape mechanic\n- Rocket Flare global True Sight projectile for vision and map pressure\n- Facet system with cooldown reduction and mechanical enhancement options",
+    "complete": true
+  },
+  {
+    "id": 52,
+    "displayName": "Leshrac",
+    "shortName": "leshrac",
+    "notes": "stranges:\n- Sustained damage output through pure damage and toggle abilities\n- Strong wave clear and pushing capability\n- AoE crowd control\n- Flexible facet system for aggressive or defensive play\n\nweaknes:\n- Positioning dependency with short-range abilities\n- Extremely mana intensive\n- Low mobility with no escapes\n- Fragile with low base survivability\n\ncore_mecanics:\n- Toggle ability providing constant area damage at mana cost\n- Pure damage pulses effective against buildings\n- Abilities scale area-of-effect with intelligence\n- AoE stun with delay and bouncing damage spell\n- Ethereal transformation reducing enemy magic resistance",
+    "complete": true
+  },
+  {
+    "id": 53,
+    "displayName": "Nature's Prophet",
+    "shortName": "furion",
+    "notes": "stranges:\n- Global teleportation enables anywhere map presence for split-pushing and strategic positioning\n- Arrival barrier grants immediate survivability when teleporting into hostile territory\n- Adaptive damage scaling based on nearby trees incentivizes forest engagement\n- Terrain manipulation through Sprout and ent summons controls teamfight positioning\n- Global ultimate provides cross-map teamfight impact through bouncing damage\n\nweaknes:\n- Teleportation highly predictable with visible animation and sound through fog of war\n- Core abilities limited by tree dependency and forest terrain availability\n- Cooldown constraints create significant vulnerability during downtime periods\n- Vulnerable to AOE damage and crowd control that clears ents and damages quickly\n- Limited early scaling and heavy item dependence for effectiveness\n\ncore_mecanics:\n- Global teleportation with arrival barrier enables aggressive map movement\n- Passive damage bonus based on proximity to surrounding trees\n- Sprout creates tree formations that block pathing and provide vision\n- Converting trees into controlled ents for map pressure\n- Global bouncing ultimate that hits enemies across the map, with talent interactions for ent scaling",
+    "complete": true
+  },
+  {
+    "id": 54,
+    "displayName": "Lifestealer",
+    "shortName": "life_stealer",
+    "notes": "stranges:\n- Intrinsic sustainability through percent-based lifesteal and damage on attacks\n- Permanent HP scaling from kills, accumulating benefits throughout the game\n- Debuff immunity with high magic resistance providing strong survival\n- Invulnerability and healing via creep consumption and infest mechanics\n\nweaknes:\n- Mana constraints from low intelligence with high ability costs\n- Melee limitation with no built-in mobility or escape mechanisms\n- Cooldown-dependent playstyle creating vulnerability windows\n- Susceptible to pure damage, break effects, and crowd control\n- Single-target focus limits effectiveness against groups\n\ncore_mecanics:\n- Feast provides percent-based sustain and permanent HP scaling through kills\n- Rage grants spell immunity and magic resistance for survival during fights\n- Open Wounds applies multi-stage slow while amplifying allied lifesteal\n- Infest offers invulnerability, healing, stat boost to host, and creep control\n- Passive mobility and attack speed enhance farming efficiency and fighting capability",
+    "complete": true
+  },
+  {
+    "id": 55,
+    "displayName": "Dark Seer",
+    "shortName": "dark_seer",
+    "notes": "stranges:\n- Exceptional teamfight control via Vacuum positioning manipulation and Wall of Replica illusions\n- Unstoppable mobility with Surge (slow immunity, phasing, max MS cap)\n- Sustained area pressure with Ion Shell and pickoff potential with Normal Punch\n\nweaknes:\n- Mana-intensive, limiting ability uptime\n- Requires precise Blink Dagger positioning to enable Vacuum setups\n- Wall of Replica depends on enemy choices, nullified if avoided\n- Highly vulnerable to silence and disruption\n- Power spike delayed without key items\n\ncore_mecanics:\n- Vacuum: Pulls enemies toward target point, destroys trees\n- Surge: Grants max movement speed, phasing, and slow immunity\n- Ion Shell: AoE damage aura on attached target\n- Normal Punch: Movement-charged punch with stun, damage scales with distance traveled\n- Wall of Replica: Creates controlled illusions from enemies passing through",
+    "complete": true
+  },
+  {
+    "id": 56,
+    "displayName": "Clinkz",
+    "shortName": "clinkz",
+    "notes": "stranges:\n- Lane dominance through Searing Arrows autocast providing spell damage and safe last-hits\n- Massive sustain burst from Death Pact granting temporary max HP and heal\n- High mobility and safety via Skeleton Walk stealth and movement speed boost\n- Exceptional burst damage potential with Strafe's attack speed and range bonus\n- Superior tower damage and pushing capability\n\nweaknes:\n- Severe mana constraints limiting ability usage early game\n- Extremely fragile without Death Pact active\n- Cooldown limitations on burst and sustain windows\n- No hard control - completely lacks stun or root\n- Dependent on enemies lacking detection and creep availability\n\ncore_mecanics:\n- Searing Arrows autocast for spell damage attacks that scale with items\n- Skeleton Walk provides stealth, speed burst, and summons Skeleton Archers\n- Strafe grants massive attack speed boost with range bonus for burst windows\n- Death Pact consumes creeps to gain temporary max HP and healing\n- Infernal Shred passively stacks armor reduction on attacked targets\n- Burning Army summons Skeleton Archers for DPS and pushing\n- Burning Barrage channels piercing AOE damage\n- Attack speed amplifies Searing Arrows damage output",
+    "complete": true
+  },
+  {
+    "id": 57,
+    "displayName": "Omniknight",
+    "shortName": "omniknight",
+    "notes": "stranges:\n- Dual-role versatility through facets (damage vs support focus)\n- Physical immunity ultimate combined with single-target debuff immunity\n- Strong burst damage-heal synergy that scales with items\n- Powerful laning presence through burst-driven play\n\nweaknes:\n- Zero mobility or escape (melee, no dash or blink)\n- High mana dependency limits ability spam\n- Lacks hard crowd control or lockdown\n- Vulnerable to dispels and counter-picks\n- Timing pressure dependent on Shard power spike\n\ncore_mecanics:\n- Purification - delayed burst that heals allies and damages nearby enemies\n- Hammer of Purity - autocast pure damage bonus with attack range increase\n- Repel - debuff immunity shield that grants bonus attributes\n- Guardian Angel - AOE physical damage immunity that creates timing windows\n- Degen Aura - innate movement speed slow aura around hero",
+    "complete": true
+  },
+  {
+    "id": 58,
+    "displayName": "Enchantress",
+    "shortName": "enchantress",
+    "notes": "stranges:\n- Early game neutral creep control for farm independence\n- Untouchable passive provides significant survivability via attack speed slow\n- Self-sustain through healing over time to self and allies\n- Impetus damage scales dramatically with attack distance\n- Dominant power window in early-mid game timeframe\n\nweaknes:\n- Severely limited by mana availability and high costs\n- Fragile positioning dependency despite defensive passive\n- Significant power drop-off in late game\n- Highly vulnerable to burst damage and lockdown\n- Distance-based damage capped by maximum range limitations\n\ncore_mecanics:\n- Enchant charms enemy heroes or neutral creeps, applying dispel and movement slow\n- Untouchable reduces attackers' attack speed substantially\n- Impetus deals bonus damage based on attack distance with exceptional range\n- Nature's Attendants provides healing over time to self and allies via wisps\n- Sproink leaps backward to disjoint projectiles and trigger Impetus attacks",
+    "complete": true
+  },
+  {
+    "id": 59,
+    "displayName": "Huskar",
+    "shortName": "huskar",
+    "notes": "stranges:\n- Health-based power scaling grants massive attack speed, magic resistance, and regeneration as health decreases\n- Zero mana dependency forces cost-efficient resource management\n- Instant engagement capabilities with Life Break for aggressive positioning\n- Sustained pressure damage through stacking Burning Spear DoT\n- Area control via Inner Fire's knockback and silence\n\nweaknes:\n- No escape mechanism, mobility purely offensive\n- Extremely vulnerable to burst and percentage-based damage\n- Requires precise low-health management with severe positioning risks\n- Attack speed damage negated by enemy armor stacking\n- Melee range restricts target access in teamfights\n\ncore_mecanics:\n- Berserker's Blood: Passive grants escalating bonuses at lower health thresholds\n- Blood Magic: Zero mana pool converts all ability costs to health\n- Burning Spear: Stacking DoT applied via auto-attacks\n- Life Break: Instant gap closer that deals percentage current health damage\n- Peak effectiveness in early-mid game timing window",
+    "complete": true
+  },
+  {
+    "id": 60,
+    "displayName": "Night Stalker",
+    "shortName": "night_stalker",
+    "notes": "stranges:\n- Significantly stronger during night with massive movement and attack speed bonuses\n- Powerful crowd control combination with slow and silence\n- Superior vision control and unobstructed movement during ultimate\n\nweaknes:\n- Fundamentally weak during daylight hours with predictable power windows\n- Lacks gap-closing abilities and hard crowd control\n- Limited laning presence and farming capacity\n\ncore_mecanics:\n- Power scales with day/night cycle, peaking during nighttime\n- Void provides AoE slow with damage, Crippling Fear creates silence aura\n- Hunter in the Night grants movement and attack speed bonuses during darkness",
+    "complete": true
+  },
+  {
+    "id": 61,
+    "displayName": "Broodmother",
+    "shortName": "broodmother",
+    "notes": "stranges:\n- Superior map mobility and territory control through webs that provide terrain traversal and bonuses\n- Army-scale swarm tactics with spiderling generation that applies movement slow\n- Combat sustain and healing through passive heal on enemy hero kills\n- Strong combat steroid with damage multiplier and significant lifesteal\n\nweaknes:\n- Web dependency severely limits mobility and combat effectiveness outside webs\n- Spiderling army extremely vulnerable to AOE damage and splash attacks\n- Spider damage and effectiveness do not scale with items\n- Short combat window during ultimate burst\n\ncore_mecanics:\n- Create webs for permanent mobility, regeneration zones, and territory control\n- Inject enemies to spawn spiderling armies that swarm and slow opponents\n- Apply movement slow, miss chance, and bonus damage through Incapacitating Bite\n- Activate Insatiable Hunger for damage and lifesteal burst during key engagements\n- Peak effectiveness during mid-game timing window",
+    "complete": true
+  },
+  {
+    "id": 62,
+    "displayName": "Bounty Hunter",
+    "shortName": "bounty_hunter",
+    "notes": "stranges:\n- Stealth-based gameplay enabling strategic positioning and surprise attacks\n- Superior gold economy through multiple passive and active gold-generating abilities\n- High burst damage output from ability-based attacking\n- Exceptional map control through tracking and information advantage\n\nweaknes:\n- Invisibility countered by detection items and abilities\n- Low base survivability requiring defensive items\n- Minimal team utility beyond tracking and vision\n- Limited mobility outside of stealth burst periods\n- Physical damage scaling dependent on gold investment\n\ncore_mecanics:\n- Track applies True Sight, damage amplification, vision, and generates bonus gold\n- Shadow Walk provides invisibility with stun on first attack breaking stealth\n- Jinada autocast grants bonus damage and gold steal on cooldown\n- Shuriken Toss deals burst damage with chain bounce targeting\n- Innate passives generate gold through kills, assists, and ability casts",
+    "complete": true
+  },
+  {
+    "id": 63,
+    "displayName": "Weaver",
+    "shortName": "weaver",
+    "notes": "stranges:\n- Exceptional mobility through Shukuchi invisibility with near-instant activation\n- Geminate Attack provides burst damage with automatic double attacks and applies all attack modifiers\n- The Swarm grants vision and armor reduction across the map\n- Time Lapse acts as an ultimate defensive reset for position, health, and mana\n- Rewoven stacks attack range on ability cast, trading mobility for damage scaling\n\nweaknes:\n- Extremely fragile with low base stats, making positioning critical\n- High mana dependency with limited mana pool constrains ability usage\n- No hard crowd control, limiting solo kill potential without team support\n- Swarm beetles die quickly, reducing their effectiveness\n\ncore_mecanics:\n- Shukuchi: Invisibility mobility ability with AoE damage on activation\n- Geminate Attack: Passive that grants a free second attack with bonus damage, applies attack effects\n- The Swarm: Deploys a swarm of beetles that latch onto enemies, reducing armor and providing vision\n- Time Lapse: Ultimate that reverts Weaver to position, HP, and mana from several seconds earlier\n- Rewoven: Innate stack effect increasing attack range with each ability cast, offering choice between mobility (clearing stacks) and damage (retaining stacks)",
+    "complete": true
+  },
+  {
+    "id": 64,
+    "displayName": "Jakiro",
+    "shortName": "jakiro",
+    "notes": "stranges:\n- Strong lane dominance through double attack projectiles\n- Comprehensive crowd control with fire damage/burn and ice slow/stun\n- Flexible auto-cast attack modifiers for varied combat scenarios\n\nweaknes:\n- Zero mobility with no escape mechanisms\n- High mana dependency limits sustain and ability usage\n- Strict positioning requirements for ultimate effectiveness\n\ncore_mecanics:\n- Double Trouble passive launches two projectiles with inherent damage reduction\n- Fire abilities (Dual Breath, Macropyre) provide damage-over-time\n- Ice abilities (Ice Path) deliver crowd control and area control\n- Auto-cast modifiers on Liquid Fire and Liquid Frost alter attack properties\n- Facets (Twin Terror, Ice Breaker) provide distinct playstyle variations",
+    "complete": true
+  },
+  {
+    "id": 65,
+    "displayName": "Batrider",
+    "shortName": "batrider",
+    "notes": "stranges:\n- Exceptional terrain mobility from Firefly, bypassing obstacles while providing zone control and vision\n- Powerful stacking debuff with Sticky Napalm, progressively slowing enemies and amplifying damage from all sources\n- Versatile crowd control toolkit combining displacement, dragging, and channeled disable potential\n- Facet system provides distinct playstyle options for different strategic approaches\n\nweaknes:\n- Heavy mana dependency limits ability spam and sustained pressure\n- Poor wave clear and farming speed delays item acquisition\n- Lasso requires close-range initiation and breaks easily to crowd control\n- Low base defensive stats make him vulnerable when caught without positioning advantage\n\ncore_mecanics:\n- Firefly enables unhindered terrain traversal over extended duration while igniting and destroying trees\n- Sticky Napalm stacks amplify subsequent damage and progressively slow enemy movement and turn rate\n- Flaming Lasso is a channeled disable that drags enemies toward Batrider\n- Flamebreak provides AOE displacement with lingering damage\n- Smoldering Resin applies passive damage-over-time on auto-attacks\n- Aghanim's Scepter upgrades to double Lasso, Shard removes Napalm stack limit",
+    "complete": true
+  },
+  {
+    "id": 66,
+    "displayName": "Chen",
+    "shortName": "chen",
+    "notes": "stranges:\n- Versatile creep control with five distinct aspects providing varied tactical utilities\n- Global Hand of God enables massive team-wide healing and sustain\n- Divine Favor aura provides team regeneration, heal amplification, and armor\n- Generates strategic gold economy from controlled creep bounties\n\nweaknes:\n- Six-second delay for creep teleportation limits repositioning flexibility\n- High mana dependency constrains ability usage and sustain\n- Complex creep management requires significant micro-management\n- Limited damage potential focused only on intelligence scaling\n- Vulnerable to disruption with long cooldowns and fragile creeps\n\ncore_mecanics:\n- Holy Persuasion controls multiple creeps with enhanced stats\n- Divine Favor aura provides regeneration, heal amp, armor, and creep teleport\n- Hand of God delivers global healing to allies and creeps\n- Penitence slows enemies while boosting ally attack speed against debuffed targets\n- Five unique creep aspects provide diverse utilities",
+    "complete": true
+  },
+  {
+    "id": 67,
+    "displayName": "Spectre",
+    "shortName": "spectre",
+    "notes": "stranges:\n- Haunt provides global presence with illusions and vision\n- Spectral Dagger enables terrain pathing and farming acceleration\n- Desolate deals bonus pure damage against isolated targets\n- Dispersion reflects received damage to nearby enemies\n- Strong late-game scaling with item dependency\n\nweaknes:\n- Extremely weak early game laning and farming\n- Cooldown and mana limitations constrain ability usage\n- Desolate positional requirement disables damage with nearby allies\n- No built-in crowd control or dispel capabilities\n- Slow farming speed without item investments\n\ncore_mecanics:\n- Illusion-based global mobility with Reality swapping capability\n- Terrain traversal through Spectral Dagger paths\n- Isolation damage mechanic requiring enemy separation\n- Proximity-based damage reduction and reflection\n- Farming accelerator dependency for power spike timing",
+    "complete": true
+  },
+  {
+    "id": 68,
+    "displayName": "Ancient Apparition",
+    "shortName": "ancient_apparition",
+    "notes": "stranges:\n- Exceptional casting range on all abilities\n- Complete healing denial and execute mechanic with Ice Blast\n- Magic damage amplification from Ice Vortex\n- Strong lane control through constant harassment and vision\n\nweaknes:\n- Slow movement speed and no escape\n- No reliable disable - Cold Feet is conditional\n- Severely countered by dispel and magic immunity\n- Mana intensive with strict positioning requirements\n\ncore_mecanics:\n- Cold Feet: conditional stun when enemy remains stationary within area\n- Ice Vortex: AoE slow that reduces magic resistance and provides vision\n- Chilling Touch: extended range attack modifier with slow\n- Ice Blast: global healing denial with frost stacks and low HP execute\n- Requires team coordination to hold enemies in Cold Feet\n- Specialized counter to healing-reliant lineups",
+    "complete": true
+  },
+  {
+    "id": 69,
+    "displayName": "Doom",
+    "shortName": "doom_bringer",
+    "notes": "stranges:\n- Doom ultimate completely neutralizes enemies with Mute, Break, and heal prevention\n- Self-cast Doom with Aghanim's creates walking disable aura\n- Devour provides instant farming, ability theft, and gold generation\n- High strength grants natural tankiness\n\nweaknes:\n- No natural mobility, requires Blink Dagger\n- Slow casting ultimate with short range gives enemies reaction time\n- Farm-dependent with long cooldowns creating vulnerability windows\n- Single-target focus reduces teamfight impact\n\ncore_mecanics:\n- Disable key enemies with Doom ultimate\n- Farm quickly and steal abilities with Devour\n- Position with Scorched Earth mobility\n- Target tanky enemies with Infernal Blade percentage HP damage",
+    "complete": true
+  },
+  {
+    "id": 70,
+    "displayName": "Ursa",
+    "shortName": "ursa",
+    "notes": "stranges:\n- Exceptional single-target burst through stacking damage mechanic\n- Massive attack speed buff enables prolonged fight dominance\n- High survivability via damage reduction, debuff purge, and status resistance\n- Passive damage scaling based on current health\n\nweaknes:\n- Vulnerable to kiting due to limited mobility\n- Damage bonuses lost when not consistently attacking same target\n- Performance dependent on specific item choices and mana regeneration\n- Weak against multiple targets due to single-target focused design\n\ncore_mecanics:\n- Fury Swipes: Passive damage amplification from consecutive attacks on same target\n- Overpower: Fixed attack speed buff for rapid stack application\n- Enrage: Instant debuff cleanse with damage reduction and status resistance\n- Earthshock: AoE leap with damage and slow\n- Maul: Health-to-damage conversion based on current HP",
+    "complete": true
+  },
+  {
+    "id": 71,
+    "displayName": "Spirit Breaker",
+    "shortName": "spirit_breaker",
+    "notes": "stranges:\n- Unmatched global mobility to any visible target creating constant map pressure\n- Strong synergy with global allies and mobility-based teammates\n- Powerful crowd control through multiple stun mechanisms\n- Effective at all game stages when properly supported\n- Forces enemies to react constantly through psychological pressure\n\nweaknes:\n- Severe early game limitations with weak laning presence\n- Becomes functionally useless after using abilities in teamfights\n- Highly predictable with straightforward mechanics at higher skill levels\n- Dependent on specific items for core functionality\n- Mana constraints limit ability uptime and sustain\n\ncore_mecanics:\n- Charge of Darkness provides global initiation and path-stunning capability\n- Greater Bash passively bashes with damage scaling from movement speed\n- Planar Pocket redirects enemy spells to self while providing magic resistance\n- Nether Strike executes pick-off bursts with short cast range\n- Herd Mentality aura grants experience advantage to underleveled teammates",
+    "complete": true
+  },
+  {
+    "id": 72,
+    "displayName": "Gyrocopter",
+    "shortName": "gyrocopter",
+    "notes": "stranges:\n- Strong multi-target damage output through Flak Cannon\n- Reliable pickoff potential with Homing Missile (lock-on projectile, damage, stun)\n- Potent burst damage combo with Rocket Barrage and Call Down\n- Excellent laning phase advantage\n- Exceptional very late game scaling with critical strike items\n\nweaknes:\n- Poor mid-late game performance slump before ultra late game\n- Homing Missile can be destroyed by enemies before impact\n- Limited range on spells (missile and rockets are short-medium range)\n- High mana costs in early-mid game\n- Dependent on expensive core items to reach full effectiveness\n\ncore_mecanics:\n- Flak Cannon multi-target physical damage (cleave on auto-attacks with bonus vision)\n- Homing Missile targeted stun projectile with kill requirement\n- Rocket Barrage area-of-effect burst around Gyrocopter\n- Call Down global-range airstrike with slow and damage layers\n- Positioning management to maximize Flak Cannon multi-target effect",
+    "complete": true
+  },
+  {
+    "id": 73,
+    "displayName": "Alchemist",
+    "shortName": "alchemist",
+    "notes": "stranges:\n- Exceptional gold generation and farming acceleration through Greevil's Greed\n- Strong area control with armor reduction from Acid Spray\n- Scalable single-target disable with Unstable Concoction\n- Transformation ultimate providing significant combat stats and sustain\n- Stacking multi-source slows from multiple ability interactions\n\nweaknes:\n- Self-damage vulnerability if Unstable Concoction is overcharged\n- High predictability with audible/visual warnings during charge-up\n- Unreliable advantage from charge decay mechanics on Greevil's Greed\n- Heavy item dependency for full utility (Shard, mobility)\n- Limited late-game scaling with no hard dispel or consistent hard CC\n\ncore_mecanics:\n- Greevil's Greed: Stack charges to amplify gold from all sources\n- Acid Spray: Persistent physical damage zone with armor debuff\n- Unstable Concoction: Charge-up ability scaling in potency while granting movement\n- Chemical Rage: Transformation with combat stat boosts and dispel\n- Corrosive Weaponry: Passive stacking slow applied through multiple attack vectors",
+    "complete": true
+  },
+  {
+    "id": 74,
+    "displayName": "Invoker",
+    "shortName": "invoker",
+    "notes": "stranges:\n- Extreme versatility with 10 spells created from three orb combinations\n- Three distinct playstyle archetypes (CC/mana, burst/push, mobility)\n- Global map presence and multi-ability combo execution potential\n\nweaknes:\n- High skill floor requiring extensive muscle memory for spell execution\n- Extremely mana-intensive with expensive core item requirements\n- Fragile early game with positioning dependency and vulnerability during Invoke cooldown gaps\n\ncore_mecanics:\n- Three elemental orbs (Quas, Wex, Exort) provide passive bonuses and combine to create spells via Invoke\n- Spells scale with orb levels; Wex reduces Invoke cooldown for faster spell access\n- Build path selection (QW/QE/WE) dictates available spell pool and playstyle from laning phase",
+    "complete": true
+  },
+  {
+    "id": 75,
+    "displayName": "Silencer",
+    "shortName": "silencer",
+    "notes": "stranges:\n- Permanent Intelligence growth from enemy hero deaths\n- Right-click damage scales with stolen Intelligence\n- Punishes spellcasting through conditional silences\n- Global teamfight control that pierces spell immunity\n- Damage amplification against silenced targets\n\nweaknes:\n- No mobility or escape mechanisms\n- Mana-intensive abilities requiring careful management\n- Long-cooldown ultimate with predictable cast time\n- Poor wave clear and inefficient farming\n- Low survivability against physical burst damage\n\ncore_mecanics:\n- Permanent Intelligence stealing from nearby enemy deaths\n- Intelligence-based damage scaling on both spells and attacks\n- Conditional silences triggered by enemy spellcasting\n- Global silence affecting all enemies regardless of visibility or immunity status\n- Synergy between silence application and damage amplification",
+    "complete": true
+  },
+  {
+    "id": 76,
+    "displayName": "Outworld Destroyer",
+    "shortName": "obsidian_destroyer",
+    "notes": "stranges:\n- Pure damage scaling based on current mana pool\n- Chance to restore max mana when casting abilities\n- Removes target from play while stealing their mana capacity\n- AOE damage based on mana difference, bonus damage to illusions\n- More mana per Intelligence point than normal\n\nweaknes:\n- Extremely vulnerable with low HP and no escape\n- No base mobility, positioning dependent\n- Countered by magic immunity and mana-drain effects\n- High farm dependence, needs Int/mana items to become threatening\n- Long cooldown on ultimate\n\ncore_mecanics:\n- Arcane Orb: Pure damage based on current mana, zero cooldown at max rank\n- Astral Imprisonment: Removes target from play, steals mana capacity\n- Essence Flux: Chance to restore max mana on ability cast\n- Sanity's Eclipse: AOE damage based on max mana difference\n- Passive: Increased mana per Intelligence point",
+    "complete": true
+  },
+  {
+    "id": 77,
+    "displayName": "Lycan",
+    "shortName": "lycan",
+    "notes": "stranges:\n- Exceptional mid-game power spike through summon synergy\n- Strong objective control and siege capabilities\n- Efficient farming with multiple income streams and jungle efficiency\n- Mobility and positioning burst through Shapeshift\n- Map pressure through split-pushing with summons\n\nweaknes:\n- Summons become fragile in late game\n- Strong susceptibility to AOE damage\n- Poor scaling against high-armor targets and cleave\n- Limited engagement options without transformation\n- Itemization constraints balancing hero vs summon power\n\ncore_mecanics:\n- Manage independent wolf units for vision, farming, and damage\n- Time Shapeshift windows for engagement mobility and crit chance\n- Coordinate split-push siege with heroes and summons\n- Leverage mid-game momentum for objective destruction\n- Balance positioning around transformation availability",
+    "complete": true
+  },
+  {
+    "id": 78,
+    "displayName": "Brewmaster",
+    "shortName": "brewmaster",
+    "notes": "stranges:\n- Adaptive defensive versatility through three stance-switching modes\n- Fight-turning ultimate creating three controllable elementals with unique abilities\n- Exceptional item synergy and lane presence\n- Strong disruption toolkit with crowd control and dispel\n\nweaknes:\n- Extremely high mechanical complexity requiring control of four units\n- Ultimate kill vulnerability - losing all warriors is fatal\n- Mana constraints limiting ability usage\n- Weak to specific counters like illusion heroes\n\ncore_mecanics:\n- Stance switching between Earth, Storm, and Fire with adaptive bonuses\n- Drunken Brawler multiplier amplifying stance effects\n- Primal Split splitting hero into three distinct elemental warriors\n- Status resistance and movement speed adjustment based on HP threshold\n- Barrel and AOE combo with damage and slow capabilities",
+    "complete": true
+  },
+  {
+    "id": 79,
+    "displayName": "Shadow Demon",
+    "shortName": "shadow_demon",
+    "notes": "stranges:\n- Multiple damage amplification layers create exponential teamfight power\n- Versatile purge toolkit provides both offensive and defensive utility\n- Strong disable potential through illusions and displacement\n- Ability to spread effects to multiple enemies in teamfights\n\nweaknes:\n- Zero escape mechanisms creates high vulnerability\n- Long cast animations interrupt ability execution\n- High mana demands create sustainability issues\n- Cooldowns limit sustained effectiveness\n- Team-dependent to realize full potential\n\ncore_mecanics:\n- Stacking debuff passively amplifies damage on attacked targets\n- Linear skillshot builds multiplicative poison damage, released on command\n- Target displacement creates illusions that mimic original\n- Damage amplification and sharing spreads effects to nearby enemies\n- Ultimate progressively purges, slows, and damages over time\n- Ally support ability continuously removes debuffs and heals",
+    "complete": true
+  },
+  {
+    "id": 80,
+    "displayName": "Lone Druid",
+    "shortName": "lone_druid",
+    "notes": "stranges:\n- Dual unit control enables independent farming, split-pushing, and simultaneous map pressure\n- Two separate inventories provide multiplicative item scaling and build flexibility\n- Exceptional late-game scaling through both hero and bear progression\n- Transformation ability adapts combat style between ranged harassment and melee dominance\n\nweaknes:\n- Complete dependency on bear survivability creates significant vulnerability when bear dies\n- High micro-skill requirement makes control punishing during complex fights\n- No innate mobility abilities makes positioning errors fatal\n- Limited mana pool restricts ability usage without significant mana investment\n\ncore_mecanics:\n- Spirit Bear acts as independent second hero with separate stats, inventory, and scaling\n- Entangle counter-based root system applied through AOE attacks rewards coordinated bear and druid aggression\n- Transformation between ranged and melee forms provides combat versatility with timed stat bonuses\n- Shared lifesteal and movement speed through Spirit Link creates synergistic sustain for both units",
+    "complete": true
+  },
+  {
+    "id": 81,
+    "displayName": "Chaos Knight",
+    "shortName": "chaos_knight",
+    "notes": "stranges:\n- Exceptional laning sustain and damage from lifesteal + critical strike combo\n- Unique passive doubles illusions from ANY source (runes, items, enemy spells)\n- Phantasm illusions deal full hero damage (unlike most illusion-based heroes)\n- Reality Rift teleports ALL illusions to target with armor reduction for burst mobility\n\nweaknes:\n- Heavy RNG reliance on stun duration, damage output, and illusion doubling\n- Severe mana limitations from lowest INT and high spell costs\n- Illusions vulnerable to AOE damage and quick clear\n- Limited initiation range requires careful positioning for Reality Rift\n\ncore_mecanics:\n- Combo-oriented: Reality Rift entire illusion army to target, then use Chaos Bolt for setup\n- Synchronize item actives (Armlet, Satanic) with Phantasm casting for maximum benefit\n- Manage RNG elements for optimal timing based on game phase (longer stun early, more damage late)\n- Position carefully on Reality Rift cast—teleporting yourself is equally important as moving the target",
+    "complete": true
+  },
+  {
+    "id": 82,
+    "displayName": "Meepo",
+    "shortName": "meepo",
+    "notes": "stranges:\n- Clones provide exponential scaling and independent map control\n- Simultaneous multi-lane farming and jungle efficiency\n- Coordinated teamfight damage from multiple ability activations\n- Item effectiveness multiplies with each additional clone\n\nweaknes:\n- Extremely high micro-management requirement\n- Primary Meepo's death kills all clones instantly\n- Highly vulnerable to crowd control and positioning mistakes\n- Mana dependency limits ability usage and sustain\n- Weak early game with limited clone availability\n\ncore_mecanics:\n- Ultimate creates independent clones sharing levels and abilities\n- Poof enables global teleportation with area damage\n- Earthbind provides ranged root that can be chained\n- Dig offers escape, dispel, invulnerability, and regeneration\n- MegaMeepo transformation shares attributes for enhanced combat",
+    "complete": true
+  },
+  {
+    "id": 83,
+    "displayName": "Treant Protector",
+    "shortName": "treant",
+    "notes": "stranges:\n- Exceptional defensive support with global damage-blocking and healing that can protect allies, towers, and structures\n- Powerful area control through long-range slowing vines that prevent Blink Dagger usage and restrict enemy movement\n- Superior vision control with long-duration, hard-to-detect vision from enchanted trees for strategic map awareness\n- Strong early-game presence through high base damage despite being a position 5 support\n\nweaknes:\n- Minimal damage output that scales poorly into late game compared to other supports\n- Living armor easily negated by heroes with multi-hit abilities that quickly consume damage-blocking instances\n- Heavily dependent on tree coverage for movement speed and positioning, limiting effectiveness in tree-sparse areas\n- Mana constraints require careful management to sustain ability usage throughout fights\n- Very slow farming capacity as a position 5, creating economy pressure for essential utility items\n\ncore_mecanics:\n- Proactive defensive play: cast Living Armor on allies before damage occurs to maximize damage negation and healing value\n- Tree-based map control: leverage trees for mobility, strategic positioning, and vision placement through Eyes in the Forest\n- Setup-based initiation: apply debuffs with Leech Seed or Nature's Grasp before using Overgrowth to enable the rooting bind effect\n- Strategic area denial: control choke points and key map areas with Nature's Grasp's slow and Blink Dagger disable",
+    "complete": true
+  },
+  {
+    "id": 84,
+    "displayName": "Ogre Magi",
+    "shortName": "ogre_magi",
+    "notes": "stranges:\n- Multicast passive transforms basic abilities into amplified multi-cast effects\n- Exceptional durability from high base health allows aggressive lane presence\n- Reliable targeted stun combined with potent team buffing capability\n- Strength-based mana scaling provides sustainable spell casting\n- Fire Shield offers significant damage reduction and counter-attack potential\n\nweaknes:\n- Higher-tier multicast triggers are unreliable and inconsistent\n- Complete lack of mobility makes positioning crucial and risky\n- Melee range severely disadvantages against ranged opponents\n- Limited farming capability and economic scaling as support\n- Random secondary targeting on Ignite reduces strategic precision\n\ncore_mecanics:\n- Multicast passive randomly multiplies spell casts for burst/healing spikes\n- Dumb Luck passive replaces intelligence scaling with strength-based mana generation\n- Fireblast provides targeted stun lockdown, Unrefined Fireblast guarantees strength-scaled damage\n- Ignite deals damage over time with slow across multiple targets\n- Bloodlust grants movement and attack speed buffs, escalating in team value with multicast",
+    "complete": true
+  },
+  {
+    "id": 85,
+    "displayName": "Undying",
+    "shortName": "undying",
+    "notes": "stranges:\n- Decay steals strength from grouped enemies, reducing their attributes while boosting own\n- Tombstone creates autonomous zone control that forces enemy attention and limits positioning\n- Soul Rip provides flexible damage or healing scaling with nearby unit count\n- Flesh Golem transformation offers powerful team fight auras with slows and damage amplification\n\nweaknes:\n- Power curve declines significantly late game as abilities don't scale well with farm\n- High mana dependency limits ability cycling and effectiveness without sustain\n- No mobility or escape tools makes the hero easily kited and heavily position-dependent\n- Conditional effectiveness requires clustered enemies or numerous nearby units to function\n\ncore_mecanics:\n- Early-midgame power spike focused around strength manipulation and attrition-based laning\n- Zone control through Tombstone placement that demands immediate enemy response\n- Unit-count scaling abilities that leverage creep waves and team fight positioning\n- Critical positioning requirements due to lack of mobility and conditional ability effectiveness\n- Late-game transition to utility support role focused on team items and zone control",
+    "complete": true
+  },
+  {
+    "id": 86,
+    "displayName": "Rubick",
+    "shortName": "rubick",
+    "notes": "stranges:\n- Spell Steal grants adaptive utility by copying enemy abilities with long duration and fast cast animation\n- Arcane Supremacy provides universal spell enhancement through cast range and damage amplification for all abilities\n- Telekinesis offers versatile single-target displacement with AOE control and flexible direction\n- Multi-target harass through Fade Bolt with attack damage reduction\n\nweaknes:\n- Stolen abilities are completely lost on death, creating high-risk vulnerability\n- Limited to one stolen spell without Aghanim's Scepter, restricting versatility\n- Highly dependent on positioning with line-of-sight requirements and low mobility without Blink Dagger\n- Mana-intensive costs require sustain items to maintain spell casting\n\ncore_mecanics:\n- Spell Steal: Copy enemy abilities to use them with enhanced range, damage, and debuff duration\n- Telekinesis: Single-target displacement lift with AOE stun upon landing\n- Fade Bolt: Bouncing damage between enemies while reducing their attack damage\n- Attribute hybridization: Convert spell amplification into both attack damage and magic resistance",
+    "complete": true
+  },
+  {
+    "id": 88,
+    "displayName": "Nyx Assassin",
+    "shortName": "nyx_assassin",
+    "notes": "stranges:\n- Potent burst initiator with chainable crowd control\n- Burst damage scales heavily with enemy mana pools\n- Reflective defensive ability punishes attackers with stun\n- Instant invisibility with mobility for surprise positioning\n- Significant damage reduction and regeneration when burrowed\n\nweaknes:\n- Extremely vulnerable when abilities are on cooldown\n- Detection counters core gameplay and eliminates advantage\n- Damage potential heavily dependent on target mana pools\n- Visible burrow indicator telegraphs positioning\n- Insufficient sustained damage for late-game carry role\n\ncore_mecanics:\n- Passive reveals nearby invisible enemies in Fog of War\n- Linear stun with substantial burst damage potential\n- Mana-scaling damage ability amplified by recent damage dealt\n- Defensive shell reflecting damage and stunning attackers\n- Burrowed state grants extended range, survivability, and cooldown acceleration\n- Ultimate provides instant invisibility with devastating first-strike bonus",
+    "complete": true
+  },
+  {
+    "id": 89,
+    "displayName": "Naga Siren",
+    "shortName": "naga_siren",
+    "notes": "stranges:\n- Illusion army enables multifaceted farming, pushing, and damage output\n- Unreliable crowd control that works on invulnerable targets\n- Ultimate provides team reset, escape, and healing utility\n- Scales with armor reduction and evasion through illusions\n- Strong split-push capability with simultaneous camp clearing\n\nweaknes:\n- Illusions extremely fragile to AoE and cleave damage\n- Highly mana-dependent requiring regeneration items\n- Positioning-sensitive due to modest crowd control range\n- Channeling requirement on pull ability limits mobility\n- Armor reduction requires significant attack buildup\n\ncore_mecanics:\n- Generate and sustain illusion army for map pressure\n- Chain crowd control with root into pull combination\n- Use ultimate for team disengagement, healing, or repositioning\n- Trigger abilities through illusions for passive effects\n- Scale evasion based on nearby allied illusions",
+    "complete": true
+  },
+  {
+    "id": 90,
+    "displayName": "Keeper of the Light",
+    "shortName": "keeper_of_the_light",
+    "notes": "stranges:\n- Chakra Magic provides instant mana restoration and ability cooldown reduction\n- Illuminate delivers long-range wave clear and teamfight damage\n- Recall enables global map presence and strategic ally repositioning\n- Solar Bind reduces enemy magic resistance for team damage amplification\n- Special Reserve maintains minimum mana threshold for ability availability\n\nweaknes:\n- Extremely low base movement speed with no escape abilities\n- Highly vulnerable during channeling and ability commitments\n- Positionally-dependent spells that require significant setup time and accuracy\n- Long base cooldowns create strategic vulnerability windows\n- Relies heavily on team protection and proper positioning\n\ncore_mecanics:\n- Resource management through mana restoration and cooldown reduction\n- Long-range directional damage with required charge-up time\n- Global map control via delayed ally teleportation\n- Magic resistance reduction for team damage synergy\n- Spirit Form transformation to unlock secondary abilities",
+    "complete": true
+  },
+  {
+    "id": 86,
+    "displayName": "Rubick",
+    "shortName": "rubick",
+    "notes": "",
+    "complete": false
+  },
+  {
+    "id": 80,
+    "displayName": "Disruptor",
+    "shortName": "disruptor",
+    "notes": "stranges:\n- Glimpse instantly returns enemies to their position from seconds ago, punishing movement\n- Creates impenetrable barriers that trap enemies in confined spaces\n- AOE silence renders spellcasters completely helpless in its radius\n- Innate knockback provides defensive capability when being burst down\n\nweaknes:\n- Zero mobility makes him extremely vulnerable to ganks and initiation\n- Entire ability set completely negated by magic immunity (BKB)\n- Requires precise timing and prediction to land abilities effectively\n- Highly mana dependent, struggling without early sustain investment\n\ncore_mecanics:\n- Glimpse tracks and remembers enemy positions, teleporting them back after a delay\n- Kinetic Field forms a circular barrier that cannot be crossed by enemies\n- Static Storm creates an area of complete silence that disrupts enemy positioning\n- All abilities rely on magical damage and control, making the hero entirely BKB-dependent",
+    "complete": true
+  },
+  {
+    "id": 88,
+    "displayName": "Nyx Assassin",
+    "shortName": "nyx_assassin",
+    "notes": "",
+    "complete": false
+  },
+  {
+    "id": 89,
+    "displayName": "Naga Siren",
+    "shortName": "naga_siren",
+    "notes": "",
+    "complete": false
+  },
+  {
+    "id": 90,
+    "displayName": "Keeper of the Light",
+    "shortName": "keeper_of_the_light",
+    "notes": "",
+    "complete": false
+  },
+  {
+    "id": 91,
+    "displayName": "Io",
+    "shortName": "wisp",
+    "notes": "stranges:\n- Tether leeches ally regeneration and provides movement speed bonus, enabling ranged item usage on tethered ally\n- Overcharge provides percentage-based health regeneration for both Io and tethered ally, scaling with health items\n- Relocate grants global map presence and map-wide impact with ability to reposition anywhere\n- Spirits provide multi-functional utility for damage, vision, and protection through positioning\n- Facet system allows adaptation between offensive and defensive playstyles\n\nweaknes:\n- Extremely fragile with minimal survivability without tether\n- High mana dependency requires careful resource management\n- Tether breaks at limited range and can be disrupted by enemy displacement\n- Vulnerable during Relocate cast delay with predictable return points\n- Minimal independent combat capability, completely reliant on ally effectiveness\n\ncore_mecanics:\n- Maintain Tether connection to ally for all abilities and item effectiveness\n- Control Spirits positioning for damage, vision, and zoning utility\n- Time Relocate initiations and returns based on enemy awareness and map control\n- Build health items to scale Overcharge regeneration percentage\n- Coordinate with tethered ally for safe engagements and escape timing",
+    "complete": true
+  },
+  {
+    "id": 92,
+    "displayName": "Visage",
+    "shortName": "visage",
+    "notes": "stranges:\n- Soul Assumption delivers massive burst damage scaling with accumulated damage charges\n- Familiars provide independent damage, crowd control, vision, and utility with Stone Form\n- Gravekeeper's Cloak grants exceptional magic durability through stacking damage reduction layers\n\nweaknes:\n- Familiars are vulnerable and their loss critically reduces power output\n- Soul Assumption requires nearby damage events to charge; insignificant without charges\n- High micro demands and strict mana constraints limit ability usage\n\ncore_mecanics:\n- Position within damage event radius to build and maintain Soul Assumption charges\n- Control familiars independently while protecting them from focused fire\n- Use Stone Form for invulnerability and timing AoE damage/stun on grouped enemies",
+    "complete": true
+  },
+  {
+    "id": 93,
+    "displayName": "Slark",
+    "shortName": "slark",
+    "notes": "stranges:\n- Dark Pact purges debuffs and disables while providing self-farming capability\n- Pounce offers undodgeable engagement and prevents enemy escapes\n- Shadow Dance enables passive regeneration when unseen and active immunity\n- Essence Shift creates mechanical snowball through stat stealing on continuous attacks\n\nweaknes:\n- Essence Shift advantage resets without constant attacking\n- Shadow Dance passive is completely negated by vision and detection\n- Limited single-target focus makes him vulnerable to mass summons and spread formations\n- Early game vulnerable to magic burst and requires positioning/fog of war for effectiveness\n\ncore_mecanics:\n- Attack-duration snowball mechanic that rewards extended engagement\n- Hit-and-run tactics leveraging fog of war for regeneration between fights\n- Leap-leash engagement pattern with pursuit capability\n- Reactive ability timing for purge and defensive immunity",
+    "complete": true
+  },
+  {
+    "id": 94,
+    "displayName": "Medusa",
+    "shortName": "medusa",
+    "notes": "stranges:\n- Mana Shield converts damage to mana, creating dual-resource survivability that scales with int/mana items\n- Split Shot attacks multiple targets simultaneously for massive multi-target damage and wave clearing\n- Stone Gaze creates directional zone control with progressive slow, damage amp, and stun duration while boosting Medusa's movement speed\n\nweaknes:\n- Mana disable effects completely negate survivability by breaking Mana Shield\n- No mobility and zero gap-closing abilities make mispositioning fatal without items\n- Stone Gaze is fully countered by enemies looking away, giving reaction time and requiring setup\n\ncore_mecanics:\n- Protect and scale mana pool as primary survivability mechanic alongside health investment\n- Position strategically to force enemies into Stone Gaze while using Mystic Snake for poke and sustain\n- Rush mana pool and mobility items to transition from weak laner to unstoppable teamfight carry",
+    "complete": true
+  },
+  {
+    "id": 95,
+    "displayName": "Troll Warlord",
+    "shortName": "troll_warlord",
+    "notes": "stranges:\n- Fervor provides massive stackable attack speed on consecutive same-target attacks\n- Toggle between ranged and melee forms adapt to different combat situations (ranged: safer/mobile, melee: more damage/utility)\n- Whirling Axes offers versatile utility from both forms (ranged: slows; melee: evasion zone)\n- Battle Trance grants extreme attack speed, lifesteal, and movement speed with minimum health protection\n- Exceptional synergy with on-hit effects due to very high attack speed\n\nweaknes:\n- Fervor stacks reset on misses or target switches, heavily disrupted by evasion, blinds, and ethereal\n- No gap closers or displacement tools—relies entirely on positioning and movement speed\n- Vulnerable to kiting due to lack of hard crowd control (only slows)\n- Break disables Fervor, mode toggle, and melee form bonuses\n- Ultimate can be dispelled and autotargets closest enemy within range\n\ncore_mecanics:\n- Build and maintain Fervor stacks on same target before engaging priority units\n- Toggle between ranged and melee forms during combat based on positioning needs\n- Activate Battle Trance when Fervor is stacked, positioned for correct autotargeting\n- Utilize melee Whirling Axes as defensive evasion zone vs auto-attackers\n- Prioritize building attack speed items over raw damage to maximize Fervor effectiveness",
+    "complete": true
+  },
+  {
+    "id": 96,
+    "displayName": "Centaur Warrunner",
+    "shortName": "centaur",
+    "notes": "stranges:\n- Exceptional team mobility through global haste Stampede that grants unit pathing to all allies\n- Strength-scaled burst damage from Double Edge that grows exponentially with tank investment\n- Passive damage reflection aura that punishes focus-fire and provides free damage against multiple attackers\n- Natural tankiness with high base strength and abilities that synergize with defensive itemization\n\nweaknes:\n- Mana constraints limit ability usage, requiring careful management of dual active burst combo\n- Lacks sustained single-target damage output, dependent on cooldown windows\n- Vulnerable when key abilities are on cooldown, with long periods of reduced effectiveness\n- Dependent on team composition to capitalize on global mobility and AoE lockdown\n\ncore_mecanics:\n- AoE teamfight initiation with melee-range stun that can be cast during movement windup\n- Global positioning tool that resets ally mobility and escape options simultaneously\n- Strength-scaling burst combo centered around self-damage nuke and passive damage return\n- Tank-for-damage playstyle that converts defensive stats into teamfight presence",
+    "complete": true
+  },
+  {
+    "id": 97,
+    "displayName": "Magnus",
+    "shortName": "magnataur",
+    "notes": "stranges:\n- Massive AoE teamfight control and initiation\n- Strong waveclear and long-range harassment\n- Team-wide damage amplification and cleave\n- Ultimate pierces magic immunity\n\nweaknes:\n- Heavily dependent on optimal positioning for Skewer\n- Non-ultimate abilities blocked by magic immunity\n- Single-target initiation limits displacement to one enemy\n\ncore_mecanics:\n- Reverse Polarity gathers and stuns multiple enemies at Magnus's location\n- Skewer drags targeted enemy along Magnus's movement path\n- Shockwave provides long-range line damage and farming\n- Empower grants melee allies bonus damage and cleave",
+    "complete": true
+  },
+  {
+    "id": 98,
+    "displayName": "Timbersaw",
+    "shortName": "shredder",
+    "notes": "stranges:\n- Exceptional durability against physical damage through stacking armor and regeneration\n- Strong waveclear via tree destruction mechanics\n- High single-target burst potential with chain combo\n- Effective area denial and zoning capabilities\n\nweaknes:\n- Completely reliant on trees - loses significant effectiveness in open areas\n- Mana hungry; depletion means zero mobility, damage, or sustain\n- Vulnerable to magic damage as armor provides no protection\n- Requires aggressive positioning at medium range\n\ncore_mecanics:\n- All abilities consume trees - managing tree resources is essential\n- Timber Chain provides mobility dependent solely on tree targets\n- Reactive Armor stacks from incoming physical attacks\n- Abilities deal physical damage, bypassing magic immunity",
+    "complete": true
+  },
+  {
+    "id": 99,
+    "displayName": "Bristleback",
+    "shortName": "bristleback",
+    "notes": "stranges:\n- Passive damage reduction from side and rear angles provides exceptional durability in teamfights\n- Quill Spray deals AoE burst damage that scales significantly with repeated applications\n- Warpath converts spell casts into stacking attack damage and movement speed\n\nweaknes:\n- Mana intensive playstyle requires resource management and sustain to remain effective\n- Lacks innate escape or chase tools, making positioning critical throughout fights\n- Susceptible to being kited and attacked from front where damage reduction doesn't apply\n\ncore_mecanics:\n- Bristleback passive heavily reduces incoming damage when hit from side or rear angles\n- Quill Spray creates AoE damage in radius around Bristleback with stacking damage per cast\n- Warpath grants stacks of attack damage and movement speed every time a spell is cast",
+    "complete": true
+  },
+  {
+    "id": 100,
+    "displayName": "Tusk",
+    "shortName": "tusk",
+    "notes": "stranges:\n- Powerful map-wide initiation with Snowball that can carry allies and hold enemies\n- High burst damage potential from Ice Shards and Walrus PUNCH! combo\n- Strong solo lockdown with Walrus Kick that pierces magic immunity and can interrupt Roshan\n\nweaknes:\n- Severely mana-constrained, limiting sustained casting ability\n- Snowball projectile is visible and predictable, making it missable against aware opponents\n- Reliant on teammates following up to convert openings into successful kills\n\ncore_mecanics:\n- Snowball targets and holds an enemy while rolling, can gather one ally to transport with damage and stun on impact\n- Ice Shards projectile damages enemies and creates temporary terrain blocker that can trap targets\n- Walrus PUNCH! is a massive critical attack that launches victim in the air with stun\n- Walrus Kick kicks facing direction stun, damage, and slow; interrupt pierces magic immunity",
+    "complete": true
+  },
+  {
+    "id": 101,
+    "displayName": "Skywrath Mage",
+    "shortName": "skywrath_mage",
+    "notes": "stranges:\n- Long magical range enables safe positioning and engagement\n- Exceptional single-target burst damage capability\n- Area denial through massive AoE magical damage\n- Built-in silence provides reliable crowd control\n\nweaknes:\n- Extremely fragile with low health and armor\n- Complete lack of mobility or escape mechanisms\n- Mana-dependent with high ability costs\n\ncore_mecanics:\n- AoE damage distributed evenly among enemy heroes within radius\n- Combines silence with magic resistance reduction to amplify spell damage\n- Intelligence-scaling single-target damage\n- All abilities deal magical damage with synergistic interactions",
+    "complete": true
+  },
+  {
+    "id": 102,
+    "displayName": "Abaddon",
+    "shortName": "abaddon",
+    "notes": "stranges:\n- Aphotic Shield provides burst dispel and damage prevention for allies or self\n- Borrowed Time offers powerful self-sustain by converting damage into healing when low\n- Curse of Avernus simultaneously slows enemies and accelerates allies with attacks\n- Mist Coil delivers dual heal/damage at range\n\nweaknes:\n- Low mobility forces commitment once engaged in fights\n- Vulnerable to physical damage when abilities are on cooldown\n- Self-damage on Mist Coil requires careful positioning consideration\n- Lacks direct stun or hard crowd control for disruption\n\ncore_mecanics:\n- Aphotic Shield: Grants damage-absorbing shield with strong dispel on cast\n- Borrowed Time: Converts incoming damage into healing at low health threshold\n- Mist Coil: Projectile that heals allies or damages enemies at range\n- Curse of Avernus: Passive aura slowing enemies and boosting ally attack speed",
+    "complete": true
+  },
+  {
+    "id": 103,
+    "displayName": "Elder Titan",
+    "shortName": "elder_titan",
+    "notes": "stranges:\n- Percentage-based max health damage with dual damage types that cannot be fully mitigated by single defensive stat\n- Dual-aura team stat reduction amplifies both physical and magical damage for entire team\n- Double-area crowd control from two sources (Titan and Spirit) enables powerful teamfight disruption\n\nweaknes:\n- Earth Splitter has significant travel delay making it highly telegraphed and dodgeable\n- Astral Spirit effectiveness requires accurate prediction and careful positioning to hit enemies\n- High mana demands create sustainability issues for sustaining ability usage\n- Stat reduction auras require maintaining specific positioning and survival to remain effective\n\ncore_mecanics:\n- Send Astral Spirit through enemies to gather power bonuses and enable magic resistance reduction\n- Position Spirit for magic resistance reduction and Earth Splitter from Titan location for armor reduction\n- Coordinate Echo Stomp with Spirit for double-area damage and crowd control\n- Max health percentage nuke with split damage types that scales against tanky enemies",
+    "complete": true
+  },
+  {
+    "id": 104,
+    "displayName": "Legion Commander",
+    "shortName": "legion_commander",
+    "notes": "stranges:\n- Strong dispel and sustain for self or ally with movement speed boost\n- Area damage that scales with enemies and provides attack speed\n- Permanent damage gain creates snowball potential through isolated fights\n- Defensive lifesteal trigger during combat with massive attack speed burst\n\nweaknes:\n- Vulnerable to kiting and crowd control due to lack of mobility\n- Duel is an irreversible commitment with no escape option\n- Reliance on auto-attacks makes disable-heavy enemies dangerous\n\ncore_mecanics:\n- Press the Attack dispels debuffs and accelerates healing while boosting mobility\n- Overwhelming Odds damages clustered enemies and enhances attack speed\n- Moment of Courage provides instant lifesteal and near-infinite attack speed when struck\n- Duel isolates a target for pure melee combat, disabling all external interference",
+    "complete": true
+  },
+  {
+    "id": 105,
+    "displayName": "Techies",
+    "shortName": "techies",
+    "notes": "stranges:\n- Creates persistent zone control through invisible mine placement\n- Forces enemies to play cautiously and waste resources on detection\n- Provides team fight disruption with area damage and utility\n\nweaknes:\n- Completely immobile with zero escape mechanisms\n- Extremely fragile with no defensive abilities\n- Mana-intensive playstyle vulnerable to resource denial\n\ncore_mecanics:\n- Pre-emptive mine placement that requires prediction and positioning\n- Area denial through invisible, trigger-based traps\n- Self-damaging initiation ability for high-risk burst plays",
+    "complete": true
+  },
+  {
+    "id": 106,
+    "displayName": "Ember Spirit",
+    "shortName": "ember_spirit",
+    "notes": "stranges:\n- Exceptional mobility with Sleight of Fist that attacks all enemies in target area\n- Global escape and repositioning through Fire Remnant activation\n- High burst damage potential by attacking multiple enemies simultaneously\n\nweaknes:\n- Vulnerable when Fire Remnants are depleted\n- Requires multiple enemies in area for Sleight of Fist effectiveness\n- Relies on Flame Guard for magic damage protection\n\ncore_mecanics:\n- Sleight of Fist dashes to all enemies in target area and returns to start position\n- Fire Remnants can be placed strategically and activated globally for movement and damage\n- Searing chains anchors up to 2 nearby enemies, Flame guard absorbs magic damage and damages nearby enemies",
+    "complete": true
+  },
+  {
+    "id": 107,
+    "displayName": "Earth Spirit",
+    "shortName": "earth_spirit",
+    "notes": "stranges:\n- Exceptional mobility through Rolling Boulder and Stone Remnant manipulation\n- Powerful displacement with Boulder Smash and Geomagnetic Grip positioning\n- Strong teamfight presence through AoE damage, silence, and stun control\n- Sustained effectiveness through Magnetize's duration refresh mechanic\n\nweaknes:\n- Heavy reliance on Stone Remnant setup for full kit utility\n- Vulnerable when Stone Remnants are unavailable or poorly positioned\n- Rolling Boulder requires anticipation due to cast delay\n- Limited Stone Remnant count demands precise resource management\n\ncore_mecanics:\n- Stone Remnant placement as foundation for kit enablement\n- Boulder Smash targeted on stones/units for directional displacement\n- Rolling Boulder enhanced by traveling through Stone Remnants\n- Geomagnetic Grip pulling stones or allies while silencing enemies\n- Magnetize spreading and refreshing as stones detonate near magnetized units",
+    "complete": true
+  },
+  {
+    "id": 108,
+    "displayName": "Underlord",
+    "shortName": "abyssal_underlord",
+    "notes": "stranges:\n- Powerful teamfight utility through crowd control and area denial\n- Team repositioning capability with Fiend's Gate for save or engage\n- Enemy damage reduction through Atrophy Aura that scales with kills nearby\n- Strong zoning and area control with multiple ground-targeted effects\n\nweaknes:\n- Very low mobility with no gap-close ability\n- Escape entirely dependent on Fiend's Gate\n- Fiend's Gate requires team coordination and proper usage\n- Vulnerable when Fiend's Gate is on cooldown\n\ncore_mecanics:\n- Firestorm: Area damage over time in targeted location for zoning\n- Pit of Malice: Ground-targeted area that roots and damages entering units\n- Fiend's Gate: Creates paired portals allowing hero teleportation via channel\n- Atrophy Aura: Passive damage reduction that grants bonus damage from nearby enemy deaths",
+    "complete": true
+  },
+  {
+    "id": 109,
+    "displayName": "Terrorblade",
+    "shortName": "terrorblade",
+    "notes": "stranges:\n- High-impact illusion army that turns enemy heroes against themselves\n- Life-swing capability through health percentage swapping allows dramatic recovery\n- Transformation to ranged form provides significant damage and range advantages\n- All illusions receive massive damage multiplier from aura synergy\n\nweaknes:\n- Extremely fragile without illusion army active\n- Abilities have strict limitations on range, radius, and targeting conditions\n- Illusions suffer amplified damage and melt to anti-illusion effects\n- Entire damage output depends on metamorphosis window\n\ncore_mecanics:\n- Creates invulnerable reflections of all nearby enemy heroes that attack their originals\n- Transforms into ranged demon form with enhanced damage and range\n- Spawns illusions based on current health that benefit from passive multipliers\n- Exchanges current health percentage with target hero as reset mechanic",
+    "complete": true
+  },
+  {
+    "id": 110,
+    "displayName": "Phoenix",
+    "shortName": "phoenix",
+    "notes": "stranges:\n- Icarus Dive provides strong mobility for engagement and escape\n- Sun Ray offers high damage and healing at the cost of health\n- Supernova provides powerful teamfight presence and resets all abilities\n- Fire Spirits apply damage over time and attack speed slow\n\nweaknes:\n- Health-based resource pool makes Phoenix extremely vulnerable\n- Icarus Dive is predictable with fixed distance and forced return\n- Sun Ray channels limit mobility and create vulnerability windows\n- Supernova can be destroyed by enemy attacks before completion\n\ncore_mecanics:\n- Icarus Dive: Dives forward in an arc then returns to origin automatically\n- Fire Spirits: Summon orbiting spirits that can be launched independently\n- Sun Ray: Channels beam dealing damage to enemies and healing allies at health cost\n- Supernova: Transforms into burning sun, reforms at full health with abilities reset",
+    "complete": true
+  },
+  {
+    "id": 111,
+    "displayName": "Oracle",
+    "shortName": "oracle",
+    "notes": "stranges:\n- Grants 100% magic resistance to any target\n- Spells can target both allies and enemies for maximum flexibility\n- Combines root with buff dispel\n- Instant damage followed by delayed heal over time\n- Area damage with heal reduction utility\n\nweaknes:\n- Ally disarm when providing magic immunity\n- Requires precise timing and target selection for effectiveness\n- Channel interruption vulnerability\n- Mana-intensive playstyle\n- Allied damage on heal application\n\ncore_mecanics:\n- Fortune's End: channels up, then roots target and dispels buffs\n- Fate's Edict: sets magic resistance to 100% and disarms target\n- Purifying Flames: deals instant damage then heals over time\n- Rain of Destiny: area damage with heal reduction debuff\n- False Promise: delays all damage and healing, then applies doubled healing",
+    "complete": true
+  },
+  {
+    "id": 112,
+    "displayName": "Winter Wyvern",
+    "shortName": "winter_wyvern",
+    "notes": "stranges:\n- Arctic Burn provides unobstructed movement, increased attack range, and % current HP damage with slow\n- Cold Embrace grants allies complete immunity to physical damage while healing them\n- Winter's Curse forces enemies to attack their own frozen ally, creating teamfight disruption\n- Splinter Blast spreads area damage to multiple nearby enemies\n\nweaknes:\n- Low mobility with no escape abilities\n- Reliant on team composition for Winter's Curse effectiveness\n- Vulnerable to magic damage when abilities are on cooldown\n- Sustained effectiveness requires careful timing of limited-duration toggle ability\n\ncore_mecanics:\n- Arctic Burn: Toggle ability granting unobstructed movement, increased attack range, and attacks dealing % current HP damage with movement slow\n- Splinter Blast: Projectile that deals damage to primary target and spreads to nearby enemies\n- Cold Embrace: Encases ally in cocoon, healing over time while blocking all physical damage\n- Winter's Curse: Stuns target and forces nearby enemies to attack the cursed ally with increased attack speed",
+    "complete": true
+  },
+  {
+    "id": 113,
+    "displayName": "Arc Warden",
+    "shortName": "arc_warden",
+    "notes": "stranges:\n- Tempest Double creates perfect duplicate hero capable of independent ability and item usage\n- Magnetic Field provides 100% evasion with significant attack speed boost\n- Two instances acting simultaneously enable multiplied damage and spell output\n- Spark Wraith provides delayed area damage and slow\n- Runic Infusion grants sustain through rune control\n\nweaknes:\n- Spark Wraiths deal zero damage when multiple enemies are present in area\n- Flux damage only applies when targeted enemy is isolated from allies\n- Tempest Double has movement speed and attack penalties\n- Heavily reliant on positioning abilities correctly for effectiveness\n- Vulnerable when both hero and double are disabled\n\ncore_mecanics:\n- Tempest Double shares cooldowns with main hero but acts independently\n- Magnetic Field zones do not stack when both instances cast\n- Spark Wraiths have activation delay that allows dodging\n- Flux requires allied positioning away from targeted enemy\n- Double cannot pick up or drop items but uses inventory freely",
+    "complete": true
+  },
+  {
+    "id": 114,
+    "displayName": "Monkey King",
+    "shortName": "monkey_king",
+    "notes": "stranges:\n- Exceptional mobility through tree traversal with escape and initiation options\n- Multiple crowd control abilities with True Strike for reliable lockdown\n- Zone control and damage amplification through soldier army creation\n- Strong sustain and burst damage potential through stacking mechanics\n\nweaknes:\n- Completely dependent on trees for core mechanics, severely limited when trees are destroyed\n- Channeling abilities telegraph plays and can be interrupted\n- Weak against heroes who can cut trees or knock him out of tree form\n- Requires meticulous positioning and timing due to lack of raw survivability\n\ncore_mecanics:\n- Tree-based mobility system that enables vision advantage and aerial positioning\n- Channeling ability that scales damage and slow while providing escape/initiation\n- Passive attack modifier that rewards consistent focus fire with bonus damage and lifesteal\n- Soldier summon ability that provides zone control, armor bonus, and defensive utility",
+    "complete": true
+  },
+  {
+    "id": 119,
+    "displayName": "Dark Willow",
+    "shortName": "dark_willow",
+    "notes": "stranges:\n- Shadow Realm provides untargetability, mobility, and high burst damage\n- Strong area control through roots, stuns, and displacement effects\n- Multiple crowd control types enable powerful combo potential\n\nweaknes:\n- Abilities have significant delays and cast times that can be punished\n- Limited escape options outside of Shadow Realm\n- Damage output constrained to single targets during lockdown\n\ncore_mecanics:\n- Shadow Realm grants invulnerability and charges up next attack based on duration\n- Bramble Maze creates delayed zone control with root and damage\n- Cursed Crown applies delayed stun that can be cleansed by allies\n- Bedlam provides consistent single-target damage during combos\n- Terrorize applies area displacement to disrupt enemy positioning\n- Pixie Dust sustains during untargetable periods with regeneration",
+    "complete": true
+  },
+  {
+    "id": 120,
+    "displayName": "Pangolier",
+    "shortName": "pangolier",
+    "notes": "stranges:\n- Exceptional mobility with terrain traversal and invulnerable transformation\n- Strong physical burst with multi-hit abilities triggering crit/bash items\n- Defensive durability with absorption barriers and magic resistance\n\nweaknes:\n- Mana-constrained early game\n- High mechanical skill required with slow turn rate on ultimate\n- Movement-blocking effects instantly cancel main mobility ability\n- Reliant on proper positioning and enemy proximity for effectiveness\n\ncore_mecanics:\n- Rolling Thunder provides committed invulnerable initiation with terrain bounces\n- Swashbuckle delivers multi-hit burst while repositioning through enemies\n- Shield Crash combines AOE damage with damage absorption barrier\n- Lucky Shot applies persistent armor reduction and attack speed slow",
+    "complete": true
+  },
+  {
+    "id": 121,
+    "displayName": "Grimstroke",
+    "shortName": "grimstroke",
+    "notes": "stranges:\n- Soulbind duplicates targeted abilities between two linked enemies for massive combo potential\n- Strong multi-aspect crowd control with silence, slow, and stun capabilities\n- Ink Trail passive reveals enemies in fog through attacks and spell hits\n- Stroke of Fate scales damage based on units hit, excellent for wave clear\n\nweaknes:\n- High mana costs require careful management for full combo execution\n- Long cast animations make abilities vulnerable to being dodged\n- Phantom's Embrace instantly removed by auto-attacks, especially weak against high attack speed\n- Soulbind requires enemies positioned close together and can be broken by distance or displacement\n\ncore_mecanics:\n- Soulbind links two enemies and duplicates targeted spells between them, breaking by exceeding maximum distance\n- Combo execution requires enemy positioning and follows specific order: Soulbind → Phantom's Embrace → Ink Swell → Stroke of Fate\n- Ink Trail passive applies revelation and vision on enemies affected by any ability or attack\n- Phantom's Embrace refreshing to zero cooldown only if the phantom survives full duration\n- Vector-targeted Stroke of Fate with angle-based aiming, damage increases with each unit hit",
+    "complete": true
+  },
+  {
+    "id": 123,
+    "displayName": "Hoodwink",
+    "shortName": "hoodwink",
+    "notes": "stranges:\n- Strong tree-tethered stun for control\n- High mobility with evasion and tree-walking\n- Long-range burst damage potential\n- Multi-target bouncing damage for farming and fighting\n- Instant invisibility escape tool\n\nweaknes:\n- Severely limited effectiveness in treeless areas\n- Abilities require setup time and can be blocked\n- No sustain or self-healing\n- Evasion countered by true strike\n- Vulnerable when caught without escape options\n\ncore_mecanics:\n- Tree-reliant abilities for stuns and mobility\n- Bouncing multi-target damage projectile\n- Chargeable long-range sniper shot\n- Evasion-based movement with tree-walking\n- Illusion-based invisibility escape",
+    "complete": true
+  },
+  {
+    "id": 126,
+    "displayName": "Void Spirit",
+    "shortName": "void_spirit",
+    "notes": "stranges:\n- Instant teleportation with multiple charges for hit-and-run playstyle\n- Invulnerability frames to dodge projectiles and avoid burst damage\n- Chainable abilities for devastating burst windows\n- Versatile utility with scouting, zoning, and shielding tools\n\nweaknes:\n- Extremely mana-dependent, especially during early game\n- Sustained pressure limited by ability cooldown periods\n- Must commit to vulnerable melee positions for effectiveness\n- Relies on hero kills and fights rather than farming speed\n\ncore_mecanics:\n- Dissimilate provides invulnerability window plus area damage escape\n- Astral Step ultimate uses multi-charge teleportation system\n- Aether Remnant offers wave clear and vision control capabilities\n- Chain abilities together for burst damage plus mobility combos",
+    "complete": true
+  },
+  {
+    "id": 128,
+    "displayName": "Snapfire",
+    "shortName": "snapfire",
+    "notes": "stranges:\n- Devastating early nuking with point-blank positioning (damage + slow combo)\n- Versatile displacement ability enabling mobility, engagement, peeling, and saves\n- Stacking armor reduction with range bonus for team fight impact\n- Area denial/control through persistent field effects with vision\n\nweaknes:\n- Inconsistent damage output reliant on random attack procs\n- Aggressive positioning required for optimal effectiveness, increasing vulnerability\n- Mana constraints with long cooldowns limit sustain and frequency\n- Short base attack range reduces safety and zoning potential\n\ncore_mecanics:\n- Passive attack damage proc that triggers all on-hit effects\n- Cone-shape nuke with damage/slow multiplier at close range\n- Mobility ability that repositions allies and traverses terrain\n- Toggled attack modifier providing stacking armor reduction\n- Channeled area damage creating persistent control zones with vision",
+    "complete": true
+  },
+  {
+    "id": 129,
+    "displayName": "Mars",
+    "shortName": "mars",
+    "notes": "stranges:\n- Superior zone control via Arena of Blood that traps enemies and blocks projectiles\n- Long-range initiation with Spear of Mars to isolate targets and set up combos\n- Strong physical burst damage from God's Rebuke conical AOE that scales with attack items\n- Built-in sustain and tankiness with passive health regen amplification and damage reduction active\n- Abilities provide teamfight utility through vision control, disruption, and zone denial\n- Good scaling potential remains relevant through late game with control and burst win conditions\n\nweaknes:\n- Extremely mana dependent with high spell costs requiring early mana regen items\n- All abilities are positioning-dependent with linear skillshots and directional constraints\n- Limited mobility pre-Blink Dagger lacks built-in gap closing tools\n- Spear skillshot is predictable and easily dodged by enemy movement\n- Arena of Blood can be countered by mobile heroes and enemies at wall edges\n- Offensive abilities suppressed by enemy Black King Bar\n- Bulwark requires precise timing and slows movement speed while active\n\ncore_mecanics:\n- Spear-initiation combos with Arena to isolate targets for 1v1 advantages\n- Arena walls provide safe trading zone against enclosed enemies while blocking outside interference\n- Positioning-critical gameplay where ability effectiveness depends entirely on Mars alignment to enemies\n- Blink Dagger enables instant repositioning for optimal ability angles and surprise initiation\n- Cooldown management essential with Arena and Spear having limited availability early game\n- Teamfight pattern of isolate-contain-burst with Spear → Arena → God's Rebuke sequence",
+    "complete": true
+  },
+  {
+    "id": 131,
+    "displayName": "Ringmaster",
+    "shortName": "ringmaster",
+    "notes": "stranges:\n- Strong multi-type crowd control (fear, slow, knockback, miss chance)\n- Exceptional team fight zone control and repositioning capabilities\n- Long-range engagement with multiple initiation options\n- Unique versatility from random souvenir abilities\n- Protective transformation that saves allies during critical moments\n\nweaknes:\n- Mana-intensive requiring careful resource management\n- RNG-based souvenirs create performance inconsistency\n- Key crowd control ability requires channeling time\n- Dependent on proximity for effective positioning\n- Cannot rely on specific utility abilities being available\n\ncore_mecanics:\n- Tame the Beasts: channeled area control that trades radius for stronger impact\n- Escape Act: protective transformation granting untargetable movement\n- Impalement Arts: long-range skill shot with slow and percentage damage\n- Wheel of Wonder: multi-stage zone control with knockback and delayed explosion\n- Souvenirs: passive mechanic gaining random single-use abilities from enemy hero deaths",
+    "complete": true
+  },
+  {
+    "id": 135,
+    "displayName": "Dawnbreaker",
+    "shortName": "dawnbreaker",
+    "notes": "stranges:\n- Global presence with Solar Guardian for map-wide impact and saves\n- Strong AoE kit with built-in sustain and ally healing\n- Durable with day/night vision and damage advantages\n\nweaknes:\n- Cooldown-dependent with significant downtime periods\n- Predictable dash with limited escape options once committed\n- Mana constraints and vulnerability to disruption\n\ncore_mecanics:\n- Starbreaker dash with smash for burst initiation\n- Celestial Hammer skillshot with fire trails and repositioning\n- Solar Guardian global ultimate with damage, heal, and landing stun\n- Luminosity passive that scales with attacks for crit and ally healing",
+    "complete": true
+  },
+  {
+    "id": 136,
+    "displayName": "Marci",
+    "shortName": "marci",
+    "notes": "stranges:\n- High mobility with terrain-crossing and repositioning capabilities through Rebound\n- Chainable crowd control with multiple disable types (displacement, stun, slow) that prevent immunity counterplay\n- Strong ally synergy via Bodyguard with damage and lifesteal amplification for both target and self\n- Dominant early-mid game power with peak effectiveness before 25 minutes\n- Strong initiation and defensive escape options from versatile mobility\n\nweaknes:\n- Mana constraints limit sustained fight presence and full combo execution\n- Short range vulnerability to kiting from ranged opponents and zoning capabilities\n- High positioning and execution skill requirement with severe punishment for mistakes\n- Significant late game power drop-off with rapidly diminishing impact beyond 35 minutes\n\ncore_mecanics:\n- Physical brawler playstyle requiring close quarters engagement for maximum effectiveness\n- Combo flow of Dispose (displacement) → Rebound (stun/position) → Bodybuff/ultimate for sustained fight\n- Early-mid game focused strategy, aiming to close out games during peak power windows\n- Position-dependent mobility where Rebound targets determine initiation vs escape options",
+    "complete": true
+  },
+  {
+    "id": 137,
+    "displayName": "Primal Beast",
+    "shortName": "primal_beast",
+    "notes": "stranges:\n- Global engagement capability with highly impactful crowd control on Onslaught\n- Building siege specialist with massive structure damage amplification from Colossal\n- Skirmish disruptor through sustained AoE damage while mobile with Trample\n- Becomes stronger as fights continue via Uproar stacking stats and area slow\n- Powerful channeled lockdown with Pulverize that creates repeated team fight disruption\n\nweaknes:\n- Self-disarmed during Trample, limiting fighting capability while ability active\n- Highly positional dependent with short ult range and commitment-based charge\n- Vulnerable to mobility disparity when abilities are on cooldown\n- Pathing reliant with abilities that can be body blocked or juked\n- All utility requires successful skill execution rather than passive reliability\n\ncore_mecanics:\n- Colossal provides passive building damage amplification as natural siege enhancer\n- Onslaught charges globally to target location, stunning and knocking enemies on impact\n- Trample damages enemies around Primal Beast per distance traveled while self-disarmed\n- Uproar stacks on damage taken to grant increasing attack damage, armor, and enemy slow aura\n- Pulverize is a channeled ult that grabs a target and repeatedly slams them into the ground",
+    "complete": true
+  },
+  {
+    "id": 138,
+    "displayName": "Muerta",
+    "shortName": "muerta",
+    "notes": "stranges:\n- Physical damage immunity during ultimate creates safe window for aggression\n- Innate ability to attack and deal damage to ethereal targets bypasses common defenses\n- High burst and sustained damage potential through Gunslinger multi-hit mechanics\n- Long-range skillshot control with Dead Shot provides lane dominance and poke\n- Zone control and teamfight presence with The Calling revenants\n\nweaknes:\n- Cannot damage magic immune targets during ultimate (critical vulnerability)\n- No innate mobility or escape mechanisms, positioning dependent\n- Skillshot abilities require aim and timing, can be avoided\n- Reliance on attack damage and attack speed for effectiveness\n- Melee-like weaknesses in lane despite being ranged hero\n\ncore_mecanics:\n- Supernatural: Passive enabling magical damage against ethereal units and attack capability while ethereal\n- Dead Shot: Line skillshot that ricochets and fears, primary poke and engage tool\n- The Calling: AoE revenant summon providing slow, silence, and damage zone\n- Gunslinger: Toggle granting chance for second attack on nearby targets, core damage amplifier\n- Pierce the Veil: Transformation ultimate converting all physical to magical damage, becoming immune to physical damage while active",
+    "complete": true
+  },
+  {
+    "id": 145,
+    "displayName": "Kez",
+    "shortName": "kez",
+    "notes": "stranges:\n- Flexible melee hero with dual weapon systems and adaptive ability sets\n- Multiple combat styles available through weapon switching mechanics\n- High skill expression through complex ability combinations\n- Strong potential for creative playstyles with versatile toolkit\n\nweaknes:\n- Data limitations prevent comprehensive mechanical analysis\n- Requires extensive testing to understand optimal play patterns\n- Complex kit may have steep learning curve\n- Hero appears to be very recently released with limited documentation\n\ncore_mecanics:\n- Dual weapon system enabling different combat approaches\n- Weapon switching creates adaptation opportunities\n- Complex ability interactions requiring mastery\n- Versatile toolkit for multiple strategic situations",
+    "complete": true
+  },
+  {
+    "id": 155,
+    "displayName": "Largo",
+    "shortName": "largo",
+    "notes": "stranges:\n- Passive extends all buff and debuff durations from abilities, maximizing impact\n- Multi-song ultimate provides versatile team bonuses with adaptable effects\n- Pull mechanic repositions enemies or allies for tactical advantage\n\nweaknes:\n- Heavy mana dependency limits sustained ability usage\n- Positioning constraints with short cast ranges\n- No innate escape or mobility options\n\ncore_mecanics:\n- Passive increases duration of all self-applied effects\n- Pull with basic dispel and regeneration\n- AoE delayed multi-hit stun and slow\n- Ally mana cost reduction with duration decay per ability cast\n- Cyclic three-song ultimate for adaptable team support",
+    "complete": true
+  }
+]
