@@ -15,12 +15,16 @@ frontend/
   vite.config.ts       — WS proxy to backend
 backend/
   src/
-    index.ts           — Express + WS server + RealtimeSession relay
-    agent.ts           — RealtimeAgent definition
-    tools/             — tool definitions (one per file, re-exported via index.ts)
+    index.ts           — Express + WS server + RealtimeSession relay + insight injection
+    agent.ts           — RealtimeAgent definition (Тренер Миша)
+    tools/             — voice agent tools (one per file, re-exported via index.ts)
+    heroes.ts          — hero data loader + fuzzy search (heroes_extend.json)
+    draftAnalysis.ts   — background draft analysis (gpt-5.4-mini with tool use)
+    pendingInsights.ts — in-memory queue for async insights → voice delivery
 insight-app/
   src/
     index.ts           — GSI listener (HTTP POST on :6074)
+    draft-detector.ts  — screen capture draft detection (Python CV subprocess)
 docs/
   valve/               — Dota 2 GSI integration guide
 ```
@@ -31,19 +35,44 @@ docs/
 - Prefer native Node.js modules over third-party packages
 - Keep dependencies minimal
 
-## Voice agent
+## Architecture
 
-Single agent: Тренер Миша. Russian-speaking voice coach.
-- Brief, conversational replies
-- Instant tools → answer immediately
-- Delayed tools → acknowledge, continue naturally, deliver result when ready
+### Data flow
 
-## Tools
+```
+Dota 2 GSI → POST → insight-app (:6074)
+                      ├─ GET /state → match state (player perspective)
+                      └─ GET /draft → team compositions (screen capture CV)
+
+Frontend (:5173) ←─ WS ─→ Backend (:3000) ←─ WS ─→ OpenAI Realtime API (gpt-realtime-1.5)
+                  audio+JSON               audio+events
+```
+
+### Voice conversation (realtime)
+
+Browser ↔ Backend ↔ OpenAI. Backend is a relay with event hooks:
+- Binary PCM16 24kHz audio passes through both directions untouched
+- JSON control messages (backend → frontend): `connected`, `transcript`, `tool_call`, `tool_result`, `interrupt`, `error`
+- Frontend → backend: audio only, no control messages
+- VAD + interruption: handled server-side by OpenAI, exposed as `audio_interrupted` event
+
+### Proactive draft analysis (async)
+
+Triggered lazily on `turn_done` (agent finished speaking):
+1. `checkAndAnalyzeDraft()` — fetches /draft from insight-app; if 10 heroes picked and not yet analyzed → fire and forget
+2. `analyzeInBackground()` — gpt-5.4-mini with `get_hero_info` tool, reasoning_effort: medium
+3. Result → `setPending()` in pendingInsights
+4. Next `turn_done` → `takePending()` → inject as system message via `conversation.item.create` + `response.create`
+5. Миша asks user "want to hear the analysis?" → user confirms → Миша delivers
+
+Reset on WS disconnect (new match).
+
+## Voice agent tools
 
 ### Instant
-- `get_joke` — returns a random joke
+- `get_joke` — random joke
 - `get_hero_info` — detailed hero info (strengths, weaknesses, mechanics)
-- `list_heroes` — list all heroes (names usable with `get_hero_info`)
+- `list_heroes` — all heroes in format usable with `get_hero_info`
 - `get_draft` — current draft composition from screen capture
 - `get_match_state` — live match state from GSI
 

@@ -10,6 +10,7 @@ import {
 
 export const agent = new RealtimeAgent({
   name: "Тренер Миша",
+  voice: "verse",
   instructions: `You are a Russian-speaking voice assistant called Тренер Миша, a Dota 2 coach.
 Keep replies brief and conversational.
 

@@ -4,6 +4,8 @@ import { WebSocketServer, WebSocket } from "ws";
 import { RealtimeSession } from "@openai/agents/realtime";
 import "dotenv/config";
 import { agent } from "./agent.js";
+import { checkAndAnalyzeDraft, resetDraftAnalysis } from "./draftAnalysis.js";
+import { takePending, clearPending } from "./pendingInsights.js";
 
 const app = express();
 const PORT = 3000;
@@ -26,7 +28,7 @@ wss.on("connection", async (ws) => {
 
   const session = new RealtimeSession(agent, {
     transport: "websocket",
-    model: "gpt-4o-realtime-preview",
+    model: "gpt-realtime-1.5",
   });
 
   function send(msg: Record<string, unknown>) {
@@ -84,6 +86,31 @@ wss.on("connection", async (ws) => {
       send({ type: "interrupt" });
     });
 
+    // On each turn_done: lazy draft check + deliver pending insights
+    session.transport.on("turn_done", () => {
+      checkAndAnalyzeDraft();
+
+      const insight = takePending();
+      if (!insight) return;
+
+      console.log("[insight] Delivering pending draft analysis");
+      session.transport.sendEvent({
+        type: "conversation.item.create",
+        item: {
+          type: "message",
+          role: "system",
+          content: [
+            {
+              type: "input_text",
+              text: `[Фоновый анализ драфта завершён]\n${insight}\n\nПредложи игроку: "У меня готов анализ драфта, рассказать?" Не рассказывай содержание сразу — дождись подтверждения.`,
+            },
+          ],
+        },
+      });
+
+      session.transport.sendEvent({ type: "response.create" });
+    });
+
     send({ type: "connected" });
     console.log("[ws] Session connected to OpenAI");
   } catch (err) {
@@ -106,6 +133,8 @@ wss.on("connection", async (ws) => {
 
   ws.on("close", () => {
     console.log("[ws] Client disconnected");
+    resetDraftAnalysis();
+    clearPending();
     session.close();
   });
 
