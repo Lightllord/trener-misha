@@ -1,6 +1,5 @@
 import { RealtimeAgent } from "@openai/agents/realtime";
 import {
-  jokeTool,
   analysisTool,
   heroInfoTool,
   heroListTool,
@@ -35,7 +34,6 @@ You will receive automatic game updates via system messages:
 - [Состояние матча] — periodic status snapshot. Remember it but do NOT comment unless the user asks. Use this context when answering questions.
 - [Фоновый анализ драфта завершён] — draft analysis ready. Ask the user if they want to hear it before sharing.`,
   tools: [
-    jokeTool,
     analysisTool,
     heroInfoTool,
     heroListTool,

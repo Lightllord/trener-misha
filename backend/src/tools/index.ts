@@ -1,4 +1,3 @@
-export { jokeTool } from "./joke.js";
 export { analysisTool } from "./analysis.js";
 export { heroInfoTool } from "./heroInfo.js";
 export { heroListTool } from "./heroList.js";

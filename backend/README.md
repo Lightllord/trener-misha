@@ -71,7 +71,6 @@ Each file exports one `tool({ … })`. `src/tools/index.ts` re-exports them.
 
 | Tool | File | Description |
 |------|------|-------------|
-| `get_joke` | `joke.ts` | Random joke |
 | `run_analysis` | `analysis.ts` | Simulated slow analysis (3 s timeout) |
 | `get_hero_info` | `heroInfo.ts` | Strengths, weaknesses, mechanics from `heroes_extend.json` |
 | `list_heroes` | `heroList.ts` | Full hero list (for looking up exact names) |

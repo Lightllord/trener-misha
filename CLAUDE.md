@@ -81,7 +81,6 @@ Reset on WS disconnect (new match).
 ## Voice agent tools
 
 ### Instant
-- `get_joke` — random joke
 - `get_hero_info` — detailed hero info (strengths, weaknesses, mechanics)
 - `list_heroes` — all heroes in format usable with `get_hero_info`
 - `get_draft` — current draft composition from screen capture

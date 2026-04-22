@@ -12,20 +12,11 @@ export const heroInfoTool = tool({
       .describe("The name of the hero to search for (search in English)"),
   }),
   execute: async ({ hero_name }) => {
-    try {
-      const hero = await findHero(hero_name);
-      if (!hero) {
-        return `Не нашли героя с названием "${hero_name}". Попробуйте другое название.`;
-      }
-
-      const formattedInfo = `${hero.displayName} (${hero.shortName}):
-
-${hero.notes}`;
-
-      return formattedInfo;
-    } catch (error) {
-      console.error("[get_hero_info] Error:", error);
-      return "Произошла ошибка при поиске героя. Попробуйте позже.";
+    const hero = await findHero(hero_name);
+    if (!hero) {
+      return `Героя "${hero_name}" нет в базе. Возможно, имя указано неточно — вызови list_heroes, чтобы получить точные названия.`;
     }
+
+    return `${hero.displayName} (${hero.shortName}):\n\n${hero.notes}`;
   },
 });
