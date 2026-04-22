@@ -17,13 +17,21 @@ export interface DraftResult {
  * Управляет запуском detect_draft.py --watch.
  * Запускается при смене фазы на pre_game, останавливается при выходе из матча.
  */
+export type DraftChangeListener = (draft: DraftResult) => void
+
 export class DraftDetector {
   private process: ChildProcess | null = null
   private draft: DraftResult | null = null
   private monitorNum: number
+  private changeListeners: DraftChangeListener[] = []
 
   constructor(monitorNum = 2) {
     this.monitorNum = monitorNum
+  }
+
+  /** Subscribe to draft updates */
+  onDraftChange(listener: DraftChangeListener): void {
+    this.changeListeners.push(listener)
   }
 
   /** Текущий драфт (null если ещё не определён) */
@@ -124,6 +132,15 @@ export class DraftDetector {
         "[DraftDetector] Draft detected:",
         `Radiant: ${raw.radiant.join(", ")} | Dire: ${raw.dire.join(", ")}`,
       )
+
+      // Notify listeners
+      for (const listener of this.changeListeners) {
+        try {
+          listener(this.draft)
+        } catch (err) {
+          console.error("[DraftDetector] Listener error:", err)
+        }
+      }
 
       // Сохраняем в файл
       writeFile(DRAFT_FILE, JSON.stringify(this.draft, null, 2), "utf-8")

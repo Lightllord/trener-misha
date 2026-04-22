@@ -2,6 +2,7 @@
 export type GamePhase =
   | "hero_selection"
   | "strategy"
+  | "loading"
   | "pre_game"
   | "playing"
   | "post_game"

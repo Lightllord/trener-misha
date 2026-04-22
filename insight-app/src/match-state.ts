@@ -290,8 +290,9 @@ function parsePhase(gameState: string): GamePhase {
       return "hero_selection"
     case "DOTA_GAMERULES_STATE_STRATEGY_TIME":
       return "strategy"
-    case "DOTA_GAMERULES_STATE_PRE_GAME":
     case "DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD":
+      return "loading"
+    case "DOTA_GAMERULES_STATE_PRE_GAME":
       return "pre_game"
     case "DOTA_GAMERULES_STATE_GAME_IN_PROGRESS":
       return "playing"

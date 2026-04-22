@@ -1,3 +1,4 @@
+import "./logger.js";
 import express from "express";
 import cors from "cors";
 import { WebSocketServer, WebSocket } from "ws";
@@ -6,6 +7,22 @@ import "dotenv/config";
 import { agent } from "./agent.js";
 import { checkAndAnalyzeDraft, resetDraftAnalysis } from "./draftAnalysis.js";
 import { takePending, clearPending } from "./pendingInsights.js";
+import { setDraft, setState, getState, clearGameData } from "./gameData.js";
+import {
+  processStateUpdate,
+  takeEvents,
+  takeFallbackStatus,
+  startFallbackTimer,
+  clearEventQueue,
+} from "./gameEventQueue.js";
+
+process.on("unhandledRejection", (err) => {
+  console.error("[FATAL] Unhandled rejection:", err);
+});
+
+process.on("uncaughtException", (err) => {
+  console.error("[FATAL] Uncaught exception:", err);
+});
 
 const app = express();
 const PORT = 3000;
@@ -15,6 +32,32 @@ app.use(express.json());
 
 app.get("/", (_req, res) => {
   res.send("trener-misha backend is running");
+});
+
+app.post("/push/draft", (req, res) => {
+  const body = req.body as Record<string, unknown>;
+  if (!body || !Array.isArray(body.radiant) || !Array.isArray(body.dire)) {
+    res.status(400).json({ error: "Invalid draft payload" });
+    return;
+  }
+  setDraft(body as { radiant: string[]; dire: string[]; confidence: number[]; detectedAt: string });
+  console.log("[push] Draft received:", (body.radiant as string[]).join(", "), "|", (body.dire as string[]).join(", "));
+  checkAndAnalyzeDraft();
+  res.json({ status: "ok" });
+});
+
+app.post("/push/state", (req, res) => {
+  const body = req.body as Record<string, unknown>;
+  if (!body) {
+    res.status(400).json({ error: "Invalid state payload" });
+    return;
+  }
+  const prev = getState();
+  setState(body);
+  if (prev) {
+    processStateUpdate(prev, body);
+  }
+  res.json({ status: "ok" });
 });
 
 const server = app.listen(PORT, () => {
@@ -76,6 +119,8 @@ wss.on("connection", async (ws) => {
     send({ type: "error", message: String(err) });
   });
 
+  let deliveryInterval: ReturnType<typeof setInterval> | null = null;
+
   // Connect to OpenAI
   try {
     await session.connect({ apiKey: process.env.OPENAI_API_KEY! });
@@ -86,30 +131,71 @@ wss.on("connection", async (ws) => {
       send({ type: "interrupt" });
     });
 
-    // On each turn_done: lazy draft check + deliver pending insights
+    // Track response activity to avoid race conditions
+    let responseActive = false;
+
+    session.transport.on("turn_started", () => {
+      responseActive = true;
+    });
+
     session.transport.on("turn_done", () => {
-      checkAndAnalyzeDraft();
+      responseActive = false;
+      tryDeliver();
+    });
 
+    function tryDeliver(): void {
+      if (responseActive) return;
+
+      // 1. Draft analysis (highest priority)
       const insight = takePending();
-      if (!insight) return;
+      if (insight) {
+        console.log("[deliver] Pending draft analysis");
+        injectMessage(
+          `[Фоновый анализ драфта завершён]\n${insight}\n\nПредложи игроку: "У меня готов анализ драфта, рассказать?" Не рассказывай содержание сразу — дождись подтверждения.`,
+          true,
+        );
+        return; // one delivery per turn
+      }
 
-      console.log("[insight] Delivering pending draft analysis");
+      // 2. Game events
+      const events = takeEvents();
+      if (events) {
+        console.log("[deliver] Game events");
+        injectMessage(events.text, events.triggerResponse);
+        return;
+      }
+
+      // 3. Fallback status
+      const fallback = takeFallbackStatus();
+      if (fallback) {
+        console.log("[deliver] Fallback status update");
+        injectMessage(fallback.text, fallback.triggerResponse);
+      }
+    }
+
+    function injectMessage(text: string, triggerResponse: boolean): void {
+      responseActive = true; // assume response will start
       session.transport.sendEvent({
         type: "conversation.item.create",
         item: {
           type: "message",
           role: "system",
-          content: [
-            {
-              type: "input_text",
-              text: `[Фоновый анализ драфта завершён]\n${insight}\n\nПредложи игроку: "У меня готов анализ драфта, рассказать?" Не рассказывай содержание сразу — дождись подтверждения.`,
-            },
-          ],
+          content: [{ type: "input_text", text }],
         },
       });
+      if (triggerResponse) {
+        session.transport.sendEvent({ type: "response.create" });
+      } else {
+        // No response triggered — reset flag so next delivery can proceed
+        responseActive = false;
+      }
+    }
 
-      session.transport.sendEvent({ type: "response.create" });
-    });
+    // Safety net: try delivering every 5s
+    deliveryInterval = setInterval(tryDeliver, 5_000);
+
+    // Fallback timer: generate status updates every 2 min
+    startFallbackTimer(tryDeliver);
 
     send({ type: "connected" });
     console.log("[ws] Session connected to OpenAI");
@@ -133,13 +219,18 @@ wss.on("connection", async (ws) => {
 
   ws.on("close", () => {
     console.log("[ws] Client disconnected");
+    if (deliveryInterval) clearInterval(deliveryInterval);
+    clearEventQueue();
     resetDraftAnalysis();
     clearPending();
+    clearGameData();
     session.close();
   });
 
   ws.on("error", (err) => {
     console.error("[ws] WebSocket error:", err);
+    if (deliveryInterval) clearInterval(deliveryInterval);
+    clearEventQueue();
     session.close();
   });
 });

@@ -2,6 +2,7 @@ node_modules/
 dist/
 .env
 *.log
+**/logs/
 .temp/
 
 # Subproject build artifacts
@@ -11,6 +12,7 @@ backend/node_modules/
 backend/dist/
 insight-app/node_modules/
 insight-app/dist/
+patch-updater/node_modules/
 
 # Dota 2 GSI config (only .cfg.example is tracked)
 gamestate_integration_trener_misha.cfg
@@ -23,3 +25,5 @@ cv/__pycache__/
 
 # Runtime data
 backend/data/draft.json
+patch-updater/.patch-progress.json
+patch-updater/patch-notes.json
