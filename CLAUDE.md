@@ -21,7 +21,8 @@ backend/
     heroes.ts          — hero data loader + fuzzy search (heroes_extend.json)
     gameData.ts        — in-memory store for draft/state pushed from insight-app
     draftAnalysis.ts   — background draft analysis (gpt-5.4-mini with tool use)
-    insights.ts        — named-insight store with per-name uniqueness config
+    insights.ts        — named-insight store with per-name uniqueness + importance
+    insightPicker.ts   — LLM-based picker that chooses the next insight to deliver
     types/             — shared type declarations (one file per domain)
     consts/            — shared constants (one file per domain)
 insight-app/
@@ -71,16 +72,22 @@ Browser ↔ Backend ↔ OpenAI. Backend is a relay with event hooks:
 - Frontend → backend: audio only, no control messages
 - VAD + interruption: handled server-side by OpenAI, exposed as `audio_interrupted` event
 
-### Proactive draft analysis (async)
+### Proactive insights (async, LLM-picked)
 
-Triggered on `POST /push/draft` (insight-app push), delivered on the next `turn_done`:
-1. `checkAndAnalyzeDraft()` — called from the `/push/draft` handler; reads draft from gameData; if 10 heroes picked and not yet analyzed → fire and forget
-2. `analyzeInBackground()` — gpt-5.4-mini with `get_hero_info`, `get_matchups`, `get_builds` tools, reasoning_effort: medium
-3. Result → `addInsight("draft_analysis", text)` in the `insights` store
-4. On `turn_done` → `tryDeliver()` picks the first unused `draft_analysis` insight, injects it as a system message via `conversation.item.create` + `response.create`, and calls `markUsed`
-5. Миша asks user "want to hear the analysis?" → user confirms → Миша delivers
+Insights are generic producer/consumer messages that Миша delivers when he's not talking. Each insight has a `name`, optional `number` (for non-unique types), `description`, `importance` (`low`/`medium`/`high`/`critical`), and a `payload` (the exact system text to inject). Producers call `addInsight(name, payload)`; the config for each name sets uniqueness + metadata.
 
-Reset on WS disconnect (new match) via `clearInsights()`.
+Delivery loop in `index.ts:tryDeliver()`:
+1. If there's a `pendingInsightPick` stashed from a prior picker run → inject it immediately, mark used.
+2. Else `getUnused()`:
+   - 0 insights → fall through to game-events / fallback-status path.
+   - 1 insight → inject it directly (skip the picker).
+   - ≥ 2 insights → call `pickInsight()` asynchronously. It sends just the metadata (name, number, description, importance, ageSeconds) to `gpt-5.4-nano` with `reasoning_effort: "minimal"` and a 5s `AbortSignal.timeout`. The model returns `{name, number}`; if parse or lookup fails, falls back to importance-then-freshness ranking.
+3. When the picker resolves, if `responseActive` is still `true`, the chosen insight is stashed in `pendingInsightPick` so the next `tryDeliver` delivers it instantly.
+4. `markUsed` flips only **after** a successful `injectMessage`.
+
+Draft analysis producer (`draftAnalysis.ts`): on `POST /push/draft` → `checkAndAnalyzeDraft()` → `gpt-5.4-mini` background run → `addInsight("draft_analysis", <full system-message text>)`. The payload bakes in the "ask the player first" wrapper; delivery stays format-agnostic.
+
+Reset on WS disconnect (new match): `pickerAbort.abort()`, `pendingInsightPick = null`, `clearInsights()`.
 
 ## Voice agent tools
 

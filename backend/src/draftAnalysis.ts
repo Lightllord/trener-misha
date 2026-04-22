@@ -325,7 +325,10 @@ ${playerContext}
     // No more tool calls — final answer
     if (msg.content) {
       console.log("[draftAnalysis] Analysis ready, queued for delivery");
-      addInsight("draft_analysis", msg.content);
+      addInsight(
+        "draft_analysis",
+        `[Фоновый анализ драфта завершён]\n${msg.content}\n\nПредложи игроку: "У меня готов анализ драфта, рассказать?" Не рассказывай содержание сразу — дождись подтверждения.`,
+      );
     }
     break;
   }

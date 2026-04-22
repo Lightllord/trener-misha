@@ -20,6 +20,12 @@ const SECOND_NON_UNIQUE = "test_non_unique_b" as InsightName;
 
 const configsWritable = INSIGHT_CONFIGS as Record<string, InsightConfig>;
 
+const fixture = (unique: boolean): InsightConfig => ({
+  unique,
+  description: "fixture insight for tests",
+  importance: "medium",
+});
+
 function withFixtureConfigs(
   entries: ReadonlyArray<[string, InsightConfig]>,
   run: () => void,
@@ -67,11 +73,36 @@ describe("insights", () => {
     assert.equal(typeof insight.createdAt, "number");
   });
 
+  it("addInsight copies description and importance from config", () => {
+    const draft = addInsight("draft_analysis", "x");
+    assert.ok(draft);
+    assert.equal(
+      draft.description,
+      INSIGHT_CONFIGS.draft_analysis.description,
+    );
+    assert.equal(draft.importance, INSIGHT_CONFIGS.draft_analysis.importance);
+
+    withFixtureConfigs(
+      [
+        [
+          NON_UNIQUE,
+          { unique: false, description: "custom desc", importance: "low" },
+        ],
+      ],
+      () => {
+        const n = addInsight(NON_UNIQUE, "n");
+        assert.ok(n);
+        assert.equal(n.description, "custom desc");
+        assert.equal(n.importance, "low");
+      },
+    );
+  });
+
   it("per-name counter increments and is independent across names", () => {
     withFixtureConfigs(
       [
-        [NON_UNIQUE, { unique: false }],
-        [SECOND_NON_UNIQUE, { unique: false }],
+        [NON_UNIQUE, fixture(false)],
+        [SECOND_NON_UNIQUE, fixture(false)],
       ],
       () => {
         const a1 = addInsight(NON_UNIQUE, "a1");
@@ -89,7 +120,7 @@ describe("insights", () => {
   });
 
   it("clearInsights resets per-name counters", () => {
-    withFixtureConfigs([[NON_UNIQUE, { unique: false }]], () => {
+    withFixtureConfigs([[NON_UNIQUE, fixture(false)]], () => {
       addInsight(NON_UNIQUE, "first");
       addInsight(NON_UNIQUE, "second");
       clearInsights();
@@ -101,7 +132,7 @@ describe("insights", () => {
   it("getLatest returns most recently added, including used; null when empty", () => {
     assert.equal(getLatest(), null);
 
-    withFixtureConfigs([[NON_UNIQUE, { unique: false }]], () => {
+    withFixtureConfigs([[NON_UNIQUE, fixture(false)]], () => {
       const first = addInsight(NON_UNIQUE, "1");
       const second = addInsight(NON_UNIQUE, "2");
       assert.equal(getLatest(), second);
@@ -118,7 +149,7 @@ describe("insights", () => {
   it("getLatestUnused skips used entries; null when all used", () => {
     assert.equal(getLatestUnused(), null);
 
-    withFixtureConfigs([[NON_UNIQUE, { unique: false }]], () => {
+    withFixtureConfigs([[NON_UNIQUE, fixture(false)]], () => {
       const a = addInsight(NON_UNIQUE, "a");
       const b = addInsight(NON_UNIQUE, "b");
       const c = addInsight(NON_UNIQUE, "c");
@@ -134,7 +165,7 @@ describe("insights", () => {
   });
 
   it("getAllInsights / getUnused return entries in insertion order", () => {
-    withFixtureConfigs([[NON_UNIQUE, { unique: false }]], () => {
+    withFixtureConfigs([[NON_UNIQUE, fixture(false)]], () => {
       const a = addInsight(NON_UNIQUE, "a");
       const b = addInsight(NON_UNIQUE, "b");
       const c = addInsight(NON_UNIQUE, "c");
@@ -157,7 +188,7 @@ describe("insights", () => {
   it("getLatestUnusedByName picks freshest unused matching the name", () => {
     assert.equal(getLatestUnusedByName("draft_analysis"), null);
 
-    withFixtureConfigs([[NON_UNIQUE, { unique: false }]], () => {
+    withFixtureConfigs([[NON_UNIQUE, fixture(false)]], () => {
       addInsight(NON_UNIQUE, "n1");
       const draft = addInsight("draft_analysis", "d");
       const n2 = addInsight(NON_UNIQUE, "n2");
@@ -177,7 +208,7 @@ describe("insights", () => {
   });
 
   it("getByName filters; getByNameAndNumber handles null (unique) and ints", () => {
-    withFixtureConfigs([[NON_UNIQUE, { unique: false }]], () => {
+    withFixtureConfigs([[NON_UNIQUE, fixture(false)]], () => {
       const draft = addInsight("draft_analysis", "d");
       addInsight(NON_UNIQUE, "n1");
       addInsight(NON_UNIQUE, "n2");

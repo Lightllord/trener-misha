@@ -61,7 +61,7 @@ The frontend sends only binary audio; it sends no JSON.
 
 After every `turn_done` and on a 5s safety tick, the backend tries to inject one of the following as a system message (in priority order):
 
-1. **Draft analysis** (`insights.ts`) — a long-running GPT analysis triggered once the draft reaches 10 heroes. See "Draft analysis" below.
+1. **Insights** (`insights.ts` + `insightPicker.ts`) — any background analysis result. If a single insight is unused, it's delivered directly. If multiple are unused, `pickInsight()` sends their metadata (name, number, description, importance, age) to `gpt-5.4-nano` with `reasoning_effort: "minimal"` and a 5-second timeout; the model picks one, and we inject its payload. If the picker finishes while a response is already in flight, the chosen insight is stashed in an in-memory `pendingInsightPick` slot so the next `tryDeliver` delivers it instantly. `markUsed` flips only after a successful inject. Picker call is aborted on WS disconnect.
 2. **Game events** (`gameEventQueue.ts`) — batched, throttled diff of important changes: kills, deaths, level-ups, respawns, Aghs pickups, item purchases, buildings destroyed. Critical events (deaths, ally buildings) bypass the 30s throttle.
 3. **Fallback status** (`gameEventQueue.ts`) — every ~2 min, if nothing else fired, a compact status snapshot (clock, score, KDA, GPM, level, items). Delivered silently (no `response.create`) so Миша has context without commenting.
 
@@ -85,7 +85,7 @@ Triggered lazily from `/push/draft`:
 
 1. When a draft with 10 heroes arrives (and not yet analyzed), kick off a background `chat.completions` run against `gpt-5.4-mini`.
 2. The model is given `get_hero_info`, `get_matchups`, `get_builds` as tools and iterates until it produces a final answer.
-3. The answer is stored via `addInsight("draft_analysis", ...)` in the `insights` store → on the next `turn_done`, `tryDeliver()` picks the first unused `draft_analysis` insight, injects it, and calls `markUsed`. The injected system message prompts Миша to ask the user before sharing.
+3. The producer wraps the final text with a "ask the player first" instruction and stores it via `addInsight("draft_analysis", ...)`. Delivery (see above) is format-agnostic.
 4. Reset on WS disconnect (new match).
 
 ## Other modules
@@ -97,8 +97,9 @@ Triggered lazily from `/push/draft`:
 | `src/gameData.ts` | In-memory store for latest draft and game state (+ previous state) |
 | `src/gameEventQueue.ts` | Event buffer, throttling, fallback-status generation |
 | `src/stateDiff.ts` | `diffStates(prev, curr)` → `GameEvent[]` with Russian summaries |
-| `src/insights.ts` | Named-insight store with per-name uniqueness config; producers call `addInsight`, delivery code reads via `getByName`/`getUnused` and flips `markUsed` |
-| `src/draftAnalysis.ts` | Background GPT analysis with tool-use loop |
+| `src/insights.ts` | Named-insight store with per-name uniqueness config + importance; producers call `addInsight`, delivery reads via `getUnused`/`getByName` and flips `markUsed` |
+| `src/insightPicker.ts` | LLM-based picker (`gpt-5.4-nano`, minimal reasoning) that ranks unused insights; falls back to importance ordering on parse/timeout errors |
+| `src/draftAnalysis.ts` | Background GPT analysis with tool-use loop; produces a `draft_analysis` insight |
 | `src/stratzApi.ts` | STRATZ GraphQL client; loads `data/stratz/{heroes,items}.json`; supports binding to a local IP via `STRATZ_LOCAL_ADDRESS` |
 | `src/heroes.ts` | Loads `data/heroes_extend.json`, fuzzy hero lookup |
 | `src/logger.ts` | Tees `console.log/warn/error` to `logs/backend.log` |

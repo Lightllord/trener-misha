@@ -6,7 +6,14 @@ import { RealtimeSession } from "@openai/agents/realtime";
 import "dotenv/config";
 import { agent } from "./agent.js";
 import { checkAndAnalyzeDraft, resetDraftAnalysis } from "./draftAnalysis.js";
-import { getLatestUnusedByName, markUsed, clearInsights } from "./insights.js";
+import {
+  clearInsights,
+  getAllInsights,
+  getUnused,
+  markUsed,
+} from "./insights.js";
+import { pickInsight } from "./insightPicker.js";
+import type { Insight } from "./types/insight.js";
 import { setDraft, setState, getState, clearGameData } from "./gameData.js";
 import {
   processStateUpdate,
@@ -120,6 +127,10 @@ wss.on("connection", async (ws) => {
   });
 
   let deliveryInterval: ReturnType<typeof setInterval> | null = null;
+  let pendingInsightPick: Insight | null = null;
+  let pickerInFlight = false;
+  let connectionClosed = false;
+  const pickerAbort = new AbortController();
 
   // Connect to OpenAI
   try {
@@ -143,22 +154,61 @@ wss.on("connection", async (ws) => {
       tryDeliver();
     });
 
+    function isLive(insight: Insight): boolean {
+      return getAllInsights().includes(insight);
+    }
+
+    function deliverInsight(insight: Insight): void {
+      const suffix = insight.number !== null ? ` #${insight.number}` : "";
+      console.log(`[deliver] insight: ${insight.name}${suffix}`);
+      injectMessage(insight.payload, true);
+      markUsed(insight); // only after successful inject
+    }
+
     function tryDeliver(): void {
       if (responseActive) return;
 
-      // 1. Draft analysis (highest priority)
-      const draftAnalysis = getLatestUnusedByName("draft_analysis");
-      if (draftAnalysis) {
-        console.log("[deliver] Pending draft analysis");
-        injectMessage(
-          `[Фоновый анализ драфта завершён]\n${draftAnalysis.payload}\n\nПредложи игроку: "У меня готов анализ драфта, рассказать?" Не рассказывай содержание сразу — дождись подтверждения.`,
-          true,
-        );
-        markUsed(draftAnalysis);
-        return; // one delivery per turn
+      // Fast path — a prior picker finished while responseActive was true
+      if (
+        pendingInsightPick &&
+        !pendingInsightPick.used &&
+        isLive(pendingInsightPick)
+      ) {
+        const p = pendingInsightPick;
+        pendingInsightPick = null;
+        deliverInsight(p);
+        return;
+      }
+      pendingInsightPick = null; // drop stale ref if any
+
+      // Insights have highest priority
+      const unused = getUnused();
+      if (unused.length > 0) {
+        if (unused.length === 1) {
+          const only = unused[0];
+          if (only) deliverInsight(only);
+          return;
+        }
+        if (pickerInFlight) return; // one picker at a time
+        pickerInFlight = true;
+        pickInsight(unused, { signal: pickerAbort.signal })
+          .then((chosen) => {
+            if (connectionClosed) return;
+            if (!chosen || chosen.used || !isLive(chosen)) return;
+            if (responseActive) {
+              pendingInsightPick = chosen;
+              return;
+            }
+            deliverInsight(chosen);
+          })
+          .catch((err) => console.error("[deliver] picker failed:", err))
+          .finally(() => {
+            pickerInFlight = false;
+          });
+        return;
       }
 
-      // 2. Game events
+      // No insights → fall through to game events / fallback status
       const events = takeEvents();
       if (events) {
         console.log("[deliver] Game events");
@@ -166,7 +216,6 @@ wss.on("connection", async (ws) => {
         return;
       }
 
-      // 3. Fallback status
       const fallback = takeFallbackStatus();
       if (fallback) {
         console.log("[deliver] Fallback status update");
@@ -220,6 +269,9 @@ wss.on("connection", async (ws) => {
 
   ws.on("close", () => {
     console.log("[ws] Client disconnected");
+    connectionClosed = true;
+    pickerAbort.abort();
+    pendingInsightPick = null;
     if (deliveryInterval) clearInterval(deliveryInterval);
     clearEventQueue();
     resetDraftAnalysis();

@@ -36,6 +36,8 @@ export function addInsight(name: InsightName, payload: string): Insight | null {
     unique: config.unique,
     number,
     payload,
+    description: config.description,
+    importance: config.importance,
     createdAt: Date.now(),
   };
   insights.push(insight);
