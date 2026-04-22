@@ -54,6 +54,7 @@ If the backend is down, pushes are logged once and silently skipped — nothing 
 | `src/draft-detector.ts` | Python CV subprocess lifecycle + stdout parsing |
 | `src/types.ts` | `MatchState`, `GamePhase`, and raw GSI payload types |
 | `src/logger.ts` | Tees `console.log/warn/error` to `logs/insight-app.log` |
+| `cv/` | Python screen-capture draft detector (OpenCV + MSS). Spawned as a subprocess by `draft-detector.ts`. Install deps: `pip install -r cv/requirements.txt` |
 
 ## Commands
 

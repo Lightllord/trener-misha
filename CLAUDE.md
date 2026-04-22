@@ -26,6 +26,9 @@ insight-app/
   src/
     index.ts           — GSI listener (HTTP POST on :6074)
     draft-detector.ts  — screen capture draft detection (Python CV subprocess)
+  cv/                  — Python OpenCV draft detector (spawned by draft-detector.ts)
+    detect_draft.py    — screen capture + icon matching
+    requirements.txt   — OpenCV, MSS, NumPy
 patch-updater/
   src/
     scrape-patch.mjs   — Puppeteer scraper for dota2.com patch notes

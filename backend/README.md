@@ -108,7 +108,7 @@ Triggered lazily from `/push/draft`:
 
 - `heroes_extend.json` — hero notes (strengths, weaknesses, mechanics). Updated by `patch-updater`.
 - `stratz/heroes.json`, `stratz/items.json` — STRATZ ID → display-name maps.
-- `draft.json` — gitignored; last draft detected by `cv/detect_draft.py`.
+- `draft.json` — gitignored; last draft detected by `insight-app/cv/detect_draft.py`.
 
 ## Environment (`.env`)
 

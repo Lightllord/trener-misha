@@ -21,7 +21,8 @@ gamestate_integration_trener_misha.cfg
 .claude/
 
 # Python cache
-cv/__pycache__/
+insight-app/cv/__pycache__/
+insight-app/cv/debug/
 
 # Runtime data
 backend/data/draft.json

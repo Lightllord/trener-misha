@@ -2,8 +2,9 @@ import { spawn, type ChildProcess } from "node:child_process"
 import { writeFile, unlink } from "node:fs/promises"
 import { resolve } from "node:path"
 
-const PROJECT_ROOT = resolve(__dirname, "..", "..")
-const SCRIPT_PATH = resolve(PROJECT_ROOT, "cv", "detect_draft.py")
+const INSIGHT_APP_ROOT = resolve(__dirname, "..")
+const PROJECT_ROOT = resolve(INSIGHT_APP_ROOT, "..")
+const SCRIPT_PATH = resolve(INSIGHT_APP_ROOT, "cv", "detect_draft.py")
 const DRAFT_FILE = resolve(PROJECT_ROOT, "backend", "data", "draft.json")
 
 export interface DraftResult {
@@ -57,7 +58,7 @@ export class DraftDetector {
       "--monitor", String(this.monitorNum),
     ], {
       stdio: ["ignore", "pipe", "pipe"],
-      cwd: resolve(PROJECT_ROOT, "cv"),
+      cwd: resolve(INSIGHT_APP_ROOT, "cv"),
     })
 
     let buffer = ""
