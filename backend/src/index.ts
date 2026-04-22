@@ -6,7 +6,7 @@ import { RealtimeSession } from "@openai/agents/realtime";
 import "dotenv/config";
 import { agent } from "./agent.js";
 import { checkAndAnalyzeDraft, resetDraftAnalysis } from "./draftAnalysis.js";
-import { takePending, clearPending } from "./pendingInsights.js";
+import { getLatestUnusedByName, markUsed, clearInsights } from "./insights.js";
 import { setDraft, setState, getState, clearGameData } from "./gameData.js";
 import {
   processStateUpdate,
@@ -147,13 +147,14 @@ wss.on("connection", async (ws) => {
       if (responseActive) return;
 
       // 1. Draft analysis (highest priority)
-      const insight = takePending();
-      if (insight) {
+      const draftAnalysis = getLatestUnusedByName("draft_analysis");
+      if (draftAnalysis) {
         console.log("[deliver] Pending draft analysis");
         injectMessage(
-          `[Фоновый анализ драфта завершён]\n${insight}\n\nПредложи игроку: "У меня готов анализ драфта, рассказать?" Не рассказывай содержание сразу — дождись подтверждения.`,
+          `[Фоновый анализ драфта завершён]\n${draftAnalysis.payload}\n\nПредложи игроку: "У меня готов анализ драфта, рассказать?" Не рассказывай содержание сразу — дождись подтверждения.`,
           true,
         );
+        markUsed(draftAnalysis);
         return; // one delivery per turn
       }
 
@@ -222,7 +223,7 @@ wss.on("connection", async (ws) => {
     if (deliveryInterval) clearInterval(deliveryInterval);
     clearEventQueue();
     resetDraftAnalysis();
-    clearPending();
+    clearInsights();
     clearGameData();
     session.close();
   });

@@ -21,7 +21,9 @@ backend/
     heroes.ts          — hero data loader + fuzzy search (heroes_extend.json)
     gameData.ts        — in-memory store for draft/state pushed from insight-app
     draftAnalysis.ts   — background draft analysis (gpt-5.4-mini with tool use)
-    pendingInsights.ts — in-memory queue for async insights → voice delivery
+    insights.ts        — named-insight store with per-name uniqueness config
+    types/             — shared type declarations (one file per domain)
+    consts/            — shared constants (one file per domain)
 insight-app/
   src/
     index.ts           — GSI listener (HTTP POST on :6074)
@@ -43,6 +45,8 @@ docs/
 - No `any` — use `unknown` + type narrowing
 - Prefer native Node.js modules over third-party packages
 - Keep dependencies minimal
+- Types live in `<pkg>/src/types/`, constants in `<pkg>/src/consts/` — from the start, not as a later cleanup
+- Tests end in `.spec.ts` and sit next to the module they cover; no test-only exports in production code
 
 ## Architecture
 
@@ -69,14 +73,14 @@ Browser ↔ Backend ↔ OpenAI. Backend is a relay with event hooks:
 
 ### Proactive draft analysis (async)
 
-Triggered lazily on `turn_done` (agent finished speaking):
-1. `checkAndAnalyzeDraft()` — reads draft from local gameData store; if 10 heroes picked and not yet analyzed → fire and forget
-2. `analyzeInBackground()` — gpt-5.4-mini with `get_hero_info` tool, reasoning_effort: medium
-3. Result → `setPending()` in pendingInsights
-4. Next `turn_done` → `takePending()` → inject as system message via `conversation.item.create` + `response.create`
+Triggered on `POST /push/draft` (insight-app push), delivered on the next `turn_done`:
+1. `checkAndAnalyzeDraft()` — called from the `/push/draft` handler; reads draft from gameData; if 10 heroes picked and not yet analyzed → fire and forget
+2. `analyzeInBackground()` — gpt-5.4-mini with `get_hero_info`, `get_matchups`, `get_builds` tools, reasoning_effort: medium
+3. Result → `addInsight("draft_analysis", text)` in the `insights` store
+4. On `turn_done` → `tryDeliver()` picks the first unused `draft_analysis` insight, injects it as a system message via `conversation.item.create` + `response.create`, and calls `markUsed`
 5. Миша asks user "want to hear the analysis?" → user confirms → Миша delivers
 
-Reset on WS disconnect (new match).
+Reset on WS disconnect (new match) via `clearInsights()`.
 
 ## Voice agent tools
 

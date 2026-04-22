@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
-import { setPending } from "./pendingInsights.js";
+import { addInsight } from "./insights.js";
 import { findHero } from "./heroes.js";
 import { getDraft, getState } from "./gameData.js";
 import {
@@ -325,7 +325,7 @@ ${playerContext}
     // No more tool calls — final answer
     if (msg.content) {
       console.log("[draftAnalysis] Analysis ready, queued for delivery");
-      setPending(msg.content);
+      addInsight("draft_analysis", msg.content);
     }
     break;
   }
