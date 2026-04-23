@@ -6,13 +6,8 @@ import { RealtimeSession } from "@openai/agents/realtime";
 import "dotenv/config";
 import { agent } from "./agent.js";
 import { checkAndAnalyzeDraft, resetDraftAnalysis } from "./draftAnalysis.js";
-import {
-  clearInsights,
-  getAllInsights,
-  getUnused,
-  markUsed,
-} from "./insights.js";
-import { pickInsight } from "./insightPicker.js";
+import { clearInsights } from "./insights.js";
+import { createInsightDelivery } from "./insightDelivery.js";
 import {
   clearConversation,
   formatConversationForPrompt,
@@ -20,7 +15,6 @@ import {
   logTranscript,
 } from "./conversationLog.js";
 import { PICKER_CONTEXT_WINDOW_MS } from "./consts/conversationLog.js";
-import type { Insight } from "./types/insight.js";
 import { setDraft, setState, getState, clearGameData } from "./gameData.js";
 import {
   processStateUpdate,
@@ -135,9 +129,6 @@ wss.on("connection", async (ws) => {
   });
 
   let deliveryInterval: ReturnType<typeof setInterval> | null = null;
-  let pendingInsightPick: Insight | null = null;
-  let pickerInFlight = false;
-  let connectionClosed = false;
   const pickerAbort = new AbortController();
 
   // Connect to OpenAI
@@ -162,65 +153,19 @@ wss.on("connection", async (ws) => {
       tryDeliver();
     });
 
-    function isLive(insight: Insight): boolean {
-      return getAllInsights().includes(insight);
-    }
-
-    function deliverInsight(insight: Insight): void {
-      const suffix = insight.number !== null ? ` #${insight.number}` : "";
-      console.log(`[deliver] insight: ${insight.name}${suffix}`);
-      injectMessage(insight.payload, true);
-      markUsed(insight); // only after successful inject
-    }
+    const delivery = createInsightDelivery({
+      inject: (text) => injectMessage(text, true),
+      isResponseActive: () => responseActive,
+      getRecentDialogue: () =>
+        formatConversationForPrompt(
+          getRecentConversation(PICKER_CONTEXT_WINDOW_MS),
+        ),
+      signal: pickerAbort.signal,
+    });
 
     function tryDeliver(): void {
       if (responseActive) return;
-
-      // Fast path — a prior picker finished while responseActive was true
-      if (
-        pendingInsightPick &&
-        !pendingInsightPick.used &&
-        isLive(pendingInsightPick)
-      ) {
-        const p = pendingInsightPick;
-        pendingInsightPick = null;
-        deliverInsight(p);
-        return;
-      }
-      pendingInsightPick = null; // drop stale ref if any
-
-      // Insights have highest priority
-      const unused = getUnused();
-      if (unused.length > 0) {
-        if (unused.length === 1) {
-          const only = unused[0];
-          if (only) deliverInsight(only);
-          return;
-        }
-        if (pickerInFlight) return; // one picker at a time
-        pickerInFlight = true;
-        const recentDialogue = formatConversationForPrompt(
-          getRecentConversation(PICKER_CONTEXT_WINDOW_MS),
-        );
-        pickInsight(unused, {
-          signal: pickerAbort.signal,
-          recentDialogue,
-        })
-          .then((chosen) => {
-            if (connectionClosed) return;
-            if (!chosen || chosen.used || !isLive(chosen)) return;
-            if (responseActive) {
-              pendingInsightPick = chosen;
-              return;
-            }
-            deliverInsight(chosen);
-          })
-          .catch((err) => console.error("[deliver] picker failed:", err))
-          .finally(() => {
-            pickerInFlight = false;
-          });
-        return;
-      }
+      if (delivery.tryDeliver()) return;
 
       // No insights → fall through to game events / fallback status
       const events = takeEvents();
@@ -283,9 +228,9 @@ wss.on("connection", async (ws) => {
 
   ws.on("close", () => {
     console.log("[ws] Client disconnected");
-    connectionClosed = true;
+    // pickerAbort stops any in-flight pickInsight call; the delivery closure
+    // (with its pending slot) is garbage-collected with the WS handler scope.
     pickerAbort.abort();
-    pendingInsightPick = null;
     if (deliveryInterval) clearInterval(deliveryInterval);
     clearEventQueue();
     resetDraftAnalysis();

@@ -22,7 +22,8 @@ backend/
     gameData.ts        — in-memory store for draft/state pushed from insight-app
     draftAnalysis.ts   — background draft analysis (gpt-5.4-mini with tool use)
     insights.ts        — named-insight store with per-name uniqueness + importance
-    insightPicker.ts   — LLM-based picker that chooses the next insight to deliver
+    insightPicker.ts   — LLM-based picker (pure API: takes unused + dialogue, returns a pick)
+    insightDelivery.ts — orchestrator: pending slot + picker lifecycle + inject/markUsed
     conversationLog.ts — rolling log of recent voice transcripts (picker context)
     types/             — shared type declarations (one file per domain)
     consts/            — shared constants (one file per domain)
@@ -77,15 +78,17 @@ Browser ↔ Backend ↔ OpenAI. Backend is a relay with event hooks:
 
 Insights are generic producer/consumer messages that Миша delivers when he's not talking. Each insight has a `name`, optional `number` (for non-unique types), `description`, `importance` (`low`/`medium`/`high`/`critical`), and a `payload` (the exact system text to inject). Producers call `addInsight(name, payload)`; the config for each name sets uniqueness + metadata.
 
-Delivery loop in `index.ts:tryDeliver()`:
-1. If there's a `pendingInsightPick` stashed from a prior picker run → inject it immediately, mark used.
-2. Else `getUnused()`:
-   - 0 insights → fall through to game-events / fallback-status path.
-   - 1 insight → inject it directly (skip the picker).
-   - Any `critical` insight → shortcut to `latestCritical()` (freshest critical), no model call.
-   - ≥ 2 non-critical insights → call `pickInsight()` asynchronously. It sends insight metadata (name, number, description, importance, ageSeconds) **plus the last ~60 seconds of dialogue** (from `conversationLog.ts`) to `gpt-5.4-nano` with `reasoning_effort: "minimal"` and a 5s `AbortSignal.timeout`. Importance is a strong preference, not a hard rule — the model may override it if the recent dialogue points at a different insight. If parse or lookup fails, falls back to importance-then-freshness ranking.
-3. When the picker resolves, if `responseActive` is still `true`, the chosen insight is stashed in `pendingInsightPick` so the next `tryDeliver` delivers it instantly.
-4. `markUsed` flips only **after** a successful `injectMessage`.
+Insight delivery is encapsulated in `insightDelivery.ts` — `index.ts:tryDeliver()` just asks "did we deliver an insight?". Internally the orchestrator owns:
+
+1. **Fast path** — if a pending pick from a prior picker run is still live and unused → inject + markUsed.
+2. **No insights** → return false (caller falls through to game events / fallback).
+3. **Single unused** → inject + markUsed directly (no model call).
+4. **Any `critical` unused** → `latestCritical()` wins; skip the model entirely.
+5. **≥ 2 non-critical** → fire-and-forget `pickInsight()` with insight metadata + last ~60s of dialogue (from `conversationLog.ts`). Uses `gpt-5.4-nano`, `reasoning_effort: "minimal"`, 5s `AbortSignal.timeout`. Importance is a strong preference only — the model may pick differently based on dialogue. On parse/timeout failure → importance-then-freshness fallback. When the pick resolves:
+   - If `responseActive === false` → inject + markUsed.
+   - Else → stash in the pending slot; next `tryDeliver` delivers it instantly.
+
+`markUsed` flips **only after** a successful `inject`. `pickerAbort.abort()` on WS close cancels any in-flight pick; the delivery closure is then garbage-collected with the WS handler scope.
 
 Draft analysis producer (`draftAnalysis.ts`): on `POST /push/draft` → `checkAndAnalyzeDraft()` → `gpt-5.4-mini` background run → `addInsight("draft_analysis", <full system-message text>)`. The payload bakes in the "ask the player first" wrapper; delivery stays format-agnostic.
 
