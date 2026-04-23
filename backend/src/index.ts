@@ -13,6 +13,13 @@ import {
   markUsed,
 } from "./insights.js";
 import { pickInsight } from "./insightPicker.js";
+import {
+  clearConversation,
+  formatConversationForPrompt,
+  getRecentConversation,
+  logTranscript,
+} from "./conversationLog.js";
+import { PICKER_CONTEXT_WINDOW_MS } from "./consts/conversationLog.js";
 import type { Insight } from "./types/insight.js";
 import { setDraft, setState, getState, clearGameData } from "./gameData.js";
 import {
@@ -117,6 +124,7 @@ wss.on("connection", async (ws) => {
         .join(" ");
       if (text && (role === "user" || status === "completed")) {
         send({ type: "transcript", role, text });
+        logTranscript(role, text);
       }
     }
   });
@@ -191,7 +199,13 @@ wss.on("connection", async (ws) => {
         }
         if (pickerInFlight) return; // one picker at a time
         pickerInFlight = true;
-        pickInsight(unused, { signal: pickerAbort.signal })
+        const recentDialogue = formatConversationForPrompt(
+          getRecentConversation(PICKER_CONTEXT_WINDOW_MS),
+        );
+        pickInsight(unused, {
+          signal: pickerAbort.signal,
+          recentDialogue,
+        })
           .then((chosen) => {
             if (connectionClosed) return;
             if (!chosen || chosen.used || !isLive(chosen)) return;
@@ -276,6 +290,7 @@ wss.on("connection", async (ws) => {
     clearEventQueue();
     resetDraftAnalysis();
     clearInsights();
+    clearConversation();
     clearGameData();
     session.close();
   });

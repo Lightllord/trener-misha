@@ -61,7 +61,7 @@ The frontend sends only binary audio; it sends no JSON.
 
 After every `turn_done` and on a 5s safety tick, the backend tries to inject one of the following as a system message (in priority order):
 
-1. **Insights** (`insights.ts` + `insightPicker.ts`) — any background analysis result. If a single insight is unused, it's delivered directly. If multiple are unused, `pickInsight()` sends their metadata (name, number, description, importance, age) to `gpt-5.4-nano` with `reasoning_effort: "minimal"` and a 5-second timeout; the model picks one, and we inject its payload. If the picker finishes while a response is already in flight, the chosen insight is stashed in an in-memory `pendingInsightPick` slot so the next `tryDeliver` delivers it instantly. `markUsed` flips only after a successful inject. Picker call is aborted on WS disconnect.
+1. **Insights** (`insights.ts` + `insightPicker.ts`) — any background analysis result. If a single insight is unused, it's delivered directly. If any `critical` insight is present, it wins outright (no model call). Otherwise `pickInsight()` sends insight metadata (name, number, description, importance, age) **and the last ~60s of dialogue** (from `conversationLog.ts`) to `gpt-5.4-nano` with `reasoning_effort: "minimal"` and a 5-second timeout. Importance is a soft preference: the model may override it if the conversation clearly calls for another insight. If the picker finishes while a response is already in flight, the chosen insight is stashed in an in-memory `pendingInsightPick` slot so the next `tryDeliver` delivers it instantly. `markUsed` flips only after a successful inject. Picker call is aborted on WS disconnect.
 2. **Game events** (`gameEventQueue.ts`) — batched, throttled diff of important changes: kills, deaths, level-ups, respawns, Aghs pickups, item purchases, buildings destroyed. Critical events (deaths, ally buildings) bypass the 30s throttle.
 3. **Fallback status** (`gameEventQueue.ts`) — every ~2 min, if nothing else fired, a compact status snapshot (clock, score, KDA, GPM, level, items). Delivered silently (no `response.create`) so Миша has context without commenting.
 
@@ -98,7 +98,8 @@ Triggered lazily from `/push/draft`:
 | `src/gameEventQueue.ts` | Event buffer, throttling, fallback-status generation |
 | `src/stateDiff.ts` | `diffStates(prev, curr)` → `GameEvent[]` with Russian summaries |
 | `src/insights.ts` | Named-insight store with per-name uniqueness config + importance; producers call `addInsight`, delivery reads via `getUnused`/`getByName` and flips `markUsed` |
-| `src/insightPicker.ts` | LLM-based picker (`gpt-5.4-nano`, minimal reasoning) that ranks unused insights; falls back to importance ordering on parse/timeout errors |
+| `src/insightPicker.ts` | LLM-based picker (`gpt-5.4-nano`, minimal reasoning) that ranks unused insights with recent-dialogue context; critical insights shortcut the model; falls back to importance ordering on parse/timeout errors |
+| `src/conversationLog.ts` | Rolling log of recent voice transcripts (role/text/timestamp); `getRecentConversation(windowMs)` feeds the picker |
 | `src/draftAnalysis.ts` | Background GPT analysis with tool-use loop; produces a `draft_analysis` insight |
 | `src/stratzApi.ts` | STRATZ GraphQL client; loads `data/stratz/{heroes,items}.json`; supports binding to a local IP via `STRATZ_LOCAL_ADDRESS` |
 | `src/heroes.ts` | Loads `data/heroes_extend.json`, fuzzy hero lookup |

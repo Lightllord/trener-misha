@@ -1,7 +1,9 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import {
+  buildPickerUserMessage,
   importanceFallback,
+  latestCritical,
   pickInsight,
   resolvePick,
   summarizeForPicker,
@@ -64,6 +66,46 @@ describe("insightPicker — pure helpers", () => {
 
   it("importanceFallback returns null on empty input", () => {
     assert.equal(importanceFallback([]), null);
+  });
+
+  it("latestCritical returns null when no critical is present", () => {
+    const a = makeInsight({ importance: "high" });
+    const b = makeInsight({ importance: "medium" });
+    assert.equal(latestCritical([a, b]), null);
+    assert.equal(latestCritical([]), null);
+  });
+
+  it("latestCritical returns the newest critical and ignores non-critical", () => {
+    const older = makeInsight({
+      payload: "older",
+      importance: "critical",
+      createdAt: 100,
+    });
+    const newerNonCrit = makeInsight({
+      payload: "newer-high",
+      importance: "high",
+      createdAt: 200,
+    });
+    const newerCrit = makeInsight({
+      payload: "newer-crit",
+      importance: "critical",
+      createdAt: 150,
+    });
+    assert.equal(latestCritical([older, newerNonCrit, newerCrit]), newerCrit);
+  });
+
+  it("buildPickerUserMessage includes both insights and dialogue", () => {
+    const summary = summarizeForPicker([makeInsight({ createdAt: 0 })], 0);
+    const msg = buildPickerUserMessage(summary, "Player: hi\nCoach: привет");
+    assert.match(msg, /UNUSED_INSIGHTS:/);
+    assert.match(msg, /RECENT_DIALOGUE:/);
+    assert.match(msg, /Player: hi/);
+  });
+
+  it("buildPickerUserMessage renders placeholder on empty dialogue", () => {
+    const summary = summarizeForPicker([makeInsight({ createdAt: 0 })], 0);
+    const msg = buildPickerUserMessage(summary, "");
+    assert.match(msg, /\(no recent dialogue\)/);
   });
 
   it("resolvePick finds an insight by name + number", () => {
@@ -168,5 +210,34 @@ describe("insightPicker — pickInsight", () => {
     await pickInsight([a, b], { chooser });
     assert.ok(received);
     assert.equal(received?.aborted, false);
+  });
+
+  it("shortcuts past the model when any critical insight is present", async () => {
+    let called = false;
+    const chooser: ModelChooser = async () => {
+      called = true;
+      return "";
+    };
+    const high = makeInsight({ payload: "h", importance: "high", createdAt: 100 });
+    const crit = makeInsight({ payload: "c", importance: "critical", createdAt: 50 });
+    const out = await pickInsight([high, crit], { chooser });
+    assert.equal(out, crit);
+    assert.equal(called, false);
+  });
+
+  it("forwards recentDialogue into the chooser user message", async () => {
+    const a = makeInsight({ payload: "a", importance: "high" });
+    const b = makeInsight({ payload: "b", importance: "low" });
+    let userSeen = "";
+    const chooser: ModelChooser = async ({ user }) => {
+      userSeen = user;
+      return '{"name":"draft_analysis","number":null}';
+    };
+    await pickInsight([a, b], {
+      chooser,
+      recentDialogue: "Player: что по драфту?\nCoach: минутку",
+    });
+    assert.match(userSeen, /RECENT_DIALOGUE:/);
+    assert.match(userSeen, /что по драфту\?/);
   });
 });

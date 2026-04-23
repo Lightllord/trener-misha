@@ -23,6 +23,7 @@ backend/
     draftAnalysis.ts   — background draft analysis (gpt-5.4-mini with tool use)
     insights.ts        — named-insight store with per-name uniqueness + importance
     insightPicker.ts   — LLM-based picker that chooses the next insight to deliver
+    conversationLog.ts — rolling log of recent voice transcripts (picker context)
     types/             — shared type declarations (one file per domain)
     consts/            — shared constants (one file per domain)
 insight-app/
@@ -81,13 +82,14 @@ Delivery loop in `index.ts:tryDeliver()`:
 2. Else `getUnused()`:
    - 0 insights → fall through to game-events / fallback-status path.
    - 1 insight → inject it directly (skip the picker).
-   - ≥ 2 insights → call `pickInsight()` asynchronously. It sends just the metadata (name, number, description, importance, ageSeconds) to `gpt-5.4-nano` with `reasoning_effort: "minimal"` and a 5s `AbortSignal.timeout`. The model returns `{name, number}`; if parse or lookup fails, falls back to importance-then-freshness ranking.
+   - Any `critical` insight → shortcut to `latestCritical()` (freshest critical), no model call.
+   - ≥ 2 non-critical insights → call `pickInsight()` asynchronously. It sends insight metadata (name, number, description, importance, ageSeconds) **plus the last ~60 seconds of dialogue** (from `conversationLog.ts`) to `gpt-5.4-nano` with `reasoning_effort: "minimal"` and a 5s `AbortSignal.timeout`. Importance is a strong preference, not a hard rule — the model may override it if the recent dialogue points at a different insight. If parse or lookup fails, falls back to importance-then-freshness ranking.
 3. When the picker resolves, if `responseActive` is still `true`, the chosen insight is stashed in `pendingInsightPick` so the next `tryDeliver` delivers it instantly.
 4. `markUsed` flips only **after** a successful `injectMessage`.
 
 Draft analysis producer (`draftAnalysis.ts`): on `POST /push/draft` → `checkAndAnalyzeDraft()` → `gpt-5.4-mini` background run → `addInsight("draft_analysis", <full system-message text>)`. The payload bakes in the "ask the player first" wrapper; delivery stays format-agnostic.
 
-Reset on WS disconnect (new match): `pickerAbort.abort()`, `pendingInsightPick = null`, `clearInsights()`.
+Reset on WS disconnect (new match): `pickerAbort.abort()`, `pendingInsightPick = null`, `clearInsights()`, `clearConversation()`.
 
 ## Voice agent tools
 

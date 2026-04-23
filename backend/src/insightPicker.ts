@@ -21,11 +21,16 @@ export type ModelChooser = (args: {
 
 const SYSTEM_PROMPT = [
   "You choose which unused coaching insight to deliver to a Dota 2 player right now.",
-  "You will receive a JSON array; each entry has: name, number, description, importance, ageSeconds.",
-  "Rules:",
-  "1. Higher importance wins (critical > high > medium > low).",
-  "2. On ties, prefer the freshest (lower ageSeconds).",
-  "3. Return the chosen insight as a JSON object: {\"name\": \"<name>\", \"number\": <int or null>}.",
+  "You will receive:",
+  "- A JSON array of unused insights. Each entry has: name, number, description, importance, ageSeconds.",
+  "- A short transcript of the last minute of the voice dialogue between the coach (Миша) and the player.",
+  "",
+  "Guidelines (in decreasing priority):",
+  "1. If a topic in the recent dialogue clearly calls for one of these insights, pick that one — even if another has higher importance.",
+  "2. Otherwise, use importance as a strong preference: critical > high > medium > low.",
+  "3. On ties, prefer the freshest (lower ageSeconds).",
+  "",
+  "Return the chosen insight as a JSON object: {\"name\": \"<name>\", \"number\": <int or null>}.",
   "Respond with ONLY that JSON object. No prose.",
 ].join("\n");
 
@@ -58,6 +63,19 @@ export function importanceFallback(
     if (byImportance !== 0) return byImportance;
     return b.createdAt - a.createdAt;
   })[0] ?? null;
+}
+
+/**
+ * Returns the freshest critical insight, or null if none is present.
+ * Used as an early exit — criticals skip the picker model entirely.
+ */
+export function latestCritical(unused: readonly Insight[]): Insight | null {
+  let best: Insight | null = null;
+  for (const i of unused) {
+    if (i.importance !== "critical") continue;
+    if (!best || i.createdAt > best.createdAt) best = i;
+  }
+  return best;
 }
 
 export function resolvePick(
@@ -116,6 +134,21 @@ export interface PickInsightDeps {
   chooser?: ModelChooser;
   signal?: AbortSignal;
   now?: () => number;
+  /** Pre-rendered transcript of the last ~60s of dialogue, passed to the model. */
+  recentDialogue?: string;
+}
+
+export function buildPickerUserMessage(
+  summary: PickerSummaryItem[],
+  recentDialogue: string,
+): string {
+  return [
+    "UNUSED_INSIGHTS:",
+    JSON.stringify(summary),
+    "",
+    "RECENT_DIALOGUE:",
+    recentDialogue || "(no recent dialogue)",
+  ].join("\n");
 }
 
 export async function pickInsight(
@@ -125,11 +158,15 @@ export async function pickInsight(
   if (unused.length === 0) return null;
   if (unused.length === 1) return unused[0] ?? null;
 
+  // Short-circuit: criticals bypass the picker model entirely.
+  const critical = latestCritical(unused);
+  if (critical) return critical;
+
   const chooser = deps.chooser ?? defaultChooser;
   const now = deps.now ?? Date.now;
 
   const summary = summarizeForPicker(unused, now());
-  const userMsg = JSON.stringify(summary);
+  const userMsg = buildPickerUserMessage(summary, deps.recentDialogue ?? "");
 
   try {
     const internal = AbortSignal.timeout(5_000);
