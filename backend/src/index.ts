@@ -6,15 +6,14 @@ import { RealtimeSession } from "@openai/agents/realtime";
 import "dotenv/config";
 import { agent } from "./agent.js";
 import { checkAndAnalyzeDraft, resetDraftAnalysis } from "./draftAnalysis.js";
-import { clearInsights } from "./insights.js";
-import { createInsightDelivery } from "./insightDelivery.js";
+import { clearInsights } from "./insight/store.js";
+import { InsightPicker } from "./insight/picker.js";
 import {
   clearConversation,
-  formatConversationForPrompt,
   getRecentConversation,
   logTranscript,
-} from "./conversationLog.js";
-import { PICKER_CONTEXT_WINDOW_MS } from "./consts/conversationLog.js";
+} from "./conversation/log.js";
+import { PICKER_CONTEXT_WINDOW_MS } from "./conversation/consts/log.js";
 import { setDraft, setState, getState, clearGameData } from "./gameData.js";
 import {
   processStateUpdate,
@@ -153,30 +152,34 @@ wss.on("connection", async (ws) => {
       tryDeliver();
     });
 
-    const delivery = createInsightDelivery({
-      inject: (text) => injectMessage(text, true),
-      isResponseActive: () => responseActive,
-      getRecentDialogue: () =>
-        formatConversationForPrompt(
-          getRecentConversation(PICKER_CONTEXT_WINDOW_MS),
-        ),
-      signal: pickerAbort.signal,
-    });
+    const picker = new InsightPicker(
+      pickerAbort.signal,
+      () => getRecentConversation(PICKER_CONTEXT_WINDOW_MS),
+    );
 
     function tryDeliver(): void {
-      if (responseActive) return;
-      if (delivery.tryDeliver()) return;
+      if (responseActive) {
+        return;
+      }
 
-      // No insights → fall through to game events / fallback status
+      const insight = picker.getSomethingToDeliverNow();
+      if (insight !== null) {
+        console.log(
+          `[deliver] insight: ${insight.name}${insight.number !== null ? ` #${insight.number}` : ""}`,
+        );
+        injectMessage(picker.formatForInjection(insight), true);
+        return;
+      }
+
       const events = takeEvents();
-      if (events) {
+      if (events !== null) {
         console.log("[deliver] Game events");
         injectMessage(events.text, events.triggerResponse);
         return;
       }
 
       const fallback = takeFallbackStatus();
-      if (fallback) {
+      if (fallback !== null) {
         console.log("[deliver] Fallback status update");
         injectMessage(fallback.text, fallback.triggerResponse);
       }

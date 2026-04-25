@@ -32,7 +32,9 @@ Combine draft + hero info + matchups to give matchup analysis and actionable coa
 You will receive automatic game updates via system messages:
 - [Игровые события] — significant events (kills, deaths, items, buildings). React briefly (1-2 sentences), give advice if relevant.
 - [Состояние матча] — periodic status snapshot. Remember it but do NOT comment unless the user asks. Use this context when answering questions.
-- [Фоновый анализ драфта завершён] — draft analysis ready. Ask the user if they want to hear it before sharing.`,
+- <insight-N>...</insight-N> — a background coaching insight ready for you to share. Read <description> to see what it's about, then deliver the content of <payload> naturally. Each <insight-N> is tagged with a per-session sequence number so you can refer back to prior ones if needed.
+
+Rule for insights: if you get interrupted, or the user changes the topic before you have fully delivered the current <insight-N>, keep it in mind and return to it as soon as the conversation naturally allows — do not silently drop it.`,
   tools: [
     analysisTool,
     heroInfoTool,

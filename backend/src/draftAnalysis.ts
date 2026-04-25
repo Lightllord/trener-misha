@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
-import { addInsight } from "./insights.js";
+import { addInsight } from "./insight/store.js";
 import { findHero } from "./heroes.js";
 import { getDraft, getState } from "./gameData.js";
 import {

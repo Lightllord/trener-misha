@@ -2,14 +2,13 @@ import { describe, it, beforeEach } from "node:test";
 import assert from "node:assert/strict";
 import {
   clearConversation,
-  formatConversationForPrompt,
   getAllConversation,
   getRecentConversation,
   logTranscript,
-} from "./conversationLog.js";
-import { MAX_LOG_ENTRIES } from "./consts/conversationLog.js";
+} from "./log.js";
+import { MAX_LOG_ENTRIES } from "./consts/log.js";
 
-describe("conversationLog", () => {
+describe("conversation/log", () => {
   beforeEach(() => {
     clearConversation();
   });
@@ -53,7 +52,6 @@ describe("conversationLog", () => {
     }
     const all = getAllConversation();
     assert.equal(all.length, MAX_LOG_ENTRIES);
-    // Oldest retained is at index (50)
     assert.equal(all[0]?.text, `msg-50`);
     assert.equal(all[MAX_LOG_ENTRIES - 1]?.text, `msg-${MAX_LOG_ENTRIES + 49}`);
   });
@@ -62,17 +60,5 @@ describe("conversationLog", () => {
     logTranscript("user", "x", 1);
     clearConversation();
     assert.equal(getAllConversation().length, 0);
-  });
-
-  it("formatConversationForPrompt renders Player/Coach lines", () => {
-    const out = formatConversationForPrompt([
-      { role: "user", text: "hi", at: 0 },
-      { role: "assistant", text: "привет", at: 1 },
-    ]);
-    assert.equal(out, "Player: hi\nCoach: привет");
-  });
-
-  it("formatConversationForPrompt returns a placeholder on empty input", () => {
-    assert.equal(formatConversationForPrompt([]), "(no recent dialogue)");
   });
 });

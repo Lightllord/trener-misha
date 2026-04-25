@@ -11,7 +11,7 @@ import {
   getLatestUnusedByName,
   getUnused,
   markUsed,
-} from "./insights.js";
+} from "./store.js";
 import { INSIGHT_CONFIGS } from "./consts/insights.js";
 import type { InsightConfig, InsightName } from "./types/insight.js";
 

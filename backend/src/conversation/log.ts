@@ -1,8 +1,8 @@
-import { MAX_LOG_ENTRIES } from "./consts/conversationLog.js";
+import { MAX_LOG_ENTRIES } from "./consts/log.js";
 import type {
   ConversationEntry,
   ConversationRole,
-} from "./types/conversationLog.js";
+} from "./types/log.js";
 
 let log: ConversationEntry[] = [];
 
@@ -33,13 +33,4 @@ export function getAllConversation(): readonly ConversationEntry[] {
 
 export function clearConversation(): void {
   log = [];
-}
-
-export function formatConversationForPrompt(
-  entries: readonly ConversationEntry[],
-): string {
-  if (entries.length === 0) return "(no recent dialogue)";
-  return entries
-    .map((e) => `${e.role === "user" ? "Player" : "Coach"}: ${e.text}`)
-    .join("\n");
 }
