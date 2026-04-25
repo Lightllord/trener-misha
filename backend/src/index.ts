@@ -8,6 +8,8 @@ import { agent } from "./agent.js";
 import { checkAndAnalyzeDraft, resetDraftAnalysis } from "./draftAnalysis.js";
 import { clearInsights } from "./insight/store.js";
 import { InsightPicker } from "./insight/picker.js";
+import { DeliveryWindow } from "./deliveryWindow/deliveryWindow.js";
+import { DebouncedPoll } from "./deliveryWindow/debouncedPoll.js";
 import {
   clearConversation,
   getRecentConversation,
@@ -128,65 +130,24 @@ wss.on("connection", async (ws) => {
   });
 
   let deliveryInterval: ReturnType<typeof setInterval> | null = null;
+  let deliveryWindow: DeliveryWindow | null = null;
   const pickerAbort = new AbortController();
 
   // Connect to OpenAI
   try {
     await session.connect({ apiKey: process.env.OPENAI_API_KEY! });
 
-    // When OpenAI detects user speech during response → interrupt frontend playback
-    session.transport.on("audio_interrupted", () => {
-      console.log("[vad] audio interrupted — flushing frontend playback");
-      send({ type: "interrupt" });
-    });
-
-    // Track response activity to avoid race conditions
-    let responseActive = false;
-
-    session.transport.on("turn_started", () => {
-      responseActive = true;
-    });
-
-    session.transport.on("turn_done", () => {
-      responseActive = false;
-      tryDeliver();
-    });
-
     const picker = new InsightPicker(
       pickerAbort.signal,
       () => getRecentConversation(PICKER_CONTEXT_WINDOW_MS),
     );
-
-    function tryDeliver(): void {
-      if (responseActive) {
-        return;
-      }
-
-      const insight = picker.getSomethingToDeliverNow();
-      if (insight !== null) {
-        console.log(
-          `[deliver] insight: ${insight.name}${insight.number !== null ? ` #${insight.number}` : ""}`,
-        );
-        injectMessage(picker.formatForInjection(insight), true);
-        return;
-      }
-
-      const events = takeEvents();
-      if (events !== null) {
-        console.log("[deliver] Game events");
-        injectMessage(events.text, events.triggerResponse);
-        return;
-      }
-
-      const fallback = takeFallbackStatus();
-      if (fallback !== null) {
-        console.log("[deliver] Fallback status update");
-        injectMessage(fallback.text, fallback.triggerResponse);
-      }
-    }
+    const dw = new DeliveryWindow(session);
+    deliveryWindow = dw;
 
     function injectMessage(text: string, triggerResponse: boolean): void {
-      responseActive = true; // assume response will start
+      // Preempt the SDK's turn_started by a few ms — closes the window
+      // synchronously so a parallel poll/event tick can't double-inject.
+      if (triggerResponse) dw.setResponseActive(true);
       session.transport.sendEvent({
         type: "conversation.item.create",
         item: {
@@ -197,16 +158,42 @@ wss.on("connection", async (ws) => {
       });
       if (triggerResponse) {
         session.transport.sendEvent({ type: "response.create" });
-      } else {
-        // No response triggered — reset flag so next delivery can proceed
-        responseActive = false;
       }
     }
 
-    // Safety net: try delivering every 5s
-    deliveryInterval = setInterval(tryDeliver, 5_000);
+    function tryDeliverInsight(): void {
+      const insight = picker.getSomethingToDeliverNow();
+      if (insight === null) return;
+      const tail = insight.number !== null ? ` #${insight.number}` : "";
+      console.log(`[deliver] insight: ${insight.name}${tail}`);
+      injectMessage(picker.formatForInjection(insight), true);
+    }
 
-    // Fallback timer: generate status updates every 2 min
+    function tryDeliver(): void {
+      if (dw.isResponseActive()) return;
+      const events = takeEvents();
+      if (events !== null) {
+        console.log("[deliver] Game events");
+        injectMessage(events.text, events.triggerResponse);
+        return;
+      }
+      const fallback = takeFallbackStatus();
+      if (fallback !== null) {
+        console.log("[deliver] Fallback status update");
+        injectMessage(fallback.text, fallback.triggerResponse);
+      }
+    }
+
+    new DebouncedPoll(dw, tryDeliverInsight);
+
+    session.transport.on("audio_interrupted", () => {
+      console.log("[vad] audio interrupted — flushing frontend playback");
+      send({ type: "interrupt" });
+    });
+    session.transport.on("turn_done", tryDeliver);
+
+    // Game events keep their old cadence — 5s safety tick + 2 min fallback.
+    deliveryInterval = setInterval(tryDeliver, 5_000);
     startFallbackTimer(tryDeliver);
 
     send({ type: "connected" });
@@ -231,10 +218,9 @@ wss.on("connection", async (ws) => {
 
   ws.on("close", () => {
     console.log("[ws] Client disconnected");
-    // pickerAbort stops any in-flight pickInsight call; the delivery closure
-    // (with its pending slot) is garbage-collected with the WS handler scope.
     pickerAbort.abort();
     if (deliveryInterval) clearInterval(deliveryInterval);
+    if (deliveryWindow !== null) deliveryWindow.dispose();
     clearEventQueue();
     resetDraftAnalysis();
     clearInsights();
@@ -245,7 +231,9 @@ wss.on("connection", async (ws) => {
 
   ws.on("error", (err) => {
     console.error("[ws] WebSocket error:", err);
+    pickerAbort.abort();
     if (deliveryInterval) clearInterval(deliveryInterval);
+    if (deliveryWindow !== null) deliveryWindow.dispose();
     clearEventQueue();
     session.close();
   });

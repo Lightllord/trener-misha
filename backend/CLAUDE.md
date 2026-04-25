@@ -28,7 +28,16 @@ Backend is a relay with hooks:
 
 Insights are the "background analysis" channel — Миша delivers them between turns. Each insight has `name`, optional `number` (counter for non-unique kinds), `description`, `importance` (`low`/`medium`/`high`/`critical`), and `payload` (the exact system text to inject). Producers call `addInsight(name, payload)`. The config registry per name sets uniqueness + metadata.
 
-`InsightPicker` (in `insight/picker.ts`) owns the "what do I deliver now?" decision. `index.ts:tryDeliver()` is a thin narrative: it asks `picker.getSomethingToDeliverNow()`; if non-null, injects `picker.formatForInjection(insight)` and returns.
+`InsightPicker` (in `insight/picker.ts`) owns the "what do I deliver now?" decision. `tryDeliverInsight()` in `index.ts` asks `picker.getSomethingToDeliverNow()`; if non-null, injects `picker.formatForInjection(insight)`.
+
+The trigger for `tryDeliverInsight()` is **not** `turn_done`. It comes from two cooperating pieces in `backend/src/deliveryWindow/`:
+
+- **`DeliveryWindow`** — a pure observable that takes the `RealtimeSession` in its constructor, subscribes to `turn_started` / `turn_done` / `audio_interrupted` / `transport_event` (filtering for `input_audio_buffer.speech_started/stopped`) on its own, and exposes `isOpen()`, `isResponseActive()`, `subscribe(cb)`, plus public setters (`setResponseActive`, `setUserSpeaking`) so callers can preempt the SDK on outgoing events. No timers, no debounce, no awareness of insights.
+- **`DebouncedPoll`** — independent class. Subscribes to the window in its constructor. While the window is open: waits 300 ms (debounce against the speech_stopped → turn_started race), then fires once and polls every 3 s. Any close cancels both timers via the subscription callback. **No public stop method** — lifecycle is owned by the window: `window.dispose()` broadcasts a final `isOpen=false` to subscribers, which lands in the same close-path that cancels timers.
+
+`index.ts` glue is two lines: `new DeliveryWindow(session)` and `new DebouncedPoll(dw, tryDeliverInsight)`. `injectMessage` synchronously calls `dw.setResponseActive(true)` before sending `response.create` so a parallel poll/event tick can't double-inject in the ms before the SDK echoes `turn_started`.
+
+Game events and fallback status keep their old path: `tryDeliver()` runs on `turn_done` and a 5s safety tick, gated by `dw.isResponseActive()`.
 
 `getSomethingToDeliverNow()` is synchronous and **marks the result used itself** — the caller is expected to inject immediately. Branches in order:
 1. **Critical shortcut** — `latestCritical(unused)` wins outright. Background thinking is kicked over the remaining non-critical candidates so the next pick is ready.
@@ -48,7 +57,7 @@ Both the picker prompt and the voice-model injection are wrapped in `<insight-N>
 
 ### Lifecycle
 
-On WS close: `pickerAbort.abort()` cancels in-flight thinking; `clearInsights()` + `clearConversation()` drop per-match state. The picker instance is garbage-collected with the WS handler scope.
+On WS close: `pickerAbort.abort()` cancels in-flight thinking; `deliveryWindow.dispose()` detaches transport listeners and broadcasts a final `isOpen=false` (any `DebouncedPoll` subscribed cancels its timers via the normal close path); `clearInsights()` + `clearConversation()` drop per-match state. The picker, poll, and window instances are garbage-collected with the WS handler scope.
 
 ## Adding a new insight kind
 
@@ -65,5 +74,6 @@ On WS close: `pickerAbort.abort()` cancels in-flight thinking; `clearInsights()`
 - One class **or** module-level functions per file; never mix.
 - Pure helpers separate from the class that uses them (e.g. `insight/helpers.ts` vs `insight/picker.ts`).
 - Markup/rendering separate from logic (e.g. `insight/markup.ts`, `conversation/markup.ts`).
-- Types in `<folder>/types/`, constants in `<folder>/consts/`. Same convention applies inside subfolders like `insight/`.
-- Tests beside the source, `*.spec.ts`. The picker spec subclasses `InsightPicker` to stub `callModel`.
+- Generic infrastructure (e.g. `deliveryWindow/`) lives outside `insight/` — does not depend on the insight domain. Domain-specific scheduling (debounce + poll) is a separate file from the observable.
+- Types in `<folder>/types/`, constants in `<folder>/consts/`. Same convention applies inside subfolders.
+- Tests beside the source, `*.spec.ts`. The picker spec subclasses `InsightPicker` to stub `callModel`. `DeliveryWindow` is tested with a fake transport; `debouncedPoll` with `mock.timers`.

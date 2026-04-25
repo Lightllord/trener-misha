@@ -18,7 +18,7 @@ The backend never polls `insight-app`; data is pushed and held in-memory (`src/g
 - **JSON control frames (backend → frontend)**: `connected`, `transcript`, `tool_call`, `tool_result`, `interrupt`, `error`.
 - Frontend sends only audio (no JSON).
 
-After `turn_done` (and on a 5s safety tick), `tryDeliver()` injects one of: an insight (via `InsightPicker`), batched game events, or a fallback status snapshot. Details in `backend/CLAUDE.md`.
+Insights are delivered via a `DeliveryWindow` that opens on `turn_done` / `speech_stopped` and closes on `turn_started` / `speech_started` / `audio_interrupted` (300ms debounce + 3s poll). Game events and fallback status use the older `tryDeliver()` path on `turn_done` + 5s safety tick. Details in `backend/CLAUDE.md`.
 
 ## Voice tools (`src/tools/`)
 
@@ -46,6 +46,8 @@ Each file exports one `tool({ … })`; `src/tools/index.ts` re-exports them.
 | `src/draftAnalysis.ts`   | Background `gpt-5.4-mini` tool-use loop → produces a `draft_analysis` insight |
 | `src/insight/store.ts`   | Named-insight store with per-name uniqueness + importance |
 | `src/insight/picker.ts`  | `InsightPicker` class — picks what to deliver, owns background thinking, formats injections |
+| `src/deliveryWindow/deliveryWindow.ts` | `DeliveryWindow` class — observable "we can speak" gate; subscribes to session transport, exposes `isOpen()` / `subscribe()` |
+| `src/deliveryWindow/debouncedPoll.ts`  | `DebouncedPoll` class — 300ms debounce + 3s poll while window open. Lifecycle owned by `DeliveryWindow.dispose()` (no public stop) |
 | `src/insight/helpers.ts` | Pure ranking + parsing helpers |
 | `src/insight/markup.ts`  | XMLike rendering for picker input + injection |
 | `src/conversation/log.ts`     | Rolling transcript log (`logTranscript`, `getRecentConversation`) |
