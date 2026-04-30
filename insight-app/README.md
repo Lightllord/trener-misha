@@ -54,7 +54,9 @@ If the backend is down, pushes are logged once and silently skipped — nothing 
 | `src/draft-detector.ts` | Python CV subprocess lifecycle + stdout parsing |
 | `src/types.ts` | `MatchState`, `GamePhase`, and raw GSI payload types |
 | `src/logger.ts` | Tees `console.log/warn/error` to `logs/insight-app.log` |
-| `cv/` | Python screen-capture draft detector (OpenCV + MSS). Spawned as a subprocess by `draft-detector.ts`. Install deps: `pip install -r cv/requirements.txt` |
+| `cv/` | Python screen-capture draft detector (OpenCV + MSS). Spawned as a subprocess by `draft-detector.ts`. See [Python setup](#python-setup) below. |
+| `src/python-runtime.ts` | Resolves the project-local Python interpreter (`.venv` → system fallback) and probes its version on startup |
+| `pyproject.toml`, `uv.lock`, `.python-version` | Python dep manifest, lockfile, pinned interpreter version. `uv sync` materialises `.venv/`. |
 
 ## Commands
 
@@ -65,3 +67,20 @@ npm start      # node dist/index.js
 ```
 
 For GSI setup instructions, see [docs/valve/README.md](../docs/valve/README.md).
+
+## Python setup
+
+The draft detector is a Python subprocess. Python deps live in [`uv`](https://docs.astral.sh/uv/)-managed project files: `pyproject.toml` declares dependencies, `uv.lock` pins exact versions, `.python-version` pins the interpreter (3.13). All three are committed; the `.venv/` itself is not.
+
+One-time setup (any machine):
+
+```bash
+cd insight-app
+uv sync
+```
+
+`uv sync` reads the lockfile, downloads the pinned Python if missing, creates `.venv/`, installs deps. Idempotent — safe to re-run.
+
+Install `uv` itself if needed: `winget install astral-sh.uv` (Windows) or see https://docs.astral.sh/uv/getting-started/install/.
+
+On `npm run dev` the pre-flight resolves Python (venv first, then system `python`), reads its version, and logs a `[preflight]` line. If no Python is found at all, it warns. Module-level dep failures surface from the detector subprocess itself, not from the pre-flight.

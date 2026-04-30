@@ -1,6 +1,7 @@
 import { spawn, type ChildProcess } from "node:child_process"
 import { writeFile, unlink } from "node:fs/promises"
 import { resolve } from "node:path"
+import { resolvePythonPath } from "./python-runtime.js"
 
 const INSIGHT_APP_ROOT = resolve(__dirname, "..")
 const PROJECT_ROOT = resolve(INSIGHT_APP_ROOT, "..")
@@ -47,11 +48,14 @@ export class DraftDetector {
       return
     }
 
+    const pythonPath = resolvePythonPath()
+
     console.log("[DraftDetector] Starting detect_draft.py --watch")
+    console.log("[DraftDetector] Python:", pythonPath)
     console.log("[DraftDetector] Script path:", SCRIPT_PATH)
     console.log("[DraftDetector] Monitor:", this.monitorNum)
 
-    this.process = spawn("python", [
+    this.process = spawn(pythonPath, [
       "-u",
       SCRIPT_PATH,
       "--watch",

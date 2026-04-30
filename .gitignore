@@ -24,6 +24,9 @@ gamestate_integration_trener_misha.cfg
 insight-app/cv/__pycache__/
 insight-app/cv/debug/
 
+# Local Python venv (managed by uv)
+insight-app/.venv/
+
 # Runtime data
 backend/data/draft.json
 patch-updater/.patch-progress.json

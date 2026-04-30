@@ -2,6 +2,7 @@ import "./logger.js";
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { MatchStateManager } from "./match-state.js";
 import { DraftDetector } from "./draft-detector.js";
+import { probePython } from "./python-runtime.js";
 import type { RawGsiPayload } from "./types.js";
 
 const PORT = 6074;
@@ -97,6 +98,18 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
   res.end("insight-app is running");
 });
 
-server.listen(PORT, () => {
-  console.log(`[insight-app] GSI listener on http://localhost:${PORT}`);
-});
+async function main(): Promise<void> {
+  const py = await probePython();
+  if (!py) {
+    console.error("[preflight] No Python found. Run `cd insight-app && uv sync`. Aborting.");
+    process.exit(1);
+  }
+  const tag = py.versionOk ? "ok" : "version mismatch (need 3.12-3.14)";
+  console.log(`[preflight] python: ${py.path} (${py.source}, ${py.version}) — ${tag}`);
+
+  server.listen(PORT, () => {
+    console.log(`[insight-app] GSI listener on http://localhost:${PORT}`);
+  });
+}
+
+void main();
