@@ -81,6 +81,17 @@ wss.on("connection", async (ws) => {
   const session = new RealtimeSession(agent, {
     transport: "websocket",
     model: "gpt-realtime-1.5",
+    config: {
+      audio: {
+        input: {
+          turnDetection: {
+            type: "semantic_vad",
+            eagerness: "low",
+          },
+          noiseReduction: { type: "near_field" },
+        },
+      },
+    },
   });
 
   function send(msg: Record<string, unknown>) {
