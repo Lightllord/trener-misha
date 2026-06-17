@@ -1,5 +1,7 @@
 import "./logger.js";
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { MatchStateManager } from "./match-state.js";
 import { DraftDetector } from "./draft-detector.js";
 import { probePython } from "./python-runtime.js";
@@ -11,6 +13,7 @@ const BACKEND_URL = "http://localhost:3000";
 const matchState = new MatchStateManager();
 const draftDetector = new DraftDetector();
 
+let stopTimeoutId: ReturnType<typeof setTimeout> | null = null;
 let backendDown = false;
 
 let pushFailCount = 0;
@@ -45,17 +48,21 @@ draftDetector.onDraftChange((draft) => {
   pushToBackend("/push/draft", draft);
 });
 
-// При смене фазы на pre_game — запускаем детекцию драфта
 matchState.onPhaseChange((newPhase, prevPhase) => {
   console.log(`[insight-app] Phase: ${prevPhase ?? "none"} → ${newPhase}`);
 
-  if (newPhase === "pre_game" && prevPhase !== "pre_game") {
+  if (newPhase === "hero_selection" && prevPhase === "loading") {
+    if (stopTimeoutId) { clearTimeout(stopTimeoutId); stopTimeoutId = null; }
+    draftDetector.reset();
     draftDetector.start();
   }
 
-  // Новый матч или выход — сброс
-  if (newPhase === "hero_selection" && prevPhase === "post_game") {
-    draftDetector.reset();
+  if (newPhase === "strategy" && prevPhase === "hero_selection") {
+    stopTimeoutId = setTimeout(() => {
+      console.log("[insight-app] Stopping draft polling (5s after strategy)");
+      draftDetector.stop();
+      stopTimeoutId = null;
+    }, 5000);
   }
 });
 
@@ -69,6 +76,27 @@ function parseBody(req: IncomingMessage): Promise<string> {
 }
 
 const server = createServer(async (req: IncomingMessage, res: ServerResponse) => {
+  // Zone editor UI
+  if (req.method === "GET" && req.url === "/zone-editor") {
+    try {
+      const html = await readFile(join(process.cwd(), "zone-editor.html"), "utf-8");
+      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+      res.end(html);
+    } catch {
+      res.writeHead(404);
+      res.end("zone-editor.html not found");
+    }
+    return;
+  }
+
+  // Live hero positions for zone editor
+  if (req.method === "GET" && req.url === "/api/hero-positions") {
+    const state = matchState.current;
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ heroPositions: state?.heroPositions ?? {} }));
+    return;
+  }
+
   if (req.method === "POST") {
     try {
       const raw = await parseBody(req);
@@ -77,6 +105,11 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
       console.log("[POST] map:", !!data.map, "player:", !!data.player, "game_state:", data.map?.game_state ?? "none");
 
       matchState.update(data);
+
+      const hp = matchState.current?.heroPositions;
+      if (hp && Object.keys(hp).length > 0) {
+        console.log("[heroPositions]", JSON.stringify(hp));
+      }
 
       // Push state to backend after every GSI update
       const state = matchState.current;

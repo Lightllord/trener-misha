@@ -248,6 +248,7 @@ export function checkAndAnalyzeDraft(): void {
   const draft = getDraft();
   if (!draft?.radiant?.length || !draft?.dire?.length) return;
   if (draft.radiant.length + draft.dire.length < 10) return;
+  if (draft.radiant.includes("unknown") || draft.dire.includes("unknown")) return;
 
   const state = getState() as StateResponse | null;
 

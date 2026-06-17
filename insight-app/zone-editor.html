@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Zone Editor — Dota 2</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { display: flex; height: 100vh; font-family: monospace; font-size: 12px; background: #111; color: #ccc; overflow: hidden; }
+
+    #canvas-wrap {
+      flex: 1;
+      overflow: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      background: #1a1a1a;
+      padding: 12px;
+    }
+    canvas { display: block; cursor: crosshair; image-rendering: pixelated; }
+
+    #sidebar {
+      width: 280px;
+      min-width: 280px;
+      background: #1e1e2e;
+      border-left: 1px solid #333;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .section { padding: 10px 12px; border-bottom: 1px solid #2a2a3a; }
+    .section h3 { font-size: 11px; color: #7c7cff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+
+    button {
+      display: block; width: 100%; padding: 6px 8px;
+      background: #2a2a4a; border: 1px solid #444; color: #ccc;
+      cursor: pointer; font-family: monospace; font-size: 11px; text-align: left;
+      margin-top: 4px;
+    }
+    button:hover { background: #3a3a5a; }
+    button.primary { background: #3a3aba; border-color: #7c7cff; color: white; }
+    button.primary:hover { background: #5a5afa; }
+    button.danger { background: #4a1a1a; border-color: #aa4444; color: #ffaaaa; }
+    button.danger:hover { background: #6a2a2a; }
+
+    input[type=number], input[type=text] {
+      width: 100%; padding: 5px; background: #111; border: 1px solid #333;
+      color: #ccc; font-family: monospace; font-size: 11px; margin-top: 4px;
+    }
+
+    .step-box {
+      background: #111; border-left: 3px solid #7c7cff;
+      padding: 6px 8px; font-size: 11px; line-height: 1.5; margin-bottom: 6px;
+    }
+    .step-box.done { border-color: #44cc88; color: #44cc88; }
+    .step-box.warn { border-color: #ffaa44; color: #ffaa44; }
+
+    .zone-item {
+      display: flex; align-items: center; gap: 4px;
+      padding: 3px 0; border-bottom: 1px solid #222;
+    }
+    .zone-name { flex: 1; font-size: 11px; }
+    .zone-del { width: auto; padding: 2px 6px; margin: 0; font-size: 10px; }
+
+    #export-out {
+      background: #080808; border: 1px solid #333;
+      padding: 8px; font-size: 10px;
+      white-space: pre; overflow-x: auto;
+      max-height: 220px; overflow-y: auto;
+      margin-top: 6px; display: none;
+    }
+
+    .live-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
+    .live-row { padding: 2px 0; font-size: 10px; display: flex; align-items: center; }
+
+    label { font-size: 11px; color: #888; display: block; margin-top: 6px; }
+  </style>
+</head>
+<body>
+
+<div id="canvas-wrap">
+  <canvas id="cv"></canvas>
+</div>
+
+<div id="sidebar">
+  <!-- 1. Загрузка -->
+  <div class="section">
+    <h3>1. Карта</h3>
+    <div class="step-box" id="img-hint">Загрузите скриншот миникарты</div>
+    <label>Файл изображения</label>
+    <input type="file" id="img-file" accept="image/*" style="margin-top:4px; width:100%">
+  </div>
+
+  <!-- 2. Калибровка -->
+  <div class="section">
+    <h3>2. Калибровка</h3>
+    <div class="step-box" id="calib-hint">Загрузите карту для начала</div>
+
+    <div id="calib-form" style="display:none">
+      <label>Игровой X (из лога)</label>
+      <input type="number" id="cx" placeholder="например -6900">
+      <label>Игровой Y (из лога)</label>
+      <input type="number" id="cy" placeholder="например -6900">
+      <button class="primary" id="calib-ok" style="margin-top:6px">Подтвердить точку</button>
+    </div>
+
+    <button class="danger" id="calib-reset" style="margin-top:6px">Сбросить калибровку</button>
+    <div id="calib-pts" style="margin-top:4px; font-size:10px; color:#888; line-height:1.6"></div>
+  </div>
+
+  <!-- 3. Зоны -->
+  <div class="section" style="flex:1">
+    <h3>3. Зоны</h3>
+    <div class="step-box" id="draw-hint">Выполните калибровку, затем тяните мышь по карте</div>
+    <div id="zones-list" style="margin-top:6px"></div>
+  </div>
+
+  <!-- 4. Экспорт -->
+  <div class="section">
+    <h3>4. Экспорт</h3>
+    <button class="primary" id="export-btn">Скопировать TypeScript</button>
+    <pre id="export-out"></pre>
+  </div>
+
+  <!-- Live heroes -->
+  <div class="section">
+    <h3>Live: герои</h3>
+    <div id="live-status" style="font-size:10px; color:#666">insight-app не запущен</div>
+    <div id="live-list"></div>
+  </div>
+</div>
+
+<script>
+const cv = document.getElementById('cv')
+const ctx = cv.getContext('2d')
+
+// ---------- State ----------
+let img = null
+// calibPoints: [{px, py, gx, gy}, ...]
+let calibPoints = loadJSON('calib', [])
+let zones       = loadJSON('zones', [])
+let transform   = null   // {xScale, yScale, xOffset, yOffset}
+let calibMode   = false  // waiting for canvas click
+let pendingPx   = null   // pixel clicked, waiting for gx/gy input
+let dragging    = false
+let dragStart   = null
+let dragCur     = null
+let liveHeroes  = {}
+
+// ---------- Persist ----------
+function loadJSON(key, def) { try { return JSON.parse(localStorage.getItem(key)) ?? def } catch { return def } }
+function saveJSON(key, v)   { localStorage.setItem(key, JSON.stringify(v)) }
+
+// ---------- Transform ----------
+function computeTransform() {
+  transform = null
+  if (calibPoints.length < 2) return
+  const [a, b] = calibPoints
+  const xScale = (b.gx - a.gx) / (b.px - a.px)
+  const yScale = (b.gy - a.gy) / (b.py - a.py)
+  transform = { xScale, yScale, xOffset: a.gx - a.px * xScale, yOffset: a.gy - a.py * yScale }
+}
+
+function toGame(px, py) {
+  if (!transform) return null
+  return { x: Math.round(px * transform.xScale + transform.xOffset),
+           y: Math.round(py * transform.yScale + transform.yOffset) }
+}
+
+function toPx(gx, gy) {
+  if (!transform) return null
+  return { px: (gx - transform.xOffset) / transform.xScale,
+           py: (gy - transform.yOffset) / transform.yScale }
+}
+
+// ---------- Canvas helpers ----------
+function canvasPos(e) {
+  const r = cv.getBoundingClientRect()
+  return { px: (e.clientX - r.left) * (cv.width / r.width),
+           py: (e.clientY - r.top)  * (cv.height / r.height) }
+}
+
+// ---------- Image ----------
+document.getElementById('img-file').addEventListener('change', e => {
+  const file = e.target.files[0]
+  if (!file) return
+  const url = URL.createObjectURL(file)
+  img = new Image()
+  img.onload = () => { cv.width = img.width; cv.height = img.height; redraw(); updateUI() }
+  img.src = url
+})
+
+// ---------- Calibration ----------
+cv.addEventListener('mousedown', e => {
+  const pos = canvasPos(e)
+  if (calibMode) {
+    pendingPx = pos
+    document.getElementById('calib-form').style.display = 'block'
+    document.getElementById('calib-hint').textContent =
+      `Точка ${calibPoints.length+1} пикселей: (${Math.round(pos.px)}, ${Math.round(pos.py)}). Введите игровые координаты.`
+    redraw()
+    return
+  }
+  if (transform) { dragging = true; dragStart = pos; dragCur = pos }
+})
+
+cv.addEventListener('mousemove', e => {
+  if (!dragging) return
+  dragCur = canvasPos(e)
+  redraw()
+})
+
+cv.addEventListener('mouseup', e => {
+  if (!dragging) return
+  dragging = false
+  dragCur = canvasPos(e)
+
+  const g1 = toGame(dragStart.px, dragStart.py)
+  const g2 = toGame(dragCur.px, dragCur.py)
+  if (!g1 || !g2) return
+  if (Math.abs(dragCur.px - dragStart.px) < 5 && Math.abs(dragCur.py - dragStart.py) < 5) {
+    dragStart = null; redraw(); return
+  }
+
+  const name = prompt('Название зоны:')
+  if (!name) { dragStart = null; redraw(); return }
+
+  zones.push({
+    zone: name,
+    minX: Math.min(g1.x, g2.x), maxX: Math.max(g1.x, g2.x),
+    minY: Math.min(g1.y, g2.y), maxY: Math.max(g1.y, g2.y),
+  })
+  saveJSON('zones', zones)
+  dragStart = null
+  renderZones()
+  redraw()
+})
+
+document.getElementById('calib-ok').addEventListener('click', () => {
+  if (!pendingPx) return
+  const gx = parseFloat(document.getElementById('cx').value)
+  const gy = parseFloat(document.getElementById('cy').value)
+  if (isNaN(gx) || isNaN(gy)) { alert('Введите числа'); return }
+  calibPoints.push({ px: pendingPx.px, py: pendingPx.py, gx, gy })
+  saveJSON('calib', calibPoints)
+  pendingPx = null
+  document.getElementById('cx').value = ''
+  document.getElementById('cy').value = ''
+  document.getElementById('calib-form').style.display = 'none'
+  computeTransform()
+  updateUI()
+  redraw()
+})
+
+document.getElementById('calib-reset').addEventListener('click', () => {
+  calibPoints = []; saveJSON('calib', calibPoints)
+  pendingPx = null; transform = null
+  document.getElementById('calib-form').style.display = 'none'
+  updateUI(); redraw()
+})
+
+// ---------- UI state ----------
+function updateUI() {
+  const imgHint = document.getElementById('img-hint')
+  const calibHint = document.getElementById('calib-hint')
+  const drawHint = document.getElementById('draw-hint')
+  const ptsEl = document.getElementById('calib-pts')
+
+  if (!img) {
+    imgHint.className = 'step-box warn'
+    imgHint.textContent = 'Загрузите скриншот миникарты'
+    calibMode = false
+    return
+  }
+  imgHint.className = 'step-box done'
+  imgHint.textContent = '✓ Карта загружена'
+
+  ptsEl.textContent = calibPoints.map((p, i) =>
+    `T${i+1}: px(${Math.round(p.px)},${Math.round(p.py)}) → game(${p.gx},${p.gy})`
+  ).join('\n')
+
+  if (calibPoints.length === 0) {
+    calibHint.className = 'step-box'
+    calibHint.textContent = 'Нажмите точку 1 на карте (рекомендуем: фонтан Radiant)'
+    calibMode = true
+  } else if (calibPoints.length === 1) {
+    calibHint.className = 'step-box'
+    calibHint.textContent = 'Нажмите точку 2 на карте (рекомендуем: фонтан Dire)'
+    calibMode = true
+  } else {
+    calibHint.className = 'step-box done'
+    calibHint.textContent = `✓ Калибровка готова (${calibPoints.length} точки)`
+    calibMode = false
+  }
+
+  if (transform) {
+    drawHint.className = 'step-box done'
+    drawHint.textContent = '✓ Зажмите ЛКМ и тяните для рисования зоны'
+  } else {
+    drawHint.className = 'step-box'
+    drawHint.textContent = 'Выполните калибровку, затем тяните мышь по карте'
+  }
+}
+
+// ---------- Zones list ----------
+function renderZones() {
+  const list = document.getElementById('zones-list')
+  list.innerHTML = ''
+  zones.forEach((z, i) => {
+    const row = document.createElement('div')
+    row.className = 'zone-item'
+    row.innerHTML = `<span class="zone-name">${z.zone}</span>
+      <button class="zone-del danger" onclick="deleteZone(${i})">✕</button>`
+    list.appendChild(row)
+  })
+}
+
+window.deleteZone = i => {
+  zones.splice(i, 1); saveJSON('zones', zones)
+  renderZones(); redraw()
+}
+
+// ---------- Export ----------
+document.getElementById('export-btn').addEventListener('click', () => {
+  const lines = zones.map(z =>
+    `  { zone: "${z.zone}", minX: ${z.minX}, maxX: ${z.maxX}, minY: ${z.minY}, maxY: ${z.maxY} },`
+  ).join('\n')
+  const ts = `const ZONES: ZoneRect[] = [\n${lines}\n]`
+  const out = document.getElementById('export-out')
+  out.textContent = ts
+  out.style.display = 'block'
+  navigator.clipboard.writeText(ts).catch(() => {})
+  const btn = document.getElementById('export-btn')
+  btn.textContent = '✓ Скопировано!'
+  setTimeout(() => { btn.textContent = 'Скопировать TypeScript' }, 2000)
+})
+
+// ---------- Draw ----------
+const ZONE_COLORS = [
+  'rgba(124,124,255,0.5)', 'rgba(255,124,124,0.5)', 'rgba(124,255,124,0.5)',
+  'rgba(255,200,80,0.5)',  'rgba(200,80,255,0.5)',  'rgba(80,200,255,0.5)',
+]
+
+function redraw() {
+  ctx.clearRect(0, 0, cv.width, cv.height)
+  if (img) ctx.drawImage(img, 0, 0)
+
+  // Calibration points
+  calibPoints.forEach((p, i) => {
+    ctx.beginPath(); ctx.arc(p.px, p.py, 7, 0, Math.PI*2)
+    ctx.fillStyle = '#ffff00'; ctx.fill()
+    ctx.strokeStyle = '#000'; ctx.lineWidth = 1; ctx.stroke()
+    ctx.fillStyle = '#000'; ctx.font = 'bold 11px monospace'
+    ctx.fillText(`T${i+1}`, p.px + 9, p.py + 4)
+  })
+  if (pendingPx) {
+    ctx.beginPath(); ctx.arc(pendingPx.px, pendingPx.py, 10, 0, Math.PI*2)
+    ctx.strokeStyle = '#ffff00'; ctx.lineWidth = 2; ctx.stroke()
+  }
+
+  // Existing zones
+  if (transform) {
+    zones.forEach((z, i) => {
+      const p1 = toPx(z.minX, z.minY), p2 = toPx(z.maxX, z.maxY)
+      if (!p1 || !p2) return
+      const x = Math.min(p1.px, p2.px), y = Math.min(p1.py, p2.py)
+      const w = Math.abs(p2.px - p1.px),  h = Math.abs(p2.py - p1.py)
+      ctx.fillStyle = ZONE_COLORS[i % ZONE_COLORS.length]
+      ctx.fillRect(x, y, w, h)
+      ctx.strokeStyle = ZONE_COLORS[i % ZONE_COLORS.length].replace('0.5', '0.9')
+      ctx.lineWidth = 2; ctx.strokeRect(x, y, w, h)
+      ctx.fillStyle = 'white'
+      ctx.font = 'bold 11px monospace'
+      ctx.shadowColor = '#000'; ctx.shadowBlur = 3
+      ctx.fillText(z.zone, x + 4, y + 14)
+      ctx.shadowBlur = 0
+    })
+  }
+
+  // Active drag
+  if (dragging && dragStart && dragCur) {
+    const x = Math.min(dragStart.px, dragCur.px), y = Math.min(dragStart.py, dragCur.py)
+    const w = Math.abs(dragCur.px - dragStart.px), h = Math.abs(dragCur.py - dragStart.py)
+    ctx.fillStyle = 'rgba(255,255,255,0.1)'
+    ctx.strokeStyle = 'rgba(255,255,255,0.8)'
+    ctx.lineWidth = 1; ctx.setLineDash([4, 3])
+    ctx.fillRect(x, y, w, h); ctx.strokeRect(x, y, w, h)
+    ctx.setLineDash([])
+    if (transform) {
+      const g1 = toGame(dragStart.px, dragStart.py)
+      const g2 = toGame(dragCur.px, dragCur.py)
+      ctx.fillStyle = 'white'; ctx.font = '10px monospace'
+      ctx.shadowColor = '#000'; ctx.shadowBlur = 3
+      ctx.fillText(`(${g1.x},${g1.y})→(${g2.x},${g2.y})`, x + 2, y + h - 4)
+      ctx.shadowBlur = 0
+    }
+  }
+
+  // Live hero dots
+  if (transform) {
+    for (const [name, h] of Object.entries(liveHeroes)) {
+      const p = toPx(h.x, h.y)
+      if (!p) continue
+      ctx.beginPath(); ctx.arc(p.px, p.py, h.visible ? 5 : 4, 0, Math.PI*2)
+      const base = h.team === 'radiant' ? [0,220,100] : [255,60,60]
+      const alpha = h.visible ? 1 : 0.4
+      ctx.fillStyle = `rgba(${base[0]},${base[1]},${base[2]},${alpha})`
+      ctx.fill()
+      ctx.strokeStyle = 'white'; ctx.lineWidth = 1; ctx.stroke()
+      const short = name.replace('npc_dota_hero_', '')
+      ctx.fillStyle = 'white'; ctx.font = '9px monospace'
+      ctx.shadowColor = '#000'; ctx.shadowBlur = 2
+      ctx.fillText(short, p.px + 6, p.py + 3)
+      ctx.shadowBlur = 0
+    }
+  }
+}
+
+// ---------- Live heroes ----------
+async function pollHeroes() {
+  try {
+    const r = await fetch('/api/hero-positions')
+    if (!r.ok) return
+    const data = await r.json()
+    liveHeroes = data.heroPositions ?? {}
+    const entries = Object.entries(liveHeroes)
+    const statusEl = document.getElementById('live-status')
+    const listEl = document.getElementById('live-list')
+    if (entries.length === 0) {
+      statusEl.textContent = 'Нет героев на карте'
+      listEl.innerHTML = ''
+    } else {
+      statusEl.textContent = `${entries.length} героев`
+      listEl.innerHTML = entries.map(([name, h]) => {
+        const short = name.replace('npc_dota_hero_', '')
+        const color = h.team === 'radiant' ? '#00cc66' : '#ff4444'
+        const opacity = h.visible ? 1 : 0.5
+        return `<div class="live-row" style="opacity:${opacity}">
+          <span class="live-dot" style="background:${color}"></span>
+          <span>${short} — ${h.zone}</span>
+        </div>`
+      }).join('')
+    }
+    redraw()
+  } catch {
+    document.getElementById('live-status').textContent = 'insight-app не запущен'
+  }
+}
+
+// ---------- Init ----------
+computeTransform()
+updateUI()
+renderZones()
+redraw()
+setInterval(pollHeroes, 1500)
+pollHeroes()
+</script>
+</body>
+</html>

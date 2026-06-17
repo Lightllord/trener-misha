@@ -1,3 +1,7 @@
+export type { MapZone, HeroPosition, HeroPositions } from "./types/heroPosition.js"
+import type { HeroPositions } from "./types/heroPosition.js"
+import type { MapZone } from "./types/heroPosition.js"
+
 /** Фаза матча */
 export type GamePhase =
   | "hero_selection"
@@ -32,6 +36,8 @@ export interface MatchState {
   /** Вражеские здания — трекинг через minimap */
   enemyBuildings: BuildingState[]
 
+  /** Позиции героев с minimap. Для невидимых врагов хранится последняя известная позиция */
+  heroPositions: HeroPositions
 }
 
 /** Статистика игрока */
@@ -81,6 +87,7 @@ export interface HeroState {
   manaPercent: number
 
   position: { x: number; y: number }
+  zone: MapZone
 
   buybackCost: number
   buybackCooldown: number

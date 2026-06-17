@@ -1,4 +1,4 @@
-import { spawn, type ChildProcess } from "node:child_process"
+import { spawn } from "node:child_process"
 import { writeFile, unlink } from "node:fs/promises"
 import { resolve } from "node:path"
 import { resolvePythonPath } from "./python-runtime.js"
@@ -8,6 +8,8 @@ const PROJECT_ROOT = resolve(INSIGHT_APP_ROOT, "..")
 const SCRIPT_PATH = resolve(INSIGHT_APP_ROOT, "cv", "detect_draft.py")
 const DRAFT_FILE = resolve(PROJECT_ROOT, "backend", "data", "draft.json")
 
+const POLL_INTERVAL_MS = 2000
+
 export interface DraftResult {
   radiant: string[]
   dire: string[]
@@ -15,14 +17,12 @@ export interface DraftResult {
   detectedAt: string
 }
 
-/**
- * Управляет запуском detect_draft.py --watch.
- * Запускается при смене фазы на pre_game, останавливается при выходе из матча.
- */
+/** Опрашивает detect_draft.py раз в 2 с пока идёт hero_selection. */
 export type DraftChangeListener = (draft: DraftResult) => void
 
 export class DraftDetector {
-  private process: ChildProcess | null = null
+  private intervalId: ReturnType<typeof setInterval> | null = null
+  private detecting = false
   private draft: DraftResult | null = null
   private monitorNum: number
   private changeListeners: DraftChangeListener[] = []
@@ -31,85 +31,74 @@ export class DraftDetector {
     this.monitorNum = monitorNum
   }
 
-  /** Subscribe to draft updates */
   onDraftChange(listener: DraftChangeListener): void {
     this.changeListeners.push(listener)
   }
 
-  /** Текущий драфт (null если ещё не определён) */
   get current(): DraftResult | null {
     return this.draft
   }
 
-  /** Запустить watch-режим detect_draft.py */
   start(): void {
-    if (this.process) {
-      console.log("[DraftDetector] Already running, skipping start")
+    if (this.intervalId) {
+      console.log("[DraftDetector] Already polling, skipping start")
       return
     }
-
-    const pythonPath = resolvePythonPath()
-
-    console.log("[DraftDetector] Starting detect_draft.py --watch")
-    console.log("[DraftDetector] Python:", pythonPath)
-    console.log("[DraftDetector] Script path:", SCRIPT_PATH)
-    console.log("[DraftDetector] Monitor:", this.monitorNum)
-
-    this.process = spawn(pythonPath, [
-      "-u",
-      SCRIPT_PATH,
-      "--watch",
-      "--monitor", String(this.monitorNum),
-    ], {
-      stdio: ["ignore", "pipe", "pipe"],
-      cwd: resolve(INSIGHT_APP_ROOT, "cv"),
-    })
-
-    let buffer = ""
-
-    this.process.stdout?.on("data", (chunk: Buffer) => {
-      buffer += chunk.toString("utf-8")
-
-      // Каждая строка stdout — JSON-результат детекции
-      const lines = buffer.split("\n")
-      buffer = lines.pop() ?? ""
-
-      for (const line of lines) {
-        const trimmed = line.trim()
-        if (!trimmed) continue
-        this.handleDetection(trimmed)
-      }
-    })
-
-    this.process.stderr?.on("data", (chunk: Buffer) => {
-      const msg = chunk.toString("utf-8").trim()
-      if (msg) console.log("[DraftDetector]", msg)
-    })
-
-    this.process.on("exit", (code) => {
-      console.log(`[DraftDetector] Process exited with code ${code}`)
-      this.process = null
-    })
-
-    this.process.on("error", (err) => {
-      console.error("[DraftDetector] Failed to start process:", err.message)
-      this.process = null
-    })
+    console.log("[DraftDetector] Starting draft polling every 2s")
+    void this.runDetection()
+    this.intervalId = setInterval(() => { void this.runDetection() }, POLL_INTERVAL_MS)
   }
 
-  /** Остановить watch-процесс */
   stop(): void {
-    if (!this.process) return
-    console.log("[DraftDetector] Stopping")
-    this.process.kill()
-    this.process = null
+    if (!this.intervalId) return
+    console.log("[DraftDetector] Stopping draft polling")
+    clearInterval(this.intervalId)
+    this.intervalId = null
   }
 
-  /** Сбросить данные драфта (новый матч) */
   reset(): void {
     this.stop()
     this.draft = null
     unlink(DRAFT_FILE).catch(() => {})
+  }
+
+  private async runDetection(): Promise<void> {
+    if (this.detecting) {
+      console.log("[DraftDetector] Detection in progress, skipping tick")
+      return
+    }
+    this.detecting = true
+    try {
+      const output = await this.spawnDetection()
+      for (const line of output.split("\n")) {
+        const trimmed = line.trim()
+        if (trimmed) this.handleDetection(trimmed)
+      }
+    } catch (err) {
+      console.error("[DraftDetector] Detection failed:", err instanceof Error ? err.message : err)
+    } finally {
+      this.detecting = false
+    }
+  }
+
+  private spawnDetection(): Promise<string> {
+    const pythonPath = resolvePythonPath()
+    return new Promise((done, fail) => {
+      let stdout = ""
+      const proc = spawn(pythonPath, [
+        "-u", SCRIPT_PATH, "--monitor", String(this.monitorNum),
+      ], {
+        stdio: ["ignore", "pipe", "pipe"],
+        cwd: resolve(INSIGHT_APP_ROOT, "cv"),
+      })
+      proc.stdout?.on("data", (chunk: Buffer) => { stdout += chunk.toString("utf-8") })
+      proc.stderr?.on("data", (chunk: Buffer) => {
+        const msg = chunk.toString("utf-8").trim()
+        if (msg) console.log("[DraftDetector]", msg)
+      })
+      proc.on("exit", () => done(stdout))
+      proc.on("error", fail)
+    })
   }
 
   private handleDetection(jsonLine: string): void {
@@ -138,7 +127,6 @@ export class DraftDetector {
         `Radiant: ${raw.radiant.join(", ")} | Dire: ${raw.dire.join(", ")}`,
       )
 
-      // Notify listeners
       for (const listener of this.changeListeners) {
         try {
           listener(this.draft)
@@ -147,7 +135,6 @@ export class DraftDetector {
         }
       }
 
-      // Сохраняем в файл
       writeFile(DRAFT_FILE, JSON.stringify(this.draft, null, 2), "utf-8")
         .then(() => console.log("[DraftDetector] Saved to", DRAFT_FILE))
         .catch((err) => console.error("[DraftDetector] Failed to save:", err.message))

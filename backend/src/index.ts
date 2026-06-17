@@ -6,7 +6,7 @@ import { RealtimeSession } from "@openai/agents/realtime";
 import "dotenv/config";
 import { agent } from "./agent.js";
 import { checkAndAnalyzeDraft, resetDraftAnalysis } from "./draftAnalysis.js";
-import { clearInsights } from "./insight/store.js";
+import { clearInsights, getLatestUnusedInterrupting, markUsed } from "./insight/store.js";
 import { InsightPicker } from "./insight/picker.js";
 import { DeliveryWindow } from "./deliveryWindow/deliveryWindow.js";
 import { DebouncedPoll } from "./deliveryWindow/debouncedPoll.js";
@@ -141,6 +141,7 @@ wss.on("connection", async (ws) => {
   });
 
   let deliveryInterval: ReturnType<typeof setInterval> | null = null;
+  let interruptInterval: ReturnType<typeof setInterval> | null = null;
   let deliveryWindow: DeliveryWindow | null = null;
   const pickerAbort = new AbortController();
 
@@ -172,6 +173,27 @@ wss.on("connection", async (ws) => {
       }
     }
 
+    function interruptAndDeliver(text: string): void {
+      if (dw.isResponseActive()) {
+        session.transport.sendEvent({ type: "response.cancel" });
+      }
+      dw.setResponseActive(true);
+      session.transport.sendEvent({
+        type: "conversation.item.create",
+        item: { type: "message", role: "system", content: [{ type: "input_text", text }] },
+      });
+      session.transport.sendEvent({ type: "response.create" });
+    }
+
+    function tryInterruptDeliver(): void {
+      const insight = getLatestUnusedInterrupting();
+      if (!insight) return;
+      markUsed(insight);
+      const tail = insight.number !== null ? ` #${insight.number}` : "";
+      console.log(`[deliver] interrupt: ${insight.name}${tail}`);
+      interruptAndDeliver(picker.formatForInjection(insight));
+    }
+
     function tryDeliverInsight(): void {
       const insight = picker.getSomethingToDeliverNow();
       if (insight === null) return;
@@ -196,6 +218,7 @@ wss.on("connection", async (ws) => {
     }
 
     new DebouncedPoll(dw, tryDeliverInsight);
+    interruptInterval = setInterval(tryInterruptDeliver, 500);
 
     session.transport.on("audio_interrupted", () => {
       console.log("[vad] audio interrupted — flushing frontend playback");
@@ -231,6 +254,7 @@ wss.on("connection", async (ws) => {
     console.log("[ws] Client disconnected");
     pickerAbort.abort();
     if (deliveryInterval) clearInterval(deliveryInterval);
+    if (interruptInterval) clearInterval(interruptInterval);
     if (deliveryWindow !== null) deliveryWindow.dispose();
     clearEventQueue();
     resetDraftAnalysis();
@@ -244,6 +268,7 @@ wss.on("connection", async (ws) => {
     console.error("[ws] WebSocket error:", err);
     pickerAbort.abort();
     if (deliveryInterval) clearInterval(deliveryInterval);
+    if (interruptInterval) clearInterval(interruptInterval);
     if (deliveryWindow !== null) deliveryWindow.dispose();
     clearEventQueue();
     session.close();

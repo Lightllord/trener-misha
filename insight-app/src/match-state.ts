@@ -8,12 +8,14 @@ import type {
   ItemSlot,
   NeutralItemState,
   BuildingState,
+  HeroPositions,
   RawGsiPayload,
   RawAbility,
   RawItem,
   RawBuilding,
   RawMinimapEntity,
 } from "./types.js"
+import { getZone } from "./mapZones.js"
 
 /** Dota+ способности которые не относятся к герою */
 const IGNORED_ABILITIES = new Set([
@@ -23,6 +25,9 @@ const IGNORED_ABILITIES = new Set([
 
 /** Паттерн unitname для зданий в minimap */
 const BUILDING_PATTERN = /^npc_dota_(goodguys|badguys)_(tower\d+.*|melee_rax_.*|range_rax_.*|fort)$/
+
+/** Паттерн unitname для героев в minimap */
+const HERO_PATTERN = /^npc_dota_hero_/
 
 // ---------------------------------------------------------------------------
 // MatchStateManager — хранит и обновляет состояние матча
@@ -38,6 +43,9 @@ export class MatchStateManager {
 
   /** Все здания замеченные на minimap за текущий матч */
   private seenBuildings = new Set<string>()
+
+  /** Последние известные позиции героев (сохраняются между тиками) */
+  private heroPositions: HeroPositions = {}
 
   /** Текущий снапшот состояния (null если матч не идёт) */
   get current(): MatchState | null {
@@ -57,6 +65,7 @@ export class MatchStateManager {
       this.currentMatchId = null
       this.previousPhase = null
       this.seenBuildings.clear()
+      this.heroPositions = {}
       return
     }
 
@@ -69,6 +78,7 @@ export class MatchStateManager {
       this.state = null
       this.previousPhase = null
       this.seenBuildings.clear()
+      this.heroPositions = {}
     }
 
     const phase = parsePhase(raw.map.game_state)
@@ -79,6 +89,9 @@ export class MatchStateManager {
       this.previousPhase = phase
     }
     const team = parseTeam(raw.player?.team_name)
+
+    // Обновляем трекинг позиций героев через minimap
+    this.heroPositions = updateHeroPositions(this.heroPositions, raw.minimap, raw.map.game_time)
 
     // Обновляем трекинг зданий через minimap
     const currentMinimapBuildings = extractMinimapBuildings(raw.minimap)
@@ -122,6 +135,7 @@ export class MatchStateManager {
 
       allyBuildings,
       enemyBuildings,
+      heroPositions: this.heroPositions,
     }
   }
 
@@ -355,6 +369,7 @@ function parseHero(raw?: RawGsiPayload["hero"]): HeroState {
     maxMana: raw?.max_mana ?? 0,
     manaPercent: raw?.mana_percent ?? 0,
     position: { x: raw?.xpos ?? 0, y: raw?.ypos ?? 0 },
+    zone: getZone(raw?.xpos ?? 0, raw?.ypos ?? 0),
     buybackCost: raw?.buyback_cost ?? 0,
     buybackCooldown: raw?.buyback_cooldown ?? 0,
     status: {
@@ -413,6 +428,42 @@ function parseItem(raw: RawItem): ItemSlot {
     passive: raw.passive ?? false,
     ...(raw.charges != null ? { charges: raw.charges } : {}),
   }
+}
+
+// ---------------------------------------------------------------------------
+// Minimap → позиции героев
+// ---------------------------------------------------------------------------
+
+/** Обновляет карту позиций героев из текущего minimap-тика */
+function updateHeroPositions(
+  prev: HeroPositions,
+  minimap: Record<string, RawMinimapEntity> | undefined,
+  gameTime: number,
+): HeroPositions {
+  // Копируем предыдущее состояние, помечая всех невидимыми
+  const next: HeroPositions = {}
+  for (const [name, pos] of Object.entries(prev)) {
+    next[name] = { ...pos, visible: false }
+  }
+
+  if (!minimap) return next
+
+  for (const entity of Object.values(minimap)) {
+    const { unitname, xpos, ypos, team } = entity
+    if (!unitname || !HERO_PATTERN.test(unitname)) continue
+    const x = xpos ?? 0
+    const y = ypos ?? 0
+    next[unitname] = {
+      x,
+      y,
+      zone: getZone(x, y),
+      lastSeen: gameTime,
+      team: team === 3 ? "dire" : "radiant",
+      visible: true,
+    }
+  }
+
+  return next
 }
 
 function parseInventory(raw?: Record<string, RawItem>): InventoryState {

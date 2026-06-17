@@ -4,6 +4,7 @@ import {
   heroInfoTool,
   heroListTool,
   draftTool,
+  correctDraftTool,
   matchStateTool,
   matchupsTool,
   buildsTool,
@@ -18,6 +19,7 @@ Keep replies brief and conversational.
 You have access to live game data:
 - get_match_state: current game state (phase, hero, items, score, buildings)
 - get_draft: team compositions detected from screen capture (radiant & dire hero picks)
+- correct_draft: исправить неверно распознанного героя в драфте. Перед вызовом уточни точное имя через list_heroes.
 - get_hero_info: detailed hero strengths, weaknesses, and mechanics
 - list_heroes: full list of all Dota 2 heroes (use to look up exact hero names)
 - get_matchups: hero win rates vs all other heroes from STRATZ (counters & good matchups)
@@ -41,6 +43,7 @@ Rule for insights: if you get interrupted, or the user changes the topic before 
     heroListTool,
     matchStateTool,
     draftTool,
+    correctDraftTool,
     matchupsTool,
     buildsTool,
   ],

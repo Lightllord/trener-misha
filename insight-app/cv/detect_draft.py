@@ -133,10 +133,10 @@ def extract_slots(screen: np.ndarray, region: dict) -> list[np.ndarray]:
 
 
 def match_hero(slot: np.ndarray, templates: dict[str, list[np.ndarray]]) -> tuple[str, float]:
-    """Match a slot against all templates using multi-scale template matching.
+    """Match a slot against all templates using horizontally-cropped comparison.
 
-    For each hero, tries all variants (default + arcanas) and multiple
-    crop levels (100%, 80%, 60% center crop).
+    Removes ~1/3 from each side of both slot and template before matching
+    to focus on the center of the portrait and ignore side decorations.
     """
     best_name = "unknown"
     best_score = 0.0
@@ -145,22 +145,16 @@ def match_hero(slot: np.ndarray, templates: dict[str, list[np.ndarray]]) -> tupl
     for hero_name, hero_templates in templates.items():
         for template in hero_templates:
             t_h, t_w = template.shape[:2]
+            t_x_off = t_w // 3
+            tmpl_cropped = template[:, t_x_off: t_w - t_x_off]
 
-            # Try different center crop levels of the template
-            for crop_pct in [1.0, 0.8, 0.6]:
-                crop_w = int(t_w * crop_pct)
-                crop_h = int(t_h * crop_pct)
-                x_off = (t_w - crop_w) // 2
-                y_off = (t_h - crop_h) // 2
-                cropped = template[y_off:y_off + crop_h, x_off:x_off + crop_w]
+            resized = cv2.resize(tmpl_cropped, (slot_w, slot_h), interpolation=cv2.INTER_AREA)
+            result = cv2.matchTemplate(slot, resized, cv2.TM_CCOEFF_NORMED)
+            _, max_val, _, _ = cv2.minMaxLoc(result)
 
-                resized = cv2.resize(cropped, (slot_w, slot_h), interpolation=cv2.INTER_AREA)
-                result = cv2.matchTemplate(slot, resized, cv2.TM_CCOEFF_NORMED)
-                _, max_val, _, _ = cv2.minMaxLoc(result)
-
-                if max_val > best_score:
-                    best_score = max_val
-                    best_name = hero_name
+            if max_val > best_score:
+                best_score = max_val
+                best_name = hero_name
 
     if best_score < CONFIDENCE_THRESHOLD:
         return "unknown", best_score
