@@ -6,7 +6,7 @@ import { RealtimeSession } from "@openai/agents/realtime";
 import "dotenv/config";
 import { agent } from "./agent.js";
 import { checkAndAnalyzeDraft, resetDraftAnalysis } from "./draftAnalysis.js";
-import { clearInsights, getLatestUnusedInterrupting, markUsed } from "./insight/store.js";
+import { clearInsights } from "./insight/store.js";
 import { InsightPicker } from "./insight/picker.js";
 import { DeliveryWindow } from "./deliveryWindow/deliveryWindow.js";
 import { DebouncedPoll } from "./deliveryWindow/debouncedPoll.js";
@@ -141,8 +141,7 @@ wss.on("connection", async (ws) => {
   });
 
   let deliveryInterval: ReturnType<typeof setInterval> | null = null;
-  let interruptInterval: ReturnType<typeof setInterval> | null = null;
-  let deliveryWindow: DeliveryWindow | null = null;
+  let deliveryWindowForCleanup: DeliveryWindow | null = null;
   const pickerAbort = new AbortController();
 
   // Connect to OpenAI
@@ -153,13 +152,19 @@ wss.on("connection", async (ws) => {
       pickerAbort.signal,
       () => getRecentConversation(PICKER_CONTEXT_WINDOW_MS),
     );
-    const dw = new DeliveryWindow(session);
-    deliveryWindow = dw;
+    const deliveryWindow = new DeliveryWindow(session);
+    deliveryWindowForCleanup = deliveryWindow;
 
     function injectMessage(text: string, triggerResponse: boolean): void {
-      // Preempt the SDK's turn_started by a few ms — closes the window
+      // Interrupt band: a response is already live, so cancel it first — our
+      // message then starts a fresh turn instead of queueing behind it. Must
+      // run before setResponseActive(true) flips the flag below.
+      if (triggerResponse && deliveryWindow.isResponseActive()) {
+        session.transport.sendEvent({ type: "response.cancel" });
+      }
+      // Preempt the SDK's turn_started by a few ms — flips the band
       // synchronously so a parallel poll/event tick can't double-inject.
-      if (triggerResponse) dw.setResponseActive(true);
+      if (triggerResponse) deliveryWindow.setResponseActive(true);
       session.transport.sendEvent({
         type: "conversation.item.create",
         item: {
@@ -173,37 +178,19 @@ wss.on("connection", async (ws) => {
       }
     }
 
-    function interruptAndDeliver(text: string): void {
-      if (dw.isResponseActive()) {
-        session.transport.sendEvent({ type: "response.cancel" });
-      }
-      dw.setResponseActive(true);
-      session.transport.sendEvent({
-        type: "conversation.item.create",
-        item: { type: "message", role: "system", content: [{ type: "input_text", text }] },
-      });
-      session.transport.sendEvent({ type: "response.create" });
-    }
-
-    function tryInterruptDeliver(): void {
-      const insight = getLatestUnusedInterrupting();
-      if (!insight) return;
-      markUsed(insight);
-      const tail = insight.number !== null ? ` #${insight.number}` : "";
-      console.log(`[deliver] interrupt: ${insight.name}${tail}`);
-      interruptAndDeliver(picker.formatForInjection(insight));
-    }
-
     function tryDeliverInsight(): void {
-      const insight = picker.getSomethingToDeliverNow();
+      const state = deliveryWindow.state();
+      if (state === "closed") return;
+      const waitOnlyCritical = state === "interrupt";
+      const insight = picker.getSomethingToDeliverNow(waitOnlyCritical);
       if (insight === null) return;
-      const tail = insight.number !== null ? ` #${insight.number}` : "";
+      const tail = insight.number !== null ? ` #${insight.number}` : "???";
       console.log(`[deliver] insight: ${insight.name}${tail}`);
       injectMessage(picker.formatForInjection(insight), true);
     }
 
     function tryDeliver(): void {
-      if (dw.isResponseActive()) return;
+      if (deliveryWindow.isResponseActive()) return;
       const events = takeEvents();
       if (events !== null) {
         console.log("[deliver] Game events");
@@ -217,8 +204,7 @@ wss.on("connection", async (ws) => {
       }
     }
 
-    new DebouncedPoll(dw, tryDeliverInsight);
-    interruptInterval = setInterval(tryInterruptDeliver, 500);
+    new DebouncedPoll(deliveryWindow, tryDeliverInsight);
 
     session.transport.on("audio_interrupted", () => {
       console.log("[vad] audio interrupted — flushing frontend playback");
@@ -254,8 +240,7 @@ wss.on("connection", async (ws) => {
     console.log("[ws] Client disconnected");
     pickerAbort.abort();
     if (deliveryInterval) clearInterval(deliveryInterval);
-    if (interruptInterval) clearInterval(interruptInterval);
-    if (deliveryWindow !== null) deliveryWindow.dispose();
+    if (deliveryWindowForCleanup !== null) deliveryWindowForCleanup.dispose();
     clearEventQueue();
     resetDraftAnalysis();
     clearInsights();
@@ -268,8 +253,7 @@ wss.on("connection", async (ws) => {
     console.error("[ws] WebSocket error:", err);
     pickerAbort.abort();
     if (deliveryInterval) clearInterval(deliveryInterval);
-    if (interruptInterval) clearInterval(interruptInterval);
-    if (deliveryWindow !== null) deliveryWindow.dispose();
+    if (deliveryWindowForCleanup !== null) deliveryWindowForCleanup.dispose();
     clearEventQueue();
     session.close();
   });

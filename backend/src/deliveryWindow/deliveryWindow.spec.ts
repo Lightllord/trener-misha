@@ -48,18 +48,20 @@ describe("DeliveryWindow", () => {
     ({ window, transport } = makeWindow());
   });
 
-  it("starts open", () => {
+  it("starts open in the full band", () => {
     assert.equal(window.isOpen(), true);
     assert.equal(window.isResponseActive(), false);
+    assert.equal(window.state(), "full");
   });
 
-  it("turn_started closes; turn_done reopens", () => {
+  it("turn_started keeps the window open but switches to interrupt; turn_done restores full", () => {
     transport.emit("turn_started");
-    assert.equal(window.isOpen(), false);
+    assert.equal(window.isOpen(), true); // user still silent → window open
     assert.equal(window.isResponseActive(), true);
+    assert.equal(window.state(), "interrupt");
     transport.emit("turn_done");
-    assert.equal(window.isOpen(), true);
     assert.equal(window.isResponseActive(), false);
+    assert.equal(window.state(), "full");
   });
 
   it("speech_started closes; speech_stopped reopens", () => {
@@ -67,10 +69,12 @@ describe("DeliveryWindow", () => {
       type: "input_audio_buffer.speech_started",
     });
     assert.equal(window.isOpen(), false);
+    assert.equal(window.state(), "closed");
     transport.emit("transport_event", {
       type: "input_audio_buffer.speech_stopped",
     });
     assert.equal(window.isOpen(), true);
+    assert.equal(window.state(), "full");
   });
 
   it("audio_interrupted closes (user speaking) and clears responseActive", () => {
@@ -78,6 +82,7 @@ describe("DeliveryWindow", () => {
     transport.emit("audio_interrupted");
     assert.equal(window.isResponseActive(), false);
     assert.equal(window.isOpen(), false); // user is now speaking
+    assert.equal(window.state(), "closed");
   });
 
   it("ignores unrelated transport_event types", () => {
@@ -87,35 +92,48 @@ describe("DeliveryWindow", () => {
     assert.equal(window.isOpen(), true);
   });
 
-  it("public setters mirror the auto handlers", () => {
+  it("state combines user speech (open/close) and model response (band)", () => {
+    assert.equal(window.state(), "full");
     window.setResponseActive(true);
-    assert.equal(window.isOpen(), false);
+    assert.equal(window.state(), "interrupt");
+    // User speaking overrides the band → closed regardless of the model.
+    window.setUserSpeaking(true);
+    assert.equal(window.state(), "closed");
     window.setResponseActive(false);
-    assert.equal(window.isOpen(), true);
+    assert.equal(window.state(), "closed");
+    window.setUserSpeaking(false);
+    assert.equal(window.state(), "full");
+  });
 
+  it("public setters mirror the auto handlers", () => {
+    // responseActive selects the band, not openness.
+    window.setResponseActive(true);
+    assert.equal(window.isOpen(), true);
+    assert.equal(window.deliveryBand(), "interrupt");
+    window.setResponseActive(false);
+    assert.equal(window.deliveryBand(), "full");
+
+    // userSpeaking opens/closes the window.
     window.setUserSpeaking(true);
     assert.equal(window.isOpen(), false);
     window.setUserSpeaking(false);
     assert.equal(window.isOpen(), true);
   });
 
-  it("subscribers fire only on open/close transitions", () => {
+  it("subscribers fire only on open/close transitions (user speech, not model turns)", () => {
     const events: boolean[] = [];
     window.subscribe((isOpen) => events.push(isOpen));
 
-    // Setting same value: no fire.
-    window.setResponseActive(false);
+    // Model turns don't change openness → no fire.
+    transport.emit("turn_started");
+    transport.emit("turn_done");
     assert.deepEqual(events, []);
 
-    transport.emit("turn_started");
-    assert.deepEqual(events, [false]);
-
-    // Adding userSpeaking while already closed: still closed, no fire.
     window.setUserSpeaking(true);
     assert.deepEqual(events, [false]);
 
-    // Removing responseActive but userSpeaking still true: still closed.
-    transport.emit("turn_done");
+    // Same value: no fire.
+    window.setUserSpeaking(true);
     assert.deepEqual(events, [false]);
 
     window.setUserSpeaking(false);
@@ -126,9 +144,9 @@ describe("DeliveryWindow", () => {
     const events: boolean[] = [];
     const unsubscribe = window.subscribe((isOpen) => events.push(isOpen));
 
-    transport.emit("turn_started");
+    window.setUserSpeaking(true);
     unsubscribe();
-    transport.emit("turn_done");
+    window.setUserSpeaking(false);
 
     assert.deepEqual(events, [false]);
   });
@@ -164,7 +182,9 @@ describe("DeliveryWindow", () => {
   });
 
   it("dispose on an already-closed window still broadcasts the final close", () => {
-    transport.emit("turn_started");
+    transport.emit("transport_event", {
+      type: "input_audio_buffer.speech_started",
+    });
     const events: boolean[] = [];
     window.subscribe((isOpen) => events.push(isOpen));
 
@@ -181,7 +201,7 @@ describe("DeliveryWindow", () => {
     });
     window.subscribe((isOpen) => seen.push(isOpen));
 
-    transport.emit("turn_started");
+    window.setUserSpeaking(true);
     assert.deepEqual(seen, [false]);
   });
 });

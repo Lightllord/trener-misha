@@ -32,15 +32,20 @@ export class InsightPicker {
   ) {}
 
   // Returned insight is already marked used — caller is expected to inject.
-  getSomethingToDeliverNow(): Insight | null {
+  // criticalOnly = interrupt band: the model is mid-response, so only a
+  // critical insight may barge in; nothing else delivers and no background
+  // thinking is scheduled.
+  getSomethingToDeliverNow(criticalOnly = false): Insight | null {
     const unused = getUnused();
 
     const critical = latestCritical(unused);
     if (critical !== null) {
-      this.scheduleThinking(unused);
+      if (!criticalOnly) this.scheduleThinking(unused);
       markUsed(critical);
       return critical;
     }
+
+    if (criticalOnly) return null;
 
     const stashed = this.takeThinkingResult();
     if (stashed !== null) {

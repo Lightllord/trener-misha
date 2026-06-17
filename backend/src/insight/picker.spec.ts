@@ -321,6 +321,62 @@ describe("InsightPicker — getSomethingToDeliverNow", () => {
   });
 });
 
+describe("InsightPicker — getSomethingToDeliverNow (interrupt band)", () => {
+  beforeEach(() => {
+    clearInsights();
+  });
+
+  it("criticalOnly returns the critical, marks it used, and schedules no thinking", async () => {
+    addWithConfig(T_A, "h", {
+      unique: true,
+      description: "h",
+      importance: "high",
+    });
+    const crit = addWithConfig(T_B, "c", {
+      unique: true,
+      description: "c",
+      importance: "critical",
+    });
+
+    const picker = makePicker();
+    assert.equal(picker.getSomethingToDeliverNow(true), crit);
+    assert.equal(crit.used, true);
+
+    await flushMicrotasks();
+    assert.equal(picker.callCount, 0);
+  });
+
+  it("criticalOnly returns null when no critical is present, touching nothing", async () => {
+    const a = addWithConfig(T_A, "a", {
+      unique: true,
+      description: "a",
+      importance: "high",
+    });
+    const b = addWithConfig(T_B, "b", {
+      unique: true,
+      description: "b",
+      importance: "medium",
+    });
+
+    const picker = makePicker();
+    assert.equal(picker.getSomethingToDeliverNow(true), null);
+
+    await flushMicrotasks();
+    assert.equal(picker.callCount, 0);
+    assert.equal(a.used, false);
+    assert.equal(b.used, false);
+  });
+
+  it("criticalOnly does not deliver a lone non-critical insight", () => {
+    const a = addInsight("draft_analysis", "p");
+    assert.ok(a);
+
+    const picker = makePicker();
+    assert.equal(picker.getSomethingToDeliverNow(true), null);
+    assert.equal(a.used, false);
+  });
+});
+
 describe("InsightPicker — formatForInjection / reset", () => {
   beforeEach(() => {
     clearInsights();

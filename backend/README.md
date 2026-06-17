@@ -46,19 +46,23 @@ The backend never polls `insight-app`; data is pushed and held in-memory (`src/g
 
 Insights are the "background analysis" channel — Миша delivers them between turns. Each insight has `name`, optional `number` (counter for non-unique kinds), `description`, `importance` (`low`/`medium`/`high`/`critical`), and `payload` (the exact system text to inject). Producers call `addInsight(name, payload)`; `INSIGHT_CONFIGS` per name sets uniqueness + metadata.
 
-`InsightPicker` (`insight/picker.ts`) owns the "what do I deliver now?" decision. `tryDeliverInsight()` in `index.ts` asks `picker.getSomethingToDeliverNow()`; if non-null, it injects `picker.formatForInjection(insight)`.
+`InsightPicker` (`insight/picker.ts`) owns the "what do I deliver now?" decision. `tryDeliverInsight()` in `index.ts` asks `picker.getSomethingToDeliverNow(criticalOnly)`; if non-null, it injects `picker.formatForInjection(insight)`.
 
-**Delivery trigger** — not `turn_done`. Two cooperating pieces in `src/deliveryWindow/`:
+**Delivery trigger** — not `turn_done`. A single poll lane, gated on "the user isn't speaking". Two cooperating pieces in `src/deliveryWindow/`:
 
-- **`DeliveryWindow`** — a pure observable constructed with the `RealtimeSession`. Subscribes to `turn_started` / `turn_done` / `audio_interrupted` / `transport_event` (filtering for `input_audio_buffer.speech_started/stopped`) and exposes `isOpen()`, `isResponseActive()`, `subscribe(cb)`, plus setters (`setResponseActive`, `setUserSpeaking`) so callers can preempt the SDK on outgoing events. No timers, no insight awareness.
-- **`DebouncedPoll`** — subscribes to the window. While open: waits 300 ms (debounce against the speech_stopped → turn_started race), fires once, then polls every 3 s. Any close cancels both timers.
+- **`DeliveryWindow`** — a pure observable constructed with the `RealtimeSession`. Subscribes to `turn_started` / `turn_done` / `audio_interrupted` / `transport_event` (filtering for `input_audio_buffer.speech_started/stopped`). The window is **open whenever the user is not speaking** (`isOpen()`); within it `state()` returns the concrete delivery state, layered over `isOpen()` + `deliveryBand()`:
+  - `"full"` — model is also silent → deliver any insight into the pause;
+  - `"interrupt"` — model is mid-response → only `critical` insights, delivered by cancelling and restarting the current output;
+  - `"closed"` — user is speaking → do nothing.
+  Also exposes `isResponseActive()`, `subscribe(cb)`, and setters (`setResponseActive`, `setUserSpeaking`) so callers can preempt the SDK on outgoing events. No timers, no insight awareness.
+- **`DebouncedPoll`** — subscribes to the window. While open: waits 150 ms (debounce against a quick re-speak), fires once, then polls every 200 ms. It keeps polling through the model's turns (only user speech disarms it). Any close cancels both timers.
 
-`index.ts` glue is two lines: `new DeliveryWindow(session)` and `new DebouncedPoll(dw, tryDeliverInsight)`. Game events and fallback status keep the older path: `tryDeliver()` on `turn_done` + a 5 s safety tick, gated by `dw.isResponseActive()`.
+`index.ts` glue is two lines: `new DeliveryWindow(session)` and `new DebouncedPoll(dw, tryDeliverInsight)`. On each fire `tryDeliverInsight()` reads `dw.state()` for the band (only the picker's `criticalOnly` flag differs) and delivers via a single `injectMessage` — which cancels a live response first when one is in flight, so a `critical` insight barges in. Game events and fallback status keep the older path: `tryDeliver()` on `turn_done` + a 5 s safety tick, gated by `dw.isResponseActive()`.
 
 A few constraints in here are easy to break:
 
 - `getSomethingToDeliverNow()` marks its result used **itself** — the caller must inject immediately, there is no second chance to claim it.
-- `injectMessage` calls `dw.setResponseActive(true)` synchronously *before* `response.create`, so a parallel poll/event tick can't double-inject in the ms before the SDK echoes `turn_started`. Keep that ordering.
+- `injectMessage` cancels a live response (`response.cancel`) **before** it flips `dw.setResponseActive(true)` — that read decides whether to barge, so the order matters. The synchronous `setResponseActive(true)` then runs *before* `response.create`, so a parallel poll/event tick can't double-inject in the ms before the SDK echoes `turn_started`. Keep that ordering.
 - `DebouncedPoll` has no public stop — its lifecycle is owned by the window: `DeliveryWindow.dispose()` broadcasts a final `isOpen=false` that lands in the same close-path that cancels the timers. Don't add a stop method.
 - Producers own the insight payload text; the picker wraps it in `<insight-N>` for delivery but never edits it.
 
@@ -68,6 +72,8 @@ A few constraints in here are easy to break:
 2. **Stashed thinking result** — if the last background pick is still live and unused, return it.
 3. **Single unused** — return it directly (no thinking).
 4. **≥ 2 non-critical unused** — schedule thinking, return `null`.
+
+In the `interrupt` band (`criticalOnly = true`, model mid-response) only step 1 runs: a `critical` insight is returned (and barges in), otherwise `null` — nothing else delivers and no thinking is scheduled. The set that barges into live speech is exactly `importance: "critical"`; there is no separate flag.
 
 The thinking step (private `think()` → `gpt-5.4-nano`, `reasoning_effort: "minimal"`, `PICKER_TIMEOUT_MS`) gets only the non-critical candidates plus the last ~60 s of dialogue. Importance is a soft preference; on parse/timeout failure it falls back to importance-then-freshness.
 
@@ -110,8 +116,8 @@ Non-obvious navigation only — files whose role isn't already implied by their 
 | `src/draftAnalysis.ts`   | Background `gpt-5.4-mini` tool-use loop → produces a `draft_analysis` insight |
 | `src/insight/store.ts`   | In-memory insight store keyed by name. Per-name uniqueness from `INSIGHT_CONFIGS` — unique kinds replace in place, others append with an incrementing `number`; tracks used/unused so the picker claims each item once |
 | `src/insight/picker.ts`  | `InsightPicker` — picks what to deliver, owns background thinking, formats injections |
-| `src/deliveryWindow/deliveryWindow.ts` | `DeliveryWindow` — observable "we can speak" gate over the session transport |
-| `src/deliveryWindow/debouncedPoll.ts`  | `DebouncedPoll` — 300 ms debounce + 3 s poll while the window is open; no public stop (the window owns its lifecycle) |
+| `src/deliveryWindow/deliveryWindow.ts` | `DeliveryWindow` — observable gate over the session transport; open while the user is silent, `state()` = full/interrupt/closed |
+| `src/deliveryWindow/debouncedPoll.ts`  | `DebouncedPoll` — 150 ms debounce + 200 ms poll while the window is open; no public stop (the window owns its lifecycle) |
 | `src/stratzApi.ts`       | STRATZ GraphQL client; supports `STRATZ_LOCAL_ADDRESS` binding (bypass VPN) |
 | `src/heroes.ts`          | Loads `heroes_extend.json` + fuzzy name lookup |
 

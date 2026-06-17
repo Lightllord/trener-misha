@@ -1,14 +1,20 @@
 import type { RealtimeSession } from "@openai/agents/realtime";
+import type { DeliveryBand, DeliveryState } from "./types/state.js";
 
 export type DeliveryWindowListener = (isOpen: boolean) => void;
 
-// Tracks the "we can safely speak" window over a RealtimeSession's transport.
-// Combines two flags:
-//   - isResponseActive: model is generating a response
-//   - isUserSpeaking:   server-side VAD has user audio
-// Both auto-update from transport events. Setters are also public so callers
-// (e.g. injectMessage) can preemptively close the window before the SDK
-// catches up.
+// Tracks when the backend may act on the audio channel, over a
+// RealtimeSession's transport. The window is open whenever the user is NOT
+// speaking (isOpen()). Within the open window there are two bands
+// (deliveryBand()):
+//   - "full"      — model is also silent → deliver any insight into the pause.
+//   - "interrupt" — model is mid-response → only critical insights, delivered
+//                   by cancelling and restarting the current output.
+// Two flags drive this, both auto-updated from transport events:
+//   - isUserSpeaking:   server-side VAD has user audio → closes the window.
+//   - isResponseActive: model is generating a response → selects the band.
+// Setters are public so callers (e.g. injectMessage) can preempt the SDK
+// before it catches up.
 export class DeliveryWindow {
   private isResponseActiveFlag = false;
   private isUserSpeakingFlag = false;
@@ -55,7 +61,19 @@ export class DeliveryWindow {
   }
 
   isOpen(): boolean {
-    return !this.isResponseActiveFlag && !this.isUserSpeakingFlag;
+    return !this.isUserSpeakingFlag;
+  }
+
+  // Concrete combined state — one call for the delivery site to switch on,
+  // layered over isOpen() + deliveryBand().
+  state(): DeliveryState {
+    if (!this.isOpen()) return "closed";
+    return this.deliveryBand();
+  }
+
+  // The band within an open window (the poll is disarmed when closed).
+  deliveryBand(): DeliveryBand {
+    return this.isResponseActiveFlag ? "interrupt" : "full";
   }
 
   isResponseActive(): boolean {

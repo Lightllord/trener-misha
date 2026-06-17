@@ -6,4 +6,4 @@ Domains this subproject owns:
 - **Game-data ingest** — HTTP endpoints that receive draft + match state pushed from `insight-app`.
 - **Insight pipeline** — LLM-driven background analysis delivered between voice turns.
 
-Backend documentation and setup guide: [`README.md`](README.md).
+Backend documentation and setup guide: [`README.md`](README.md) - important to read.

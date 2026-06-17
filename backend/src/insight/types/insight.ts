@@ -11,8 +11,6 @@ export interface InsightConfig {
   unique: boolean;
   description: string;
   importance: InsightImportance;
-  /** Если true — инсайт прерывает текущий ответ агента не дожидаясь паузы */
-  interrupts?: boolean;
 }
 
 export interface Insight {
@@ -23,6 +21,5 @@ export interface Insight {
   payload: string;
   description: string;
   importance: InsightImportance;
-  interrupts: boolean;
   createdAt: number;
 }

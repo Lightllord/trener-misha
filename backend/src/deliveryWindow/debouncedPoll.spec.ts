@@ -30,7 +30,7 @@ describe("DebouncedPoll", () => {
       calls += 1;
     });
 
-    mock.timers.tick(299);
+    mock.timers.tick(149);
     assert.equal(calls, 0);
     mock.timers.tick(1);
     assert.equal(calls, 1);
@@ -43,33 +43,49 @@ describe("DebouncedPoll", () => {
       calls += 1;
     });
 
-    mock.timers.tick(300);
+    mock.timers.tick(150);
     assert.equal(calls, 1);
-    mock.timers.tick(3_000);
+    mock.timers.tick(200);
     assert.equal(calls, 2);
-    mock.timers.tick(3_000);
+    mock.timers.tick(200);
     assert.equal(calls, 3);
   });
 
-  it("cancels both timers when window closes", () => {
+  it("keeps polling while the model speaks — only user speech disarms it", () => {
     const window = makeWindow();
     let calls = 0;
     new DebouncedPoll(window, () => {
       calls += 1;
     });
 
-    mock.timers.tick(300);
+    mock.timers.tick(150);
     assert.equal(calls, 1);
 
+    // Model starts talking — the window stays open, the poll keeps firing.
     window.setResponseActive(true);
+    mock.timers.tick(200);
+    assert.equal(calls, 2);
+  });
+
+  it("cancels both timers when the user starts speaking", () => {
+    const window = makeWindow();
+    let calls = 0;
+    new DebouncedPoll(window, () => {
+      calls += 1;
+    });
+
+    mock.timers.tick(150);
+    assert.equal(calls, 1);
+
+    window.setUserSpeaking(true);
 
     mock.timers.tick(10_000);
     assert.equal(calls, 1);
   });
 
-  it("re-arms the debounce after the window reopens", () => {
+  it("re-arms the debounce after the user stops speaking", () => {
     const window = makeWindow();
-    window.setResponseActive(true);
+    window.setUserSpeaking(true);
 
     let calls = 0;
     new DebouncedPoll(window, () => {
@@ -79,15 +95,15 @@ describe("DebouncedPoll", () => {
     mock.timers.tick(1_000);
     assert.equal(calls, 0);
 
-    window.setResponseActive(false);
+    window.setUserSpeaking(false);
 
-    mock.timers.tick(299);
+    mock.timers.tick(149);
     assert.equal(calls, 0);
     mock.timers.tick(1);
     assert.equal(calls, 1);
   });
 
-  it("absorbs the speech_stopped → turn_started race via debounce", () => {
+  it("a quick re-speak within the debounce cancels the pending fire", () => {
     const window = makeWindow();
     window.setUserSpeaking(true);
 
@@ -96,9 +112,9 @@ describe("DebouncedPoll", () => {
       calls += 1;
     });
 
-    window.setUserSpeaking(false);
+    window.setUserSpeaking(false); // arms the debounce
     mock.timers.tick(50);
-    window.setResponseActive(true);
+    window.setUserSpeaking(true); // user speaks again before it elapses
 
     mock.timers.tick(10_000);
     assert.equal(calls, 0);
@@ -111,7 +127,7 @@ describe("DebouncedPoll", () => {
       calls += 1;
     });
 
-    mock.timers.tick(300);
+    mock.timers.tick(150);
     assert.equal(calls, 1);
 
     window.dispose();
@@ -145,9 +161,9 @@ describe("DebouncedPoll", () => {
       if (calls === 1) throw new Error("boom");
     });
 
-    mock.timers.tick(300);
+    mock.timers.tick(150);
     assert.equal(calls, 1);
-    mock.timers.tick(3_000);
+    mock.timers.tick(200);
     assert.equal(calls, 2);
   });
 });

@@ -21,7 +21,6 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
     unique: false,
     description: "Three or more enemy heroes are within 1500 units of the player — critical proximity warning.",
     importance: "critical",
-    interrupts: true,
   },
   roshan_threat: {
     unique: false,

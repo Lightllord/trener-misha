@@ -38,7 +38,6 @@ export function addInsight(name: InsightName, payload: string): Insight | null {
     payload,
     description: config.description,
     importance: config.importance,
-    interrupts: config.interrupts ?? false,
     createdAt: Date.now(),
   };
   insights.push(insight);
@@ -67,14 +66,6 @@ export function getUnused(): Insight[] {
 
 export function getByName(name: InsightName): Insight[] {
   return insights.filter((i) => i.name === name);
-}
-
-export function getLatestUnusedInterrupting(): Insight | null {
-  for (let i = insights.length - 1; i >= 0; i--) {
-    const candidate = insights[i];
-    if (candidate && !candidate.used && candidate.interrupts) return candidate;
-  }
-  return null;
 }
 
 export function getLatestUnusedByName(name: InsightName): Insight | null {
