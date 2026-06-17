@@ -17,8 +17,9 @@ patch-updater/node_modules/
 # Dota 2 GSI config (only .cfg.example is tracked)
 gamestate_integration_trener_misha.cfg
 
-# Claude IDE settings
-.claude/
+# Claude local settings (rules/ and shared settings are tracked)
+.claude/settings.local.json
+CLAUDE.local.md
 
 # Python cache
 insight-app/cv/__pycache__/

@@ -1,6 +1,30 @@
 # backend
 
-WebSocket relay between the browser frontend and the OpenAI Realtime API, plus an HTTP ingest for game data pushed from `insight-app`. Architecture and rules for editors live in `backend/CLAUDE.md`.
+WebSocket relay between the browser frontend and the OpenAI Realtime API, an HTTP ingest for game data pushed from `insight-app`, and an LLM-driven insight pipeline. Coding rules for editors live in `.claude/rules/how-to-code-backend.md`.
+
+## Setup
+
+```bash
+npm install
+npm run dev    # tsx watch src/index.ts — hot reload, port 3000
+npm run build  # tsc → dist/
+npm start      # node dist/index.js (compiled output)
+npm test       # node --test
+```
+
+Requires `.env` (see [Environment](#environment-env)). All code must compile cleanly with `npm run build`.
+
+## Architecture
+
+```
+Dota 2 GSI → POST → insight-app (:6074) ── POST /push/state ──► backend (gameData)
+                      └─ DraftDetector ─── POST /push/draft ──► backend (gameData)
+
+Frontend (:5173) ◄── WS ──► backend (:3000) ◄── WS ──► OpenAI Realtime API
+                  audio + JSON              audio + events
+```
+
+`gameData.ts` is the in-memory store for everything pushed in. Voice tools and the draft analyser read from it; nothing polls. The backend is a relay with hooks — binary PCM16 24 kHz audio passes through both directions untouched; VAD and interruption are server-side at OpenAI, surfaced locally as `audio_interrupted`.
 
 ## HTTP endpoints
 
@@ -18,44 +42,78 @@ The backend never polls `insight-app`; data is pushed and held in-memory (`src/g
 - **JSON control frames (backend → frontend)**: `connected`, `transcript`, `tool_call`, `tool_result`, `interrupt`, `error`.
 - Frontend sends only audio (no JSON).
 
-Insights are delivered via a `DeliveryWindow` that opens on `turn_done` / `speech_stopped` and closes on `turn_started` / `speech_started` / `audio_interrupted` (300ms debounce + 3s poll). Game events and fallback status use the older `tryDeliver()` path on `turn_done` + 5s safety tick. Details in `backend/CLAUDE.md`.
+## Insights pipeline
+
+Insights are the "background analysis" channel — Миша delivers them between turns. Each insight has `name`, optional `number` (counter for non-unique kinds), `description`, `importance` (`low`/`medium`/`high`/`critical`), and `payload` (the exact system text to inject). Producers call `addInsight(name, payload)`; `INSIGHT_CONFIGS` per name sets uniqueness + metadata.
+
+`InsightPicker` (`insight/picker.ts`) owns the "what do I deliver now?" decision. `tryDeliverInsight()` in `index.ts` asks `picker.getSomethingToDeliverNow()`; if non-null, it injects `picker.formatForInjection(insight)`.
+
+**Delivery trigger** — not `turn_done`. Two cooperating pieces in `src/deliveryWindow/`:
+
+- **`DeliveryWindow`** — a pure observable constructed with the `RealtimeSession`. Subscribes to `turn_started` / `turn_done` / `audio_interrupted` / `transport_event` (filtering for `input_audio_buffer.speech_started/stopped`) and exposes `isOpen()`, `isResponseActive()`, `subscribe(cb)`, plus setters (`setResponseActive`, `setUserSpeaking`) so callers can preempt the SDK on outgoing events. No timers, no insight awareness.
+- **`DebouncedPoll`** — subscribes to the window. While open: waits 300 ms (debounce against the speech_stopped → turn_started race), fires once, then polls every 3 s. Any close cancels both timers.
+
+`index.ts` glue is two lines: `new DeliveryWindow(session)` and `new DebouncedPoll(dw, tryDeliverInsight)`. Game events and fallback status keep the older path: `tryDeliver()` on `turn_done` + a 5 s safety tick, gated by `dw.isResponseActive()`.
+
+A few constraints in here are easy to break:
+
+- `getSomethingToDeliverNow()` marks its result used **itself** — the caller must inject immediately, there is no second chance to claim it.
+- `injectMessage` calls `dw.setResponseActive(true)` synchronously *before* `response.create`, so a parallel poll/event tick can't double-inject in the ms before the SDK echoes `turn_started`. Keep that ordering.
+- `DebouncedPoll` has no public stop — its lifecycle is owned by the window: `DeliveryWindow.dispose()` broadcasts a final `isOpen=false` that lands in the same close-path that cancels the timers. Don't add a stop method.
+- Producers own the insight payload text; the picker wraps it in `<insight-N>` for delivery but never edits it.
+
+**Pick order** (`getSomethingToDeliverNow()`, synchronous, marks its result used itself):
+
+1. **Critical shortcut** — `latestCritical(unused)` wins outright; background thinking is kicked over the remaining non-critical candidates so the next pick is ready.
+2. **Stashed thinking result** — if the last background pick is still live and unused, return it.
+3. **Single unused** — return it directly (no thinking).
+4. **≥ 2 non-critical unused** — schedule thinking, return `null`.
+
+The thinking step (private `think()` → `gpt-5.4-nano`, `reasoning_effort: "minimal"`, `PICKER_TIMEOUT_MS`) gets only the non-critical candidates plus the last ~60 s of dialogue. Importance is a soft preference; on parse/timeout failure it falls back to importance-then-freshness.
+
+**Lifecycle** — on WS close: `pickerAbort.abort()` cancels in-flight thinking; `deliveryWindow.dispose()` detaches transport listeners and broadcasts a final `isOpen=false`; `clearInsights()` + `clearConversation()` drop per-match state.
 
 ## Voice tools (`src/tools/`)
 
-Each file exports one `tool({ … })`; `src/tools/index.ts` re-exports them.
+Each file exports one `tool({ … })`; `src/tools/index.ts` re-exports them. Tools come in two flavors — instant (synchronous data lookup) and delayed (kick off background work, return a placeholder).
 
-| Tool | File | Description |
-|------|------|-------------|
-| `run_analysis`    | `analysis.ts`   | Simulated slow analysis (3 s timeout) |
-| `get_hero_info`   | `heroInfo.ts`   | Strengths/weaknesses/mechanics from `heroes_extend.json` |
+| Tool | File | Source / behavior |
+|------|------|-------------------|
+| `run_analysis`    | `analysis.ts`   | Simulated slow analysis (3 s timeout) — delayed |
+| `get_hero_info`   | `heroInfo.ts`   | `heroes_extend.json` |
 | `list_heroes`     | `heroList.ts`   | Full hero list |
-| `get_draft`       | `draft.ts`      | Latest draft pushed by insight-app |
+| `get_draft`       | `draft.ts`      | Latest pushed draft |
 | `get_match_state` | `matchState.ts` | Latest parsed GSI state |
-| `get_matchups`    | `matchups.ts`   | STRATZ: win rate vs every other hero (best/worst 5) |
-| `get_builds`      | `builds.ts`     | STRATZ: starting items, boots, core items by game phase |
+| `get_matchups`    | `matchups.ts`   | STRATZ: win rate vs every hero (best/worst 5) |
+| `get_builds`      | `builds.ts`     | STRATZ: starting items, boots, core items by phase |
+
+## Adding to the backend
+
+**A new insight kind:**
+1. Extend `InsightName` in `insight/types/insight.ts`.
+2. Add an entry to `INSIGHT_CONFIGS` in `insight/consts/insights.ts` (`unique`, `description`, `importance`).
+3. Producer calls `addInsight("<new_name>", <fully-formed system message>)` — the producer owns the wrapping text.
+
+**A voice tool:** add `src/tools/<name>.ts` exporting one `tool({ … })`, re-export it from `src/tools/index.ts`, and add it to the agent's `tools` list in `src/agent.ts`.
 
 ## Modules
+
+Non-obvious navigation only — files whose role isn't already implied by their name.
 
 | File | Role |
 |------|------|
 | `src/index.ts`           | HTTP + WS server, session lifecycle, `tryDeliver()` orchestration |
-| `src/agent.ts`           | `RealtimeAgent` — voice, instructions, tool list |
-| `src/gameData.ts`        | In-memory store for latest draft + game state |
-| `src/gameEventQueue.ts`  | Event buffer, throttling, fallback-status generation |
+| `src/agent.ts`           | `RealtimeAgent` — system instructions, voice, tool list |
+| `src/gameData.ts`        | In-memory, push-only store for latest draft + state — nothing polls it |
+| `src/gameEventQueue.ts`  | Event buffer + throttling + fallback-status generation |
 | `src/stateDiff.ts`       | `diffStates(prev, curr)` → `GameEvent[]` |
 | `src/draftAnalysis.ts`   | Background `gpt-5.4-mini` tool-use loop → produces a `draft_analysis` insight |
-| `src/insight/store.ts`   | Named-insight store with per-name uniqueness + importance |
-| `src/insight/picker.ts`  | `InsightPicker` class — picks what to deliver, owns background thinking, formats injections |
-| `src/deliveryWindow/deliveryWindow.ts` | `DeliveryWindow` class — observable "we can speak" gate; subscribes to session transport, exposes `isOpen()` / `subscribe()` |
-| `src/deliveryWindow/debouncedPoll.ts`  | `DebouncedPoll` class — 300ms debounce + 3s poll while window open. Lifecycle owned by `DeliveryWindow.dispose()` (no public stop) |
-| `src/insight/helpers.ts` | Pure ranking + parsing helpers |
-| `src/insight/markup.ts`  | XMLike rendering for picker input + injection |
-| `src/conversation/log.ts`     | Rolling transcript log (`logTranscript`, `getRecentConversation`) |
-| `src/conversation/markup.ts`  | `formatConversationAsXMLike()` |
-| `src/xmlike/escape.ts`        | Shared `escapeXMLike()` |
-| `src/stratzApi.ts`       | STRATZ GraphQL client; supports `STRATZ_LOCAL_ADDRESS` binding |
-| `src/heroes.ts`          | Loads `data/heroes_extend.json` + fuzzy lookup |
-| `src/logger.ts`          | Tees `console.log/warn/error` to `logs/backend.log` |
+| `src/insight/store.ts`   | In-memory insight store keyed by name. Per-name uniqueness from `INSIGHT_CONFIGS` — unique kinds replace in place, others append with an incrementing `number`; tracks used/unused so the picker claims each item once |
+| `src/insight/picker.ts`  | `InsightPicker` — picks what to deliver, owns background thinking, formats injections |
+| `src/deliveryWindow/deliveryWindow.ts` | `DeliveryWindow` — observable "we can speak" gate over the session transport |
+| `src/deliveryWindow/debouncedPoll.ts`  | `DebouncedPoll` — 300 ms debounce + 3 s poll while the window is open; no public stop (the window owns its lifecycle) |
+| `src/stratzApi.ts`       | STRATZ GraphQL client; supports `STRATZ_LOCAL_ADDRESS` binding (bypass VPN) |
+| `src/heroes.ts`          | Loads `heroes_extend.json` + fuzzy name lookup |
 
 ## Data (`data/`)
 
@@ -70,12 +128,3 @@ Each file exports one `tool({ … })`; `src/tools/index.ts` re-exports them.
 | `OPENAI_API_KEY`       | yes              | Realtime session + draft analysis + picker |
 | `STRATZ_API_KEY`       | for STRATZ tools | STRATZ GraphQL auth |
 | `STRATZ_LOCAL_ADDRESS` | no               | Local IP to bind for STRATZ (bypass VPN) |
-
-## Commands
-
-```bash
-npm run dev    # tsx watch src/index.ts (port 3000)
-npm run build  # tsc → dist/
-npm test       # node --test
-npm start      # node dist/index.js
-```
