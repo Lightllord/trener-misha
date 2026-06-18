@@ -116,3 +116,4 @@ Refresh
 Rebirth
 Damage reduce
 Debuff duration increase
+Damade taken increase

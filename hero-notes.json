@@ -10536,5 +10536,632 @@
         ]
       }
     ]
+  },
+  "shadow_demon": {
+    "abilities": [
+      {
+        "name": "DISRUPTION",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Banish",
+              "Illusions",
+              "Active"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Banish",
+              "Active",
+              "Illusions"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Banish",
+              "Illusions"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "DISSEMINATE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Active",
+              "Magic damage",
+              "Phisical damage",
+              "Pure damage",
+              "AoE",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Active",
+              "Damage return",
+              "Dispeble normal"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Pure damage",
+                  "Phisical damage",
+                  "Magic damage",
+                  "AoE"
+                ]
+              }
+            ]
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Damage return",
+              "Dispeble normal"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Phisical damage",
+                  "Pure damage",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "SHADOW POISON",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Vision"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Magic damage"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "DEMONIC PURGE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Slow",
+              "Undispeble",
+              "Spell immunity pierced",
+              "Basic dispel",
+              "Magic damage",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "DEMONIC CLEANSE",
+        "scenarios": [
+          {
+            "target": "ally",
+            "tags": [
+              "Basic dispel",
+              "Undispeble",
+              "Active",
+              "Health regen"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Undispeble",
+              "Active",
+              "Health regen",
+              "Basic dispel"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "MENACE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Damade taken increase",
+              "Passive",
+              "Attack modifire"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "nevermore": {
+    "abilities": [
+      {
+        "name": "SHADOWRAZE",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "FEAST OF SOULS",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack speed increase",
+              "Movement speed increase",
+              "Attack damage increase",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "PRESENCE OF THE DARK LORD",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Passive",
+              "Aura",
+              "Armor reduce"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "REQUIEM OF SOULS",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Fear",
+                  "Slow",
+                  "Magic resistance reduce"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "NECROMASTERY",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Unbreakable",
+              "Attack damage increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "shadow_shaman": {
+    "abilities": [
+      {
+        "name": "ETHER SHOCK",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Bounced",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "HEX",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Hex",
+              "Active",
+              "Dispeble strong"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "SHACKLES",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Stun",
+              "Magic damage",
+              "Dispeble strong",
+              "Active",
+              "interruptible"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Health regen"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MASS SERPENT WARD",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Summons",
+              "Phisical damage",
+              "Barricade",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "FOOWL PLAY",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Death protect",
+              "Hex",
+              "Movement speed increase",
+              "Undispeble"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "silencer": {
+    "abilities": [
+      {
+        "name": "ARCANE CURSE",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Slow",
+                  "AoE",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "GLAIVES OF WISDOM",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Active",
+              "Magic damage",
+              "Stats reduce",
+              "Attack modifire",
+              "Undispeble"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Stats increase",
+                  "Undispeble"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "LAST WORD",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Silence",
+              "Active",
+              "Magic damage",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "GLOBAL SILENCE",
+        "scenarios": [
+          {
+            "target": "allEnemies",
+            "tags": [
+              "Global",
+              "Silence",
+              "Active",
+              "Spell immunity pierced",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "SUFFER IN SILENCE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Stats increase",
+              "Passive",
+              "Unbreakable",
+              "Damage increase"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Stats reduce"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "skywrath_mage": {
+    "abilities": [
+      {
+        "name": "ARCANE BOLT",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "CONCUSSIVE SHOT",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Slow",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ANCIENT SEAL",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Silence",
+              "Active",
+              "Magic resistance reduce"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "MYSTIC FLARE",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Magic damage",
+                  "Void zone"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "SHIELD OF THE SCION",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Barrier",
+              "Passive",
+              "Undispeble"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "slardar": {
+    "abilities": [
+      {
+        "name": "GUARDIAN SPRINT",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Slow resistance",
+              "Movement speed increase",
+              "Active",
+              "Phased"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "SLITHEREEN CRUSH",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Stun",
+                  "Phisical damage",
+                  "Slow",
+                  "Attack speed reduce"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "BASH OF THE DEEP",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Stun",
+              "Phisical damage",
+              "Attack modifire",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "CORROSIVE HAZE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Armor reduce",
+              "Active",
+              "Vision",
+              "True sight"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "SEABORN SENTINEL",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Movement speed increase",
+              "Passive",
+              "Health regen",
+              "Armor increase",
+              "Attack damage increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
   }
 }

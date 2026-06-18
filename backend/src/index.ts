@@ -17,13 +17,7 @@ import {
 } from "./conversation/log.js";
 import { PICKER_CONTEXT_WINDOW_MS } from "./conversation/consts/log.js";
 import { setDraft, setState, getState, clearGameData } from "./gameData.js";
-import {
-  processStateUpdate,
-  takeEvents,
-  takeFallbackStatus,
-  startFallbackTimer,
-  clearEventQueue,
-} from "./gameEventQueue.js";
+import { processStateUpdate, clearEventQueue } from "./gameEventQueue.js";
 
 process.on("unhandledRejection", (err) => {
   console.error("[FATAL] Unhandled rejection:", err);
@@ -140,7 +134,6 @@ wss.on("connection", async (ws) => {
     send({ type: "error", message: String(err) });
   });
 
-  let deliveryInterval: ReturnType<typeof setInterval> | null = null;
   let deliveryWindowForCleanup: DeliveryWindow | null = null;
   const pickerAbort = new AbortController();
 
@@ -189,33 +182,12 @@ wss.on("connection", async (ws) => {
       injectMessage(picker.formatForInjection(insight), true);
     }
 
-    function tryDeliver(): void {
-      if (deliveryWindow.isResponseActive()) return;
-      const events = takeEvents();
-      if (events !== null) {
-        console.log("[deliver] Game events");
-        injectMessage(events.text, events.triggerResponse);
-        return;
-      }
-      const fallback = takeFallbackStatus();
-      if (fallback !== null) {
-        console.log("[deliver] Fallback status update");
-        injectMessage(fallback.text, fallback.triggerResponse);
-      }
-    }
-
     new DebouncedPoll(deliveryWindow, tryDeliverInsight);
 
     session.transport.on("audio_interrupted", () => {
       console.log("[vad] audio interrupted — flushing frontend playback");
       send({ type: "interrupt" });
     });
-    session.transport.on("turn_done", tryDeliver);
-
-    // Game events keep their old cadence — 5s safety tick + 2 min fallback.
-    deliveryInterval = setInterval(tryDeliver, 5_000);
-    startFallbackTimer(tryDeliver);
-
     send({ type: "connected" });
     console.log("[ws] Session connected to OpenAI");
   } catch (err) {
@@ -239,7 +211,6 @@ wss.on("connection", async (ws) => {
   ws.on("close", () => {
     console.log("[ws] Client disconnected");
     pickerAbort.abort();
-    if (deliveryInterval) clearInterval(deliveryInterval);
     if (deliveryWindowForCleanup !== null) deliveryWindowForCleanup.dispose();
     clearEventQueue();
     resetDraftAnalysis();
@@ -252,7 +223,6 @@ wss.on("connection", async (ws) => {
   ws.on("error", (err) => {
     console.error("[ws] WebSocket error:", err);
     pickerAbort.abort();
-    if (deliveryInterval) clearInterval(deliveryInterval);
     if (deliveryWindowForCleanup !== null) deliveryWindowForCleanup.dispose();
     clearEventQueue();
     session.close();
