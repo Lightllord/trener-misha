@@ -1,16 +1,14 @@
-export interface PttBinding {
-  keycode: number;
-  label: string;
-}
-
 // Bridge exposed by the Electron preload (see electron/preload.cjs). The app
 // only runs inside Electron, but this stays optional so the renderer can warn
-// gracefully if loaded outside it.
+// gracefully if somehow loaded outside it.
 export interface DesktopPtt {
-  // Set the active key (null on first run → main's default). Resolves the binding.
-  setKey: (keycode: number | null) => Promise<PttBinding>;
-  // Resolve with the next key pressed, adopting it as the new binding.
-  captureNext: () => Promise<PttBinding>;
+  // UiohookKey name → keycode, used to map a KeyboardEvent.code to the global
+  // hook's keycode.
+  keymap: () => Promise<Record<string, number>>;
+  // Tell the main process which keycode to watch globally (null = none).
+  setKey: (keycode: number | null) => Promise<void>;
+  // Bound-key press/release from the GLOBAL hook — fires only while the app
+  // window is NOT focused (when focused, the renderer's own listener handles it).
   onDown: (callback: () => void) => void;
   onUp: (callback: () => void) => void;
 }

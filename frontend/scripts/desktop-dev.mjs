@@ -5,10 +5,17 @@
 // it and leave it alone.
 import { spawn } from "node:child_process";
 import { createRequire } from "node:module";
+import { dirname, join } from "node:path";
 import { setTimeout as sleep } from "node:timers/promises";
 
 const require = createRequire(import.meta.url);
 const VITE_URL = "http://localhost:5173";
+
+// Vite's package.json `exports` blocks deep imports like "vite/bin/vite.js",
+// but exposes "./package.json" — resolve that and build the bin path from it.
+function viteBinPath() {
+  return join(dirname(require.resolve("vite/package.json")), "bin", "vite.js");
+}
 
 let vite = null;
 
@@ -41,7 +48,7 @@ async function start() {
   } else {
     console.log("[desktop] starting Vite…");
     // Spawn Vite as a plain node child (single process) so .kill() is reliable.
-    vite = spawn(process.execPath, [require.resolve("vite/bin/vite.js")], {
+    vite = spawn(process.execPath, [viteBinPath()], {
       stdio: "inherit",
     });
     if (!(await waitForVite())) {

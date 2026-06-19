@@ -1,5 +1,6 @@
 import { startMicCapture, createAudioPlayer } from "./audio";
 import { PttController } from "./ptt";
+import { codeToUiohookName, isTypingTarget, labelForCode } from "./pttSettings";
 import { playCue } from "./sound";
 import type { PttMode } from "./types/ptt";
 
@@ -18,6 +19,8 @@ let ws: WebSocket | null = null;
 let mic: { stop: () => void } | null = null;
 let player: ReturnType<typeof createAudioPlayer> | null = null;
 let micGateOpen = false;
+let rebinding = false;
+let uiohookByName: Record<string, number> = {};
 
 function log(msg: string) {
   const entry = document.createElement("div");
@@ -27,8 +30,9 @@ function log(msg: string) {
 }
 
 // --- Push-to-talk ---
-// Key events arrive from the Electron main process (global hook); the gate
-// decides whether captured mic audio is forwarded over the WS.
+// Key events come from two non-overlapping sources: the global hook (main
+// process) while the window is NOT focused, and the window listeners below
+// while it IS focused. Both feed pressDown/pressUp.
 
 const ptt = new PttController((open) => {
   micGateOpen = open;
@@ -40,11 +44,25 @@ function setMicIndicator(open: boolean) {
   micIndicatorEl.className = open ? "live" : "muted";
   micIndicatorEl.textContent = open
     ? "🎙️ Микрофон включён"
-    : `🔇 Микрофон выключен — ${ptt.getSettings().label}`;
+    : `🔇 Микрофон выключен — ${labelForCode(ptt.getSettings().code)}`;
 }
 
 function renderKeyLabel() {
-  keyLabelEl.textContent = ptt.getSettings().label;
+  keyLabelEl.textContent = labelForCode(ptt.getSettings().code);
+}
+
+// Tell the main process which keycode the global hook should watch.
+function syncGlobalKey() {
+  const desktop = window.desktopPtt;
+  if (!desktop) return;
+  const name = codeToUiohookName(ptt.getSettings().code);
+  const keycode = uiohookByName[name];
+  if (typeof keycode !== "number") {
+    log(`⚠ Клавиша ${labelForCode(ptt.getSettings().code)} не поддерживается глобально (в фоне). Работает только при фокусе.`);
+    void desktop.setKey(null);
+    return;
+  }
+  void desktop.setKey(keycode);
 }
 
 modeSelectEl.value = ptt.getSettings().mode;
@@ -55,20 +73,41 @@ modeSelectEl.addEventListener("change", () => {
   ptt.setMode(modeSelectEl.value as PttMode);
 });
 
-rebindBtn.addEventListener("click", async () => {
-  const desktop = window.desktopPtt;
-  if (!desktop) return;
+rebindBtn.addEventListener("click", () => {
+  if (rebinding) return;
+  rebinding = true;
   rebindBtn.classList.add("listening");
   keyLabelEl.textContent = "нажми клавишу…";
-  const bound = await desktop.captureNext();
-  ptt.setBinding(bound.keycode, bound.label);
-  rebindBtn.classList.remove("listening");
-  rebindBtn.blur();
-  renderKeyLabel();
-  setMicIndicator(micGateOpen);
 });
 
-// --- Global hotkey bridge (Electron main process) ---
+// Window key listeners — fire while the app window is focused.
+window.addEventListener("keydown", (e) => {
+  if (rebinding) {
+    e.preventDefault();
+    rebinding = false;
+    rebindBtn.classList.remove("listening");
+    rebindBtn.blur();
+    if (e.code !== "Escape") {
+      ptt.setCode(e.code);
+      syncGlobalKey();
+    }
+    renderKeyLabel();
+    setMicIndicator(micGateOpen);
+    return;
+  }
+  if (e.code !== ptt.getSettings().code || isTypingTarget(e.target)) return;
+  e.preventDefault(); // stop the key from also activating a focused button
+  if (e.repeat) return;
+  ptt.pressDown();
+});
+
+window.addEventListener("keyup", (e) => {
+  if (e.code !== ptt.getSettings().code || isTypingTarget(e.target)) return;
+  e.preventDefault();
+  ptt.pressUp();
+});
+
+// --- Global hook bridge (Electron main) — fires while window is NOT focused ---
 
 async function initDesktop() {
   const desktop = window.desktopPtt;
@@ -76,12 +115,11 @@ async function initDesktop() {
     log("⚠ Запусти как десктоп-приложение (npm run desktop) — глобальный хоткей живёт там.");
     return;
   }
+  uiohookByName = await desktop.keymap();
   desktop.onDown(() => ptt.pressDown());
   desktop.onUp(() => ptt.pressUp());
-  const bound = await desktop.setKey(ptt.getSettings().keycode);
-  ptt.setBinding(bound.keycode, bound.label);
-  renderKeyLabel();
-  setMicIndicator(micGateOpen);
+  syncGlobalKey();
+  log(`PTT готов: клавиша ${labelForCode(ptt.getSettings().code)}, режим ${ptt.getSettings().mode}.`);
 }
 
 void initDesktop();
@@ -147,7 +185,6 @@ connectBtn.addEventListener("click", async () => {
     statusEl.textContent = "Connecting...";
     log("Connecting to backend...");
 
-    // Connect straight to the backend (no Vite proxy — we run as a desktop app).
     ws = new WebSocket("ws://localhost:3000/ws");
     ws.binaryType = "arraybuffer";
 
@@ -192,8 +229,11 @@ connectBtn.addEventListener("click", async () => {
 
     ptt.enable();
     setConnected(true);
-    const { label, mode } = ptt.getSettings();
-    log(`Mic ready. ${mode === "hold" ? "Hold" : "Press"} ${label} to talk.`);
+    // Drop focus so a bound key like Space/Enter can't "click" a focused button.
+    connectBtn.blur();
+    (document.activeElement as HTMLElement | null)?.blur?.();
+    const { code, mode } = ptt.getSettings();
+    log(`Mic ready. ${mode === "hold" ? "Hold" : "Press"} ${labelForCode(code)} to talk.`);
   } catch (err) {
     console.error(err);
     log(`Error: ${err instanceof Error ? err.message : String(err)}`);
@@ -202,6 +242,7 @@ connectBtn.addEventListener("click", async () => {
 });
 
 disconnectBtn.addEventListener("click", () => {
+  disconnectBtn.blur();
   disconnect();
   log("Disconnected");
 });

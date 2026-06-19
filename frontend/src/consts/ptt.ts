@@ -1,10 +1,9 @@
 import type { PttSettings } from "../types/ptt";
 
-export const PTT_STORAGE_KEY = "trener-misha.ptt";
+// Bump the suffix when the stored shape changes, to discard stale entries.
+export const PTT_STORAGE_KEY = "trener-misha.ptt.v3";
 
-// keycode null → the main process picks its default (F8) and reports it back.
 export const DEFAULT_PTT_SETTINGS: PttSettings = {
-  keycode: null,
-  label: "F8",
+  code: "F8",
   mode: "toggle",
 };
