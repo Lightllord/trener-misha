@@ -3,14 +3,33 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "main": "electron/main.cjs",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "desktop": "node scripts/desktop-dev.mjs",
+    "desktop:electron": "electron electron/main.cjs",
+    "desktop:build": "npm run build && electron-builder"
   },
-  "dependencies": {},
+  "dependencies": {
+    "uiohook-napi": "^1.5.4"
+  },
   "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
     "typescript": "^5.9.3",
     "vite": "^6.3.0"
+  },
+  "build": {
+    "appId": "com.trener-misha.app",
+    "productName": "Trener Misha",
+    "files": ["dist/**/*", "electron/**/*"],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": "portable"
+    }
   }
 }

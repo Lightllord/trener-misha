@@ -14,6 +14,21 @@
         <button id="disconnect" disabled>Disconnect</button>
       </div>
       <p id="status">Disconnected</p>
+
+      <div id="ptt">
+        <div id="mic-indicator" class="muted">🔇 Микрофон выключен</div>
+        <div id="ptt-settings">
+          <label>
+            Режим:
+            <select id="ptt-mode">
+              <option value="toggle">Toggle (вкл/выкл)</option>
+              <option value="hold">Hold (зажать)</option>
+            </select>
+          </label>
+          <button id="ptt-rebind">Клавиша: <kbd id="ptt-key">—</kbd></button>
+        </div>
+      </div>
+
       <div id="log"></div>
     </div>
     <script type="module" src="/src/main.ts"></script>

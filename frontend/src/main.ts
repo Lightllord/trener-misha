@@ -1,4 +1,7 @@
 import { startMicCapture, createAudioPlayer } from "./audio";
+import { PttController } from "./ptt";
+import { playCue } from "./sound";
+import type { PttMode } from "./types/ptt";
 
 // --- UI elements ---
 
@@ -6,10 +9,15 @@ const connectBtn = document.querySelector<HTMLButtonElement>("#connect")!;
 const disconnectBtn = document.querySelector<HTMLButtonElement>("#disconnect")!;
 const statusEl = document.querySelector<HTMLParagraphElement>("#status")!;
 const logEl = document.querySelector<HTMLDivElement>("#log")!;
+const micIndicatorEl = document.querySelector<HTMLDivElement>("#mic-indicator")!;
+const modeSelectEl = document.querySelector<HTMLSelectElement>("#ptt-mode")!;
+const rebindBtn = document.querySelector<HTMLButtonElement>("#ptt-rebind")!;
+const keyLabelEl = document.querySelector<HTMLElement>("#ptt-key")!;
 
 let ws: WebSocket | null = null;
 let mic: { stop: () => void } | null = null;
 let player: ReturnType<typeof createAudioPlayer> | null = null;
+let micGateOpen = false;
 
 function log(msg: string) {
   const entry = document.createElement("div");
@@ -17,6 +25,66 @@ function log(msg: string) {
   entry.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
   logEl.prepend(entry);
 }
+
+// --- Push-to-talk ---
+// Key events arrive from the Electron main process (global hook); the gate
+// decides whether captured mic audio is forwarded over the WS.
+
+const ptt = new PttController((open) => {
+  micGateOpen = open;
+  playCue(open ? "on" : "off");
+  setMicIndicator(open);
+});
+
+function setMicIndicator(open: boolean) {
+  micIndicatorEl.className = open ? "live" : "muted";
+  micIndicatorEl.textContent = open
+    ? "🎙️ Микрофон включён"
+    : `🔇 Микрофон выключен — ${ptt.getSettings().label}`;
+}
+
+function renderKeyLabel() {
+  keyLabelEl.textContent = ptt.getSettings().label;
+}
+
+modeSelectEl.value = ptt.getSettings().mode;
+renderKeyLabel();
+setMicIndicator(false);
+
+modeSelectEl.addEventListener("change", () => {
+  ptt.setMode(modeSelectEl.value as PttMode);
+});
+
+rebindBtn.addEventListener("click", async () => {
+  const desktop = window.desktopPtt;
+  if (!desktop) return;
+  rebindBtn.classList.add("listening");
+  keyLabelEl.textContent = "нажми клавишу…";
+  const bound = await desktop.captureNext();
+  ptt.setBinding(bound.keycode, bound.label);
+  rebindBtn.classList.remove("listening");
+  rebindBtn.blur();
+  renderKeyLabel();
+  setMicIndicator(micGateOpen);
+});
+
+// --- Global hotkey bridge (Electron main process) ---
+
+async function initDesktop() {
+  const desktop = window.desktopPtt;
+  if (!desktop) {
+    log("⚠ Запусти как десктоп-приложение (npm run desktop) — глобальный хоткей живёт там.");
+    return;
+  }
+  desktop.onDown(() => ptt.pressDown());
+  desktop.onUp(() => ptt.pressUp());
+  const bound = await desktop.setKey(ptt.getSettings().keycode);
+  ptt.setBinding(bound.keycode, bound.label);
+  renderKeyLabel();
+  setMicIndicator(micGateOpen);
+}
+
+void initDesktop();
 
 function setConnected(connected: boolean) {
   connectBtn.disabled = connected;
@@ -26,6 +94,7 @@ function setConnected(connected: boolean) {
 }
 
 function disconnect() {
+  ptt.disable();
   mic?.stop();
   mic = null;
   player?.stop();
@@ -78,20 +147,16 @@ connectBtn.addEventListener("click", async () => {
     statusEl.textContent = "Connecting...";
     log("Connecting to backend...");
 
-    // 1. Open WebSocket to backend
-    const wsUrl = `ws://${window.location.host}/ws`;
-    ws = new WebSocket(wsUrl);
+    // Connect straight to the backend (no Vite proxy — we run as a desktop app).
+    ws = new WebSocket("ws://localhost:3000/ws");
     ws.binaryType = "arraybuffer";
 
-    // 2. Create audio player for incoming audio
     player = createAudioPlayer();
 
     ws.onmessage = (event: MessageEvent) => {
       if (event.data instanceof ArrayBuffer) {
-        // Binary = PCM16 audio from OpenAI via backend
         player?.play(event.data);
       } else {
-        // JSON control message
         try {
           const msg = JSON.parse(event.data as string) as ControlMessage;
           handleControlMessage(msg);
@@ -112,7 +177,6 @@ connectBtn.addEventListener("click", async () => {
       disconnect();
     };
 
-    // 3. Wait for WS to open, then start mic
     await new Promise<void>((resolve, reject) => {
       ws!.onopen = () => resolve();
       ws!.onerror = () => reject(new Error("WebSocket connection failed"));
@@ -120,15 +184,16 @@ connectBtn.addEventListener("click", async () => {
 
     log("WebSocket connected, starting microphone...");
 
-    // 4. Start mic capture, send PCM16 chunks over WS
     mic = await startMicCapture((pcm16: ArrayBuffer) => {
-      if (ws && ws.readyState === WebSocket.OPEN) {
+      if (micGateOpen && ws && ws.readyState === WebSocket.OPEN) {
         ws.send(pcm16);
       }
     });
 
+    ptt.enable();
     setConnected(true);
-    log("Microphone active. Speak now.");
+    const { label, mode } = ptt.getSettings();
+    log(`Mic ready. ${mode === "hold" ? "Hold" : "Press"} ${label} to talk.`);
   } catch (err) {
     console.error(err);
     log(`Error: ${err instanceof Error ? err.message : String(err)}`);
