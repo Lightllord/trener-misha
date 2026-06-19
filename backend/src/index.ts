@@ -74,7 +74,7 @@ wss.on("connection", async (ws) => {
 
   const session = new RealtimeSession(agent, {
     transport: "websocket",
-    model: "gpt-realtime-1.5",
+    model: "gpt-realtime-2",
     config: {
       audio: {
         input: {
