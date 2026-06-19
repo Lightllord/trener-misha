@@ -120,6 +120,9 @@ Non-obvious navigation only — files whose role isn't already implied by their 
 | `src/deliveryWindow/debouncedPoll.ts`  | `DebouncedPoll` — 150 ms debounce + 200 ms poll while the window is open; no public stop (the window owns its lifecycle) |
 | `src/stratzApi.ts`       | STRATZ GraphQL client; supports `STRATZ_LOCAL_ADDRESS` binding (bypass VPN) |
 | `src/heroes.ts`          | Loads `heroes_extend.json` + fuzzy name lookup |
+| `src/logger.ts`          | Patches `console.*` to also append to `logs/backend.log` |
+| `src/observability/log.ts` | `log(scope, msg)` / `logError(...)` — tags every line with a `[scope]` |
+| `src/observability/sessionLog.ts` | `attachSessionDiagnostics(session)` — narrates the full turn lifecycle (speech → commit → response started → done+status, transcription failures, rate limits) so a stall is visible by the missing step |
 
 ## Data (`data/`)
 

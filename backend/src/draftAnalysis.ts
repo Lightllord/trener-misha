@@ -9,6 +9,9 @@ import {
   getHeroesMap,
   getItemsMap,
 } from "./stratzApi.js";
+import { log, logError } from "./observability/log.js";
+import { truncate } from "./observability/truncate.js";
+import { LOG_PREVIEW_MAX } from "./observability/consts/log.js";
 
 let analyzed = false;
 
@@ -253,10 +256,10 @@ export function checkAndAnalyzeDraft(): void {
   const state = getState() as StateResponse | null;
 
   analyzed = true;
-  console.log("[draftAnalysis] Draft complete, starting background analysis");
+  log("draft", "draft complete — starting background analysis");
 
   analyzeInBackground(draft, state).catch((err) => {
-    console.error("[draftAnalysis] Background analysis failed:", err);
+    logError("draft", "background analysis failed:", err);
   });
 }
 
@@ -312,7 +315,7 @@ ${playerContext}
           string,
           unknown
         >;
-        console.log(`[draftAnalysis] tool call: ${call.function.name}(${call.function.arguments})`);
+        log("draft", `tool call: ${call.function.name}(${truncate(call.function.arguments, LOG_PREVIEW_MAX)})`);
         const result = await handleToolCall(call.function.name, args);
         messages.push({
           role: "tool",
@@ -325,7 +328,7 @@ ${playerContext}
 
     // No more tool calls — final answer
     if (msg.content) {
-      console.log("[draftAnalysis] Analysis ready, queued for delivery");
+      log("draft", "analysis ready — queued for delivery");
       addInsight(
         "draft_analysis",
         `[Фоновый анализ драфта завершён]\n${msg.content}\n\nПредложи игроку: "У меня готов анализ драфта, рассказать?" Не рассказывай содержание сразу — дождись подтверждения.`,

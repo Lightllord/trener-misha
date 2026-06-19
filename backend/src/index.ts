@@ -18,6 +18,10 @@ import {
 import { PICKER_CONTEXT_WINDOW_MS } from "./conversation/consts/log.js";
 import { setDraft, setState, getState, clearGameData } from "./gameData.js";
 import { processStateUpdate, clearEventQueue } from "./gameEventQueue.js";
+import { log, logError } from "./observability/log.js";
+import { truncate } from "./observability/truncate.js";
+import { LOG_PREVIEW_MAX } from "./observability/consts/log.js";
+import { attachSessionDiagnostics } from "./observability/sessionLog.js";
 
 process.on("unhandledRejection", (err) => {
   console.error("[FATAL] Unhandled rejection:", err);
@@ -44,7 +48,7 @@ app.post("/push/draft", (req, res) => {
     return;
   }
   setDraft(body as { radiant: string[]; dire: string[]; confidence: number[]; detectedAt: string });
-  console.log("[push] Draft received:", (body.radiant as string[]).join(", "), "|", (body.dire as string[]).join(", "));
+  log("push", `draft received: ${(body.radiant as string[]).join(", ")} | ${(body.dire as string[]).join(", ")}`);
   checkAndAnalyzeDraft();
   res.json({ status: "ok" });
 });
@@ -64,13 +68,13 @@ app.post("/push/state", (req, res) => {
 });
 
 const server = app.listen(PORT, () => {
-  console.log(`[trener-misha] Backend listening on http://localhost:${PORT}`);
+  log("ws", `backend listening on http://localhost:${PORT}`);
 });
 
 const wss = new WebSocketServer({ server, path: "/ws" });
 
 wss.on("connection", async (ws) => {
-  console.log("[ws] Client connected");
+  log("ws", "client connected");
 
   const session = new RealtimeSession(agent, {
     transport: "websocket",
@@ -80,7 +84,7 @@ wss.on("connection", async (ws) => {
         input: {
           turnDetection: {
             type: "semantic_vad",
-            eagerness: "low",
+            eagerness: "medium",
           },
           noiseReduction: { type: "near_field" },
         },
@@ -94,6 +98,8 @@ wss.on("connection", async (ws) => {
     }
   }
 
+  attachSessionDiagnostics(session);
+
   // Relay audio from OpenAI → browser (binary PCM16 24kHz)
   session.on("audio", (event) => {
     if (ws.readyState === WebSocket.OPEN) {
@@ -101,13 +107,16 @@ wss.on("connection", async (ws) => {
     }
   });
 
-  session.on("agent_tool_start", (_ctx, _agent, toolDef) => {
-    console.log(`[tool] start: ${toolDef.name}`);
+  session.on("agent_tool_start", (_ctx, _agent, toolDef, details) => {
+    const toolCall = details.toolCall;
+    const args = "arguments" in toolCall ? toolCall.arguments : undefined;
+    const argsPreview = typeof args === "string" && args ? truncate(args, LOG_PREVIEW_MAX) : "";
+    log("tool", `→ ${toolDef.name}(${argsPreview})`);
     send({ type: "tool_call", name: toolDef.name });
   });
 
   session.on("agent_tool_end", (_ctx, _agent, toolDef, result) => {
-    console.log(`[tool] end: ${toolDef.name}`);
+    log("tool", `← ${toolDef.name}: ${truncate(String(result), LOG_PREVIEW_MAX)}`);
     send({ type: "tool_result", name: toolDef.name, result: String(result) });
   });
 
@@ -130,7 +139,7 @@ wss.on("connection", async (ws) => {
   });
 
   session.on("error", (err) => {
-    console.error("[session] error:", err);
+    logError("session", "error:", err);
     send({ type: "error", message: String(err) });
   });
 
@@ -153,11 +162,16 @@ wss.on("connection", async (ws) => {
       // message then starts a fresh turn instead of queueing behind it. Must
       // run before setResponseActive(true) flips the flag below.
       if (triggerResponse && deliveryWindow.isResponseActive()) {
+        log("inject", "preempting active response (response.cancel)");
         session.transport.sendEvent({ type: "response.cancel" });
       }
       // Preempt the SDK's turn_started by a few ms — flips the band
       // synchronously so a parallel poll/event tick can't double-inject.
       if (triggerResponse) deliveryWindow.setResponseActive(true);
+      log(
+        "inject",
+        `→ history (${triggerResponse ? "respond now" : "context only"}): ${truncate(text, LOG_PREVIEW_MAX)}`,
+      );
       session.transport.sendEvent({
         type: "conversation.item.create",
         item: {
@@ -177,21 +191,21 @@ wss.on("connection", async (ws) => {
       const waitOnlyCritical = state === "interrupt";
       const insight = picker.getSomethingToDeliverNow(waitOnlyCritical);
       if (insight === null) return;
-      const tail = insight.number !== null ? ` #${insight.number}` : "???";
-      console.log(`[deliver] insight: ${insight.name}${tail}`);
+      const tail = insight.number !== null ? ` #${insight.number}` : "";
+      log("inject", `deliver insight ${insight.name}${tail} [${insight.importance}] (band: ${state})`);
       injectMessage(picker.formatForInjection(insight), true);
     }
 
     new DebouncedPoll(deliveryWindow, tryDeliverInsight);
 
     session.transport.on("audio_interrupted", () => {
-      console.log("[vad] audio interrupted — flushing frontend playback");
+      log("turn", "audio interrupted — flushing frontend playback");
       send({ type: "interrupt" });
     });
     send({ type: "connected" });
-    console.log("[ws] Session connected to OpenAI");
+    log("ws", "session connected to OpenAI");
   } catch (err) {
-    console.error("[ws] Failed to connect to OpenAI:", err);
+    logError("ws", "failed to connect to OpenAI:", err);
     send({ type: "error", message: "Failed to connect to OpenAI" });
     ws.close();
     return;
@@ -209,7 +223,7 @@ wss.on("connection", async (ws) => {
   });
 
   ws.on("close", () => {
-    console.log("[ws] Client disconnected");
+    log("ws", "client disconnected");
     pickerAbort.abort();
     if (deliveryWindowForCleanup !== null) deliveryWindowForCleanup.dispose();
     clearEventQueue();
@@ -221,7 +235,7 @@ wss.on("connection", async (ws) => {
   });
 
   ws.on("error", (err) => {
-    console.error("[ws] WebSocket error:", err);
+    logError("ws", "WebSocket error:", err);
     pickerAbort.abort();
     if (deliveryWindowForCleanup !== null) deliveryWindowForCleanup.dispose();
     clearEventQueue();

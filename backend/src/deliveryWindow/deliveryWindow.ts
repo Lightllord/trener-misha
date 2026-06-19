@@ -1,4 +1,5 @@
 import type { RealtimeSession } from "@openai/agents/realtime";
+import { log } from "../observability/log.js";
 import type { DeliveryBand, DeliveryState } from "./types/state.js";
 
 export type DeliveryWindowListener = (isOpen: boolean) => void;
@@ -30,20 +31,17 @@ export class DeliveryWindow {
       this.setUserSpeaking(true);
       this.setResponseActive(false);
     };
-    const onTransportEvent = (raw: unknown) => {
-      if (typeof raw !== "object" || raw === null) return;
-      const type = (raw as { type?: unknown }).type;
-      if (type === "input_audio_buffer.speech_started") {
-        this.setUserSpeaking(true);
-      } else if (type === "input_audio_buffer.speech_stopped") {
-        this.setUserSpeaking(false);
-      }
-    };
+    // Server-side VAD speech classifier — the source of truth for whether the
+    // user holds the floor. These are typed transport events, emitted under
+    // their own name (not under a "transport_event" alias).
+    const onSpeechStarted = () => this.setUserSpeaking(true);
+    const onSpeechStopped = () => this.setUserSpeaking(false);
 
     transport.on("turn_started", onTurnStarted);
     transport.on("turn_done", onTurnDone);
     transport.on("audio_interrupted", onAudioInterrupted);
-    transport.on("transport_event", onTransportEvent);
+    transport.on("input_audio_buffer.speech_started", onSpeechStarted);
+    transport.on("input_audio_buffer.speech_stopped", onSpeechStopped);
 
     const off = (transport as { off?: unknown }).off;
     if (typeof off === "function") {
@@ -55,7 +53,8 @@ export class DeliveryWindow {
         () => offFn("turn_started", onTurnStarted as never),
         () => offFn("turn_done", onTurnDone as never),
         () => offFn("audio_interrupted", onAudioInterrupted as never),
-        () => offFn("transport_event", onTransportEvent as never),
+        () => offFn("input_audio_buffer.speech_started", onSpeechStarted as never),
+        () => offFn("input_audio_buffer.speech_stopped", onSpeechStopped as never),
       );
     }
   }
@@ -82,15 +81,19 @@ export class DeliveryWindow {
 
   setResponseActive(value: boolean): void {
     if (this.isResponseActiveFlag === value) return;
+    const prev = this.state();
     const wasOpen = this.isOpen();
     this.isResponseActiveFlag = value;
+    this.logTransition(prev);
     this.notifyIfChanged(wasOpen);
   }
 
   setUserSpeaking(value: boolean): void {
     if (this.isUserSpeakingFlag === value) return;
+    const prev = this.state();
     const wasOpen = this.isOpen();
     this.isUserSpeakingFlag = value;
+    this.logTransition(prev);
     this.notifyIfChanged(wasOpen);
   }
 
@@ -126,6 +129,11 @@ export class DeliveryWindow {
       }
     }
     this.listeners = [];
+  }
+
+  private logTransition(prev: DeliveryState): void {
+    const next = this.state();
+    if (next !== prev) log("inject", `delivery window: ${prev} → ${next}`);
   }
 
   private notifyIfChanged(wasOpen: boolean): void {

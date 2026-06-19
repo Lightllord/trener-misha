@@ -65,14 +65,10 @@ describe("DeliveryWindow", () => {
   });
 
   it("speech_started closes; speech_stopped reopens", () => {
-    transport.emit("transport_event", {
-      type: "input_audio_buffer.speech_started",
-    });
+    transport.emit("input_audio_buffer.speech_started");
     assert.equal(window.isOpen(), false);
     assert.equal(window.state(), "closed");
-    transport.emit("transport_event", {
-      type: "input_audio_buffer.speech_stopped",
-    });
+    transport.emit("input_audio_buffer.speech_stopped");
     assert.equal(window.isOpen(), true);
     assert.equal(window.state(), "full");
   });
@@ -85,10 +81,20 @@ describe("DeliveryWindow", () => {
     assert.equal(window.state(), "closed");
   });
 
-  it("ignores unrelated transport_event types", () => {
-    transport.emit("transport_event", { type: "session.updated" });
-    transport.emit("transport_event", null);
-    transport.emit("transport_event", "garbage");
+  it("reopens after an audio_interrupted close once speech_stopped arrives", () => {
+    transport.emit("turn_started");
+    transport.emit("audio_interrupted");
+    assert.equal(window.state(), "closed");
+    // Regression: speech_stopped must clear the user-speaking flag set by the
+    // interrupt, or the window stays closed forever.
+    transport.emit("input_audio_buffer.speech_stopped");
+    assert.equal(window.isOpen(), true);
+    assert.equal(window.state(), "full");
+  });
+
+  it("ignores unrelated transport events", () => {
+    transport.emit("session.updated");
+    transport.emit("response.audio.delta");
     assert.equal(window.isOpen(), true);
   });
 
@@ -162,7 +168,8 @@ describe("DeliveryWindow", () => {
     assert.equal(transport.listenerCount("turn_started"), 0);
     assert.equal(transport.listenerCount("turn_done"), 0);
     assert.equal(transport.listenerCount("audio_interrupted"), 0);
-    assert.equal(transport.listenerCount("transport_event"), 0);
+    assert.equal(transport.listenerCount("input_audio_buffer.speech_started"), 0);
+    assert.equal(transport.listenerCount("input_audio_buffer.speech_stopped"), 0);
 
     transport.emit("turn_started");
     // Window was open at dispose time → subscriber got one final false; no
@@ -182,9 +189,7 @@ describe("DeliveryWindow", () => {
   });
 
   it("dispose on an already-closed window still broadcasts the final close", () => {
-    transport.emit("transport_event", {
-      type: "input_audio_buffer.speech_started",
-    });
+    transport.emit("input_audio_buffer.speech_started");
     const events: boolean[] = [];
     window.subscribe((isOpen) => events.push(isOpen));
 
