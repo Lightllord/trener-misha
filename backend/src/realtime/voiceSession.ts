@@ -1,0 +1,87 @@
+import type { WebSocket } from "ws";
+import { PICKER_CONTEXT_WINDOW_MS } from "../conversation/consts/log.js";
+import { clearConversation, getRecentConversation } from "../conversation/log.js";
+import { resetDraftAnalysis } from "../draftAnalysis.js";
+import { clearGameData } from "../gameData.js";
+import { clearEventQueue } from "../gameEventQueue.js";
+import { clearInsights } from "../insight/store.js";
+import { log, logError } from "../observability/log.js";
+import { ClientChannel } from "./clientChannel.js";
+import { createRealtimeSession } from "./createSession.js";
+import { InsightDelivery } from "./insightDelivery.js";
+import { SessionConductor } from "./sessionConductor.js";
+import { SessionEventBridge } from "./sessionBridge.js";
+import { TurnController } from "./turnController.js";
+
+// Orchestrates one browser connection: composes the layers, connects to OpenAI,
+// wires the relay, and owns teardown. Transport-dependent layers are built after
+// connect; dispose is idempotent (fires from close, error, or a failed connect).
+export class VoiceSession {
+  private readonly session = createRealtimeSession();
+  private readonly channel: ClientChannel;
+  private readonly bridge: SessionEventBridge;
+  private readonly pickerAbort = new AbortController();
+  private conductor: SessionConductor | null = null;
+  private turn: TurnController | null = null;
+  private disposed = false;
+
+  constructor(ws: WebSocket) {
+    this.channel = new ClientChannel(ws);
+    this.bridge = new SessionEventBridge(this.session, this.channel);
+  }
+
+  async start(): Promise<void> {
+    log("ws", "client connected");
+    this.bridge.start();
+    this.channel.onClose(() => {
+      log("ws", "client disconnected");
+      this.dispose();
+    });
+    this.channel.onError((err) => {
+      logError("ws", "WebSocket error:", err);
+      this.dispose();
+    });
+
+    try {
+      await this.session.connect({ apiKey: process.env.OPENAI_API_KEY! });
+    } catch (err) {
+      logError("ws", "failed to connect to OpenAI:", err);
+      this.channel.send({ type: "error", message: "Failed to connect to OpenAI" });
+      this.dispose();
+      return;
+    }
+    if (this.disposed) return;
+
+    const conductor = new SessionConductor(this.session);
+    this.conductor = conductor;
+    this.turn = new TurnController(this.session, conductor);
+    const insights = new InsightDelivery(
+      conductor,
+      this.pickerAbort.signal,
+      () => getRecentConversation(PICKER_CONTEXT_WINDOW_MS),
+    );
+
+    this.channel.onAudioFrame((frame) => this.session.sendAudio(frame));
+    this.channel.onControl((msg) => {
+      if (msg.type === "mic_close") this.turn?.endUserTurn();
+    });
+
+    insights.start();
+    this.channel.send({ type: "connected" });
+    log("ws", "session connected to OpenAI");
+  }
+
+  private dispose(): void {
+    if (this.disposed) return;
+    this.disposed = true;
+    this.pickerAbort.abort();
+    this.conductor?.dispose();
+    this.turn?.dispose();
+    clearEventQueue();
+    resetDraftAnalysis();
+    clearInsights();
+    clearConversation();
+    clearGameData();
+    this.session.close();
+  }
+}
