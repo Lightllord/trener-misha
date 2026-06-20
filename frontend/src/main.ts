@@ -29,6 +29,10 @@ function log(msg: string) {
   logEl.prepend(entry);
 }
 
+function sendControl(msg: Record<string, unknown>) {
+  if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify(msg));
+}
+
 // --- Push-to-talk ---
 // Key events come from two non-overlapping sources: the global hook (main
 // process) while the window is NOT focused, and the window listeners below
@@ -36,6 +40,10 @@ function log(msg: string) {
 
 const ptt = new PttController((open) => {
   micGateOpen = open;
+  // Closing the gate signals end-of-turn. Server VAD handles the normal case;
+  // this forces a commit when the mic is cut mid-speech (no trailing silence
+  // for VAD to detect), which would otherwise hang waiting for a response.
+  if (!open) sendControl({ type: "mic_close" });
   playCue(open ? "on" : "off");
   setMicIndicator(open);
 });

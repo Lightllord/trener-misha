@@ -14,8 +14,9 @@ export type DeliveryWindowListener = (isOpen: boolean) => void;
 // Two flags drive this, both auto-updated from transport events:
 //   - isUserSpeaking:   server-side VAD has user audio → closes the window.
 //   - isResponseActive: model is generating a response → selects the band.
-// Setters are public so callers (e.g. injectMessage) can preempt the SDK
-// before it catches up.
+// Setters are public so callers (e.g. injectMessage, or the mic-gate close
+// handler when VAD can't see a mid-speech cut) can preempt the SDK before it
+// catches up.
 export class DeliveryWindow {
   private isResponseActiveFlag = false;
   private isUserSpeakingFlag = false;

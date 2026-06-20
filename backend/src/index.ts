@@ -157,6 +157,11 @@ wss.on("connection", async (ws) => {
     const deliveryWindow = new DeliveryWindow(session);
     deliveryWindowForCleanup = deliveryWindow;
 
+    // True once VAD reports the user started speaking and that speech hasn't been
+    // committed yet. Gates the forced end-of-turn so a bare key tap (gate opened
+    // and closed without speech) can't commit silence and trigger a reply.
+    let userSpeechPending = false;
+
     function injectMessage(text: string, triggerResponse: boolean): void {
       // Interrupt band: a response is already live, so cancel it first — our
       // message then starts a fresh turn instead of queueing behind it. Must
@@ -185,6 +190,29 @@ wss.on("connection", async (ws) => {
       }
     }
 
+    // Hybrid turn detection: server VAD handles the normal case (speak → pause →
+    // it commits and responds). But cutting the mic mid-speech sends no trailing
+    // silence, so VAD never fires — it emits neither input_audio_buffer.committed
+    // nor speech_stopped, leaving the turn (and the delivery window) stuck. On
+    // gate close we force the turn to end, but only if VAD saw real speech it
+    // never got to commit.
+    function endUserTurn(): void {
+      // VAD won't emit speech_stopped for a mid-speech cut, so reopen the
+      // window ourselves; harmless no-op when VAD already stopped the speech.
+      deliveryWindow.setUserSpeaking(false);
+      // No uncommitted speech — VAD already committed this turn, or the gate was
+      // tapped without speaking. Nothing to force, and committing now would be
+      // empty or duplicate VAD's commit.
+      if (!userSpeechPending) return;
+      userSpeechPending = false;
+      log("turn", "mic closed mid-speech — forcing commit + response.create");
+      session.transport.sendEvent({ type: "input_audio_buffer.commit" });
+      // Flip the band synchronously so a parallel poll can't inject in the gap
+      // before the SDK's turn_started arrives (mirrors injectMessage).
+      deliveryWindow.setResponseActive(true);
+      session.transport.sendEvent({ type: "response.create" });
+    }
+
     function tryDeliverInsight(): void {
       const state = deliveryWindow.state();
       if (state === "closed") return;
@@ -202,6 +230,37 @@ wss.on("connection", async (ws) => {
       log("turn", "audio interrupted — flushing frontend playback");
       send({ type: "interrupt" });
     });
+    // VAD's speech classifier drives the pending flag: real speech detected →
+    // arm; any commit (VAD's own or our forced one) → disarm.
+    session.transport.on("input_audio_buffer.speech_started", () => {
+      userSpeechPending = true;
+    });
+    session.transport.on("input_audio_buffer.committed", () => {
+      userSpeechPending = false;
+    });
+    // Relay browser → OpenAI: binary frames are PCM16 audio; the mic_close text
+    // frame is the gate-close signal that forces an end-of-turn when needed.
+    ws.on("message", (data, isBinary) => {
+      if (isBinary && Buffer.isBuffer(data)) {
+        const arrayBuffer = data.buffer.slice(
+          data.byteOffset,
+          data.byteOffset + data.byteLength,
+        ) as ArrayBuffer;
+        session.sendAudio(arrayBuffer);
+        return;
+      }
+      let msg: unknown;
+      try {
+        msg = JSON.parse(data.toString());
+      } catch {
+        return;
+      }
+      if (typeof msg !== "object" || msg === null) return;
+      if ((msg as { type?: unknown }).type === "mic_close") {
+        endUserTurn();
+      }
+    });
+
     send({ type: "connected" });
     log("ws", "session connected to OpenAI");
   } catch (err) {
@@ -210,17 +269,6 @@ wss.on("connection", async (ws) => {
     ws.close();
     return;
   }
-
-  // Relay audio from browser → OpenAI (binary PCM16 24kHz)
-  ws.on("message", (data, isBinary) => {
-    if (isBinary && Buffer.isBuffer(data)) {
-      const arrayBuffer = data.buffer.slice(
-        data.byteOffset,
-        data.byteOffset + data.byteLength,
-      ) as ArrayBuffer;
-      session.sendAudio(arrayBuffer);
-    }
-  });
 
   ws.on("close", () => {
     log("ws", "client disconnected");
