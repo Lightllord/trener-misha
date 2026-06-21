@@ -24,6 +24,13 @@ export class SessionEventBridge {
       channel.sendAudio(event.data as ArrayBuffer);
     });
 
+    // Server-side VAD cut the model off (user barged in). Tell the browser to
+    // flush its buffered playback so the interruption is actually heard.
+    session.transport.on("audio_interrupted", () => {
+      log("turn", "audio interrupted — flushing frontend playback");
+      channel.send({ type: "interrupt" });
+    });
+
     session.on("agent_tool_start", (_ctx, _agent, toolDef, details) => {
       const toolCall = details.toolCall;
       const args = "arguments" in toolCall ? toolCall.arguments : undefined;
