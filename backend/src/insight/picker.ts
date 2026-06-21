@@ -2,6 +2,7 @@ import OpenAI from "openai";
 import { formatConversationAsXMLike } from "../conversation/markup.js";
 import {
   PICKER_MODEL,
+  PICKER_REASONING_EFFORT,
   PICKER_SYSTEM_PROMPT,
   PICKER_TIMEOUT_MS,
 } from "./consts/picker.js";
@@ -17,8 +18,13 @@ import {
   formatInsightsAsPickerXMLike,
 } from "./markup.js";
 import { getUnused, markUsed } from "./store.js";
+import { log, logError } from "../observability/log.js";
 import type { ConversationEntry } from "../conversation/types/log.js";
 import type { Insight } from "./types/insight.js";
+
+function label(insight: Insight): string {
+  return insight.number !== null ? `${insight.name} #${insight.number}` : insight.name;
+}
 
 export class InsightPicker {
   private thinkingResult: Insight | null = null;
@@ -90,7 +96,7 @@ export class InsightPicker {
     const res = await this.openai.chat.completions.create(
       {
         model: PICKER_MODEL,
-        reasoning_effort: "minimal",
+        reasoning_effort: PICKER_REASONING_EFFORT,
         response_format: { type: "json_object" },
         messages: [
           { role: "system", content: PICKER_SYSTEM_PROMPT },
@@ -131,6 +137,7 @@ export class InsightPicker {
     }
 
     this.thinkingInFlight = true;
+    log("picker", `started thinking — deliberating over ${candidates.length} insights`);
 
     this.think(candidates)
       .then((chosen) => {
@@ -138,6 +145,7 @@ export class InsightPicker {
           return;
         }
         if (chosen === null) {
+          log("picker", "thinking done — nothing to stash");
           return;
         }
         if (chosen.used) {
@@ -147,9 +155,10 @@ export class InsightPicker {
           return;
         }
         this.thinkingResult = chosen;
+        log("picker", `thinking done — stashed ${label(chosen)}`);
       })
       .catch((err: unknown) => {
-        console.error("[insightPicker] thinking failed:", err);
+        logError("picker", "thinking failed:", err);
       })
       .finally(() => {
         this.thinkingInFlight = false;
@@ -171,7 +180,7 @@ export class InsightPicker {
       const pick = resolvePick(raw, candidates);
       return pick ?? importanceFallback(candidates);
     } catch (err) {
-      console.error("[insightPicker] model call failed:", err);
+      logError("picker", "model call failed:", err);
       return importanceFallback(candidates);
     }
   }

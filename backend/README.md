@@ -24,7 +24,7 @@ Frontend (:5173) ◄── WS ──► backend (:3000) ◄── WS ──► O
                   audio + JSON              audio + events
 ```
 
-`gameData.ts` is the in-memory store for everything pushed in. Voice tools and the draft analyser read from it; nothing polls. The backend is a relay with hooks — binary PCM16 24 kHz audio passes through both directions untouched; VAD and interruption are server-side at OpenAI, surfaced locally as `audio_interrupted`.
+`gameData.ts` is the in-memory store for everything pushed in. Voice tools and the draft analyser read from it; nothing polls. The backend is a relay with hooks — binary PCM16 24 kHz audio passes through both directions untouched. Turn detection is **hybrid**: OpenAI's `semantic_vad` handles the normal case (speak → pause → it commits and responds), and interruption stays server-side, surfaced as `audio_interrupted`. But cutting the mic mid-speech sends no trailing silence, so VAD never fires and the turn hangs. To cover that, the client sends a `mic_close` text frame on gate close; if VAD saw real speech it never committed (`userSpeechPending`, armed by `input_audio_buffer.speech_started` and disarmed by `input_audio_buffer.committed`) the backend forces `input_audio_buffer.commit` + `response.create` and nudges the delivery window open. When VAD already committed the turn — or the key was tapped without speaking — `mic_close` is a no-op, so a bare tap never triggers a reply to silence.
 
 ## HTTP endpoints
 
@@ -120,6 +120,9 @@ Non-obvious navigation only — files whose role isn't already implied by their 
 | `src/deliveryWindow/debouncedPoll.ts`  | `DebouncedPoll` — 150 ms debounce + 200 ms poll while the window is open; no public stop (the window owns its lifecycle) |
 | `src/stratzApi.ts`       | STRATZ GraphQL client; supports `STRATZ_LOCAL_ADDRESS` binding (bypass VPN) |
 | `src/heroes.ts`          | Loads `heroes_extend.json` + fuzzy name lookup |
+| `src/logger.ts`          | Patches `console.*` to also append to `logs/backend.log` |
+| `src/observability/log.ts` | `log(scope, msg)` / `logError(...)` — tags every line with a `[scope]` |
+| `src/observability/sessionLog.ts` | `attachSessionDiagnostics(session)` — narrates the full turn lifecycle (speech → commit → response started → done+status, transcription failures, rate limits) so a stall is visible by the missing step |
 
 ## Data (`data/`)
 

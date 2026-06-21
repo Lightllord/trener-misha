@@ -3,8 +3,9 @@ import type { PttMode, PttSettings } from "./types/ptt";
 
 type GateListener = (open: boolean) => void;
 
-// Owns the mic-gate state and the hold/toggle mode. Key events come from the
-// Electron main process (global hook) via pressDown/pressUp — this class never
+// Owns the mic-gate state and the hold/toggle mode. Key presses are fed in via
+// pressDown/pressUp — from the global hook (window unfocused) or the renderer's
+// own key listener (window focused); the two never overlap. This class never
 // touches the keyboard or audio itself. Settings persist to localStorage.
 export class PttController {
   private settings: PttSettings;
@@ -20,9 +21,8 @@ export class PttController {
     return { ...this.settings };
   }
 
-  setBinding(keycode: number, label: string): void {
-    this.settings.keycode = keycode;
-    this.settings.label = label;
+  setCode(code: string): void {
+    this.settings.code = code;
     saveSettings(this.settings);
   }
 
@@ -33,7 +33,6 @@ export class PttController {
     this.setOpen(false);
   }
 
-  // Enable while connected; starts closed (muted).
   enable(): void {
     this.active = true;
     this.heldDown = false;

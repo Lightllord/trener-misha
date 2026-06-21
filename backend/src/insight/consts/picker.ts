@@ -2,6 +2,10 @@ import type { InsightImportance } from "../types/insight.js";
 
 export const PICKER_MODEL = "gpt-5.4-nano";
 
+// Dispatch is a fast JSON classification — keep reasoning light. ("minimal" is
+// rejected by gpt-5.4-nano; valid values are none/low/medium/high/xhigh.)
+export const PICKER_REASONING_EFFORT = "low";
+
 export const PICKER_TIMEOUT_MS = 10_000;
 
 export const IMPORTANCE_RANK: Record<InsightImportance, number> = {

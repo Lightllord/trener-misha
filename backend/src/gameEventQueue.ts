@@ -1,5 +1,6 @@
 import { diffStates } from "./stateDiff.js";
 import { addInsight } from "./insight/store.js";
+import { log } from "./observability/log.js";
 import type { InsightName } from "./insight/types/insight.js";
 
 const MISSING_THRESHOLD_S = 60;
@@ -104,7 +105,6 @@ export function processStateUpdate(
 
   const events = diffStates(prev, curr);
   for (const e of events) {
-    console.log(`[events] ${e.type}: ${e.summary}`);
     if (e.type === "player_died") {
       const c = curr as {
         player?: { kills?: number; deaths?: number; assists?: number };

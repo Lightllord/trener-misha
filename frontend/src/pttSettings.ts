@@ -10,15 +10,13 @@ export function loadSettings(): PttSettings {
       return { ...DEFAULT_PTT_SETTINGS };
     }
     const rec = parsed as Record<string, unknown>;
-    const keycode =
-      typeof rec.keycode === "number" ? rec.keycode : DEFAULT_PTT_SETTINGS.keycode;
-    const label =
-      typeof rec.label === "string" ? rec.label : DEFAULT_PTT_SETTINGS.label;
+    const code =
+      typeof rec.code === "string" ? rec.code : DEFAULT_PTT_SETTINGS.code;
     const mode: PttMode =
       rec.mode === "hold" || rec.mode === "toggle"
         ? rec.mode
         : DEFAULT_PTT_SETTINGS.mode;
-    return { keycode, label, mode };
+    return { code, mode };
   } catch {
     return { ...DEFAULT_PTT_SETTINGS };
   }
@@ -30,4 +28,38 @@ export function saveSettings(settings: PttSettings): void {
   } catch {
     // localStorage unavailable — settings just won't persist
   }
+}
+
+// A readable label for a KeyboardEvent.code (e.g. "KeyV" → "V", "Digit1" → "1").
+export function labelForCode(code: string): string {
+  const letter = /^Key([A-Z])$/.exec(code);
+  if (letter) return letter[1];
+  const digit = /^Digit([0-9])$/.exec(code);
+  if (digit) return digit[1];
+  const named: Record<string, string> = {
+    Space: "Space",
+    ArrowLeft: "←",
+    ArrowRight: "→",
+    ArrowUp: "↑",
+    ArrowDown: "↓",
+  };
+  return named[code] ?? code;
+}
+
+// KeyboardEvent.code → UiohookKey name (most match already; letters/digits don't).
+export function codeToUiohookName(code: string): string {
+  const letter = /^Key([A-Z])$/.exec(code);
+  if (letter) return letter[1];
+  const digit = /^Digit([0-9])$/.exec(code);
+  if (digit) return digit[1];
+  return code;
+}
+
+export function isTypingTarget(target: EventTarget | null): boolean {
+  return (
+    target instanceof HTMLElement &&
+    (target.tagName === "INPUT" ||
+      target.tagName === "TEXTAREA" ||
+      target.isContentEditable)
+  );
 }

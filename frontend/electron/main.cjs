@@ -3,22 +3,22 @@ const path = require("node:path");
 const { uIOhook, UiohookKey } = require("uiohook-napi");
 
 const DEV_URL = "http://localhost:5173";
-const DEFAULT_KEYCODE = UiohookKey.F8;
-
-// code → label for display (invert UiohookKey's name → code map).
-const KEY_LABEL = {};
-for (const [name, code] of Object.entries(UiohookKey)) {
-  if (typeof code === "number" && !(code in KEY_LABEL)) KEY_LABEL[code] = name;
-}
-const labelFor = (code) => KEY_LABEL[code] ?? `Key${code}`;
-const binding = (code) => ({ keycode: code, label: labelFor(code) });
 
 let win = null;
-let boundKeycode = DEFAULT_KEYCODE;
-let captureResolve = null;
+// Keycode the global hook watches. -1 = nothing (renderer sets it on startup).
+let boundKeycode = -1;
 
 function send(channel) {
-  win?.webContents.send(channel);
+  // Guard hard: a throw here would propagate into uiohook's native callback and
+  // can stop further event delivery (hook goes dead). Never let it throw.
+  try {
+    if (win && !win.isDestroyed()) {
+      const wc = win.webContents;
+      if (wc && !wc.isDestroyed()) wc.send(channel);
+    }
+  } catch (err) {
+    console.error("[ptt] send failed:", err);
+  }
 }
 
 function createWindow() {
@@ -44,40 +44,44 @@ function createWindow() {
   });
 }
 
-// uiohook is a passive listener — it reports keys globally without swallowing
-// them, so the bound key still reaches the game.
+// The global hook fires only while the app window is NOT focused. When Chromium
+// has focus it grabs raw keyboard input (Raw Input API — aggravated by an active
+// getUserMedia), so this low-level WH_KEYBOARD_LL hook never sees the keys. That
+// case is handled by the renderer's own key listener instead; the two cover
+// disjoint focus states. The hook is passive — it doesn't swallow the key, so
+// the bound key still reaches the game.
+// Refs: github.com/wilix-team/iohook/issues/147 ; magpcss.org CEF forum t=19607
 uIOhook.on("keydown", (e) => {
-  if (captureResolve !== null) {
-    boundKeycode = e.keycode;
-    const resolve = captureResolve;
-    captureResolve = null;
-    resolve(binding(boundKeycode));
-    return;
+  try {
+    if (e.keycode === boundKeycode) send("ptt:down");
+  } catch (err) {
+    console.error("[ptt] keydown handler error:", err);
   }
-  if (e.keycode === boundKeycode) send("ptt:down");
 });
 
 uIOhook.on("keyup", (e) => {
-  if (e.keycode === boundKeycode && captureResolve === null) send("ptt:up");
+  try {
+    if (e.keycode === boundKeycode) send("ptt:up");
+  } catch (err) {
+    console.error("[ptt] keyup handler error:", err);
+  }
 });
 
-// Renderer sends its stored keycode on startup (null on first run → default).
-// Returns the resolved binding so the renderer can show/persist the label.
+ipcMain.handle("ptt:keymap", () => ({ ...UiohookKey }));
+
 ipcMain.handle("ptt:set-key", (_event, keycode) => {
-  if (typeof keycode === "number") boundKeycode = keycode;
-  return binding(boundKeycode);
-});
-
-// Resolves with the next key the user presses, and adopts it as the binding.
-ipcMain.handle("ptt:capture-next", () => {
-  return new Promise((resolve) => {
-    captureResolve = resolve;
-  });
+  boundKeycode = typeof keycode === "number" ? keycode : -1;
+  console.log(`[ptt] global hook watching keycode=${boundKeycode}`);
 });
 
 app.whenReady().then(() => {
   createWindow();
-  uIOhook.start();
+  try {
+    uIOhook.start();
+    console.log("[ptt] global keyboard hook started");
+  } catch (err) {
+    console.error("[ptt] FAILED to start keyboard hook:", err);
+  }
 });
 
 app.on("activate", () => {

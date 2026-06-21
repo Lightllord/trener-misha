@@ -1,3 +1,4 @@
+import { log } from "../observability/log.js";
 import { INSIGHT_CONFIGS } from "./consts/insights.js";
 import type {
   Insight,
@@ -40,6 +41,7 @@ export function addInsight(name: InsightName, payload: string): Insight | null {
     importance: config.importance,
     createdAt: Date.now(),
   };
+  log("insight", `PUSHED: ${insight.name}: ${insight.importance}: ${insight.description}`);
   insights.push(insight);
   return insight;
 }
