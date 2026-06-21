@@ -40,8 +40,8 @@ async function start() {
     console.log("[desktop] Vite already running — reusing :5173 (left running on exit)");
   } else {
     console.log("[desktop] starting Vite…");
-    // Spawn Vite as a plain node child (single process) so .kill() is reliable.
-    vite = spawn(process.execPath, [require.resolve("vite/bin/vite.js")], {
+    // Spawn Vite via its package bin entry — compatible with Vite 5 and 6.
+    vite = spawn(process.execPath, ["node_modules/vite/bin/vite.js"], {
       stdio: "inherit",
     });
     if (!(await waitForVite())) {

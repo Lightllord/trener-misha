@@ -9,6 +9,7 @@ import type {
   NeutralItemState,
   BuildingState,
   HeroPositions,
+  OtherPlayerState,
   RawGsiPayload,
   RawAbility,
   RawItem,
@@ -129,13 +130,12 @@ export class MatchStateManager {
       },
 
       player: parsePlayer(raw.player),
-      hero: parseHero(raw.hero),
-      abilities: parseAbilities(raw.abilities),
-      inventory: parseInventory(raw.items),
+      hero: parseHero(raw.hero, raw.abilities, raw.items),
 
       allyBuildings,
       enemyBuildings,
       heroPositions: this.heroPositions,
+      otherHeroes: [],
     }
   }
 
@@ -353,7 +353,11 @@ function parsePlayer(raw?: RawGsiPayload["player"]): PlayerState {
   }
 }
 
-function parseHero(raw?: RawGsiPayload["hero"]): HeroState {
+function parseHero(
+  raw?: RawGsiPayload["hero"],
+  rawAbilities?: Record<string, RawAbility>,
+  rawItems?: Record<string, RawItem>,
+): HeroState {
   return {
     id: raw?.id ?? 0,
     name: raw?.name ?? "",
@@ -396,6 +400,8 @@ function parseHero(raw?: RawGsiPayload["hero"]): HeroState {
       raw?.talent_8 ?? false,
     ],
     attributesLevel: raw?.attributes_level ?? 0,
+    abilities: rawAbilities ? parseAbilities(rawAbilities) : undefined,
+    inventory: parseInventory(rawItems),
   }
 }
 
@@ -464,6 +470,54 @@ function updateHeroPositions(
   }
 
   return next
+}
+
+export function otherPlayerToHeroState(p: OtherPlayerState): HeroState {
+  const emptyStatus = {
+    silenced: false, stunned: false, disarmed: false, magicImmune: false,
+    hexed: false, muted: false, break: false, smoked: false, hasDebuff: false,
+  }
+  return {
+    id: 0,
+    name: p.heroName,
+    facet: 0,
+    level: p.level,
+    xp: 0,
+    alive: true,
+    respawnSeconds: 0,
+    health: 0,
+    maxHealth: 0,
+    healthPercent: 0,
+    mana: 0,
+    maxMana: 0,
+    manaPercent: 0,
+    position: { x: 0, y: 0 },
+    zone: "",
+    buybackCost: 0,
+    buybackCooldown: 0,
+    status: emptyStatus,
+    aghanimsScepter: false,
+    aghanimsShard: false,
+    talents: [false, false, false, false, false, false, false, false],
+    attributesLevel: 0,
+    team: p.team,
+    slot: p.slot,
+    inventory: {
+      main: p.items
+        .filter(name => name !== "empty")
+        .map(name => ({
+          name,
+          level: 0,
+          canCast: false,
+          cooldown: 0,
+          maxCooldown: 0,
+          passive: false,
+        })),
+      stash: [],
+      teleport: null,
+      neutral: null,
+    },
+  }
 }
 
 function parseInventory(raw?: Record<string, RawItem>): InventoryState {

@@ -2,8 +2,9 @@ import "./logger.js";
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { MatchStateManager } from "./match-state.js";
+import { MatchStateManager, otherPlayerToHeroState } from "./match-state.js";
 import { DraftDetector } from "./draft-detector.js";
+import { PlayerDetector } from "./player-detector.js";
 import { probePython } from "./python-runtime.js";
 import type { RawGsiPayload } from "./types.js";
 
@@ -12,6 +13,10 @@ const BACKEND_URL = "http://localhost:3000";
 
 const matchState = new MatchStateManager();
 const draftDetector = new DraftDetector();
+const playerDetector = new PlayerDetector(
+  2,
+  () => matchState.current?.heroPositions ?? {},
+);
 
 let stopTimeoutId: ReturnType<typeof setTimeout> | null = null;
 let backendDown = false;
@@ -64,6 +69,15 @@ matchState.onPhaseChange((newPhase, prevPhase) => {
       stopTimeoutId = null;
     }, 5000);
   }
+
+  if (newPhase === "playing") {
+    playerDetector.reset();
+    playerDetector.start();
+  }
+
+  if (prevPhase === "playing") {
+    playerDetector.stop();
+  }
 });
 
 function parseBody(req: IncomingMessage): Promise<string> {
@@ -114,6 +128,7 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
       // Push state to backend after every GSI update
       const state = matchState.current;
       if (state) {
+        state.otherHeroes = playerDetector.getOtherPlayers().map(otherPlayerToHeroState);
         pushToBackend("/push/state", state);
       }
 

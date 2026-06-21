@@ -17,6 +17,7 @@ import {
 } from "./conversation/log.js";
 import { PICKER_CONTEXT_WINDOW_MS } from "./conversation/consts/log.js";
 import { setDraft, setState, getState, clearGameData } from "./gameData.js";
+import { formatMatchSnapshot } from "./matchSnapshot.js";
 import { processStateUpdate, clearEventQueue } from "./gameEventQueue.js";
 
 process.on("unhandledRejection", (err) => {
@@ -59,6 +60,10 @@ app.post("/push/state", (req, res) => {
   setState(body);
   if (prev) {
     processStateUpdate(prev, body);
+  }
+  const others = Array.isArray(body["otherPlayers"]) ? body["otherPlayers"] as unknown[] : [];
+  if (others.length > 0) {
+    console.log(`[push/state] otherPlayers: ${others.length}`, JSON.stringify(others));
   }
   res.json({ status: "ok" });
 });
@@ -179,7 +184,9 @@ wss.on("connection", async (ws) => {
       if (insight === null) return;
       const tail = insight.number !== null ? ` #${insight.number}` : "???";
       console.log(`[deliver] insight: ${insight.name}${tail}`);
-      injectMessage(picker.formatForInjection(insight), true);
+      const snapshot = formatMatchSnapshot(getState());
+      const text = snapshot ? `${picker.formatForInjection(insight)}\n${snapshot}` : picker.formatForInjection(insight);
+      injectMessage(text, true);
     }
 
     new DebouncedPoll(deliveryWindow, tryDeliverInsight);

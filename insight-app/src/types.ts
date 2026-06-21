@@ -28,8 +28,6 @@ export interface MatchState {
 
   player: PlayerState
   hero: HeroState
-  abilities: AbilityState[]
-  inventory: InventoryState
 
   /** Здания нашей команды — HP из GSI buildings + destroyed из minimap */
   allyBuildings: BuildingState[]
@@ -38,6 +36,18 @@ export interface MatchState {
 
   /** Позиции героев с minimap. Для невидимых врагов хранится последняя известная позиция */
   heroPositions: HeroPositions
+
+  /** Остальные герои в матче из CV. abilities отсутствуют, inventory только с именами предметов */
+  otherHeroes: HeroState[]
+}
+
+/** Внутренний формат CV-детектора — не входит в MatchState напрямую */
+export interface OtherPlayerState {
+  heroName: string
+  team: "radiant" | "dire"
+  slot: number
+  level: number
+  items: string[]
 }
 
 /** Статистика игрока */
@@ -111,6 +121,16 @@ export interface HeroState {
   /** talent_1..talent_8 — true = взят */
   talents: boolean[]
   attributesLevel: number
+
+  /** Только для чужих героев (из CV): команда и слот */
+  team?: "radiant" | "dire"
+  slot?: number
+
+  /** Только для героя игрока: способности из GSI */
+  abilities?: AbilityState[]
+
+  /** Инвентарь. Для чужих героев — только имена предметов, остальные поля нулевые */
+  inventory: InventoryState
 }
 
 /** Способность героя */

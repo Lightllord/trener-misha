@@ -11,20 +11,21 @@ interface PlayerData {
   gpm?: number;
 }
 
-interface HeroData {
-  level?: number;
-  alive?: boolean;
-  respawnSeconds?: number;
-  aghanimsScepter?: boolean;
-  aghanimsShard?: boolean;
-}
-
 interface ItemSlotData {
   name?: string;
 }
 
 interface InventoryData {
   main?: ItemSlotData[];
+}
+
+interface HeroData {
+  level?: number;
+  alive?: boolean;
+  respawnSeconds?: number;
+  aghanimsScepter?: boolean;
+  aghanimsShard?: boolean;
+  inventory?: InventoryData;
 }
 
 interface BuildingData {
@@ -39,7 +40,6 @@ interface MatchStateData {
   score?: { radiant?: number; dire?: number };
   player?: PlayerData;
   hero?: HeroData;
-  inventory?: InventoryData;
   allyBuildings?: BuildingData[];
   enemyBuildings?: BuildingData[];
 }
@@ -166,8 +166,8 @@ export function diffStates(
   }
 
   // Item purchased
-  const prevItems = itemMultiset(p.inventory?.main ?? []);
-  const currItems = itemMultiset(c.inventory?.main ?? []);
+  const prevItems = itemMultiset(p.hero?.inventory?.main ?? []);
+  const currItems = itemMultiset(c.hero?.inventory?.main ?? []);
   for (const [name, count] of currItems) {
     const prevCount = prevItems.get(name) ?? 0;
     if (count > prevCount) {
