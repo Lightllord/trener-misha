@@ -1,0 +1,134 @@
+{
+  "heroName": "Clinkz",
+  "innateAbility": {
+    "name": "Infernal Shred",
+    "hotkey": "",
+    "description": "Attacks now apply an armor piercing stacking debuff that affects the armor damage factor.Only affects attack damage sourced to Clinkz' and his Skeleton Archers.",
+    "type": "Passive",
+    "traits": {
+      "Max Armor Piercing Bonus": "20%",
+      "Duration": "5"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Strafe",
+      "hotkey": "Q",
+      "description": "Applies a bonus attack speed and bonus attack range buff to Clinkz and his Archers within the radius upon cast.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Attack Speed Bonus": "120/160/200/240 (With level 20 Right Talent 160/200/240/280)",
+        "Attack Range Bonus": "200",
+        "Duration": "3.5 (With level 10 Right Talent 4.5)",
+        "Archer Attack Speed Bonus Factor": "0.4",
+        "Cooldown": "30/25/20/15 ( 21/16/11/6)",
+        "Mana Cost": "60/70/80/90"
+      }
+    },
+    {
+      "name": "Searing Arrows",
+      "hotkey": "W",
+      "description": "Imbues Clinkz' and his Skeleton Archers' arrows with spell damage bonus.",
+      "type": "Autocast / Unit",
+      "traits": {
+        "Cast Animation": "0.4 + 0.3",
+        "Cast Range": "600 (With level 15 Right Talent 650)",
+        "Spell Damage Bonus": "20/35/50/65",
+        "Building Damage Factor": "1",
+        "Archer Spell Damage Bonus": "0.5",
+        "Mana Cost": "10"
+      }
+    },
+    {
+      "name": "Death Pact",
+      "hotkey": "E",
+      "description": "Consumes the targeted unit, self-healing and gaining max health.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.47",
+        "Cast Range": "700",
+        "Self Max Health Bonus": "175/250/325/400 (With level 20 Left Talent 575/650/725/800)",
+        "Health Bonus as Self Heal": "100%",
+        "Cooldown": "0",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Burning Army",
+      "hotkey": "D",
+      "description": "Summons an array of fiery Skeleton Archers toward the point-targeted direction.",
+      "type": "Point / Vector",
+      "traits": {
+        "Cast Animation": "0 + 0.67",
+        "Cast Range": "600",
+        "Cooldown": "70",
+        "Mana Cost": "150"
+      }
+    },
+    {
+      "name": "Burning Barrage",
+      "hotkey": "F",
+      "description": "Channels and shoots multiple piercing arrows in the target direction that hit all enemy units for a portion of Clinkz' attack damage while applying attack modifiers.",
+      "type": "Point / Channeled",
+      "traits": {
+        "Cast Animation": "0.2 + 0",
+        "Cast Range": "850 (With level 15 Right Talent 900)",
+        "Instant Attack Damage Factor": "0.75",
+        "Cooldown": "17",
+        "Mana Cost": "40"
+      }
+    },
+    {
+      "name": "Skeleton Walk",
+      "hotkey": "R",
+      "description": "Clinkz moves nimbly and invisibly through units until the moment he attacks or uses items.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Move Speed Bonus": "25%/35%/45%",
+        "Current Hit Count as Damage": "100%",
+        "Attack Damage to Archer Damage": "0.2",
+        "Duration": "20/25/30",
+        "Building Damage Factor": "0.25",
+        "Cooldown": "24/21/18 ( 20/17/14)",
+        "Mana Cost": "80/105/130"
+      }
+    },
+    {
+      "name": "Skeleton Archer (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Searing Arrows Multishot",
+      "right": "-9s Strafe Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "+400 Death Pact Health",
+      "right": "+40 Strafe Attack Speed"
+    },
+    {
+      "level": 15,
+      "left": "-10s Death Pact Restore Time",
+      "right": "+50 Attack Range"
+    },
+    {
+      "level": 10,
+      "left": "-4s Skeleton Walk Cooldown",
+      "right": "+1s Strafe Duration"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Escape",
+    "Pusher"
+  ],
+  "facets": []
+}

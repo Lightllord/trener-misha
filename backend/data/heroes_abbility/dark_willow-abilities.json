@@ -1,0 +1,125 @@
+{
+  "heroName": "Dark Willow",
+  "innateAbility": {
+    "name": "Pixie Dust",
+    "hotkey": "",
+    "description": "Grants a bonus factor to all health regeneration and mana regeneration sources applied to Mireska.",
+    "type": "Passive",
+    "traits": {
+      "Health Regen Factor": "2"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Bramble Maze",
+      "hotkey": "Q",
+      "description": "Creates a maze of brambles that grow in the area-targeted location after a short delay.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.3 + 0.8",
+        "Cast Range": "1000/1100/1200/1300",
+        "Damage Interval": "0.5",
+        "Damage per Instance": "50/55/60/65",
+        "Cooldown": "22 ( 15)",
+        "Mana Cost": "100/120/140/160"
+      }
+    },
+    {
+      "name": "Shadow Realm",
+      "hotkey": "W",
+      "description": "Recedes into the shadows and becomes untargetable. Mireska's next attack has increased attack range imbued with magical spell damage corresponding to the duration within the Shadow Realm.Attacking breaks the incantation and brings her back to the physical plane.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Attack Range Bonus": "600",
+        "Max Damage": "120/200/280/360",
+        "Duration": "5 (With level 20 Right Talent 6.5)",
+        "Cooldown": "21/19/17/15",
+        "Mana Cost": "80/90/100/110"
+      }
+    },
+    {
+      "name": "Cursed Crown",
+      "hotkey": "E",
+      "description": "Casts an ancient fae curse that stuns the affected enemy unit after a delay.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.4",
+        "Cast Range": "700",
+        "Cooldown": "17/15/13/11 ( 15.5/13.5/11.5/9.5)",
+        "Mana Cost": "80/90/100/110"
+      }
+    },
+    {
+      "name": "Bedlam",
+      "hotkey": "D",
+      "description": "Summons her pet wisp, Jex, to roam around herselfJex damages the enemy unit within its range per orbit for the entire duration.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "900",
+        "Duration": "5.5 (With level 10 Right Talent 6.5)",
+        "Damage Interval": "0.25",
+        "Damage per Instance": "70/120/170 (With level 15 Right Talent 100/150/200)",
+        "Cooldown": "30",
+        "Mana Cost": "100/150/200"
+      }
+    },
+    {
+      "name": "Jex (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Terrorize",
+      "hotkey": "R",
+      "description": "Releases her pet wisp, Jex, after a short delay to terrorize and apply a fountain-fear on enemy units within the radius.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "1 + 2.57",
+        "Cast Range": "1200",
+        "Damage": " (With level 25 Left Talent 500)",
+        "Cooldown": "100/90/80 ( 80/70/60)",
+        "Mana Cost": "150"
+      }
+    },
+    {
+      "name": "Jex (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+500 Terrorize Impact Damage",
+      "right": "+2 Bedlam Attack Targets"
+    },
+    {
+      "level": 20,
+      "left": "-7s Bramble Maze Cooldown",
+      "right": "+1.5s Shadow Realm Duration"
+    },
+    {
+      "level": 15,
+      "left": "-20s Terrorize Cooldown",
+      "right": "+30 Bedlam Damage"
+    },
+    {
+      "level": 10,
+      "left": "+12 Intelligence",
+      "right": "+1s Bedlam Duration"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Nuker",
+    "Disabler",
+    "Escape"
+  ],
+  "facets": []
+}

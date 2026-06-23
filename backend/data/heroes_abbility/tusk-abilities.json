@@ -1,0 +1,137 @@
+{
+  "heroName": "Tusk",
+  "innateAbility": {
+    "name": "Bitter Chill",
+    "hotkey": "",
+    "description": "Applies an attack speed slow on all enemy units within the radius.",
+    "type": "Passive",
+    "traits": {
+      "Radius": "350"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Ice Shards",
+      "hotkey": "Q",
+      "description": "Throws a ball of frozen energy that damages all enemy units it comes in contact with.When the ball its point-targeted location, the shards are released, creating a temporary path blocker.",
+      "type": "Point / Aura",
+      "traits": {
+        "Cast Animation": "0.1 + 0",
+        "Cast Range": "1400",
+        "Damage Radius": "200",
+        "Damage": "75/150/225/300",
+        "Damage per Second": "100",
+        "Cooldown": "23/20/17/14",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Snowball",
+      "hotkey": "W",
+      "description": "Tusk begins rolling into a snowball, and exposes the unit-targeted enemy during its hold duration.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.1 + 0.5",
+        "Cast Range": "1150",
+        "Cooldown": "21/19/17/15 ( 15/13/11/9)",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Launch Snowball",
+      "hotkey": "W",
+      "description": "Launch the snowball toward the target.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Base Damage": "80/140/200/260 (With level 15 Left Talent 200/260/320/380)",
+        "Spell Damage Bonus": "40/65/90/115",
+        "Stun Duration Bonus": "0.2",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Tag Team",
+      "hotkey": "E",
+      "description": "Creates a negative debuff aura around Tusk, causing enemy units that are attacked under it to have reduced movement speed.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Radius": "350",
+        "Attack Damage Bonus": "25/50/75/100",
+        "Cooldown": "24/21/18/15",
+        "Mana Cost": "70"
+      }
+    },
+    {
+      "name": "Drinking Buddies",
+      "hotkey": "E",
+      "description": "Reaches out to tag an allied unit and pulls them closer.Grants both Tusk and the tagged ally bonus movement speed and bonus armor once tagged.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.1 + 0",
+        "Cast Range": "1000",
+        "Move Speed Bonus": "25%",
+        "Armor Bonus": "7",
+        "Cooldown": "14",
+        "Mana Cost": "80"
+      }
+    },
+    {
+      "name": "Walrus Kick",
+      "hotkey": "D",
+      "description": "Kicks the closest enemy unit in a targeted direction, stunning, damaging, and slowing them.Upon the affected unit landing, Tusk deals damage to all enemy heroes within the landing radius.",
+      "type": "Unit / Vector",
+      "traits": {
+        "Cast Animation": "0.2 + 1.3",
+        "Cast Range": "250",
+        "Damage Radius": "250",
+        "Damage": "550",
+        "Cooldown": "12",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Walrus PUNCH!",
+      "hotkey": "R",
+      "description": "Applies a critical strike so powerful it launches its victim into the air.",
+      "type": "Autocast / Active Attack Modifier / Passive",
+      "traits": {
+        "Cast Animation": "0.36 + 0.64",
+        "Cast Range": "150",
+        "Attack Damage Bonus": "60/90/120",
+        "Crit Damage": "250%/325%/400% (With level 20 Left Talent 325%/400%/475%)",
+        "Cooldown": "16/13/10",
+        "Mana Cost": "75"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "12% Walrus PUNCH! Chance",
+      "right": "Ice Shards Negative Aura"
+    },
+    {
+      "level": 20,
+      "left": "+75% Walrus PUNCH! Critical Damage",
+      "right": "-6s Snowball Cooldown"
+    },
+    {
+      "level": 15,
+      "left": "+120 Snowball Damage",
+      "right": "+325 Health"
+    },
+    {
+      "level": 10,
+      "left": "+0.75s Walrus PUNCH! Stun Duration",
+      "right": "+2s Tag Team Duration"
+    }
+  ],
+  "roles": [
+    "Initiator",
+    "Disabler",
+    "Nuker"
+  ],
+  "facets": []
+}

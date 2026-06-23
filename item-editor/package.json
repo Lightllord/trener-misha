@@ -1,0 +1,10 @@
+{
+  "name": "item-editor",
+  "private": true,
+  "scripts": {
+    "dev": "tsx server.ts"
+  },
+  "dependencies": {
+    "tsx": "*"
+  }
+}

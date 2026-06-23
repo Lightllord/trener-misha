@@ -1,0 +1,98 @@
+{
+  "heroName": "Earthshaker",
+  "innateAbility": {
+    "name": "Slugger",
+    "hotkey": "",
+    "description": "Turns enemy heroes killed into projectiles that that travel in a straight line from its origin position, and deals damage to all enemy units it passes through.",
+    "type": "Passive",
+    "traits": {
+      "Damage": "27",
+      "Hero Damage": "15",
+      "Creep Damage": "3"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Fissure",
+      "hotkey": "Q",
+      "description": "Slams the ground with a mighty totem, creating an impassable ridge of stone while stunning and damaging enemy units along its line.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.69 + 0",
+        "Cast Range": "1600 (With level 15 Right Talent 1800)",
+        "Damage Radius": "225",
+        "Damage": "100/160/220/280 (With level 10 Left Talent 175/235/295/355)",
+        "Cooldown": "18/17/16/15 ( 16/15/14/13)",
+        "Mana Cost": "115/120/125/130"
+      }
+    },
+    {
+      "name": "Enchant Totem",
+      "hotkey": "W",
+      "description": "Empowers Earthshaker's totem, causing it to deal extra damage and grants bonus attack range on the next attack.",
+      "type": "No / Unit / Area",
+      "traits": {
+        "Cast Animation": "0.5 + 0.48",
+        "Attack Range Bonus": "100",
+        "Attack Damage Bonus": "100%/200%/300%/400% (With level 20 Left Talent 165%/265%/365%/465%)",
+        "Duration": "14",
+        "Cast Range": "950",
+        "Cleave Damage": "(Upgradable by Aghanim's Scepter. 40%)",
+        "Cooldown": "5 ( 3.5)",
+        "Mana Cost": "45/55/65/75"
+      }
+    },
+    {
+      "name": "Aftershock",
+      "hotkey": "E",
+      "description": "Causes the earth to shake underfoot, adding additional damage and stuns to nearby enemy units when Earthshaker casts his abilities.",
+      "type": "Passive",
+      "traits": {
+        "Radius": "350",
+        "Proc Damage": "65/90/115/140 (With level 15 Left Talent 115/140/165/190)"
+      }
+    },
+    {
+      "name": "Echo Slam",
+      "hotkey": "R",
+      "description": "Creates shockwaves that travel through the ground, damaging enemy units. Affected enemy heroes releases two echos.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 1.33",
+        "Base Damage": "100/140/180",
+        "Echo Damage": "70/90/110 (With level 20 Right Talent 120/140/160)",
+        "Cooldown": "130/120/110 ( 65/60/55)",
+        "Mana Cost": "150/200/250"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-1.5s Enchant Totem Cooldown",
+      "right": "-50% Echo Slam Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "+65% Enchant Totem Attack Damage",
+      "right": "+50 Echo Slam Damage"
+    },
+    {
+      "level": 15,
+      "left": "+50 Aftershock Damage",
+      "right": "+200 Fissure Range"
+    },
+    {
+      "level": 10,
+      "left": "+75 Fissure Damage",
+      "right": "+25 Base Damage"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Initiator",
+    "Disabler",
+    "Nuker"
+  ],
+  "facets": []
+}

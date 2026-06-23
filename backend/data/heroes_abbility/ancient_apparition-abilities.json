@@ -1,0 +1,109 @@
+{
+  "heroName": "Ancient Apparition",
+  "innateAbility": {
+    "name": "Bone Chill",
+    "hotkey": "",
+    "description": "Applies a movement speed slow debuff to all enemy units affected by Kaldr's abilities.",
+    "type": "Passive",
+    "traits": {
+      "Duration": "4"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Cold Feet",
+      "hotkey": "Q",
+      "description": "Places a frozen hex on an enemy unit that can be dispelled by moving away from the initial cast point.If the enemy unit doesn't move out of the given distance within a period of time, it will be stunned and frozen in place.",
+      "type": "Unit / Area",
+      "traits": {
+        "Cast Animation": "0.01 + 0",
+        "Cast Range": "700/800/900/1000",
+        "Damage per Second": "25/45/65/85 (With level 10 Left Talent 55/75/95/115)",
+        "Damage Duration": "4",
+        "Cooldown": "15/13/11/9",
+        "Mana Cost": "110/115/120/125"
+      }
+    },
+    {
+      "name": "Ice Vortex",
+      "hotkey": "W",
+      "description": "Applies a movement speed slow and magic resistance reduction to enemy units within its radius.",
+      "type": "Area / Aura",
+      "traits": {
+        "Cast Animation": "0.01 + 0",
+        "Cast Range": "1200",
+        "Damage per Second": "10/20/30/40",
+        "Duration": "0.50625",
+        "Cooldown": "10/8/6/4 ( 8/6/4/2)",
+        "Mana Cost": "40/55/70/85"
+      }
+    },
+    {
+      "name": "Chilling Touch",
+      "hotkey": "E",
+      "description": "Enhances Kaldr's attack with increased attack range, heavy magic damage, and movement speed slow.",
+      "type": "Autocast / Active Attack Modifier",
+      "traits": {
+        "Cast Animation": "0.45 + 0.3",
+        "Cast Range": "735/765/795/825 (With level 10 Right Talent 1035/1065/1095/1125)",
+        "Damage": "35/65/95/125 (With level 20 Left Talent 135/165/195/225)",
+        "Cooldown": "10/7.5/5/2.5 ( 0)",
+        "Mana Cost": "35"
+      }
+    },
+    {
+      "name": "Ice Blast",
+      "hotkey": "R",
+      "description": "Launches a tracer toward any location, which must be triggered again to mark the final point-targeted location, this area will be blasted by a damaging explosion of hail.The further the tracer travels, the larger the explosion radius.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.01 + 1.07",
+        "Cast Range": "Global",
+        "First Damage": "250/325/400",
+        "Damage per Second": "12/24/46",
+        "Health Kill Threshold": "12%/13%/14% (With level 25 Left Talent 16%/17%/18%)",
+        "Freeze Health Duration": "10/11/12 (With level 20 Right Talent 14/15/16)",
+        "Cooldown": "60/50/40",
+        "Mana Cost": "175"
+      }
+    },
+    {
+      "name": "Release",
+      "hotkey": "R",
+      "description": "Marks the final point-targeted location, and releases the ice blast.The tracer now will explode at the final location.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.01 + 1.1",
+        "Cooldown": "1"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+4% Ice Blast Health Kill Threshold",
+      "right": "450 Radius Cold Feet"
+    },
+    {
+      "level": 20,
+      "left": "+100 Chilling Touch Damage",
+      "right": "+4s Ice Blast Duration"
+    },
+    {
+      "level": 15,
+      "left": "+250 Cold Feet Break Radius",
+      "right": "-2s Ice Vortex Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "+30 Cold Feet Damage per Second",
+      "right": "+300 Chilling Touch Attack Range"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Disabler",
+    "Nuker"
+  ],
+  "facets": []
+}

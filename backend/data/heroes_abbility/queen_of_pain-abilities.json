@@ -1,0 +1,101 @@
+{
+  "heroName": "Queen of Pain",
+  "innateAbility": {
+    "name": "Succubus",
+    "hotkey": "",
+    "description": "The closer the enemy units, the stronger the Akasha's spell lifesteal for herself will be.",
+    "type": "Passive",
+    "traits": {
+      "Min Bonus Radius": "800",
+      "Min Spell Lifesteal Bonus": "2%",
+      "Proximity Spell Lifesteal Bonus": "14%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Shadow Strike",
+      "hotkey": "Q",
+      "description": "Hurls a poisoned dagger that deals first damage to the unit-targeted enemy, then applies damage over time with a movement speed slow.",
+      "type": "Unit / Area",
+      "traits": {
+        "Cast Animation": "0.3 + 0.77",
+        "Cast Range": "450/500/550/600",
+        "First Damage": "50/80/110/140",
+        "Duration": "16",
+        "Damage per Instance": "20/40/60/80",
+        "Max Health Threshold": "25%",
+        "Attack Speed Bonus": " (With level 10 Right Talent 35)",
+        "Cooldown": "11/9/7/5",
+        "Mana Cost": "100/110/120/130"
+      }
+    },
+    {
+      "name": "Blink",
+      "hotkey": "W",
+      "description": "Short distance teleportation that allows Akasha to move in and out of combat.",
+      "type": "Point / Area",
+      "traits": {
+        "Cast Animation": "0.33 + 0.07",
+        "Cast Range": "Global",
+        "Radius": "(Upgradable by Aghanim's Shard. 300)",
+        "Damage": "(Upgradable by Aghanim's Shard. 125)",
+        "Cooldown": "12/10/8/6 ( 10/8/6/4)",
+        "Mana Cost": "65"
+      }
+    },
+    {
+      "name": "Scream of Pain",
+      "hotkey": "E",
+      "description": "Let loose a piercing scream around Akasha, damaging nearby enemies.",
+      "type": "No / Passive",
+      "traits": {
+        "Cast Animation": "0 + 0.63",
+        "Damage": "90/175/260/345 (With level 20 Right Talent 205/290/375/460)",
+        "Reflect Damage Factor": "0.25",
+        "Cooldown": "7.5/7/6.5/6",
+        "Mana Cost": "120"
+      }
+    },
+    {
+      "name": "Sonic Wave",
+      "hotkey": "R",
+      "description": "Creates a gigantic wave of sound in front of Akasha, dealing heavy damage to all enemy units in its wake and pushing them back.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.452 + 0.9",
+        "Cast Range": "700",
+        "Total Damage": "325/475/625 (With level 25 Left Talent 575/725/875)",
+        "Cooldown": "110/95/80 ( 65/50/35)",
+        "Mana Cost": "250/400/550"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+250 Sonic Wave Damage",
+      "right": "-2s Blink Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "-45s Sonic Wave Cooldown",
+      "right": "+115 Scream of Pain Damage"
+    },
+    {
+      "level": 15,
+      "left": "+30 Attack Damage",
+      "right": "-1s Shadow Strike Damage Interval"
+    },
+    {
+      "level": 10,
+      "left": "+7 Strength",
+      "right": "+35 Shadow Strike Attack Speed"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Nuker",
+    "Escape"
+  ],
+  "facets": []
+}

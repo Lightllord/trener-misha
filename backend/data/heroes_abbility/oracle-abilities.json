@@ -1,0 +1,130 @@
+{
+  "heroName": "Oracle",
+  "innateAbility": {
+    "name": "Prognosticate",
+    "hotkey": "",
+    "description": "Accurately predicts where the next Power Rune will spawn.",
+    "type": "Passive",
+    "traits": {}
+  },
+  "abilities": [
+    {
+      "name": "Fortune's End",
+      "hotkey": "Q",
+      "description": "Gathers his power into a bolt of scouring energy. Roots and dispels enemy units of buff within the radius when released.The potency of the root duration corresponds to the channel time.",
+      "type": "Unit / Channeled",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "850",
+        "Damage": "100/160/220/280 (With level 15 Right Talent 200/260/320/380)",
+        "Cooldown": "18/14/10/6",
+        "Mana Cost": "80"
+      }
+    },
+    {
+      "name": "Fate's Edict",
+      "hotkey": "W",
+      "description": "Enraptures the affected unit, disarms and set its magic resistance to the max value.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 1.1",
+        "Cast Range": "700",
+        "Duration": "3.5/4/4.5/5",
+        "Cooldown": "17/14/11/8",
+        "Mana Cost": "70"
+      }
+    },
+    {
+      "name": "Purifying Flames",
+      "hotkey": "E",
+      "description": "Deals damage to the affected unit before causing them to heal over time.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.1 + 1.15",
+        "Cast Range": "850",
+        "Damage": "90/180/270/360 (With level 15 Left Talent 112.5/225/337.5/450)",
+        "Heal per Second": "15/25/35/45",
+        "Duration": "10",
+        "Ally Damage": "90/180/270/360",
+        "Cooldown": "2.5 ( 1.5)",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Rain of Destiny",
+      "hotkey": "D",
+      "description": "Damages and applies an incoming heal reduction for all affected enemy units within an area-targeted location.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.2 + 1.07",
+        "Cast Range": "650",
+        "Radius": "650",
+        "Damage per Second": "30",
+        "Heal Reduction": "15%",
+        "Duration": "10",
+        "Heal per Second": "30",
+        "Heal Amp": "15%",
+        "Cooldown": "40",
+        "Mana Cost": "150"
+      }
+    },
+    {
+      "name": "Diviner's Deck",
+      "hotkey": "",
+      "description": "Grants self various bonus ability effects corresponding to the randomly selected card.The first buff granted is the current applied ability effects, whereas the second buff indicates the upcoming ability effects granted.",
+      "type": "Passive",
+      "traits": {
+        "Health Restore Amp": "40%",
+        "Barrier": "500",
+        "Barrier Regeneration Rate": "100",
+        "Int Bonus Factor": "2.5"
+      }
+    },
+    {
+      "name": "False Promise",
+      "hotkey": "R",
+      "description": "Applies a strong dispel on the affected allied hero upon cast.Delays certain health restoration sources and all incoming damage sources until the ability duration ends. Any healing that is delayed is doubled at the end of the duration.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.97",
+        "Cast Range": "700/800/900",
+        "Health Regen Counter Factor": "2",
+        "Heal Counter Factor": "2",
+        "Damage Counter Factor": "1",
+        "Duration": "7/8.5/10 (With level 25 Left Talent 8.5/10/11.5)",
+        "Armor Bonus": " (With level 10 Left Talent 8)",
+        "Cooldown": "110/85/60 ( 90/65/40)",
+        "Mana Cost": "100/150/200"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+1.5s False Promise Duration",
+      "right": "Fortune's End Constantly Basic Dispels"
+    },
+    {
+      "level": 20,
+      "left": "-1s Purifying Flames Cooldown",
+      "right": "-20s False Promise Cooldown"
+    },
+    {
+      "level": 15,
+      "left": "+25% Purifying Flames Enemy Damage",
+      "right": "+100 Fortune's End Radius"
+    },
+    {
+      "level": 10,
+      "left": "+8 False Promise Armor",
+      "right": "+0.5s Fortune's End Duration"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Nuker",
+    "Disabler",
+    "Escape"
+  ],
+  "facets": []
+}

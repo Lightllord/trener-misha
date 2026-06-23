@@ -1,0 +1,123 @@
+{
+  "heroName": "Meepo",
+  "innateAbility": null,
+  "abilities": [
+    {
+      "name": "Earthbind",
+      "hotkey": "Q",
+      "description": "Tosses a net at the target point, rooting down all enemy units within the radius.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "750/900/1050/1200",
+        "Radius": "220",
+        "Duration": "2",
+        "Net Bonus per Meepo Stacked": "(Upgradable by Aghanim's Scepter. 1)",
+        "Cooldown": "16/14/12/10 ( 14.5/12.5/10.5/8.5)",
+        "Mana Cost": "70/80/90/100"
+      }
+    },
+    {
+      "name": "Poof",
+      "hotkey": "W",
+      "description": "A Meepo can teleport to another Meepo or itself after its cast point, dealing damage in both the departure and arrival locations.",
+      "type": "Point / Unit",
+      "traits": {
+        "Cast Animation": "1.5 + 0 (With level 25 Left Talent 0.75 + 0)",
+        "Cast Range": "Global",
+        "Radius": "400",
+        "Damage": "50/80/110/140 (With level 15 Left Talent 90/120/150/180)",
+        "Damage Factor per Meepo Stacked": "(Upgradable by Aghanim's Scepter. 0.5)",
+        "Cooldown": "12/10/8/6",
+        "Mana Cost": "80"
+      }
+    },
+    {
+      "name": "Ransack",
+      "hotkey": "E",
+      "description": "Steals health from the attacked enemy target per strike and heals all other Meepos for a fixed amount.",
+      "type": "Passive",
+      "traits": {
+        "Damage": "7/10/13/16 (With level 20 Left Talent 13/16/19/22)"
+      }
+    },
+    {
+      "name": "Dig",
+      "hotkey": "D",
+      "description": "Dispels Meepo, becomes invulnerable and hidden shortly, while restoring its health.",
+      "type": "No / Channeled",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Max Health Restore": "25%",
+        "Duration": "3",
+        "Cooldown": "40",
+        "Mana Cost": "125"
+      }
+    },
+    {
+      "name": "MegaMeepo",
+      "hotkey": "F",
+      "description": "The Prime mounts all other lesser Meepos within the radius around him on top of his shoulders.While in this form, the other lesser Meepos share their attributes with the Prime.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Duration": "20",
+        "Net Bonus per Meepo Stacked": "1",
+        "Damage Factor per Meepo Stacked": "0.5",
+        "Cooldown": "90"
+      }
+    },
+    {
+      "name": "MegaMeepo Fling",
+      "hotkey": "F",
+      "description": "MegaMeepo flings the topmost Meepo towards a target, dealing damage and slowing their movement speed.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0",
+        "Cast Range": "900",
+        "Damage": "225",
+        "Cooldown": "0.5"
+      }
+    },
+    {
+      "name": "Divided We Stand",
+      "hotkey": "R",
+      "description": "Meepo Summons another Meepo, which levels up and shares items and experience with the main Meepo. Ability cooldowns are independent, but items share cooldowns between Meepos, except Teleport Scrolls.",
+      "type": "Passive",
+      "traits": {
+        "Current Health as Damage": "100%"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-0.75s Poof Cast Point",
+      "right": "+400 Health"
+    },
+    {
+      "level": 20,
+      "left": "+6 Ransack Health Steal",
+      "right": "Earthbind True Strike"
+    },
+    {
+      "level": 15,
+      "left": "+40 Poof Damage",
+      "right": "+15% Evasion"
+    },
+    {
+      "level": 10,
+      "left": "-1.5s Earthbind Cooldown",
+      "right": "+7 Strength"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Escape",
+    "Nuker",
+    "Disabler",
+    "Initiator",
+    "Pusher"
+  ],
+  "facets": []
+}

@@ -1,0 +1,124 @@
+{
+  "heroName": "Nature's Prophet",
+  "innateAbility": {
+    "name": "Spirit of the Forest",
+    "hotkey": "",
+    "description": "Grants the Prophet bonus base attack damage per tree within the proximity radius.",
+    "type": "Passive",
+    "traits": {
+      "Attack Damage Bonus per Tree": "2%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Sprout",
+      "hotkey": "Q",
+      "description": "Sprouts a ring of trees around a unit, trapping it in place, while providing a vision radius slightly larger than the tree ring radius.",
+      "type": "Point / Unit",
+      "traits": {
+        "Cast Animation": "0.35 + 0.44",
+        "Cast Range": "625/700/775/850",
+        "Duration": "2.5/3/3.5/4",
+        "Damage Radius": "275",
+        "Damage": "70/130/190/250 (With level 20 Left Talent 310/370/430/490)",
+        "Cooldown": "14/12/10/8",
+        "Mana Cost": "70/80/90/100"
+      }
+    },
+    {
+      "name": "Teleportation",
+      "hotkey": "W",
+      "description": "The Prophet may globally teleports to any point on the map.Grants the Prophet an all damage barrier upon a successful teleportation.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "3 + 0",
+        "Cast Range": "Global",
+        "Barrier": "70/130/190/250 (With level 15 Left Talent 170/230/290/350)",
+        "Duration": "15",
+        "Cooldown": "65/50/35/20 ( 0)",
+        "Mana Cost": "50/60/70/80"
+      }
+    },
+    {
+      "name": "Nature's Call",
+      "hotkey": "E",
+      "description": "Converts an area of trees into Treants under the command of the Prophet.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.5 + 1.23",
+        "Cast Range": "750",
+        "Hero Attack Damage Bonus": "6/10/14/18 (With level 25 Left Talent 18/30/42/54)",
+        "Health Bonus Factor": "3",
+        "Attack Damage Bonus": "3",
+        "Cooldown": "45/40/35/30 ( 35/30/25/20)",
+        "Mana Cost": "85/90/95/100"
+      }
+    },
+    {
+      "name": "Treant (Summoned   Creep)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {
+        "Health Bonus Factor": "3",
+        "Attack Damage Bonus": "3"
+      }
+    },
+    {
+      "name": "Curse of the Oldgrowth",
+      "hotkey": "D",
+      "description": "Applies an exposing debuff on all enemy heroes within the radius and slowing them.The debuff also deals damage over time based on the number of trees surrounding the affected enemy hero.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.2 + 0.6",
+        "Damage per Second per Tree": "15",
+        "Cooldown": "18",
+        "Mana Cost": "80"
+      }
+    },
+    {
+      "name": "Wrath of Nature",
+      "hotkey": "R",
+      "description": "A damaging energy that bounces around globally, striking enemy units close to the point-targeted location within the Prophet's vision radius.The damage increases incrementally per bounce.",
+      "type": "Point / Unit",
+      "traits": {
+        "Cast Animation": "0.5 + 0.97",
+        "Cast Range": "Global",
+        "Nth Bounce to Max Damage": "16",
+        "Base Damage": "100/140/180 (With level 10 Left Talent 125/165/205)",
+        "Damage Factor per Bounce": "1.1",
+        "Cooldown": "85 ( 65)",
+        "Mana Cost": "130/160/190"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "×3 Treant Health/Damage",
+      "right": "No Teleportation Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "+240 Sprout Damage",
+      "right": "-20s Wrath of Nature Cooldown"
+    },
+    {
+      "level": 15,
+      "left": "+100 Teleportation Damage Barrier",
+      "right": "+50 Treant Move Speed"
+    },
+    {
+      "level": 10,
+      "left": "+25 Wrath of Nature Base Damage",
+      "right": "-10s Nature's Call Cooldown"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Pusher",
+    "Escape",
+    "Nuker"
+  ],
+  "facets": []
+}

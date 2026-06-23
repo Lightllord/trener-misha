@@ -1,0 +1,102 @@
+{
+  "heroName": "Bloodseeker",
+  "innateAbility": {
+    "name": "Sanguivore",
+    "hotkey": "",
+    "description": "The seeker applies a lifesteal-based heal on itself corresponding to the max health of the killed unit.Denying allied heroes heal for the same amount.",
+    "type": "Passive",
+    "traits": {
+      "Enemy Hero Death Heal Radius": "300",
+      "Ally Kill Heal Factor": "0.5",
+      "Hero Max Health as Lifesteal Increase": "1"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Bloodrage",
+      "hotkey": "Q",
+      "description": "Grants self bonus attack speed and outgoing spell damage amplification at the cost of a percentage of his max health per second.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.2 + 0.4",
+        "Max Health as Self-Damage per Second": "1.2% (With level 15 Right Talent 0.5%)",
+        "Attack Speed Bonus": "55/80/105/130 (With level 10 Left Talent 85/110/135/160)",
+        "Spell Damage Amp": "15%/20%/25%/30%",
+        "Duration": "8",
+        "Max Health as Pure Damage": "(Upgradable by Aghanim's Shard. 1.5%)",
+        "Cooldown": "14/12/10/8"
+      }
+    },
+    {
+      "name": "Blood Rite",
+      "hotkey": "W",
+      "description": "The ritual completes after a delay, applying silence while damaging any enemy units within the radius.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.3 + 0.57",
+        "Cast Range": "1500",
+        "Radius": "600",
+        "Damage": "100/155/210/265 (With level 15 Left Talent 200/255/310/365)",
+        "Cooldown": "15/14/13/12",
+        "Mana Cost": "90/100/110/120"
+      }
+    },
+    {
+      "name": "Thirst",
+      "hotkey": "E",
+      "description": "Sensing blood of the mortally wounded, Bloodseeker gains bonus movement speed when an enemy hero's health falls below a certain threshold, with the bonuses increasing as their health falls further.These insatiable bonuses stack per hero.",
+      "type": "Passive",
+      "traits": {
+        "Enemy Max Health for Min Bonus": "99%",
+        "Enemy Max Health for Max Bonus": "25%",
+        "Max Move Speed Bonus per Enemy": "16%/24%/32%/40% (With level 25 Left Talent 31%/39%/47%/55%)",
+        "Visibility Health Threshold": "25%",
+        "Deactivation Health Threshold": "99%"
+      }
+    },
+    {
+      "name": "Rupture",
+      "hotkey": "R",
+      "description": "Deals an initial damage based on the unit-targeted enemy's current health. If the unit moves, it additionally takes damage based on the distance moved.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.4 + 0.53",
+        "Cast Range": "800 (With level 20 Right Talent 1200)",
+        "Current Health as First Damage": "10% (Upgradable by Aghanim's Scepter. 15%)",
+        "Moved Distance to Damage Factor": "0.35/0.45/0.55",
+        "Duration": "9/10/11",
+        "Cooldown": "75/70/65 ( 0.25)",
+        "Mana Cost": "125/175/225"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+15% Thirst Max Move Speed",
+      "right": "+3s Blood Rite Silence Duration"
+    },
+    {
+      "level": 20,
+      "left": "+15 Agility",
+      "right": "+400 Rupture Cast Range"
+    },
+    {
+      "level": 15,
+      "left": "+100 Blood Rite Damage",
+      "right": "-0.7% Bloodrage Max Health Damage per Second"
+    },
+    {
+      "level": 10,
+      "left": "+30 Bloodrage Attack Speed",
+      "right": "+200 Health"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Disabler",
+    "Nuker",
+    "Initiator"
+  ],
+  "facets": []
+}

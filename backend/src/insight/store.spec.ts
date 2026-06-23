@@ -24,6 +24,7 @@ const fixture = (unique: boolean): InsightConfig => ({
   unique,
   description: "fixture insight for tests",
   importance: "medium",
+  ttlMs: 999_999_999,
 });
 
 function withFixtureConfigs(
@@ -86,7 +87,7 @@ describe("insights", () => {
       [
         [
           NON_UNIQUE,
-          { unique: false, description: "custom desc", importance: "low" },
+          { unique: false, description: "custom desc", importance: "low", ttlMs: 999_999_999 },
         ],
       ],
       () => {
@@ -242,5 +243,51 @@ describe("insights", () => {
     assert.equal(getAllInsights().length, 0);
     assert.equal(getLatest(), null);
     assert.equal(getLatestUnused(), null);
+  });
+
+  it("expired insight is excluded from getUnused and getLatestUnused", () => {
+    withFixtureConfigs([[NON_UNIQUE, { ...fixture(false), ttlMs: -1 }]], () => {
+      addInsight(NON_UNIQUE, "expired");
+      assert.equal(getUnused().length, 0);
+      assert.equal(getLatestUnused(), null);
+      assert.equal(getLatest(), null);
+    });
+  });
+
+  it("non-expired insight is returned normally", () => {
+    withFixtureConfigs([[NON_UNIQUE, fixture(false)]], () => {
+      const insight = addInsight(NON_UNIQUE, "alive");
+      assert.ok(insight);
+      assert.equal(getUnused().length, 1);
+      assert.equal(getLatestUnused(), insight);
+    });
+  });
+
+  it("expired unique insight allows re-adding the same name", () => {
+    withFixtureConfigs([[NON_UNIQUE, { ...fixture(true), ttlMs: -1 }]], () => {
+      const first = addInsight(NON_UNIQUE, "first");
+      assert.ok(first);
+      const second = addInsight(NON_UNIQUE, "second");
+      assert.ok(second, "should allow re-adding after TTL expiry");
+      assert.equal(second.payload, "second");
+    });
+  });
+
+  it("expired insight is excluded from getByName and getLatestUnusedByName", () => {
+    withFixtureConfigs(
+      [
+        [NON_UNIQUE, { ...fixture(false), ttlMs: -1 }],
+        [SECOND_NON_UNIQUE, fixture(false)],
+      ],
+      () => {
+        addInsight(NON_UNIQUE, "expired");
+        const alive = addInsight(SECOND_NON_UNIQUE, "alive");
+        assert.ok(alive);
+
+        assert.equal(getByName(NON_UNIQUE).length, 0);
+        assert.equal(getLatestUnusedByName(NON_UNIQUE), null);
+        assert.equal(getByName(SECOND_NON_UNIQUE).length, 1);
+      },
+    );
   });
 });

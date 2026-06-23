@@ -1,0 +1,130 @@
+{
+  "heroName": "Clockwerk",
+  "innateAbility": {
+    "name": "Armor Power",
+    "hotkey": "",
+    "description": "Consumes a Chain Mail in Clockwerk's inventory and grants himself armor bonus.",
+    "type": "No / Passive",
+    "traits": {
+      "Cast Animation": "0 + 0",
+      "Armor Bonus": "4",
+      "Damage Amp per Armor": "0.25%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Battery Assault",
+      "hotkey": "Q",
+      "description": "Discharges high-powered shrapnel toward one random nearby enemy unit at a time, dealing damage and stunning the affected enemy unit.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage per Interval": "20/45/70/95 (With level 15 Left Talent 45/70/95/120)",
+        "Cooldown": "24/22/20/18",
+        "Mana Cost": "75/80/85/90"
+      }
+    },
+    {
+      "name": "Power Cogs",
+      "hotkey": "W",
+      "description": "Forms a barrier of energized cogs around Clockwerk, trapping any units that are near. These Power Cogs can be destroyed by hero attacks.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.2 + 0.5",
+        "Duration": "5/6/7/8",
+        "First Damage": "50/125/200/275",
+        "Mana Burn to Damage Factor": "0.5",
+        "Armor Bonus Factor": "(Upgradable by Aghanim's Scepter. 1.25)",
+        "Cooldown": "21/19/17/15",
+        "Mana Cost": "60/65/70/75"
+      }
+    },
+    {
+      "name": "Power Cog (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Rocket Flare",
+      "hotkey": "E",
+      "description": "Fires a flare toward an area globally that explodes within the area-targeted radius.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "Global",
+        "Damage": "(Upgradable by Aghanim's Scepter. 108/162/216/270)",
+        "Cooldown": "20/18/16/14",
+        "Mana Cost": "35/40/45/50"
+      }
+    },
+    {
+      "name": "Overclocking",
+      "hotkey": "D",
+      "description": "Applies a self-debuff that allows Clockwerk to increase the power of all his abilities' values.Applies a movement speed and attack speed slow once the duration runs out.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "50",
+        "Mana Cost": "90"
+      }
+    },
+    {
+      "name": "Jetpack",
+      "hotkey": "F",
+      "description": "Grants unobstructed movement, flying vision, and bonus movement speed.However, this self-disarms and severely limits his turn rate.",
+      "type": "Toggle / No",
+      "traits": {
+        "Cast Animation": "0 + 0.53",
+        "Move Speed Bonus": "(Upgradable by Aghanim's Scepter. 40%)",
+        "Duration": "6",
+        "Cooldown": "16",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Hookshot",
+      "hotkey": "R",
+      "description": "Fires a rapid grappling device at the point-targeted location. If it latches on a unit, Clockwerk launches himself toward the unit, stunning and dealing damage.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "2000/2500/3000",
+        "Damage Radius": "175",
+        "Damage": "75/175/275 (With level 10 Left Talent 150/250/350)",
+        "Cooldown": "60/45/30 ( 50/35/20)",
+        "Mana Cost": "100/125/150"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-0.25s Battery Assault Interval",
+      "right": "3 Rocket Flare Charges"
+    },
+    {
+      "level": 20,
+      "left": "+80 Power Cogs Mana Shock",
+      "right": "Rocket Flare Applies True Sight"
+    },
+    {
+      "level": 15,
+      "left": "+25 Battery Assault Damage",
+      "right": "-10s Hookshot Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "+75 Hookshot Damage",
+      "right": "+1.5 Mana Regen"
+    }
+  ],
+  "roles": [
+    "Initiator",
+    "Disabler",
+    "Durable",
+    "Nuker"
+  ],
+  "facets": []
+}

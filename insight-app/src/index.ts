@@ -16,6 +16,7 @@ const draftDetector = new DraftDetector();
 const playerDetector = new PlayerDetector(
   2,
   () => matchState.current?.heroPositions ?? {},
+  () => matchState.current?.gameTime ?? 0,
 );
 
 let stopTimeoutId: ReturnType<typeof setTimeout> | null = null;
@@ -129,6 +130,7 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
       const state = matchState.current;
       if (state) {
         state.otherHeroes = playerDetector.getOtherPlayers().map(otherPlayerToHeroState);
+        state.lastEnemyInspectAt = playerDetector.getLastInspectGameTime();
         pushToBackend("/push/state", state);
       }
 

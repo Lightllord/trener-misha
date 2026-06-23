@@ -1,0 +1,128 @@
+{
+  "heroName": "Grimstroke",
+  "innateAbility": {
+    "name": "Ink Trail",
+    "hotkey": "",
+    "description": "Both attack damage and spell damage sourced to Grimstroke applies a debuff on enemy heroes that exposes them.The debuff causes affected enemy units to deal less damage to Grimstroke.",
+    "type": "Passive",
+    "traits": {
+      "Incoming Damage Reduction": "5%",
+      "Incoming Damage Reduction Increase": "0.5%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Stroke of Fate",
+      "hotkey": "Q",
+      "description": "Paints a path of ink with his brush, damaging and slowing enemies. The damage is increased with each enemy the ink hits.",
+      "type": "Point / Vector",
+      "traits": {
+        "Cast Animation": "0.6 + 0.5",
+        "Cast Range": "1400 (With level 25 Left Talent 2380)",
+        "Base Damage": "100/160/220/280 (With level 20 Right Talent 180/288/396/504)",
+        "Damage Increment per Hero Hit": "20/40/60/80 (With level 20 Right Talent 36/72/108/144)",
+        "Damage Increment per Creep Hit": "10/20/30/40 (With level 20 Right Talent 18/36/54/72)",
+        "Cooldown": "11/9/7/5",
+        "Mana Cost": "100/110/120/130"
+      }
+    },
+    {
+      "name": "Phantom's Embrace",
+      "hotkey": "W",
+      "description": "Summons a phantom that moves quickly towards the unit-targeted enemy. Once the phantom latches on the unit, she deals damage over time while silencing it.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "900",
+        "Damage per Second": "10/20/30/40 (With level 10 Right Talent 75/85/95/105)",
+        "Damage": "120/200/280/360",
+        "Cooldown": "30/26/22/18",
+        "Mana Cost": "80/100/120/140"
+      }
+    },
+    {
+      "name": "Phantom (Summoned   Attached Unit)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Ink Swell",
+      "hotkey": "E",
+      "description": "Shrouds an allied unit in ink, increasing its movement speed.Enemy units in range of the affected ally are damaged with inky tendrils over time.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.15 + 0.86",
+        "Cast Range": "650/700/750/800",
+        "Move Speed Bonus": "20% (With level 15 Left Talent 35%)",
+        "Radius Damage per Second": "30/45/60/75 (Upgradable by Aghanim's Shard. 42/63/84/105)",
+        "Duration": "3",
+        "Max Explosion Damage": "90/180/270/360  (Upgradable by Aghanim's Shard. 126/252/378/504)",
+        "Tendril Heal": "(Upgradable by Aghanim's Shard. 40%)",
+        "Creep Heal Factor": "(Upgradable by Aghanim's Shard. 0.2)",
+        "Cooldown": "27/24/21/18 ( 23/20/17/14)",
+        "Mana Cost": "120/130/140/150"
+      }
+    },
+    {
+      "name": "Dark Portrait",
+      "hotkey": "D",
+      "description": "Masterfully creates an illusion of the affected enemy hero.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0 + 0.54",
+        "Cast Range": "1200",
+        "Damage Dealt": "125%",
+        "Damage Taken": "275%",
+        "Move Speed Bonus": "30%",
+        "Duration": "25",
+        "Cooldown": "35",
+        "Mana Cost": "200"
+      }
+    },
+    {
+      "name": "Soulbind",
+      "hotkey": "R",
+      "description": "Bound an enemy hero to its nearest allied hero within the radius, preventing both affected enemy units from moving away from each other.Any unit-targeted ability that either bound hero received is instantly cast on the other.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.15 + 0.5",
+        "Cast Range": "700/800/900",
+        "Duration": "6/7/8",
+        "Spell Damage Amp": " (With level 15 Right Talent 25%)",
+        "Cooldown": "70/65/60",
+        "Mana Cost": "150/200/250"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+70% Stroke of Fate Speed/Travel Range",
+      "right": "+150 Ink Swell Radius"
+    },
+    {
+      "level": 20,
+      "left": "+2 Phantom Hit Count",
+      "right": "+80% Stroke of Fate Damage"
+    },
+    {
+      "level": 15,
+      "left": "+15% Ink Swell Move Speed",
+      "right": "+25% Soulbind Spell Damage Amp"
+    },
+    {
+      "level": 10,
+      "left": "-4s Ink Swell Cooldown",
+      "right": "+65 Phantom's Embrace Damage per Second"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Nuker",
+    "Disabler",
+    "Escape"
+  ],
+  "facets": []
+}

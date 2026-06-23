@@ -1,0 +1,99 @@
+{
+  "heroName": "Arc Warden",
+  "innateAbility": {
+    "name": "Runic Infusion",
+    "hotkey": "",
+    "description": "Grants permanent strength, agility, and intelligence per Power Rune activated by The Self and The Double.",
+    "type": "Passive",
+    "traits": {}
+  },
+  "abilities": [
+    {
+      "name": "Flux",
+      "hotkey": "Q",
+      "description": "Deals damage over time on the unit-targeted enemy.The damage is not applied if another enemy unit is near the debuff-affected enemy unit.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.77",
+        "Cast Range": "625/700/775/850 (With level 10 Right Talent 825/900/975/1050)",
+        "Damage per Second": "15/30/45/60 (Upgradable by Aghanim's Scepter. 22.5/45/67.5/90)",
+        "Duration": "6 (Upgradable by Aghanim's Scepter. 8)",
+        "Cooldown": "16",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Magnetic Field",
+      "hotkey": "W",
+      "description": "Grants allied units absolute evasion and attack speed bonus within the area-targeted location.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "900",
+        "Attack Speed Bonus": "30/60/90/120 (With level 15 Left Talent 55/85/115/145)",
+        "Cooldown": "20/19/18/17 ( 16/15/14/13)",
+        "Mana Cost": "60/70/80/90"
+      }
+    },
+    {
+      "name": "Spark Wraith",
+      "hotkey": "E",
+      "description": "Summons a Spark Wraith that activates after an effect delay.Once an enemy is within its search radius, the wraith fuses itself with the target.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.3 + 0.77",
+        "Cast Range": "2000",
+        "Damage": "100/170/240/310 (With level 25 Left Talent 340/410/480/550)",
+        "Cooldown": "4",
+        "Mana Cost": "80"
+      }
+    },
+    {
+      "name": "Tempest Double",
+      "hotkey": "R",
+      "description": "The Self creates a perfect duplication of itself which is considered a hero by most abilities.The Double can use all of The Self's current items and non-ultimate spells, except most consumables and items that would drop on death.The Double has a separate and independent item and ability cooldowns.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.15 + 0.5",
+        "Cast Range": "700",
+        "Duration": "18/21/24",
+        "Cooldown": "60/55/50"
+      }
+    },
+    {
+      "name": "Clone Inventory",
+      "hotkey": "",
+      "description": "The Double neither can pick up, nor drop items. However, it can utilize item abilities within its inventory with each item having an independent cooldown of The Self's.Upon each cast, The Double's inventory is updated based on The Self's. This sets all items' attributes as well.Does not copy muted items in The Self's inventory.",
+      "type": "Innate",
+      "traits": {}
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+240 Spark Wraith Damage",
+      "right": "+1 Runic Infusion All Attributes Bonus"
+    },
+    {
+      "level": 20,
+      "left": "-4s Magnetic Field Cooldown",
+      "right": "+30s Spark Wraith Duration"
+    },
+    {
+      "level": 15,
+      "left": "+25 Magnetic Field Attack Speed",
+      "right": "+20% Flux Slow"
+    },
+    {
+      "level": 10,
+      "left": "+200 Health",
+      "right": "+200 Flux Cast Range"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Escape",
+    "Nuker"
+  ],
+  "facets": []
+}

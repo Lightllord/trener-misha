@@ -1,0 +1,120 @@
+{
+  "heroName": "Spectre",
+  "innateAbility": {
+    "name": "Desolate",
+    "hotkey": "",
+    "description": "Spectre's attacks deal bonus damage to lone enemy units that does not have any allied units within a certain radius around them.",
+    "type": "Passive",
+    "traits": {
+      "Damage": "23 (With level 10 Left Talent 35)",
+      "Damage Increase": "2",
+      "Damage Dealt": " (With level 25 Right Talent 15%)"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Spectral Dagger",
+      "hotkey": "Q",
+      "description": "Flings a dagger to draw a Shadow Path, dealing damage and slowing the movement speed of all enemy units along the trail.",
+      "type": "Point / Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.37",
+        "Cast Range": "1800",
+        "Damage": "80/120/160/200 (With level 15 Left Talent 160/200/240/280)",
+        "Move Speed Bonus": "14%/16%/18%/20% (With level 20 Left Talent 29%/31%/33%/35%)",
+        "Cooldown": "22/20/18/16 ( 19/17/15/13)",
+        "Mana Cost": "100/110/120/130"
+      }
+    },
+    {
+      "name": "Shadow Step",
+      "hotkey": "W",
+      "description": "Send an uncontrollable Shadow Step-illusion that homes into the unit-targeted enemy hero.The illusion has unobstructed movement and an increased movement speed.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.5",
+        "Cast Range": "1000",
+        "Damage Dealt": "35%/40%/45%/50%",
+        "Damage Taken": "175%",
+        "Cooldown": "24/21/18/15",
+        "Mana Cost": "60/65/70/75"
+      }
+    },
+    {
+      "name": "Dispersion",
+      "hotkey": "E",
+      "description": "Damage done to Spectre is reflected as the same damage-type on enemy units within the radius.The effect lessens with distance.",
+      "type": "Passive / No",
+      "traits": {
+        "Damage Reflected": "9%/12%/15%/18% (With level 25 Left Talent 13%/16%/19%/22%)",
+        "Damage Reduction": "9%/12%/15%/18% (With level 25 Left Talent 13%/16%/19%/22%)",
+        "Cast Animation": "0 + 0",
+        "Damage Reflected Factor": "(Upgradable by Aghanim's Shard. 1.5)",
+        "Damage Reduction Factor": "(Upgradable by Aghanim's Shard. 1.5)",
+        "Duration": "(Upgradable by Aghanim's Shard. 5)",
+        "Cooldown": "( 25)",
+        "Mana Cost": "( 50)"
+      }
+    },
+    {
+      "name": "Haunt",
+      "hotkey": "F",
+      "description": "Creates a number of Haunt-based illusions to attack each enemy hero.At any moment during the duration, Spectre may exchanges place with the haunted image in reality.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.3 + 0.5",
+        "Damage Dealt": "30%/50%/70%",
+        "Damage Taken": "200%",
+        "Duration": "6",
+        "Cooldown": "160/150/140 ( 140/130/120)",
+        "Mana Cost": "125/175/225"
+      }
+    },
+    {
+      "name": "Reality",
+      "hotkey": "D",
+      "description": "Exchanges place with a chosen Shadow Step-based or Haunt-based illusion after an effect delay.",
+      "type": "Point / Unit",
+      "traits": {
+        "Cast Animation": "0 + 0.7",
+        "Cast Range": "Global",
+        "Current Health as Damage": "100%",
+        "Cooldown": "1.5",
+        "Mana Cost": "25"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+4% Dispersion Damage Reflection/Reduction",
+      "right": "+15% All Spectre Illusions Damage Dealt"
+    },
+    {
+      "level": 20,
+      "left": "+15% Spectral Dagger Move Speed Change",
+      "right": "+300 Health"
+    },
+    {
+      "level": 15,
+      "left": "+80 Spectral Dagger Damage",
+      "right": "+1s Shadow Step Duration"
+    },
+    {
+      "level": 10,
+      "left": "+12 Desolate Damage",
+      "right": "-3s Spectral Dagger Cooldown"
+    },
+    {
+      "level": 25,
+      "left": "",
+      "right": "35"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Durable",
+    "Escape"
+  ],
+  "facets": []
+}

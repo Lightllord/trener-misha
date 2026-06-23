@@ -1,0 +1,112 @@
+{
+  "heroName": "Dawnbreaker",
+  "innateAbility": {
+    "name": "Break of Dawn",
+    "hotkey": "",
+    "description": "Whenever the sun comes out, Valora gains bonus base damage and vision that decreases throughout the course of the day.",
+    "type": "Passive",
+    "traits": {
+      "Max Base Attack Damage Bonus": "8%",
+      "Max Vision Radius Bonus": "1.2",
+      "Max Heal Amp": "(Upgradable by Aghanim's Scepter. 8%)",
+      "Max Base Attack Damage Bonus Increase": "1%",
+      "Max Heal Amp Increase": "(Upgradable by Aghanim's Scepter. 1%)",
+      "Duration": "6",
+      "Value to Heal Amp Factor": "(Upgradable by Aghanim's Scepter. 1)"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Starbreaker",
+      "hotkey": "Q",
+      "description": "Dawnbreaker whirls her hammer multiple times, damaging enemies with her attack plus bonus damage.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.1 + 0.2",
+        "Cast Range": "Global",
+        "Swipe Damage Bonus": "25/40/55/70",
+        "Smash Damage Bonus": "25/40/55/70",
+        "Magic Resist Bonus": "(Upgradable by Aghanim's Shard. 50%)",
+        "Cooldown": "17/15/13/11 ( 13/11/9/7)",
+        "Mana Cost": "110"
+      }
+    },
+    {
+      "name": "Celestial Hammer",
+      "hotkey": "W",
+      "description": "Hurls Brightmaul toward a targeted location, damaging enemy units struck along the way.The hammer pauses for a duration at the destination before flying back to her.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.2 + 0.77",
+        "Cast Range": "Global",
+        "Contact Damage Radius": "200",
+        "Contact Damage": "50/80/110/140 (With level 15 Right Talent 70/112/154/196)",
+        "Damage per Second": "20/30/40/50 (With level 15 Right Talent 28/42/56/70)",
+        "Move Speed Bonus": "24%/28%/32%/36%",
+        "Cooldown": "18/16/14/12",
+        "Mana Cost": "100/110/120/130"
+      }
+    },
+    {
+      "name": "Converge",
+      "hotkey": "W",
+      "description": "Dawnbreaker can recall Brightmaul at any time, pulling her towards it so they meet in the middle.Both Dawnbreaker and Brightmaul create fire trails as they converge.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0.25"
+      }
+    },
+    {
+      "name": "Luminosity",
+      "hotkey": "E",
+      "description": "After a number of attacks, Dawnbreaker powers up, charging her next attack with a critical strike that heals allied heroes within the radius.",
+      "type": "Passive",
+      "traits": {
+        "Crit Damage": "125%/150%/175%/200% (With level 10 Right Talent 150%/175%/200%/225%)",
+        "Lifesteal to Ally Heal": "17.5%/20%/22.5%/25%"
+      }
+    },
+    {
+      "name": "Solar Guardian",
+      "hotkey": "R",
+      "description": "Temporary calls upon daytime and creates a pulsing effect at a location near an allied hero anywhere on the map.Each pulse damages enemy units and heals allied units.",
+      "type": "Area / Channeled",
+      "traits": {
+        "Cast Animation": "0.1 + 0",
+        "Cast Range": "Global",
+        "Damage per Instance": "30/50/70",
+        "Heal per Instance": "45/70/95",
+        "Cooldown": "110/100/90 ( 90/80/70)",
+        "Mana Cost": "150/200/250"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "x1.8 Celestial Hammer Max Distance/Speed",
+      "right": "-4s Starbreaker Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "-1 Luminosity Attacks Required",
+      "right": "+150 Solar Guardian Radius"
+    },
+    {
+      "level": 15,
+      "left": "-20s Solar Guardian Cooldown",
+      "right": "x1.4 Celestial Hammer Contact Damage/Damage per Second"
+    },
+    {
+      "level": 10,
+      "left": "Celestial Hammer Grants Allies Move Speed",
+      "right": "+25% Luminosity Critical Damage"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Durable"
+  ],
+  "facets": []
+}

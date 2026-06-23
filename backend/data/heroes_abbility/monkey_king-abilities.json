@@ -1,0 +1,138 @@
+{
+  "heroName": "Monkey King",
+  "innateAbility": {
+    "name": "Mischief",
+    "hotkey": "F",
+    "description": "Changes Monkey King's shape using the environment nearby to deceive opponents. Taking damage, attacking, or using any item or ability breaks the disguise.Negates damage for a brief moment upon transforming.",
+    "type": "No",
+    "traits": {
+      "Cast Animation": "0 + 0.53",
+      "Damage Negation Duration": "0.1",
+      "Damage Threshold": "0",
+      "Move Speed Bonus": "8%",
+      "Cooldown": "24.5"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Boundless Strike",
+      "hotkey": "Q",
+      "description": "Slams his enlarged staff against the ground with True Strike, stunning enemy units in a line and damaging them with a critical strike instant attack.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.4 + 0.38",
+        "Cast Range": "1100",
+        "Crit Damage": "135%/165%/195%/225% (With level 20 Left Talent 195%/225%/255%/285%)",
+        "Radius": "(Upgradable by Aghanim's Shard. 375)",
+        "Max Damage Factor": "(Upgradable by Aghanim's Shard. 0.35)",
+        "Cooldown": "24/21/18/15",
+        "Mana Cost": "85/90/95/100"
+      }
+    },
+    {
+      "name": "Tree Dance",
+      "hotkey": "W",
+      "description": "Jumps to a tree and perches atop it.If the tree Wukong's is perched on is destroyed, he falls and then stuns himself.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.1 + 0",
+        "Cast Range": "900 (With level 10 Right Talent 1200)",
+        "Cooldown": "0.9/0.6/0.3/0"
+      }
+    },
+    {
+      "name": "Primal Spring",
+      "hotkey": "E",
+      "description": "Springs out from his tree perch, damaging and slowing enemy units in proprotion to the channel duration toward the landing area.",
+      "type": "Area / Channeled",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "Global",
+        "Radius": "375",
+        "Max Damage": "110/200/290/380 (With level 10 Right Talent 410/500/590/680)",
+        "Cooldown": "18/16/14/12 ( 0)",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Spring Early",
+      "hotkey": "E",
+      "description": "Monkey King can spring off earlier on the current tree, this immediately ends Primal Spring.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Jingu Mastery",
+      "hotkey": "D",
+      "description": "Grants certain bonuses after a number of attacks on the same enemy hero within a duration.",
+      "type": "Passive",
+      "traits": {
+        "Attack Damage Bonus": "30/80/130/180 (With level 15 Left Talent 140/190/240/290)"
+      }
+    },
+    {
+      "name": "Wukong's Command",
+      "hotkey": "R",
+      "description": "Creates a circular formation of soldiers that spread out from his position.Grants Wukong bonus armor for its duration.",
+      "type": "Area / Passive",
+      "traits": {
+        "Cast Animation": "1 + 0",
+        "Cast Range": "625 (With level 25 Left Talent 975)",
+        "Self Armor Bonus": "15/20/25",
+        "Cooldown": "100/90/80",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Changing of the Guard",
+      "hotkey": "R",
+      "description": "Monkey King takes the place of the soldier closest to the target location, leaving another one in his stead. While transfigured, Monkey King is indistinguishable from other soldiers and invulnerable, but can't issue commands.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.3 + 0.05",
+        "Cast Range": "625",
+        "Cooldown": "5",
+        "Mana Cost": "25"
+      }
+    },
+    {
+      "name": "Clone Inventory",
+      "hotkey": "",
+      "description": "These unselectable and uncontrollable Clones cannot use the items' active abilities. However, the items' passive effects are applied conditionally.",
+      "type": "Innate",
+      "traits": {}
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+1 Wukong's Command Ring",
+      "right": "-1 Jingu Mastery Required Hits"
+    },
+    {
+      "level": 20,
+      "left": "+60% Boundless Strike Critical Damage",
+      "right": "Jingu Mastery Death Dispel Only"
+    },
+    {
+      "level": 15,
+      "left": "+110 Jingu Mastery Damage",
+      "right": "No Primal Spring Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "+0.2s Boundless Strike Stun Duration",
+      "right": "+300 Tree Dance Cast Range"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Escape",
+    "Disabler",
+    "Initiator"
+  ],
+  "facets": []
+}

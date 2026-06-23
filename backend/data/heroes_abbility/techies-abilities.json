@@ -1,0 +1,150 @@
+{
+  "heroName": "Techies",
+  "innateAbility": {
+    "name": "M.A.D.",
+    "hotkey": "D",
+    "description": "Passively grants bonus mana regeneration corresponding to Techies' current max mana.",
+    "type": "Passive / No",
+    "traits": {
+      "Max Mana to Mana Regen Bonus": "0.001",
+      "Mana Regen Bonus Increase": "0.0001",
+      "Base Damage": "50",
+      "Max Mana to Damage Factor": "0.3  (Upgradable by Aghanim's Shard. 0.4)",
+      "Cast Animation": "1 + 0.95",
+      "Cast Range": "(Upgradable by Aghanim's Shard. 450)",
+      "Cooldown": "( 30)"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Sticky Bomb",
+      "hotkey": "Q",
+      "description": "Lobs a Sticky Bomb toward the area-targeted location.Once the bomb latches itself to an enemy hero within proximity, it applies a movement speed slow.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.1 + 0.7",
+        "Cast Range": "1000",
+        "Damage": "95/170/245/320 (With level 20 Right Talent 255/330/405/480)",
+        "Cooldown": "16/13/10/7",
+        "Mana Cost": "100/115/130/145"
+      }
+    },
+    {
+      "name": "Sticky Bomb (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Reactive Tazer",
+      "hotkey": "W",
+      "description": "Triggers an electric charge, granting the Techies team bonus movement speed for a short time.",
+      "type": "No / Unit",
+      "traits": {
+        "Cast Animation": "0.1 + 0.5",
+        "Cast Range": "600",
+        "Move Speed Bonus": "18%/22%/26%/30%",
+        "Damage": "60/110/160/210",
+        "Cooldown": "26/22/18/14",
+        "Mana Cost": "60"
+      }
+    },
+    {
+      "name": "Detonate Tazer",
+      "hotkey": "W",
+      "description": "Instantly detonates Reactive Tazer and apply all its ability effects.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0.5"
+      }
+    },
+    {
+      "name": "Blast Off!",
+      "hotkey": "E",
+      "description": "Hurls themselves into the enemy's midst, deals massive area damage, and stuns enemy units within the radius upon landing.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "1 + 0.9",
+        "Cast Range": "1000",
+        "Damage": "200/300/400/500 (With level 15 Right Talent 375/475/575/675)",
+        "Current Health as Self Damage Factor": "0.2",
+        "Cooldown": "40/35/30/25 ( 25/20/15/10)",
+        "Mana Cost": "100/125/150/175"
+      }
+    },
+    {
+      "name": "Minefield Sign",
+      "hotkey": "F",
+      "description": "Places a warning sign! Creates a minefield in the area-targeted location upon cast.The entire minefield is activated once a valid enemy hero is within its proximity radius, and deals damage to all moving enemy units within the minefield radius.The Minefield Sign is destroyed when the duration ends.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "1.25 + 0.4",
+        "Cast Range": "150",
+        "Damage per Proc": "300",
+        "Damage Factor": "1.15",
+        "Counter Bonus": "200",
+        "Cooldown": "60"
+      }
+    },
+    {
+      "name": "Minefield Sign (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Proximity Mines",
+      "hotkey": "R",
+      "description": "Plants an invisible mine that cannot be detected by certain True Sight sources.The mine is visible to enemy units within the mine proc radius, and detonates if an enemy unit is standing within the proc radius for a period of time.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0 + 0.47",
+        "Cast Range": "450",
+        "Min Damage Radius": "500",
+        "Max Damage Radius": "150",
+        "Min Damage": "200/275/350",
+        "Max Damage": "400/550/700",
+        "Damage Factor": "0.3",
+        "Cooldown": "0",
+        "Mana Cost": "110/140/170"
+      }
+    },
+    {
+      "name": "Proximity Mine (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-0.8s Proximity Mines Activation Delay",
+      "right": "+253 Attack Damage"
+    },
+    {
+      "level": 20,
+      "left": "-15s Blast Off! Cooldown",
+      "right": "+160 Sticky Bomb Damage"
+    },
+    {
+      "level": 15,
+      "left": "x1.25 Reactive Tazer Buff/Debuff Duration",
+      "right": "+175 Blast Off! Damage"
+    },
+    {
+      "level": 10,
+      "left": "-2s Proximity Mines Cooldown",
+      "right": "+15% Magic Resist"
+    }
+  ],
+  "roles": [
+    "Nuker",
+    "Disabler"
+  ],
+  "facets": []
+}

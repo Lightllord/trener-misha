@@ -1,0 +1,122 @@
+{
+  "heroName": "Ogre Magi",
+  "innateAbility": {
+    "name": "Dumb Luck",
+    "hotkey": "",
+    "description": "Ogre Magi's max intelligence is always 0. Strength grants him mana and mana regeneration instead.",
+    "type": "Passive",
+    "traits": {}
+  },
+  "abilities": [
+    {
+      "name": "Fireblast",
+      "hotkey": "Q",
+      "description": "Blasts an enemy unit with a wave of fire, dealing damage and stunning the target.",
+      "type": "Unit / Passive",
+      "traits": {
+        "Cast Animation": "(Upgradable by Aghanim's Scepter. 0.338 + 0.398)",
+        "Cast Range": "525",
+        "Damage": "70/130/190/250 (With level 20 Left Talent 245/305/365/425)",
+        "Cooldown": "11/10/9/8 ( 10/9/8/7)",
+        "Mana Cost": "70/85/100/115"
+      }
+    },
+    {
+      "name": "Ignite",
+      "hotkey": "W",
+      "description": "Applies damage per second and movement speed slow on the target and another random unit within the radius.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.35 + 0.6",
+        "Cast Range": "700/800/900/1000",
+        "Damage per Second": "20/30/40/50 (With level 10 Right Talent 30/40/50/60)",
+        "Duration": "5/6/7/8",
+        "Cooldown": "17",
+        "Mana Cost": "80/90/100/110"
+      }
+    },
+    {
+      "name": "Bloodlust",
+      "hotkey": "E",
+      "description": "Incites a frenzy in a friendly unit, increasing its movement speed and attack speed. Can be cast on buildings.",
+      "type": "Autocast-off / Unit",
+      "traits": {
+        "Cast Animation": "0.45 + 0.67",
+        "Cast Range": "650",
+        "Move Speed Bonus": "6%/8%/10%/12%",
+        "Attack Speed Bonus": "35/50/65/80 (With level 15 Left Talent 55/70/85/100)",
+        "Duration": "30",
+        "Self Attack Speed Bonus": "40/60/80/100 (With level 15 Left Talent 75/95/115/135)",
+        "Cooldown": "20/18/16/14",
+        "Mana Cost": "40/50/60/70"
+      }
+    },
+    {
+      "name": "Unrefined Fireblast",
+      "hotkey": "D",
+      "description": "Stuns and deals damage corresponding to the Ogre's strength.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.45 + 0.53",
+        "Cast Range": "525",
+        "Base Damage": "150",
+        "Str as Damage Factor": "1.5",
+        "Cooldown": "7",
+        "Mana Cost": "35% × CurrentMP"
+      }
+    },
+    {
+      "name": "Fire Shield",
+      "hotkey": "F",
+      "description": "Creates a fire shield around the targeted ally, absorbing a percentage of the damage of next few attacks from enemy heroes.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.6",
+        "Cast Range": "600",
+        "Damage Threshold": "0",
+        "Damage Reduction": "85%",
+        "Duration": "25",
+        "Fireball Damage": "160",
+        "Cooldown": "15",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Multicast",
+      "hotkey": "R",
+      "description": "Enables Ogre Magi to cast his abilities, disregarding its cooldown.Each of Ogre Magi's abilities has its own Multicast buffer range.",
+      "type": "Passive",
+      "traits": {}
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+10% All Multicast Chance",
+      "right": "17% Fireblast Proc Chance"
+    },
+    {
+      "level": 20,
+      "left": "+175 Fireblast Damage",
+      "right": "+30 Strength"
+    },
+    {
+      "level": 15,
+      "left": "+20 Bloodlust Allied Attack Speed+35 Bloodlust Self Attack Speed",
+      "right": "+80 Attack Damage"
+    },
+    {
+      "level": 10,
+      "left": "+2/+0.01 Dumb Luck Strength to Max Mana/Mana Regen",
+      "right": "+10 Ignite Damage per Second"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Nuker",
+    "Disabler",
+    "Durable",
+    "Initiator"
+  ],
+  "facets": []
+}

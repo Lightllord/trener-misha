@@ -1,0 +1,127 @@
+{
+  "heroName": "Beastmaster",
+  "innateAbility": {
+    "name": "Inner Beast",
+    "hotkey": "D",
+    "description": "Grants Beastmaster and his player-controlled units within the radius bonus attack speed.",
+    "type": "Passive / Aura",
+    "traits": {
+      "Radius": "1200",
+      "Attack Speed Bonus": "7",
+      "Attack Speed Bonus Increase": "3"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Wild Axes",
+      "hotkey": "Q",
+      "description": "Sends his axes flying and calls them home again, slicing through enemy units and trees along their path.Each axe can only affect the same enemy units once, and amplifies subsequent damage from Beastmaster and his units.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.3 + 0.47",
+        "Cast Range": "1500",
+        "Damage per Axe": "40/80/120/160",
+        "Damage Amp per Stack": "5%/6%/7%/8% (With level 10 Left Talent 6.5%/7.5%/8.5%/9.5%)",
+        "Cooldown": "8 ( 0)",
+        "Mana Cost": "65"
+      }
+    },
+    {
+      "name": "Summon Razorback",
+      "hotkey": "W",
+      "description": "Calls forth a Razorback to aid in his battlefield.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.3 + 0.67",
+        "Duration": "3",
+        "Attack Damage Bonus": " (With level 20 Right Talent 30)",
+        "Cooldown": "30",
+        "Mana Cost": "60"
+      }
+    },
+    {
+      "name": "Razorback (Summoned   Creep)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {
+        "Attack Damage Bonus": " (With level 20 Right Talent 30)"
+      }
+    },
+    {
+      "name": "Summon Raptors",
+      "hotkey": "E",
+      "description": "Summons a Raptor that orbits around Beastmaster.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.4 + 0",
+        "Current Health to Damage": "100%",
+        "Cast Range": "Global",
+        "Damage": "60/95/130/165 (With level 20 Right Talent 90/125/160/195)",
+        "Cooldown": "30",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Raptor (Summoned   Creep)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Drums of Slom",
+      "hotkey": "",
+      "description": "Grants an aura that causes successful attacks of Beastmaster and his player-controlled units to strike the drum.Every successful attack grants a stack that reduces the drum strike interval. If no attacks are made, the drum strikes gradually increases.",
+      "type": "Passive",
+      "traits": {
+        "Damage per Interval": "70",
+        "Damage to Heal Factor": "0.2",
+        "Creep Damage to Heal Factor": "0.05"
+      }
+    },
+    {
+      "name": "Primal Roar",
+      "hotkey": "R",
+      "description": "Stuns, damages, and shoves all secondary enemy units aside, opening a path to the unit-targeted enemy.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.5 + 0.63",
+        "Cast Range": "600 (With level 15 Left Talent 800)",
+        "Damage": "150/225/300",
+        "Move Speed Bonus": "40%",
+        "Cooldown": "90/75/60 ( 65/50/35)",
+        "Mana Cost": "100/125/150"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-25s Primal Roar Cooldown",
+      "right": "No Wild Axes Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "+250 Max Health to Beastmaster and His Units",
+      "right": "+30 Damage to Beastmaster and His Units"
+    },
+    {
+      "level": 15,
+      "left": "+200 Primal Roar Cast Range",
+      "right": "+15 Move Speed to Beastmaster and His Units"
+    },
+    {
+      "level": 10,
+      "left": "+1.5% Wild Axes Damage Amp per Stack",
+      "right": "+4 Armor"
+    }
+  ],
+  "roles": [
+    "Initiator",
+    "Disabler",
+    "Durable",
+    "Nuker"
+  ],
+  "facets": []
+}

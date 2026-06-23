@@ -1,0 +1,101 @@
+{
+  "heroName": "Phantom Assassin",
+  "innateAbility": {
+    "name": "Blur",
+    "hotkey": "E",
+    "description": "Mortred is untargetable, invisible, and enemy units only see the assassin's sihoulette within their vision radius for a certain duration.Casting Mortred's own abilities do not break the invisibility.",
+    "type": "No",
+    "traits": {
+      "Cast Animation": "0 + 0",
+      "Move Speed Bonus": "9.5%",
+      "Move Speed Bonus Increase": "0.5%",
+      "Cooldown": "45 ( 35)",
+      "Mana Cost": "50"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Stifling Dagger",
+      "hotkey": "Q",
+      "description": "Throws a dagger slowing the enemy unit's movement speed, dealing a portion of Mortred's attack damage as instant attack and applying attack modifiers.",
+      "type": "Unit / Passive",
+      "traits": {
+        "Cast Animation": "0.3 + 0.47",
+        "Cast Range": "700/850/1000/1150",
+        "Attack Damage Bonus": "65/70/75/80",
+        "Cooldown": "6 ( 4)",
+        "Mana Cost": "30"
+      }
+    },
+    {
+      "name": "Phantom Strike",
+      "hotkey": "W",
+      "description": "Teleports next to the targeted unit upon cast.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.25 + 0.8",
+        "Cast Range": "650/750/850/950 (With level 20 Right Talent 850/950/1050/1150)",
+        "Attack Speed Bonus": "80/120/160/200 (With level 20 Left Talent 140/180/220/260)",
+        "Duration": "3 (With level 10 Right Talent 3.8)",
+        "Cooldown": "0.1",
+        "Mana Cost": "35/40/45/50"
+      }
+    },
+    {
+      "name": "Immaterial",
+      "hotkey": "F",
+      "description": "Grants Mortred evasion bonus.",
+      "type": "Passive",
+      "traits": {}
+    },
+    {
+      "name": "Fan of Knives",
+      "hotkey": "D",
+      "description": "Breaks while dealing a percentage of the affectred enemy units' max health on impact.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.15 + 0.9",
+        "Radius": "550",
+        "Max Health as Damage": "28%",
+        "Cooldown": "14",
+        "Mana Cost": "80"
+      }
+    },
+    {
+      "name": "Coup de Grace",
+      "hotkey": "R",
+      "description": "Mortred's attacks have a chance to proc the Deadly Focus buff, causing her next attack to be an ensured critical strike.",
+      "type": "Passive",
+      "traits": {
+        "Crit Damage": "200%/325%/450%"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Triple Stifling Dagger Strikes",
+      "right": "+10% Coup de Grace Chance"
+    },
+    {
+      "level": 20,
+      "left": "+60 Phantom Strike Attack Speed",
+      "right": "+200 Phantom Strike Cast Range"
+    },
+    {
+      "level": 15,
+      "left": "+15% Stifling Dagger Instant Attack Damage",
+      "right": "+20% Immaterial Evasion"
+    },
+    {
+      "level": 10,
+      "left": "-2s Stifling Dagger Cooldown",
+      "right": "+0.8s Phantom Strike Duration"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Escape"
+  ],
+  "facets": []
+}

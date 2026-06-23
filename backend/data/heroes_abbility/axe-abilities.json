@@ -1,0 +1,103 @@
+{
+  "heroName": "Axe",
+  "innateAbility": {
+    "name": "One Man Army",
+    "hotkey": "",
+    "description": "Grants Axe temporary strength based on Axe's current armor.Allied heroes venturing too close to Axe passively disables this effect linearly.",
+    "type": "Passive",
+    "traits": {
+      "Bonus Linger Duration": "3"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Berserker's Call",
+      "hotkey": "Q",
+      "description": "Axe taunts nearby enemy units, forcing them to attack him, while he gains bonus armor for the duration.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.3 + 0.5",
+        "Radius": "315 (With level 25 Right Talent 400)",
+        "Armor Bonus": "12/13/14/15 (With level 15 Left Talent 22/23/24/25)",
+        "Duration": "2.1/2.4/2.7/3",
+        "Cooldown": "18/16/14/12",
+        "Mana Cost": "90/100/110/120"
+      }
+    },
+    {
+      "name": "Battle Hunger",
+      "hotkey": "W",
+      "description": "Enrages an enemy unit, causing it to take damage over time until it kills another unit or the duration ends.The debuff-affected enemy unit is slowed as long as it is facing away from Axe.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.5",
+        "Cast Range": "600/700/800/900",
+        "Damage per Second": "12/18/24/30 (With level 15 Right Talent 20/26/32/38)",
+        "Duration": "12",
+        "Self Move Speed Bonus per Enemy": " (With level 10 Left Talent 8%)",
+        "Cooldown": "20/15/10/5",
+        "Mana Cost": "50/60/70/80"
+      }
+    },
+    {
+      "name": "Counter Helix",
+      "hotkey": "E",
+      "description": "After a set number of incoming attacks, Axe performs a helix counter attack, dealing pure damage to all nearby enemies.",
+      "type": "Passive",
+      "traits": {
+        "Radius": "275",
+        "Damage": "100/120/140/160 (With level 20 Left Talent 140/160/180/200)",
+        "Attack Damage Reduction per Stack": "(Upgradable by Aghanim's Scepter. 12%)",
+        "Duration": "(Upgradable by Aghanim's Scepter. 6)",
+        "Cooldown": "0.3 ( 0)"
+      }
+    },
+    {
+      "name": "Culling Blade",
+      "hotkey": "R",
+      "description": "Axe spots a weakness and strikes, dealing pure damage.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.5",
+        "Cast Range": "175",
+        "Damage": "275/375/475 (With level 25 Left Talent 425/525/625)",
+        "Damage to Kill Threshold Factor": "1",
+        "Move Speed Bonus": "20%/25%/30%",
+        "Armor Bonus": "10/15/20",
+        "Duration": "6 (With level 10 Right Talent 9)",
+        "Armor Bonus per Kill": "1/1.5/2",
+        "Cooldown": "80/75/70",
+        "Mana Cost": "100/125/150"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+150 Culling Blade Damage",
+      "right": "+85 Berserker's Call Radius"
+    },
+    {
+      "level": 20,
+      "left": "+40 Counter Helix Damage",
+      "right": "+15 Strength"
+    },
+    {
+      "level": 15,
+      "left": "+10 Berserker's Call Armor",
+      "right": "+8 Battle Hunger Damage per Second"
+    },
+    {
+      "level": 10,
+      "left": "+8% Move Speed per active Battle Hunger",
+      "right": "+3s Culling Blade Kill Buff Bonus Duration"
+    }
+  ],
+  "roles": [
+    "Initiator",
+    "Durable",
+    "Disabler",
+    "Carry"
+  ],
+  "facets": []
+}

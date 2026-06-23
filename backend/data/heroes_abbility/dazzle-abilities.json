@@ -1,0 +1,113 @@
+{
+  "heroName": "Dazzle",
+  "innateAbility": {
+    "name": "Weave",
+    "hotkey": "",
+    "description": "The Shadow Priest's invocations provide a dual-utility armor manipulation, simultaneously reducing armor if an enemy unit was affected, while increasing armor if an allied unit is affected.",
+    "type": "Passive",
+    "traits": {
+      "Heal per Stack": "(Upgradable by Aghanim's Shard. 60)"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Poison Touch",
+      "hotkey": "Q",
+      "description": "Releases a cone of poison that strike multiple enemy units.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.57",
+        "Cast Range": "500/600/700/800",
+        "Damage per Second": "16/28/40/52 (With level 20 Left Talent 91/103/115/127)",
+        "Max Health Threshold": "25%",
+        "Illusion Current Health as Damage": "100%",
+        "Attack Range Bonus": "200",
+        "Cooldown": "24/21/18/15",
+        "Mana Cost": "125/130/135/140"
+      }
+    },
+    {
+      "name": "Shallow Grave",
+      "hotkey": "W",
+      "description": "Blesses an allied hero with Shallow Grave. The allied hero cannot die while under its protection, no matter how close to death.Grants bonus heal amplification corresponding to its health percentage.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "900",
+        "Set Min Health": "1",
+        "Health Threshold": "10%",
+        "Heal Amp per Max Health Threshold": "3%/5%/7%/9%",
+        "Duration": "4/4.5/5/5.5",
+        "End Heal": "225/300/375",
+        "Cooldown": "30/26/22/18 ( 27/23/19/15)",
+        "Mana Cost": "90/100/110/120"
+      }
+    },
+    {
+      "name": "Shadow Wave",
+      "hotkey": "E",
+      "description": "Sends a wave of power that bounces between and heals all affected allied units.Shadow Wave always heals the Shadow Priest, without counting toward the number of bounces upon cast.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.57",
+        "Cast Range": "800",
+        "Heal": "85/105/125/145 (With level 15 Right Talent 130/150/170/190)",
+        "Damage Radius": "185",
+        "Damage": "85/105/125/145 (With level 15 Right Talent 130/150/170/190)",
+        "Cooldown": "10/9/8/7",
+        "Mana Cost": "90"
+      }
+    },
+    {
+      "name": "Nothl Projection",
+      "hotkey": "R",
+      "description": "The Priest projects his Shadow in a short distance away, and stuns his own physical body for the duration.After the effect ends, the Shadow forcefully returns and applies a Strong Dispel onto the Priest.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.2 + 0.76",
+        "Cast Range": "450",
+        "Illusion Current Health as Damage": "100%",
+        "Heal": "225/300/375",
+        "Cooldown": "70/60/50",
+        "Mana Cost": "100/150/200"
+      }
+    },
+    {
+      "name": "End Projection",
+      "hotkey": "R",
+      "description": "The Priest may prematurely end the Shadow projection after its min duration.",
+      "type": "No",
+      "traits": {
+        "Cooldown": "5"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+1 Weave Armor Reduction/Bonus",
+      "right": "+40% Poison Touch Slow"
+    },
+    {
+      "level": 20,
+      "left": "+75 Poison Touch Damage per Second",
+      "right": "-3s Shallow Grave Cooldown"
+    },
+    {
+      "level": 15,
+      "left": "+5s Nothl Projection Duration",
+      "right": "+45 Shadow Wave Heal/Damage"
+    },
+    {
+      "level": 10,
+      "left": "+1.75 Mana Regen",
+      "right": "+200 Poison Touch Attack Range"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Nuker",
+    "Disabler"
+  ],
+  "facets": []
+}

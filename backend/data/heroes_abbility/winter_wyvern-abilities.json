@@ -1,0 +1,102 @@
+{
+  "heroName": "Winter Wyvern",
+  "innateAbility": {
+    "name": "Forbidden Knowledge",
+    "hotkey": "",
+    "description": "Starts the game with a neutral consumable item — Eldwurm's Edda.This can be consumed after a certain period of time to grant Auroth bonus intelligence corresponding to its current intelligence.",
+    "type": "No",
+    "traits": {
+      "Int Bonus": "25%",
+      "Cooldown": "600"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Arctic Burn",
+      "hotkey": "Q",
+      "description": "Sets Auroth's attack point to a certain value, and grants herself unobstructed movement and bonus attack range.",
+      "type": "No / Toggle",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Attack Range Bonus": "250/275/300/325/337.5",
+        "Attack Projectile Speed Bonus": "500",
+        "Move Speed Bonus": "(Upgradable by Aghanim's Scepter. 25%)",
+        "Current Health as Damage per Second": "4%/6%/8%/10%/11%",
+        "Cooldown": "26/24/22/20/19 ( 0)",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Splinter Blast",
+      "hotkey": "W",
+      "description": "Launches a projectile towards a unit and shatters on impact, leaving the primary target completely unaffected, while hurling damaging splinters to enemy units within the radius and slowing them.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 1.17",
+        "Cast Range": "1150",
+        "Damage": "80/160/240/320/360 (With level 20 Left Talent 180/260/340/420/460)",
+        "Cooldown": "6",
+        "Mana Cost": "105/115/125/135"
+      }
+    },
+    {
+      "name": "Cold Embrace",
+      "hotkey": "E",
+      "description": "Encases the affected allied unit in a cocoon, healing it while preventing all physical damage instances.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.63",
+        "Cast Range": "850/900/950/1000/1025",
+        "Heal per Second": "40/45/50/55/57.5 (With level 10 Right Talent 60/65/70/75/77.5)",
+        "Max Health as Heal per Second Bonus": "2.25%/3%/3.75%/4.5%/4.875%",
+        "Duration": "(Upgradable by Aghanim's Shard. 6)",
+        "Attack Damage Bonus": "(Upgradable by Aghanim's Shard. 60%)",
+        "Cooldown": "24/21/18/15/13.5 ( 20/17/14/11/9.5)",
+        "Mana Cost": "50/60/70/80"
+      }
+    },
+    {
+      "name": "Winter's Curse",
+      "hotkey": "R",
+      "description": "Dispels and stuns an enemy unit in place.Enemy units within the radius are striken with a maddening curse that causes them to attack their frozen ally with increased attack speed.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 1.37",
+        "Cast Range": "800",
+        "Radius": "525",
+        "Enemy Attack Speed Bonus": "50/65/80 (With level 25 Right Talent 110/125/140)",
+        "Physical Damage Reduction": "100%",
+        "Cooldown": "100/90/80",
+        "Mana Cost": "150/200/250"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+1s Splinter Blast Stun Duration",
+      "right": "+60 Winter's Curse Attack Speed"
+    },
+    {
+      "level": 20,
+      "left": "+100 Splinter Blast Damage",
+      "right": "+10% Arctic Burn Move Speed Slow"
+    },
+    {
+      "level": 15,
+      "left": "+175 Splinter Blast Shatter Radius",
+      "right": "+3s Arctic Burn Debuff Duration"
+    },
+    {
+      "level": 10,
+      "left": "+30 Attack Damage",
+      "right": "+20 Cold Embrace Heal per Second"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Disabler",
+    "Nuker"
+  ],
+  "facets": []
+}

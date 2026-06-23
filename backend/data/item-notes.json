@@ -1,0 +1,2613 @@
+{
+  "abyssal_blade": {
+    "abilities": [
+      {
+        "name": "Overwhelm",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Stun",
+              "Active",
+              "Dispeble strong"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "Bash",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Stun",
+              "Phisical damage",
+              "Attack modifire",
+              "Dispeble strong"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "aegis": {
+    "abilities": [
+      {
+        "name": "rebirth",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Rebirth",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "aeon_disk": {
+    "abilities": [
+      {
+        "name": "Combo Breaker",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Damage block",
+              "Strong dispel",
+              "Passive",
+              "Debuff immunity",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "aether_lens": {
+    "abilities": [
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Spell range increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "ancient_janggo": {
+    "abilities": [
+      {
+        "name": "Endurance",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Movement speed increase",
+              "Attack speed increase",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "Movement speed increase",
+                  "Attack speed increase",
+                  "AoE",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Swiftness Aura",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Movement speed increase"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "Aura",
+                  "AoE",
+                  "Movement speed increase"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "angels_demise": {
+    "abilities": [
+      {
+        "name": "Empower Spell",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Passive",
+              "Slow",
+              "Break",
+              "Magic damage",
+              "Undispeble"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "arcane_blink": {
+    "abilities": [
+      {
+        "name": "Arcane Blink",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Teleport/Blink",
+                  "Health regen",
+                  "Mana regen"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "assault": {
+    "abilities": [
+      {
+        "name": "Assault Aura",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Armor increase",
+              "Attack speed increase",
+              "Passive"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Aura",
+                  "AoE",
+                  "Armor reduce"
+                ]
+              },
+              {
+                "target": "ally",
+                "tags": [
+                  "Aura",
+                  "Armor increase",
+                  "Attack speed increase",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "basher": {
+    "abilities": [
+      {
+        "name": "Bash",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Stun",
+              "Phisical damage",
+              "Attack modifire",
+              "Passive",
+              "Dispeble strong"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "bfury": {
+    "abilities": [
+      {
+        "name": "Cleave",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Attack splash",
+              "Passive",
+              "Attack modifire"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "Chop Tree",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Cut tree",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "black_king_bar": {
+    "abilities": [
+      {
+        "name": "Avatar",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Spell immunity",
+              "Active",
+              "Magic resistance",
+              "Basic dispel",
+              "Undispeble"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "blade_mail": {
+    "abilities": [
+      {
+        "name": "Damage Return",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Damage return",
+              "Active",
+              "Magic damage",
+              "Phisical damage",
+              "Pure damage",
+              "Undispeble"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "blink": {
+    "abilities": [
+      {
+        "name": "Blink",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Teleport/Blink"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "bloodstone": {
+    "abilities": [
+      {
+        "name": "Bloodpact",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Spell lifesteal",
+              "Undispeble"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Spell lifesteal",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "Spell Weakness Aura",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Passive",
+              "Magic resistance reduce",
+              "Aura",
+              "AoE"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "bloodthorn": {
+    "abilities": [
+      {
+        "name": "Soul Rend",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Silence",
+              "Magic damage",
+              "Active",
+              "True strike",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "Pierce",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Attack modifire",
+              "True strike"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "boots_of_bearing": {
+    "abilities": [
+      {
+        "name": "Endurance",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Movement speed increase",
+              "Slow resistance",
+              "Attack speed increase",
+              "Dispeble normal"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "AoE",
+                  "Movement speed increase",
+                  "Slow resistance",
+                  "Attack speed increase",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Swiftness Aura",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Movement speed increase",
+              "Passive"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "Movement speed increase",
+                  "Aura",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "butterfly": {
+    "abilities": [
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack damage increase",
+              "Evasion",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "cheese": {
+    "abilities": [
+      {
+        "name": "Eat Cheese",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Health regen",
+              "Mana regen"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "consecrated_wraps": {
+    "abilities": [
+      {
+        "name": "Hallowed",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Barrier",
+              "Movement speed increase",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Magic resistance",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "crellas_crozier": {
+    "abilities": [
+      {
+        "name": "Rite of Rumusque",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Ethereal",
+              "Movement speed increase",
+              "Dispeble normal",
+              "Magic resistance reduce"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Slow",
+                  "AoE",
+                  "Aura",
+                  "Health regen reduce"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Putrefaction Aura",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Health regen reduce",
+              "Aura",
+              "AoE",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "crimson_guard": {
+    "abilities": [
+      {
+        "name": "Guard",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack damage resistance",
+              "Active",
+              "Undispeble"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "AoE",
+                  "Attack damage resistance",
+                  "Undispeble"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Damage Block",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack damage resistance",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "cyclone": {
+    "abilities": [
+      {
+        "name": "Cyclon",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Cyclone",
+              "Active",
+              "Debuff resist pierced",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Cyclone",
+              "Active",
+              "Debuff resist pierced",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "dagon": {
+    "abilities": [
+      {
+        "name": "Energy Burst",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "desolator": {
+    "abilities": [
+      {
+        "name": "Corruption",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Armor reduce",
+              "Passive",
+              "Attack modifire",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack damage increase",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "devastator": {
+    "abilities": [
+      {
+        "name": "Witch Blade",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Passive",
+              "Attack modifire",
+              "Magic resistance reduce",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "diffusal_blade": {
+    "abilities": [
+      {
+        "name": "Inhibit",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Active",
+              "Slow",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "Manabreak",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Passive",
+              "Mana bearn",
+              "Attack modifire"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "disperser": {
+    "abilities": [
+      {
+        "name": "Suppress",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Slow",
+              "Basic dispel",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Movement speed increase",
+                  "Slow resistance",
+                  "Basic dispel",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Movement speed increase",
+              "Basic dispel",
+              "Slow resistance",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Basic dispel",
+                  "Slow resistance",
+                  "Movement speed increase",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Basic dispel",
+              "Movement speed increase",
+              "Slow resistance",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "Manabreak",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Passive",
+              "Mana bearn",
+              "Attack modifire"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "dragon_lance": {
+    "abilities": [
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Attack range increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "echo_sabre": {
+    "abilities": [
+      {
+        "name": "Echo Strike",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Phisical damage",
+              "Damage from attack",
+              "Passive",
+              "Attack modifire",
+              "Attack effect proc",
+              "Slow"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "essence_distiller": {
+    "abilities": [
+      {
+        "name": "Soul Release",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Active",
+              "Magic damage",
+              "Vision",
+              "True sight",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Health regen",
+              "Active"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Health regen",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "ethereal_blade": {
+    "abilities": [
+      {
+        "name": "Ether Blast",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Ethereal",
+              "Magic damage",
+              "Active",
+              "Magic resistance reduce"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Ethereal",
+              "Active",
+              "Magic resistance reduce"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Magic resistance reduce",
+              "Ethereal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "force_staff": {
+    "abilities": [
+      {
+        "name": "Force",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Forced movement",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Forced movement",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Forced movement",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "gem": {
+    "abilities": [
+      {
+        "name": "True Sight",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Passive",
+              "Aura",
+              "AoE",
+              "True sight"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "ghost": {
+    "abilities": [
+      {
+        "name": "Ghost Form",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Ethereal",
+              "Active",
+              "Magic resistance reduce"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "glimmer_cape": {
+    "abilities": [
+      {
+        "name": "Glimmer",
+        "scenarios": [
+          {
+            "target": "ally",
+            "tags": [
+              "Active",
+              "Barrier",
+              "Invisibility",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Invisibility",
+              "Barrier",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "greater_crit": {
+    "abilities": [
+      {
+        "name": "Critical Strike",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Crit",
+              "Attack modifire",
+              "Phisical damage",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack damage increase",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "guardian_greaves": {
+    "abilities": [
+      {
+        "name": "Mend",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Basic dispel",
+              "Active",
+              "Health regen",
+              "Mana regen"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "Mana regen",
+                  "Health regen",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Guardian Aura",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Health regen",
+              "Mana regen"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "Mana regen",
+                  "Health regen",
+                  "Aura",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "gungir": {
+    "abilities": [
+      {
+        "name": "Eternal Cheins",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Root",
+                  "Dispeble normal",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "hand_of_midas": {
+    "abilities": [
+      {
+        "name": "Transmute",
+        "scenarios": [
+          {
+            "target": "creep",
+            "tags": [
+              "Kill",
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Gold bonus"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "harpoon": {
+    "abilities": [
+      {
+        "name": "Draw Forth",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Forced movement",
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Forced movement"
+                ]
+              }
+            ]
+          },
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Cut tree"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Forced movement"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "heart": {
+    "abilities": [
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Health regen",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "heavens_halberd": {
+    "abilities": [
+      {
+        "name": "Disarm",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Active",
+              "Disarm",
+              "Dispeble strong"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Evasion",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "helm_of_the_dominator": {
+    "abilities": [
+      {
+        "name": "Dominate",
+        "scenarios": [
+          {
+            "target": "creep",
+            "tags": [
+              "Active",
+              "Summons"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "helm_of_the_overlord": {
+    "abilities": [
+      {
+        "name": "Dominate",
+        "scenarios": [
+          {
+            "target": "creep",
+            "tags": [
+              "Active",
+              "Summons"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "holy_locket": {
+    "abilities": [
+      {
+        "name": "Energy Charge",
+        "scenarios": [
+          {
+            "target": "ally",
+            "tags": [
+              "Health regen",
+              "Mana regen",
+              "Active"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Health regen",
+              "Mana regen",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "hurricane_pike": {
+    "abilities": [
+      {
+        "name": "Hurricane",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Forced movement",
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Forced movement",
+                  "Attack speed increase",
+                  "Attack range increase"
+                ]
+              }
+            ]
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Forced movement",
+              "Active"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Forced movement",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack range increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "hydras_breath": {
+    "abilities": [
+      {
+        "name": "Miasma",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Passive",
+              "Attack modifire",
+              "Percentage damage",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "Polycephaly",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Multishot",
+              "Phisical damage",
+              "Damage from attack",
+              "Attack modifire",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "invis_sword": {
+    "abilities": [
+      {
+        "name": "Shadow Walk",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Invisibility",
+              "Movement speed increase",
+              "Undispeble"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "kaya": {
+    "abilities": [
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Spell damage increase",
+              "Mana regen",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "kaya_and_sange": {
+    "abilities": [
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Mana regen",
+              "Passive",
+              "Spell damage increase",
+              "Health regen increase",
+              "Slow resistance"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "lesser_crit": {
+    "abilities": [
+      {
+        "name": "Critical Strike",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Attack modifire",
+              "Crit",
+              "Passive",
+              "Phisical damage"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "lotus_orb": {
+    "abilities": [
+      {
+        "name": "Echo Shell",
+        "scenarios": [
+          {
+            "target": "ally",
+            "tags": [
+              "Active",
+              "Undispeble",
+              "Basic dispel",
+              "Target spell counter"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "maelstrom": {
+    "abilities": [
+      {
+        "name": "Chain Lightning",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Attack modifire",
+              "Passive",
+              "Bounced"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "mage_slayer": {
+    "abilities": [
+      {
+        "name": "Mage Slayer",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Phisical damage",
+              "Dispeble normal",
+              "Passive",
+              "Attack modifire",
+              "Spell damage reduce"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Magic resistance",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "manta": {
+    "abilities": [
+      {
+        "name": "Mirror Image",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Illusions",
+              "Active",
+              "Basic dispel"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "mask_of_madness": {
+    "abilities": [
+      {
+        "name": "Berserk",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Movement speed increase",
+              "Attack speed increase",
+              "Armor reduce",
+              "Silence",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Lifesteal",
+              "Passive",
+              "Attack modifire"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "mekansm": {
+    "abilities": [
+      {
+        "name": "Restore",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Health regen",
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "Health regen",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "meteor_hammer": {
+    "abilities": [
+      {
+        "name": "Meteor Hammer",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "interruptible",
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Stun",
+                  "Magic damage",
+                  "Slow",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "mjollnir": {
+    "abilities": [
+      {
+        "name": "Static Chane",
+        "scenarios": [
+          {
+            "target": "ally",
+            "tags": [
+              "Magic damage",
+              "Active",
+              "Damage return",
+              "Bounced",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Damage return",
+              "Magic damage",
+              "Bounced",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "Chain Lightning",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Passive",
+              "Bounced",
+              "Attack modifire"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "monkey_king_bar": {
+    "abilities": [
+      {
+        "name": "Pierce",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Attack modifire",
+              "True strike"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "moon_shard": {
+    "abilities": [
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Night vision",
+              "Attack speed increase",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "nullifier": {
+    "abilities": [
+      {
+        "name": "Nullify",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Undispeble",
+              "Active",
+              "Slow",
+              "Basic dispel"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "octarine_core": {
+    "abilities": [
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Coldown reduction"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "orchid": {
+    "abilities": [
+      {
+        "name": "Soul Burn",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Silence",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "overwhelming_blink": {
+    "abilities": [
+      {
+        "name": "Overwhelming Blink",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Slow",
+                  "AoE",
+                  "Dispeble normal"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "Teleport/Blink"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "pavise": {
+    "abilities": [
+      {
+        "name": "Protect",
+        "scenarios": [
+          {
+            "target": "ally",
+            "tags": [
+              "Barrier",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Barrier",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "phase_boots": {
+    "abilities": [
+      {
+        "name": "Phase",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Movement speed increase",
+              "Phased",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "phylactery": {
+    "abilities": [
+      {
+        "name": "Empower Spell",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Slow",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "pipe": {
+    "abilities": [
+      {
+        "name": "Barrier",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Barrier",
+              "Active",
+              "Undispeble"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "Barrier",
+                  "AoE",
+                  "Undispeble"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Insight Aura",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Magic resistance",
+              "Passive"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "Magic resistance",
+                  "Aura",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "power_treads": {
+    "abilities": [
+      {
+        "name": "Switch Attribute",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Stats increase",
+              "Passive",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "radiance": {
+    "abilities": [
+      {
+        "name": "Burn",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Aura",
+              "Magic damage",
+              "AoE",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Evasion",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "rapier": {
+    "abilities": [
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack damage increase",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "refresher": {
+    "abilities": [
+      {
+        "name": "Reset Cooldowns",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Refresh"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "refresher_shard": {
+    "abilities": [
+      {
+        "name": "Reset Cooldowns",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Refresh"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "revenants_brooch": {
+    "abilities": [
+      {
+        "name": "Phantom Critical",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Passive",
+              "Crit",
+              "Attack modifire"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "rod_of_atos": {
+    "abilities": [
+      {
+        "name": "Cripple",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Root",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "sange": {
+    "abilities": [
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Health regen increase",
+              "Slow resistance",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "sange_and_yasha": {
+    "abilities": [
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Slow resistance",
+              "Health regen increase",
+              "Movement speed increase",
+              "Passive",
+              "Status resistance"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "satanic": {
+    "abilities": [
+      {
+        "name": "Unholy Rage",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Lifesteal",
+              "Basic dispel",
+              "Attack modifire"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Lifesteal",
+              "Attack modifire",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "sheepstick": {
+    "abilities": [
+      {
+        "name": "Hex",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Hex",
+              "Active",
+              "Dispeble strong"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "shivas_guard": {
+    "abilities": [
+      {
+        "name": "Arctic Blast",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Slow",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Freezing Aura",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Aura",
+              "AoE",
+              "Attack speed reduce"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Armor increase",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "silver_edge": {
+    "abilities": [
+      {
+        "name": "Shadow Walk",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Invisibility",
+              "Movement speed increase",
+              "Active",
+              "Undispeble"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Break",
+                  "Slow",
+                  "Undispeble"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "skadi": {
+    "abilities": [
+      {
+        "name": "Cold Attack",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Slow",
+              "Attack modifire",
+              "Attack speed reduce",
+              "Health regen reduce",
+              "Passive",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Stats increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "solar_crest": {
+    "abilities": [
+      {
+        "name": "Shine",
+        "scenarios": [
+          {
+            "target": "ally",
+            "tags": [
+              "Barrier",
+              "Active",
+              "Armor increase",
+              "Movement speed increase",
+              "Attack speed increase",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Barrier",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "sphere": {
+    "abilities": [
+      {
+        "name": "Spellblock",
+        "scenarios": [
+          {
+            "target": "ally",
+            "tags": [
+              "Active",
+              "Target spell block"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Target spell block"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "spirit_vessel": {
+    "abilities": [
+      {
+        "name": "Soul Release",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Active",
+              "Health regen reduce",
+              "Percentage damage",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Health regen",
+              "Active"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Health regen"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "swift_blink": {
+    "abilities": [
+      {
+        "name": "Swift Blink",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Teleport/Blink",
+                  "Movement speed increase",
+                  "Stats increase",
+                  "Phased"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "tranquil_boots": {
+    "abilities": [
+      {
+        "name": "Break",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Health regen",
+              "Passive",
+              "Movement speed increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "urn_of_shadows": {
+    "abilities": [
+      {
+        "name": "Soul Release",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Active",
+              "Health regen",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Health regen",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "vanguard": {
+    "abilities": [
+      {
+        "name": "Damage Block",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Attack damage resistance"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "veil_of_discord": {
+    "abilities": [
+      {
+        "name": "Spell Weakness",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Magic resistance reduce",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "vladmir": {
+    "abilities": [
+      {
+        "name": "Vladmir's Aura",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Lifesteal",
+              "Passive",
+              "Attack damage increase"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "Lifesteal",
+                  "Attack damage increase",
+                  "Aura",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "wind_waker": {
+    "abilities": [
+      {
+        "name": "Cyclone",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Cyclone",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Active",
+              "Cyclone",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Cyclone",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "witch_blade": {
+    "abilities": [
+      {
+        "name": "Witch Blade",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Passive",
+              "Attack modifire",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "yasha": {
+    "abilities": [
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Movement speed increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "yasha_and_kaya": {
+    "abilities": [
+      {
+        "name": "generic",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Movement speed increase",
+              "Passive",
+              "Spell damage increase",
+              "Mana regen"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  }
+}

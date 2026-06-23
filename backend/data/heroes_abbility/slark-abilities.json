@@ -1,0 +1,115 @@
+{
+  "heroName": "Slark",
+  "innateAbility": {
+    "name": "Essence Shift",
+    "hotkey": "",
+    "description": "A successful attack drains the attacked enemy heroes' attributes.",
+    "type": "Passive",
+    "traits": {
+      "Duration": "10 (With level 20 Right Talent 30)"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Dark Pact",
+      "hotkey": "Q",
+      "description": "After a short delay, Slark dispels most negative debuffs while dealing damage to enemy units around him and to himself.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage Radius": "325",
+        "Damage Intervals": "0.1",
+        "Total Damage": "75/150/225/300 (With level 15 Right Talent 145/220/295/370)",
+        "Duration": "1",
+        "Self Damage Factor": "0.3",
+        "Cooldown": "9/8/7/6 ( 8.25/7.25/6.25/5.25)",
+        "Mana Cost": "65"
+      }
+    },
+    {
+      "name": "Pounce",
+      "hotkey": "W",
+      "description": "Leaps forward and leashes the first enemy hero he connects with.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0.53",
+        "Duration": "2.5/2.75/3/3.25 (With level 10 Left Talent 3/3.25/3.5/3.75)",
+        "Cooldown": "24/20/16/12 ( 0)",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Saltwater Shiv",
+      "hotkey": "E",
+      "description": "A successful attack now steals a poriton of the target's health restoration, health regeneration, and movement speed for Slark.",
+      "type": "Autocast / Active Attack Modifier",
+      "traits": {
+        "Cast Animation": "0.5 + 0.3",
+        "Cast Range": "200",
+        "Health Restoration Change per Attack": "4%/8%/12%/16%",
+        "Health Regen Change per Attack": "4/8/12/16",
+        "Duration": "12",
+        "Cooldown": "12/10.5/9/7.5",
+        "Mana Cost": "25/30/35/40"
+      }
+    },
+    {
+      "name": "Depth Shroud",
+      "hotkey": "D",
+      "description": "Creates a dark cloud at the area-targeted location.All allied units within the radius are affected by Shadow Dance of its corresponding level.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.1 + 0.8",
+        "Cast Range": "400",
+        "Duration": "3",
+        "Attack Speed Bonus": " (With level 20 Left Talent 100)",
+        "Cooldown": "75",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Shadow Dance",
+      "hotkey": "R",
+      "description": "When activated, Slark hides himself in a cloud of shadows, becoming immune to both vision and True Sight.Attacking, casting abilities, and using items will not reveal Slark within the duration.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Duration": "4/4.25/4.5 (With level 25 Right Talent 5.5/5.75/6)",
+        "Move Speed Bonus": "20%/30%/40%",
+        "Health Regen Bonus": "70/100/130 (With level 15 Left Talent 100/130/160)",
+        "Attack Speed Bonus": "100",
+        "Cooldown": "50/40/30",
+        "Mana Cost": "100"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+1 Essence Shift Agility Change per Stack",
+      "right": "+1.5s Shadow Dance Duration"
+    },
+    {
+      "level": 20,
+      "left": "+100 Shadow Dance Attack Speed",
+      "right": "+20s Essence Shift Duration"
+    },
+    {
+      "level": 15,
+      "left": "+30 Shadow Dance Regen",
+      "right": "+70 Dark Pact Damage"
+    },
+    {
+      "level": 10,
+      "left": "+0.5s Pounce Leash Duration",
+      "right": "-0.75s Dark Pact Cooldown"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Escape",
+    "Disabler",
+    "Nuker"
+  ],
+  "facets": []
+}

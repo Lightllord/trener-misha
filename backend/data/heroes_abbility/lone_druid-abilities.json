@@ -1,0 +1,100 @@
+{
+  "heroName": "Lone Druid",
+  "innateAbility": {
+    "name": "Summon Spirit Bear",
+    "hotkey": "D",
+    "description": "Summons a powerful Spirit Bear companion that can wield and utilize items.",
+    "type": "No",
+    "traits": {
+      "Cast Animation": "0.5 + 0.57",
+      "Health": "1500",
+      "Health Regen": "3",
+      "Duration": "",
+      "Max Health as Damage": "20%",
+      "Cooldown": "120",
+      "Mana Cost": "100"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Entangle",
+      "hotkey": "Q",
+      "description": "Applies an entangle counter to all enemy heroes within the radius upon cast.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.3 + 0.24",
+        "Cast Range": "700",
+        "Damage Per Second": "90 (With level 10 Left Talent 110)",
+        "Cooldown": "20/19/18/17",
+        "Mana Cost": "60"
+      }
+    },
+    {
+      "name": "Spirit Link",
+      "hotkey": "W",
+      "description": "Both the Lone Druid and the Spirit Bear shares a percentage of their lifesteal with each other.",
+      "type": "Passive",
+      "traits": {
+        "Move Speed Bonus": "20/40/60/80"
+      }
+    },
+    {
+      "name": "Savage Roar",
+      "hotkey": "E",
+      "description": "Both Lone Druid and the Spirit Bear roar fiercely and applies a fountain-fear to enemy units within the radius.Grants affected enemy units bonus movement speed while fleeing toward their fountain.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.1 + 0.63",
+        "Fear Move Speed Bonus": "20%",
+        "Move Speed Bonus": "(Upgradable by Aghanim's Shard. 15%)",
+        "Attack Speed Bonus": "(Upgradable by Aghanim's Shard. 40)",
+        "Cooldown": "29/26/23/20 ( 24/21/18/15)",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "True Form",
+      "hotkey": "R",
+      "description": "Morphs into a melee raging bear. Grants bonus armor, health, and attack damage.Certain abilities now utilize a different cast animation while in True Form.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Armor Bonus": "10/15/20",
+        "Health Bonus": "500/1000/1500",
+        "Attack Damage Bonus": "50/90/130",
+        "Duration": "25",
+        "Slow Resist Bonus": " (With level 25 Right Talent 70%)",
+        "Cooldown": "60/55/50",
+        "Mana Cost": "80"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+0.6s Entangle Root Duration",
+      "right": "+70% True Form Slow Resist Bonus"
+    },
+    {
+      "level": 20,
+      "left": "+55 Attack Speed",
+      "right": "+150 Savage Roar Radius"
+    },
+    {
+      "level": 15,
+      "left": "+12 Agility",
+      "right": "-5s Savage Roar Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "+20 Entangle Damage per Second",
+      "right": "+5s True Form Duration"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Pusher",
+    "Durable"
+  ],
+  "facets": []
+}

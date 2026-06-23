@@ -1,0 +1,100 @@
+{
+  "heroName": "Morphling",
+  "innateAbility": null,
+  "abilities": [
+    {
+      "name": "Waveform",
+      "hotkey": "Q",
+      "description": "Surges forward, damaging enemy units in Morphling's path. Morphling is invulnerable during Waveform.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.25 + 0",
+        "Cast Range": "Global",
+        "Damage": "75/150/225/300",
+        "Cooldown": "21/18/15/12 ( 12.6/10.8/9/7.2)",
+        "Mana Cost": "115"
+      }
+    },
+    {
+      "name": "Adaptive Strike",
+      "hotkey": "W",
+      "description": "Launches a surge of water at an enemy unit, dealing damage and knocking them back.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.25 + 0.67",
+        "Cast Range": "600/675/750/825",
+        "Base Damage": "50/70/90/110",
+        "Min Damage Factor": "0.5",
+        "Max Damage Factor": "1/1.5/2/2.5",
+        "Cooldown": "17/14/11/8 ( 14/11/8/5)",
+        "Mana Cost": "40/50/60/70"
+      }
+    },
+    {
+      "name": "Attribute Shift",
+      "hotkey": "D",
+      "description": "Morphling converts strength to agility, and vice versa. The process is reversible.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Morph",
+      "hotkey": "R",
+      "description": "Changes Morphling's form to match the targeted enemy, gaining their basic abilities.Morph can be toggled between the Morph Replicate sub-ability for its duration.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.25 + 0.1",
+        "Cast Range": "700/850/1000",
+        "Duration": "24 (With level 10 Left Talent 36)",
+        "Damage Dealt": "(Upgradable by Aghanim's Scepter. 100%)",
+        "Damage Taken": "(Upgradable by Aghanim's Scepter. 200%)",
+        "Cooldown": "140/100/60",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Morph Replicate",
+      "hotkey": "R",
+      "description": "Toggles Morphling's form between his own and the replicated enemy.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Current Health as Damage": "(Upgradable by Aghanim's Scepter. 100%)",
+        "Cooldown": "2"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+35 Strength",
+      "right": "-40% Waveform Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "+15 Agility",
+      "right": "-3s Adaptive Strike Cooldown"
+    },
+    {
+      "level": 15,
+      "left": "+75 Attack Range",
+      "right": "+250 Waveform Cast Range/Distance"
+    },
+    {
+      "level": 10,
+      "left": "+12s Morph Duration",
+      "right": "+15% Magic Resist"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Escape",
+    "Durable",
+    "Nuker",
+    "Disabler"
+  ],
+  "facets": []
+}

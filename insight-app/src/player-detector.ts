@@ -28,10 +28,23 @@ export class PlayerDetector {
 
   private monitorNum:       number
   private getHeroPositions: () => HeroPositions
+  private getGameTime:      () => number
 
-  constructor(monitorNum: number, getHeroPositions: () => HeroPositions) {
+  // gameTime последней валидной CV-детекции — игрок осматривал инвентарь врага.
+  private lastInspectGameTime = 0
+
+  constructor(
+    monitorNum: number,
+    getHeroPositions: () => HeroPositions,
+    getGameTime: () => number,
+  ) {
     this.monitorNum       = monitorNum
     this.getHeroPositions = getHeroPositions
+    this.getGameTime      = getGameTime
+  }
+
+  getLastInspectGameTime(): number {
+    return this.lastInspectGameTime
   }
 
   start(): void {
@@ -52,6 +65,7 @@ export class PlayerDetector {
   reset(): void {
     this.stop()
     this.cache.clear()
+    this.lastInspectGameTime = 0
   }
 
   getOtherPlayers(): OtherPlayerState[] {
@@ -164,6 +178,8 @@ export class PlayerDetector {
     ) return
 
     const raw = parsed as RawDetection
+    // heroName === "unknown" — это панель собственного героя игрока, а не осмотр врага.
+    if (raw.heroName === "unknown") return
     if (!isClean(raw.items)) {
       console.log(`[PlayerDetector] ${raw.heroName}: skipped (unknown items)`)
       return
@@ -187,6 +203,7 @@ export class PlayerDetector {
     }
 
     this.cache.set(raw.heroName, state)
+    this.lastInspectGameTime = this.getGameTime()
     const itemList = raw.items.filter(i => i !== "empty").join(", ") || "—"
     console.log(`[PlayerDetector] ${raw.heroName} lvl${raw.level} [${team}] — ${itemList}`)
   }

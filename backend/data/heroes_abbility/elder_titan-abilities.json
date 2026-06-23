@@ -1,0 +1,130 @@
+{
+  "heroName": "Elder Titan",
+  "innateAbility": {
+    "name": "Momentum",
+    "hotkey": "",
+    "description": "Grants bonus armor corresponding to the Titan's bonus movement speed values above the Titan's base movement speed.",
+    "type": "Passive",
+    "traits": {
+      "Armor Bonus Increase": "0.005"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Echo Stomp",
+      "hotkey": "Q",
+      "description": "The Titan stomps and deals physical spell damage within the radius.Additionally applies a brief stun duration, and causes enemy units to become unconscious.",
+      "type": "No / Channeled",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Radius": "475",
+        "Physical Spell Damage": "65/110/155/200 (With level 15 Right Talent 140/185/230/275)",
+        "Damage Threshold": "55/120/185/250 (With level 10 Left Talent 205/270/335/400)",
+        "Magical Spell Damage": "65/110/155/200 (With level 15 Right Talent 140/185/230/275)",
+        "Cooldown": "14/13/12/11 ( 12/11/10/9)",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Astral Spirit",
+      "hotkey": "W",
+      "description": "The Titan sends forth the Spirit, damaging any units it passes through.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.4 + 0",
+        "Cast Range": "1200",
+        "Damage Radius": "275",
+        "Contact Damage": "50",
+        "Max Move Speed Bonus": "40%",
+        "Move Speed Bonus per Enemy": "4%/5%/6%/7% (With level 10 Right Talent 6.5%/7.5%/8.5%/9.5%)",
+        "Attack Damage Bonus per Enemy": "17/38/59/80 (With level 20 Right Talent 47/68/89/110)",
+        "Magic Resist Bonus": "(Upgradable by Aghanim's Scepter. 50%)",
+        "Move Speed Bonus per Creep": "1.5%",
+        "Attack Damage Bonus per Creep": "3/7/11/15",
+        "Titan Move Speed to Move Speed Bonus Factor": "1",
+        "Cooldown": "23/21/19/17",
+        "Mana Cost": "80/90/100/110"
+      }
+    },
+    {
+      "name": "Astral Spirit (Summoned Ancient  Creep-Hero)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Return Astral Spirit",
+      "hotkey": "W",
+      "description": "The Spirit returns to the Titan upon his command.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Move Astral Spirit",
+      "hotkey": "D",
+      "description": "Moves the Spirit to a point-targeted location upon the Titan's command.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "Global",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Natural Order",
+      "hotkey": "E",
+      "description": "Reduces all elements to their basic levels, removing base armor and base magic resistance from nearby enemy units.",
+      "type": "Passive / Aura",
+      "traits": {
+        "Radius": "375 (With level 20 Left Talent 525)"
+      }
+    },
+    {
+      "name": "Earth Splitter",
+      "hotkey": "R",
+      "description": "Sends forth a jagged crack in front of the Titan that implodes after a slight delay.The implosion applies movement speed slow, deals both magicial and physical spell damage corresponding to the affected enemy units' max health.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.4 + 0.73",
+        "Cast Range": "2400",
+        "Max Health as Magical Damage": "15%/20%/25%",
+        "Max Health as Physical Damage": "15%/20%/25%",
+        "Cooldown": "100/95/90 ( 40/35/30)",
+        "Mana Cost": "125/175/225"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+100% Cleave",
+      "right": "-60s Earth Splitter Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "+150 Natural Order Radius",
+      "right": "+30 Astral Spirit Bonus Damage per Hero"
+    },
+    {
+      "level": 15,
+      "left": "x0.2 Momentum Move Speed to Attack Speed Factor",
+      "right": "+75 Echo Stomp Damage"
+    },
+    {
+      "level": 10,
+      "left": "+150 Echo Stomp Wake Damage",
+      "right": "+2.5% Astral Spirit Move Speed per Hero"
+    }
+  ],
+  "roles": [
+    "Initiator",
+    "Disabler",
+    "Nuker",
+    "Durable"
+  ],
+  "facets": []
+}

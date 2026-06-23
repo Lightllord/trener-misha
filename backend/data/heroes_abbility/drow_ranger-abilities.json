@@ -1,0 +1,108 @@
+{
+  "heroName": "Drow Ranger",
+  "innateAbility": {
+    "name": "Precision Aura",
+    "hotkey": "",
+    "description": "Grants Drow agility bonus corresponding to her current agility.",
+    "type": "Passive",
+    "traits": {
+      "Self Agi Bonus Factor": "0.1",
+      "Agi Bonus Increase": "0.01",
+      "Ally Agi Bonus Factor": "0.5"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Frost Arrows",
+      "hotkey": "Q",
+      "description": "Adds a freezing effect to Drow's attacks, slowing enemy movement and dealing bonus damage.",
+      "type": "Autocast / Active Attack Modifier",
+      "traits": {
+        "Cast Animation": "0.5 + 0.3",
+        "Cast Range": "625 (With level 15 Right Talent 700)",
+        "Attack Damage Bonus": "12/18/24/30",
+        "Attack Damage Bonus per Stack": "(Upgradable by Aghanim's Scepter. 18)",
+        "Health Restore Reduction per Stack": "(Upgradable by Aghanim's Scepter. 10%)",
+        "Burst Damage per Stack": "(Upgradable by Aghanim's Scepter. 60)",
+        "Mana Cost": "9/10/11/12 ( 7.38/8.2/9.02/9.84)"
+      }
+    },
+    {
+      "name": "Gust",
+      "hotkey": "W",
+      "description": "Releases a wave that applies True Sight, silences, and knocks enemy units back relative to how close they are to the Drow.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.25 + 0.6",
+        "Cast Range": "900",
+        "Self Move Speed Bonus": "50%",
+        "Cooldown": "19/17/15/13",
+        "Mana Cost": "55"
+      }
+    },
+    {
+      "name": "Multishot",
+      "hotkey": "E",
+      "description": "Releases a flurry of arrows in continuous salvos within an area in front of the Drow.",
+      "type": "Point / Channeled",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "Global",
+        "Main Attack Damage as Spell Damage Factor": "1/1.2/1.4/1.6 (With level 20 Left Talent 1.25/1.45/1.65/1.85)",
+        "Cooldown": "24/21/18/15 ( 18/15/12/9)",
+        "Mana Cost": "50/70/90/110"
+      }
+    },
+    {
+      "name": "Glacier",
+      "hotkey": "D",
+      "description": "Creates a hill of ice beneath Drow, knocking away nearby enemy units. Grants all units on the hill flying vision.The front of the hill obscures vision and cannot be moved through except by Drow.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.1 + 0.7",
+        "Cast Range": "400",
+        "Ally Attack Range Bonus": "200",
+        "Attack Damage Bonus": "25%",
+        "Cooldown": "25",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Marksmanship",
+      "hotkey": "R",
+      "description": "Drow's attacks have a chance to ignore the enemy unit's base armor.Enemy heroes too close to Drow automatically disables this effect.",
+      "type": "Passive / Aura",
+      "traits": {
+        "Attack Damage Bonus": "50/70/90"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+2 Multishot Waves",
+      "right": "+8% Marksmanship Chance"
+    },
+    {
+      "level": 20,
+      "left": "+25% Multishot Damage",
+      "right": "50% Gust Self Move Speed"
+    },
+    {
+      "level": 15,
+      "left": "-6s Multishot Cooldown",
+      "right": "+75 Attack Range"
+    },
+    {
+      "level": 10,
+      "left": "+1 Multishot Arrow per Wave",
+      "right": "x0.82 Frost Arrows Mana Cost"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Disabler",
+    "Pusher"
+  ],
+  "facets": []
+}

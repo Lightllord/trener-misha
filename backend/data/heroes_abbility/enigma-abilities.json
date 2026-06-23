@@ -1,0 +1,111 @@
+{
+  "heroName": "Enigma",
+  "innateAbility": {
+    "name": "Event Horizon",
+    "hotkey": "",
+    "description": "Applies a movement speed slow to enemy units not facing Enigma within the radius.",
+    "type": "Passive",
+    "traits": {
+      "Radius": "600 (With level 15 Left Talent 700)"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Malefice",
+      "hotkey": "Q",
+      "description": "Focus his will on an enemy unit, damaging it and repeatedly stuns it.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.6",
+        "Cast Range": "450/500/550/600",
+        "Damage per Instance": "55/70/85/100",
+        "Cooldown": "20/18/16/14",
+        "Mana Cost": "100/110/120/130"
+      }
+    },
+    {
+      "name": "Demonic Summoning",
+      "hotkey": "W",
+      "description": "Summons fragments of the Enigma himself.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.3 + 0.7",
+        "Cast Range": "400",
+        "Duration": "40",
+        "Current Health as Max Health Bonus": "3%",
+        "Set Current Health": "100%",
+        "Attack Speed Bonus": " (With level 10 Right Talent 10)",
+        "Attack Damage Bonus": " (With level 20 Left Talent 40)",
+        "Cooldown": "45/40/35/30",
+        "Mana Cost": "70/80/90/100"
+      }
+    },
+    {
+      "name": "Eidolon (Summoned   Creep)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {
+        "Attack Speed Bonus": " (With level 10 Right Talent 10)",
+        "Attack Damage Bonus": " (With level 20 Left Talent 40)"
+      }
+    },
+    {
+      "name": "Midnight Pulse",
+      "hotkey": "E",
+      "description": "Steeps an area in dark resonance, damaging enemy units based on their current health.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.1 + 0",
+        "Cast Range": "700",
+        "Damage per Second": "5/10/15/20",
+        "Current Health as Damage per Second": "4%/6%/8%/10%",
+        "Duration": "9/10/11/12",
+        "Cooldown": "40/35/30/25",
+        "Mana Cost": "65/90/115/140"
+      }
+    },
+    {
+      "name": "Black Hole",
+      "hotkey": "R",
+      "description": "Summons a vortex that pulls in and disables enemy units within the radius.",
+      "type": "Area / Channeled",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "275",
+        "Damage per Second": "100/150/200 (With level 10 Left Talent 150/200/250)",
+        "Max Health as Damage per Second": "(Upgradable by Aghanim's Scepter. 4%)",
+        "Cooldown": "180/170/160",
+        "Mana Cost": "300/400/500"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+4 Demonic Summoning Eidolons",
+      "right": "+4 Malefice Instances"
+    },
+    {
+      "level": 20,
+      "left": "+40 Eidolon Damage",
+      "right": "+200 Midnight Pulse Radius"
+    },
+    {
+      "level": 15,
+      "left": "+100 Event Horizon Radius",
+      "right": "+250 Health"
+    },
+    {
+      "level": 10,
+      "left": "+50 Black Hole Damage per Second",
+      "right": "+10 Eidolon Attack Speed"
+    }
+  ],
+  "roles": [
+    "Disabler",
+    "Initiator",
+    "Pusher"
+  ],
+  "facets": []
+}

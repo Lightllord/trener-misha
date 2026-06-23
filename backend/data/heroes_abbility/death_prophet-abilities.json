@@ -1,0 +1,101 @@
+{
+  "heroName": "Death Prophet",
+  "innateAbility": {
+    "name": "Witchcraft",
+    "hotkey": "",
+    "description": "Grants self bonus movement speed and cooldown reduction.",
+    "type": "Passive",
+    "traits": {
+      "Move Speed Bonus": "0.5%",
+      "Move Speed Bonus Increase": "0.75%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Crypt Swarm",
+      "hotkey": "Q",
+      "description": "Sends a swarm of winged beasts to savage enemy units in front of Death Prophet.",
+      "type": "Point / Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.5",
+        "Cast Range": "900",
+        "Damage": "100/175/250/325",
+        "Cooldown": "9/8/7/6 ( 6.5/5.5/4.5/3.5)",
+        "Mana Cost": "80/90/100/110"
+      }
+    },
+    {
+      "name": "Silence",
+      "hotkey": "W",
+      "description": "Fires a projectile that silences enemy units within a radius, preventing them from casting spells.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.2 + 0.9",
+        "Cast Range": "900",
+        "Radius": "450 (With level 10 Right Talent 525)",
+        "Damage per Instance": "0",
+        "Cooldown": "15/14/13/12",
+        "Mana Cost": "80/90/100/110"
+      }
+    },
+    {
+      "name": "Spirit Siphon",
+      "hotkey": "E",
+      "description": "Creates a spirit link between Death Prophet and an enemy unit, draining health from the enemy.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.1 + 0",
+        "Cast Range": "500",
+        "Damage per Second": "25/50/75/100 (With level 20 Left Talent 55/80/105/130)",
+        "Self Heal per Second": "25/50/75/100 (With level 20 Left Talent 55/80/105/130)",
+        "Cooldown": "0",
+        "Mana Cost": "60"
+      }
+    },
+    {
+      "name": "Exorcism",
+      "hotkey": "R",
+      "description": "Unleashes spirits to drain the life of nearby enemy units and buildings.At the end of the exorcism, all spirits return and heals Death Prophet for a portion of the damage dealt at the end of the duration.",
+      "type": "No / Passive",
+      "traits": {
+        "Cast Animation": "0.5 + 0.77",
+        "Bonus Duration per Hero Death": "(Upgradable by Aghanim's Scepter. 8)",
+        "Min Damage": "62/65/68",
+        "Max Damage": "68/71/74",
+        "Damage to Heal Factor": "0.25",
+        "Damage Factor": "(Upgradable by Aghanim's Scepter. 1.6)",
+        "Cooldown": "150",
+        "Mana Cost": "200/300/400"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Deaths During Exorcism Extend Duration by +8s",
+      "right": "-22s Spirit Siphon Restore Time"
+    },
+    {
+      "level": 20,
+      "left": "+30 Spirit Siphon Damage/Heal",
+      "right": "+6 Exorcism Spirits"
+    },
+    {
+      "level": 15,
+      "left": "-2.5s Crypt Swarm Cooldown",
+      "right": "+50 Attack Speed"
+    },
+    {
+      "level": 10,
+      "left": "+200 Health",
+      "right": "+75 Silence AoE"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Pusher",
+    "Nuker",
+    "Disabler"
+  ],
+  "facets": []
+}

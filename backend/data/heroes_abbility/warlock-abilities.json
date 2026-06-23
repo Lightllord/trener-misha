@@ -1,0 +1,126 @@
+{
+  "heroName": "Warlock",
+  "innateAbility": {
+    "name": "Eldritch Summoning",
+    "hotkey": "",
+    "description": "Whenever a unit dies under effect of any of Warlock's abilities, an uncontrollable Minor Imp is spawned in their place, and chases after nearby units.",
+    "type": "Passive",
+    "traits": {
+      "Health": "5 (Upgradable by Aghanim's Shard. 85)",
+      "Duration": "15",
+      "Health Increase": "15",
+      "Damage": "20 (Upgradable by Aghanim's Shard. 65)",
+      "Current Health as Self-Damage": "100%",
+      "Lvl per Damage Increase": "3",
+      "Damage Increase": "20"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Fatal Bonds",
+      "hotkey": "Q",
+      "description": "Binds several enemy units together, causing a portion of the damage taken to one of them to be felt by the others.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0",
+        "Cast Range": "1000",
+        "Damage Shared": "15%/18%/21%/24% (With level 10 Right Talent 19%/22%/25%/28%)",
+        "Duration": "18",
+        "Cooldown": "42/34/26/18",
+        "Mana Cost": "120/130/140/150"
+      }
+    },
+    {
+      "name": "Shadow Word",
+      "hotkey": "W",
+      "description": "Heals allied units and damages enemy units within the radius over time.",
+      "type": "Unit / Area",
+      "traits": {
+        "Cast Animation": "0.2 + 0.4",
+        "Cast Range": "650/700/750/800",
+        "Radius": "225 (With level 15 Left Talent 375)",
+        "Damage per Second": "15/25/35/45",
+        "Heal per Second": "15/25/35/45",
+        "Duration": "10",
+        "Cooldown": "15/14/13/12",
+        "Mana Cost": "110/120/130/140"
+      }
+    },
+    {
+      "name": "Upheaval",
+      "hotkey": "E",
+      "description": "A powerful current that grows stronger per channeled second.All ability effects lingers for a short duration after exiting the effect radius.",
+      "type": "Area / Channled",
+      "traits": {
+        "Cast Animation": "0.4 + 0",
+        "Cast Range": "800",
+        "Damage Increment per Second": "10 (With level 20 Left Talent 55)",
+        "Max Damage per Second": "35/60/85/110 (With level 20 Left Talent 80/105/130/155)",
+        "Ally Max Attack Speed Bonus": " (With level 15 Right Talent 70)",
+        "Cooldown": "45/40/35/30",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Chaotic Offering",
+      "hotkey": "R",
+      "description": "Summons a Golem and stuns enemy units within the radius.",
+      "type": "Area / Passive",
+      "traits": {
+        "Cast Animation": "0.5 + 0.7",
+        "Cast Range": "900",
+        "Damage Reduction": " (With level 20 Right Talent 25%)",
+        "Set Attack Damage": "(Upgradable by Aghanim's Scepter. 80/120/160)",
+        "Radius": "300",
+        "Damage": "40/50/60",
+        "Base Damage per Second": "30/45/60",
+        "Cooldown": "165",
+        "Mana Cost": "200/400/600"
+      }
+    },
+    {
+      "name": "Warlock Golem (Summoned Ancient  Creep-Hero)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {
+        "Radius": "300",
+        "Damage": "40/50/60",
+        "Base Damage per Second": "30/45/60"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+5 Fatal Bonds Targets",
+      "right": "Chaotic Offering on Death"
+    },
+    {
+      "level": 20,
+      "left": "+45 Upheaval Damage Increment+45 Upheaval Max Damage",
+      "right": "+25% Warlock Golem Incoming Damage Reduction"
+    },
+    {
+      "level": 15,
+      "left": "+150 Shadow Word Radius",
+      "right": "+8 Upheaval Attack Speed per Second+70 Upheaval Max Attack Speed"
+    },
+    {
+      "level": 10,
+      "left": "+50 Upheaval Radius",
+      "right": "+4% Fatal Bonds Damage"
+    },
+    {
+      "level": 10,
+      "left": "DPS",
+      "right": "20"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Initiator",
+    "Disabler"
+  ],
+  "facets": []
+}

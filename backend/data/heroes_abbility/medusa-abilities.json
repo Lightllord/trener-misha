@@ -1,0 +1,107 @@
+{
+  "heroName": "Medusa",
+  "innateAbility": {
+    "name": "Mana Shield",
+    "hotkey": "",
+    "description": "Creates a shield that absorbs incoming damage in exchange for Medusa's mana.",
+    "type": "Passive",
+    "traits": {
+      "Damage Reduction": "100%",
+      "Damage Taken to Mana Factor": "2",
+      "Damage Taken to Mana Factor Increase": "0.1",
+      "Damage Taken to Mana Total Factor": "0.6"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Split Shot",
+      "hotkey": "Q",
+      "description": "Magically splits her shot into several arrows. These arrows deal a lower percent of her normal damage.",
+      "type": "Toggle",
+      "traits": {
+        "Cast Animation": "0.4 + 0",
+        "Bonus Attack Targets": "4 (Upgradable by Aghanim's Scepter. 5)",
+        "Self Attack Damage Factor": "0.5/0.6/0.7/0.8 (With level 20 Left Talent 0.62/0.72/0.82/0.92)",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Mystic Snake",
+      "hotkey": "W",
+      "description": "Fires an energy bolt that jumps from target to target dealing damage.After it reaches its last target, it returns and replenishes Medusa's mana.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.7",
+        "Cast Range": "750",
+        "First Damage": "90/140/190/240 (With level 20 Right Talent 126/196/266/336)",
+        "Damage Factor": "1.25",
+        "Cooldown": "15/14/13/12 ( 11/10/9/8)",
+        "Mana Cost": "80/100/120/140"
+      }
+    },
+    {
+      "name": "Cold Blooded",
+      "hotkey": "",
+      "description": "When Medusa is offensively unit-targeted by a spell, a single-target Mystic Snake is sent back towards the enemy source.",
+      "type": "Passive",
+      "traits": {
+        "Cooldown": "12"
+      }
+    },
+    {
+      "name": "Gorgon's Grasp",
+      "hotkey": "E",
+      "description": "Fires a volley of damaging arrows in a straight line, with each grouping covering a larger radius than the previous.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.4 + 0.67",
+        "Cast Range": "625",
+        "Impact Damage": "30/70/110/150",
+        "Total Damage Per Second": "100",
+        "Cooldown": "30/26/22/18",
+        "Mana Cost": "65/85/105/125"
+      }
+    },
+    {
+      "name": "Stone Gaze",
+      "hotkey": "R",
+      "description": "Any enemy units looking at Medusa will have both their movement speed, attack speed, and turn rate slowed.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.4 + 0",
+        "Physical Damage Amp": "35%/45%/55% (With level 10 Left Talent 47%/57%/67%)",
+        "Move Speed Bonus": "50%",
+        "Cooldown": "90",
+        "Mana Cost": "250"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+40 Intelligence",
+      "right": "+2.5s Stone Gaze Duration"
+    },
+    {
+      "level": 20,
+      "left": "+0.12 Split Shot Attack Damage Factor",
+      "right": "x1.4 Mystic Snake First Damage/Mana Restore"
+    },
+    {
+      "level": 15,
+      "left": "-4s Mystic Snake Cooldown",
+      "right": "+1 Gorgon's Grasp Arrows"
+    },
+    {
+      "level": 10,
+      "left": "+12% Stone Gaze Bonus Physical Damage",
+      "right": "+0.20 Gorgon's Grasp Radius Factor"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Disabler",
+    "Durable"
+  ],
+  "facets": []
+}

@@ -1,0 +1,101 @@
+{
+  "heroName": "Slardar",
+  "innateAbility": {
+    "name": "Seaborn Sentinel",
+    "hotkey": "",
+    "description": "Grants Slardar bonus health regeneration, bonus armor, bonus attack damage, and bonus movement speed in certain water-based terrains.",
+    "type": "Passive",
+    "traits": {
+      "Health Regen Bonus": "1.75 (Upgradable by Aghanim's Scepter. 21.75)",
+      "Armor Bonus": "1.8 (Upgradable by Aghanim's Scepter. 9.8)",
+      "Attack Damage Bonus": "11.4% (With level 20 Left Talent 27.4%)",
+      "Move Speed Bonus": "18%",
+      "Bonus Linger Duration": "0.033",
+      "Status Resist Bonus": "(Upgradable by Aghanim's Scepter. 40%)",
+      "Health Regen Increase": "0.25",
+      "Attack Damage Bonus Increase": "0.6%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Guardian Sprint",
+      "hotkey": "Q",
+      "description": "Slithers ahead and moves significantly faster with phase movement.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Move Speed Bonus": "10%/18%/26%/34%",
+        "Duration": "10 (With level 10 Right Talent 12)",
+        "Slow Resist Bonus": "100%",
+        "Cooldown": "33/28/23/18",
+        "Mana Cost": "25"
+      }
+    },
+    {
+      "name": "Slithereen Crush",
+      "hotkey": "W",
+      "description": "Slams the ground, stunning and damaging nearby enemy land units. After the stun, the affected units are slowed.",
+      "type": "No / Aura",
+      "traits": {
+        "Cast Animation": "0.25 + 0.7",
+        "Damage": "75/150/225/300 (With level 20 Right Talent 200/275/350/425)",
+        "Duration": "7 (Upgradable by Aghanim's Scepter. 12)",
+        "Cooldown": "8.5/8/7.5/7 ( 5.5/5/4.5/4)",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Bash of the Deep",
+      "hotkey": "E",
+      "description": "After a number of attacks, Slardar bashes its attacking target.",
+      "type": "Passive",
+      "traits": {
+        "Damage": "35/90/145/200 (With level 10 Left Talent 65/120/175/230)",
+        "Duration": "1"
+      }
+    },
+    {
+      "name": "Corrosive Haze",
+      "hotkey": "R",
+      "description": "Reduces the affected enemy target's armor, provides True Sight and vision over it, revealing invisibility.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.67",
+        "Cast Range": "900",
+        "Duration": "18",
+        "Cooldown": "5",
+        "Mana Cost": "25"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Death Dispels Corrosive Haze",
+      "right": "-3s Slithereen Crush Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "+16% Seaborn Sentinel Attack Damage",
+      "right": "+125 Slithereen Crush Damage"
+    },
+    {
+      "level": 15,
+      "left": "-3 Corrosive Haze Armor",
+      "right": "+250 Health"
+    },
+    {
+      "level": 10,
+      "left": "+30 Bash of the Deep Damage",
+      "right": "+2s Guardian Sprint Duration"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Durable",
+    "Initiator",
+    "Disabler",
+    "Escape"
+  ],
+  "facets": []
+}

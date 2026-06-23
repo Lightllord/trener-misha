@@ -1,5 +1,6 @@
 export type InsightName =
   | "draft_analysis"
+  | "item_advice"
   | "hero_death"
   | "hero_missing"
   | "enemies_nearby"
@@ -10,6 +11,8 @@ export type InsightName =
   | "aghs_scepter"
   | "aghs_shard"
   | "item_purchased"
+  | "enemy_key_item"
+  | "enemy_inspect_reminder"
   | "ally_building_destroyed"
   | "enemy_building_destroyed";
 
@@ -19,6 +22,7 @@ export interface InsightConfig {
   unique: boolean;
   description: string;
   importance: InsightImportance;
+  ttlMs: number;
 }
 
 export interface Insight {
@@ -29,5 +33,6 @@ export interface Insight {
   payload: string;
   description: string;
   importance: InsightImportance;
+  ttlMs: number;
   createdAt: number;
 }

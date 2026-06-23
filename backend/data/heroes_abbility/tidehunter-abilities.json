@@ -1,0 +1,122 @@
+{
+  "heroName": "Tidehunter",
+  "innateAbility": {
+    "name": "Leviathan's Catch",
+    "hotkey": "",
+    "description": "Whenever an enemy hero dies while affected by debuff sources sourced to Tidehunter, a fish spawns within their death location.Tidehunter can eat the fish to permanent grant self various stat bonuses.",
+    "type": "Passive",
+    "traits": {
+      "Max Health Bonus per Stack": "3",
+      "Attack Range Bonus per Stack": "2",
+      "Blocked Damage Bonus per Stack": "1"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Gush",
+      "hotkey": "Q",
+      "description": "Damages the unit-targeted enemy, and reduces its movement speed and armor.",
+      "type": "Unit / Point",
+      "traits": {
+        "Cast Animation": "0.3 + 0.6",
+        "Cast Range": "700 (Upgradable by Aghanim's Scepter. 2200)",
+        "Damage": "100/160/220/280 (With level 15 Right Talent 190/250/310/370)",
+        "Duration": "4.5",
+        "Cooldown": "12 ( 7)",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Kraken Shell",
+      "hotkey": "W",
+      "description": "Passively damage block a portion of any incoming physical attack damage.",
+      "type": "Passive / No",
+      "traits": {
+        "Blocked Damage": "15/35/55/75",
+        "Creep Blocked Damage Factor": "0.5",
+        "Cast Animation": "0 + 0",
+        "Blocked Damage Factor": "2",
+        "Duration": "4",
+        "Damage Threshold per Dispel": "600/550/500/450",
+        "Cooldown": "30",
+        "Mana Cost": "45"
+      }
+    },
+    {
+      "name": "Anchor Smash",
+      "hotkey": "E",
+      "description": "Instantly attacks and reduces all enemy units' main attack damage within the radius.The effect radius scales correspondingly to Tidehunter's current attack range.",
+      "type": "No / Passive",
+      "traits": {
+        "Cast Animation": "0.4 + 0.3",
+        "Attack Range to Effect Radius Bonus": "1",
+        "Instant Attack Damage Bonus": "50/100/150/200",
+        "Attack Damage Reduction": "25%/30%/35%/40% (With level 10 Right Talent 35%/40%/45%/50%)",
+        "Duration": "6",
+        "Cooldown": "7/6/5/4",
+        "Mana Cost": "40/45/50/55"
+      }
+    },
+    {
+      "name": "Dead in the Water",
+      "hotkey": "D",
+      "description": "Attaches and leashes a heavy anchor to an enemy hero.Attempting to move a certain distance from the anchor sets its movement speed value and forces the affected unit to drag the Anchor behind them.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 1",
+        "Cast Range": "350",
+        "Cooldown": "35",
+        "Mana Cost": "110"
+      }
+    },
+    {
+      "name": "Anchor (Summoned Ancient  Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Ravage",
+      "hotkey": "R",
+      "description": "Damages and stuns all enemy units within the radius.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.3 + 0.57",
+        "Damage": "275/375/475",
+        "Cooldown": "150/145/140 ( 135/130/125)",
+        "Mana Cost": "125/225/325"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Anchor Smash Affects Buildings",
+      "right": "+1s Ravage Stun Duration"
+    },
+    {
+      "level": 20,
+      "left": "-4 Gush Armor Reduction",
+      "right": "Kraken Shell Dispel Procs Anchor Smash"
+    },
+    {
+      "level": 15,
+      "left": "-15s Ravage Cooldown",
+      "right": "+90 Gush Damage"
+    },
+    {
+      "level": 10,
+      "left": "+20% Gush Move Speed Slow",
+      "right": "+10% Anchor Smash Attack Damage Reduction"
+    }
+  ],
+  "roles": [
+    "Initiator",
+    "Durable",
+    "Disabler",
+    "Nuker",
+    "Carry"
+  ],
+  "facets": []
+}

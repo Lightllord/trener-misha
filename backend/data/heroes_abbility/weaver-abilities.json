@@ -1,0 +1,97 @@
+{
+  "heroName": "Weaver",
+  "innateAbility": {
+    "name": "Threads of Fate",
+    "hotkey": "",
+    "description": "Additionally applies a dormant debuff to enemy heroes whenever Weaver damages them.If Weaver remains within proximity distance of the debuff-affected enemy hero a certain time, the debuff becomes active and applies a movement speed slow.",
+    "type": "Passive",
+    "traits": {
+      "Attack Damage Bonus per Hero": "10%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "The Swarm",
+      "hotkey": "Q",
+      "description": "Launches a swarm of Beetles, that latch on any enemy unit in their path, attacking and reducing the affected enemy units' armor until it is killed.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "3000",
+        "Damage per Instance": "18/23/28/33",
+        "Cooldown": "44/36/28/20",
+        "Mana Cost": "110/105/100/95"
+      }
+    },
+    {
+      "name": "Beetle (Summoned   Attached Unit)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Shukuchi",
+      "hotkey": "W",
+      "description": "Shifts out of visibility while reaching high movement speeds — doing harm once to all enemy units it passes through.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage Radius": "175",
+        "Damage": "100/130/160/190 (With level 15 Right Talent 190/220/250/280)",
+        "Cooldown": "15/12/9/6 ( 12/9/6/3)",
+        "Mana Cost": "65"
+      }
+    },
+    {
+      "name": "Geminate Attack",
+      "hotkey": "E",
+      "description": "Allows Weaver to dispatch more than one attack at once.",
+      "type": "Autocast / Active Attack Modifier",
+      "traits": {
+        "Cast Animation": "0.55 + 0.36",
+        "Cast Range": "425",
+        "Attack Damage Bonus": "20/35/50/65 (With level 20 Right Talent 80/95/110/125)",
+        "Cooldown": "9/7/5/3"
+      }
+    },
+    {
+      "name": "Time Lapse",
+      "hotkey": "R",
+      "description": "Weaver warps backward to whatever position it was in a few seconds earlier — regaining both health and mana values from that time.Neither affects current ability cooldowns nor gold and experience.",
+      "type": "No / Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.53",
+        "Cooldown": "70/55/40 ( 60/45/30)",
+        "Mana Cost": "150/75/0"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+1 Geminate Attack Count",
+      "right": "-3s Shukuchi Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "+0.5 The Swarm Armor Reduction",
+      "right": "+60 Geminate Attack Damage"
+    },
+    {
+      "level": 15,
+      "left": "+2 Beetles Hit Count",
+      "right": "+90 Shukuchi Damage"
+    },
+    {
+      "level": 10,
+      "left": "+7 Strength",
+      "right": "+50 Shukuchi Move Speed"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Escape"
+  ],
+  "facets": []
+}

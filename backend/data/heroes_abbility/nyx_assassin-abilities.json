@@ -1,0 +1,126 @@
+{
+  "heroName": "Nyx Assassin",
+  "innateAbility": {
+    "name": "Mana Burn",
+    "hotkey": "",
+    "description": "Offensively removes the affected enemy unit's current mana corresponding to Nyx's attack damage dealt and spell damage applied.",
+    "type": "Passive",
+    "traits": {
+      "Min Damage Threshold": "0",
+      "Damage Dealt to Current Mana Burn Factor": "0.12"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Impale",
+      "hotkey": "Q",
+      "description": "Rock spike burst from the earth along a straight path.Immediately damages and stuns enemy units while being hurled into the air.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "(Upgradable by Aghanim's Scepter. 1250)",
+        "Damage": "100/160/220/280 (With level 20 Left Talent 240/300/360/420)",
+        "Cooldown": "17/15/13/11",
+        "Mana Cost": "90/100/110/120"
+      }
+    },
+    {
+      "name": "Mind Flare",
+      "hotkey": "W",
+      "description": "Deals a base damage based on the affected enemy unit's max mana, and additional damage equal to a percentage of the damage taken from Nyx previously.",
+      "type": "Unit / Area",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "(Upgradable by Aghanim's Scepter. 1300)",
+        "Min Damage": "0",
+        "Enemy Max Mana to Damage Factor": "0.25/0.3/0.35/0.4",
+        "Accumulated Damage Factor": "0.15",
+        "Damage Timer": "15",
+        "Radius": "600",
+        "Cooldown": "11/9.5/8/6.5 ( 8/6.5/5/3.5)",
+        "Mana Cost": "100/105/110/115"
+      }
+    },
+    {
+      "name": "Spiked Carapace",
+      "hotkey": "E",
+      "description": "While above ground, Spiked Carapace reflects, negates one damage instance per damage source, and stuns the damage source as well.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Reflect Damage Factor": "1.4 (With level 10 Right Talent 1.65)",
+        "Damage Instance": "0",
+        "Cooldown": "20/16/12/8",
+        "Mana Cost": "40"
+      }
+    },
+    {
+      "name": "Burrow",
+      "hotkey": "D",
+      "description": "The scarab buries himself beneath the battlefield over a short duration.Grants self cast range bonus, health and mana regeneration bonus, incoming damage reduction, and cooldown reduction bonus.While burrowed, Nyx is stationary, unable to attack, and invisible.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range Bonus": "500",
+        "Max Health as Health Regen Bonus": "1%",
+        "Max Mana as Mana Regen Bonus": "1%",
+        "Damage Reduction": "40%",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Unburrow",
+      "hotkey": "D",
+      "description": "Emerges from the burrow.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Vendetta",
+      "hotkey": "R",
+      "description": "Nyx becomes invisible and grants self a movement speed bonus.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Move Speed Bonus": "16%/18%/20%",
+        "Attack Range Bonus": "75",
+        "Spell Damage Bonus": "300/400/500 (With level 15 Right Talent 350/450/550)",
+        "Scuttle Move Speed Bonus": "(Upgradable by Aghanim's Shard. 200%)",
+        "Cooldown": "80/70/60 ( 70/60/50)",
+        "Mana Cost": "180/240/300"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+80 Agility",
+      "right": "+600 Mind Flare Radius"
+    },
+    {
+      "level": 20,
+      "left": "+140 Impale Damage",
+      "right": "+0.6s Spiked Carapace Buff Duration"
+    },
+    {
+      "level": 15,
+      "left": "-3s Mind Flare Cooldown",
+      "right": "+50 Vendetta Damage"
+    },
+    {
+      "level": 10,
+      "left": "+0.2s Impale Stun Duration",
+      "right": "+0.25× Spiked Carapace Reflect Damage Factor"
+    }
+  ],
+  "roles": [
+    "Disabler",
+    "Nuker",
+    "Initiator",
+    "Escape"
+  ],
+  "facets": []
+}

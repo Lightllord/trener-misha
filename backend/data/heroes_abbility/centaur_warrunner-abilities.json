@@ -1,0 +1,123 @@
+{
+  "heroName": "Centaur Warrunner",
+  "innateAbility": {
+    "name": "Horsepower",
+    "hotkey": "",
+    "description": "Grants flat bonus movement speed per current strength and increases the self max movement speed cap.",
+    "type": "Passive",
+    "traits": {
+      "Str to Move Speed Bonus": "0.4"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Hoof Stomp",
+      "hotkey": "Q",
+      "description": "After a brief windup, Centaur slams the ground, stunning and damaging nearby enemy units.Centaur can move and is not disarmed during the delay.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Radius": "325",
+        "Damage": "90/160/230/300",
+        "Cooldown": "18/16/14/12",
+        "Mana Cost": "100/110/120/130"
+      }
+    },
+    {
+      "name": "Double Edge",
+      "hotkey": "W",
+      "description": "Strikes a mighty blow at melee range, damaging both himself and a small area around the target. Deals extra damage based on Centaur's strength.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.25 + 0.55",
+        "Cast Range": "175",
+        "Damage Radius": "220",
+        "Base Damage": "120/180/240/300",
+        "Current Str to Damage Factor": "0.6/0.9/1.2/1.5 (With level 15 Left Talent 0.9/1.2/1.5/1.8)",
+        "Self Damage Factor": "1",
+        "Self Str Bonus per Enemy": "(Upgradable by Aghanim's Shard. 15%)",
+        "Duration": "(Upgradable by Aghanim's Shard. 15)",
+        "Cooldown": "3.5"
+      }
+    },
+    {
+      "name": "Retaliate",
+      "hotkey": "E",
+      "description": "Counters all attacks, and returns a fixed damage amount plus a percentage based on Centaur's strength.",
+      "type": "Passive / Aura",
+      "traits": {
+        "Base Damage": "15/25/35/45 (With level 20 Right Talent 60/70/80/90)",
+        "Enemy Str to Bonus Damage Factor": "0.16/0.24/0.32/0.4",
+        "Damage Factor": "0.5"
+      }
+    },
+    {
+      "name": "Work Horse",
+      "hotkey": "F",
+      "description": "Centaur hitches a cart behind him and can cast Hitch A Ride on an ally.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Duration": "3.5/4/4.5",
+        "Cooldown": "35",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Hitch A Ride",
+      "hotkey": "F",
+      "description": "Centaur tosses an ally into a cart hitched behind him.While in the cart, the ally can still cast and attack normally, but cannot move independently or be targeted by opponents. Non-targeted effects can still affect the hitched ally. Melee heroes has their attack range increased while being hitched.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "250",
+        "Attack Range Bonus": "200",
+        "Cooldown": "30",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Stampede",
+      "hotkey": "R",
+      "description": "Centaur leads all allied units into a vicious charge, causing them to move through units at max speed while trampling enemy units.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage Radius": "105",
+        "Str to Damage Factor": "2/2.5/3",
+        "Cooldown": "100/95/90 ( 75/70/65)",
+        "Mana Cost": "150/200/250"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+1s Hoof Stomp Duration",
+      "right": "Grants Retaliate Aura"
+    },
+    {
+      "level": 20,
+      "left": "-25s Stampede Cooldown",
+      "right": "+45 Retaliate Damage"
+    },
+    {
+      "level": 15,
+      "left": "+30% Double Edge Strength as Damage",
+      "right": "+10 Strength"
+    },
+    {
+      "level": 10,
+      "left": "+15 Move Speed",
+      "right": "+4 Health Regen"
+    }
+  ],
+  "roles": [
+    "Durable",
+    "Initiator",
+    "Disabler",
+    "Nuker",
+    "Escape"
+  ],
+  "facets": []
+}

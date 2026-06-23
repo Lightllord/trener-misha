@@ -754,7 +754,7 @@
           {
             "target": "enemy",
             "tags": [
-              "Debuff immunity reduce",
+              "Status resistance reduce",
               "Passive",
               "Unbreakable"
             ],
@@ -2912,7 +2912,7 @@
                   "Silence",
                   "Magic damage",
                   "Undispeble",
-                  "Debuff resist pierced",
+                  "Status resist pierced",
                   "Void zone"
                 ]
               }
@@ -3120,7 +3120,8 @@
               "Attack splash",
               "Movement speed increase",
               "Spell range increase",
-              "Active"
+              "Active",
+              "Attack type swap"
             ],
             "sideEffects": [
               {
@@ -3248,7 +3249,7 @@
               "True strike",
               "Passive",
               "Attack modifire",
-              "Debuff resist pierced",
+              "Status resist pierced",
               "Spell immunity pierced"
             ],
             "sideEffects": []
@@ -3970,7 +3971,7 @@
                   "AoE",
                   "Undispeble",
                   "Spell immunity pierced",
-                  "Debuff resist pierced",
+                  "Status resist pierced",
                   "Void zone"
                 ]
               }
@@ -3987,7 +3988,7 @@
               "Passive",
               "Slow",
               "Aura",
-              "Debuff resist pierced"
+              "Status resist pierced"
             ],
             "sideEffects": []
           }
@@ -4074,7 +4075,7 @@
                 "tags": [
                   "Stun",
                   "Spell immunity pierced",
-                  "Debuff resist pierced",
+                  "Status resist pierced",
                   "Undispeble",
                   "Void zone"
                 ]
@@ -4084,7 +4085,7 @@
                 "tags": [
                   "Stun",
                   "Spell immunity pierced",
-                  "Debuff resist pierced",
+                  "Status resist pierced",
                   "Undispeble",
                   "Void zone"
                 ]
@@ -10410,7 +10411,7 @@
             "tags": [
               "Passive",
               "Unbreakable",
-              "Debuff duration increase",
+              "Status duration increase",
               "AoE increase",
               "Attack damage increase"
             ],
@@ -11157,6 +11158,3741 @@
               "Health regen",
               "Armor increase",
               "Attack damage increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "slark": {
+    "abilities": [
+      {
+        "name": "DARK PACT",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Magic damage",
+              "Active",
+              "Strong dispel"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Magic damage"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "POUNCE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Teleport/Blink"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Leash",
+                  "Undispeble"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "SALTWATER SHIV",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Attack modifire",
+              "Slow",
+              "Health regen reduce",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Movement speed increase",
+                  "Health regen increase",
+                  "Health regen",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "SHADOW DANCE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Movement speed increase",
+              "Passive",
+              "Health regen",
+              "Invisibility",
+              "Target immunity"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "DEPTH SHROUD",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Shard"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "AoE",
+                  "Void zone",
+                  "Invisibility",
+                  "Movement speed increase",
+                  "Health regen",
+                  "Target immunity"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "AoE",
+                  "Void zone",
+                  "Movement speed increase",
+                  "Invisibility",
+                  "Health regen",
+                  "Target immunity"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ESSENCE SHIFT",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Passive",
+              "Stats reduce",
+              "Attack modifire",
+              "Undispeble"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Stats increase",
+                  "Undispeble"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "snapfire": {
+    "abilities": [
+      {
+        "name": "SCATTERBLAST",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Magic damage",
+                  "Slow",
+                  "Attack speed reduce"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "FIRESNAP COOKIE",
+        "scenarios": [
+          {
+            "target": "ally",
+            "tags": [
+              "Active",
+              "Forced movement"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Magic damage",
+                  "Stun"
+                ]
+              }
+            ]
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Forced movement"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Stun",
+                  "Magic damage"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "LIL'SHREDDER",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Attack range increase",
+              "Attack speed increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "MORTIMER KISSES",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "interruptible"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Magic damage",
+                  "Slow",
+                  "Dispeble normal",
+                  "Void zone"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "GOBBLE UP",
+        "scenarios": [
+          {
+            "target": "ally",
+            "tags": [
+              "Banish",
+              "Forced movement",
+              "Active",
+              "Aghanim"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Stun",
+                  "Magic damage",
+                  "Dispeble strong",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "BOOMSTICK",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Unbreakable",
+              "Damage increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "sniper": {
+    "abilities": [
+      {
+        "name": "SHRAPNEL",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Vision"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Slow",
+                  "Void zone",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "HEADSHOT",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Passive",
+              "Attack modifire",
+              "Phisical damage",
+              "Slow"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "TAKE AIM",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Attack range increase",
+              "Attack damage increase",
+              "Vision",
+              "Slow",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "ASSASSINATE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "CONCUSSIVE GRENADE",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Shard"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Forced movement",
+                  "Slow",
+                  "Magic damage"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "Forced movement"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "KEEN SCOPE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Attack damage increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "spectre": {
+    "abilities": [
+      {
+        "name": "SPECTRAL DAGGER",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Slow",
+              "Vision",
+              "Dispeble normal"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Free move",
+                  "Movement speed increase"
+                ]
+              }
+            ]
+          },
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Slow",
+                  "Vision",
+                  "Dispeble normal"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "Movement speed increase",
+                  "Free move"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "SHADOW STEP",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Active",
+              "Spell immunity pierced"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Illusions"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "DISPERSION",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Damage resistance",
+              "Damage return"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Pure damage",
+                  "Damage from attack",
+                  "Phisical damage",
+                  "Spell immunity pierced"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "HAUNT",
+        "scenarios": [
+          {
+            "target": "allEnemies",
+            "tags": [
+              "Active",
+              "Global",
+              "Spell immunity pierced"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Illusions"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "REALITY",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Teleport/Blink",
+              "Active",
+              "Global"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "DESOLATE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Passive",
+              "Pure damage",
+              "Attack modifire",
+              "Spell immunity pierced"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "spirit_breaker": {
+    "abilities": [
+      {
+        "name": "CHARGE OF DARKNESS",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Global",
+              "Active",
+              "Stun",
+              "Dispeble strong"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Movement speed increase",
+                  "Free move"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "BULLDOZE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Movement speed increase",
+              "Status resistance",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "GREATER BASH",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Stun",
+              "Magic damage",
+              "Attack modifire",
+              "Passive",
+              "Spell immunity pierced",
+              "Forced movement",
+              "Dispeble strong"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "NETHER STRIKE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Active",
+              "Stun",
+              "Magic damage",
+              "Forced movement",
+              "Dispeble strong",
+              "Spell immunity pierced"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Teleport/Blink"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "EMPOWERING HASTE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Unbreakable",
+              "Movement speed increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "storm_spirit": {
+    "abilities": [
+      {
+        "name": "STATIC REMNANT",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Vision"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Magic damage"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ELECTRIC VORTEX",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Stun",
+              "Forced movement",
+              "Active",
+              "Dispeble strong"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "OVERLOAD",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Passive",
+              "Attack modifire",
+              "Slow",
+              "Attack speed reduce",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "BALL LIGHTNING",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "AoE"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "Forced movement"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "GALVANIZED",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Mana regen"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "sven": {
+    "abilities": [
+      {
+        "name": "STORM HAMMER",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Stun",
+              "AoE",
+              "Magic damage",
+              "Dispeble strong"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "GREAT CLEAVE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Attack splash",
+              "Attack modifire"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "WARCRY",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Movement speed increase",
+              "Armor increase",
+              "Dispeble normal"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "AoE",
+                  "Movement speed increase",
+                  "Armor increase",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "GOD'S STRENGTH",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack damage increase",
+              "Active",
+              "Slow resistance",
+              "Undispeble"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "WRATH OF GOD",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Attack damage increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "techies": {
+    "abilities": [
+      {
+        "name": "STICKY BOMB",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Slow",
+                  "Magic damage",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "REACTIVE TAZER",
+        "scenarios": [
+          {
+            "target": "ally",
+            "tags": [
+              "Movement speed increase",
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Disarm",
+                  "Magic damage",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "BLAST OFF!",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Stun",
+                  "AoE",
+                  "Magic damage"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "Forced movement",
+                  "Pure damage",
+                  "Percentage damage"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "PROXIMITY MINES",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Magic damage",
+                  "Magic resistance reduce"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "M.A.D.",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Mana regen",
+              "Passive",
+              "Unbreakable"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MINEFIELD SIGN",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "AoE",
+                  "Void zone"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "templar_assassin": {
+    "abilities": [
+      {
+        "name": "REFRACTION",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Attack damage increase",
+              "Barrier",
+              "Undispeble"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "MELD",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Invisibility",
+              "Active",
+              "Undispeble"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Phisical damage",
+                  "Armor reduce",
+                  "Attack modifire",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "PSIBLADES",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Pure damage",
+              "Passive",
+              "Damage from attack",
+              "Attack modifire",
+              "AoE"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "PSIONIC TRAP",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Vision"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Slow",
+                  "Magic damage",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "PSIONIC PROJECTION",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "interruptible",
+              "Global",
+              "Aghanim"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Teleport/Blink"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "INNER PEACE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Mana regen",
+              "Health regen",
+              "Passive",
+              "Unbreakable"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "terrorblade": {
+    "abilities": [
+      {
+        "name": "REFLECTION",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Illusions",
+                  "Slow",
+                  "Attack speed reduce",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "CONJURE IMAGE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Illusions"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "METAMORPHOSIS",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack range increase",
+              "Attack damage increase",
+              "Attack speed increase",
+              "Active",
+              "Undispeble",
+              "Attack type swap"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "SUNDER",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Active",
+              "Swap hp"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Swap hp",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "DEMON ZEAL",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack speed increase",
+              "Movement speed increase",
+              "Health regen",
+              "Pure damage",
+              "Shard"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "TERROR WAVE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Attack damage increase",
+              "Attack range increase",
+              "Attack speed increase",
+              "Undispeble",
+              "Aghanim",
+              "Attack type swap"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Fear",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "tidehunter": {
+    "abilities": [
+      {
+        "name": "GUSH",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Slow",
+              "Magic damage",
+              "Active",
+              "Armor reduce"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "KRAKEN SHELL",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Active",
+              "Attack damage resistance",
+              "Strong dispel"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "ANCHOR SMASH",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Damage from attack",
+                  "Phisical damage",
+                  "AoE",
+                  "Dispeble normal",
+                  "Attack effect proc",
+                  "Attack damage reduce"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "RAVAGE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Stun",
+                  "AoE",
+                  "Magic damage",
+                  "Dispeble strong"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "DEAD IN THE WATER",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Leash",
+              "Active",
+              "Undispeble",
+              "Shard"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "shredder": {
+    "abilities": [
+      {
+        "name": "WHIRLING DEATH",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Cut tree",
+              "AoE"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Pure damage",
+                  "Stats reduce",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "TIMBER CHAIN",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Cut tree"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Pure damage"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "Forced movement"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "REACTIVE ARMOR",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Armor increase",
+              "Health regen",
+              "Undispeble",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "CHAKRAM",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Cut tree",
+              "AoE"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Pure damage",
+                  "Slow",
+                  "AoE",
+                  "Void zone"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "Disarm"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "FLAMETHROWER",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Shard"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Slow",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "EXPOSURE THERAPY",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Mana regen",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "tinker": {
+    "abilities": [
+      {
+        "name": "LASER",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Pure damage",
+              "Active",
+              "Miss",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "MARCH OF THE MACHINES",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Magic damage",
+                  "Void zone"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "DEPLOY TURRETS",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Forced movement",
+                  "Magic damage",
+                  "AoE"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "Forced movement"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "KEEN CONVEYANCE",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "interruptible"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Teleport/Blink"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "REARM",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "interruptible",
+              "Refresh"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "WARP FLARE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Forced movement",
+              "Root",
+              "Magic damage",
+              "Active",
+              "Shard"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "EUREKA!",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Coldown reduction"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "tiny": {
+    "abilities": [
+      {
+        "name": "AVALANCHE",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Stun",
+                  "Undispeble"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "TOSS",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Forced movement",
+              "Magic damage",
+              "AoE",
+              "Active"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Forced movement",
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "TREE GRAB",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Cut tree"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Attack splash",
+                  "Attack damage increase",
+                  "Attack range increase",
+                  "Undispeble"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "GROW",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Attack damage increase",
+              "Movement speed increase",
+              "Armor increase",
+              "Undispeble",
+              "Attack speed reduce"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "INSURMOUNTABLE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Status resistance",
+              "Slow resistance"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "treant": {
+    "abilities": [
+      {
+        "name": "NATURE'S GRASP",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Slow",
+                  "Magic damage",
+                  "Void zone"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "LEECH SEED",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Attack modifire",
+              "Magic damage",
+              "Dispeble normal",
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "AoE",
+                  "Health regen",
+                  "Aura"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "Health regen",
+                  "Aura",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "LIVING ARMOR",
+        "scenarios": [
+          {
+            "target": "ally",
+            "tags": [
+              "Global",
+              "Damage block",
+              "Health regen",
+              "Active"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Health regen",
+              "Active",
+              "Damage block"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "NATURE'S GUISE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Movement speed increase",
+              "Passive",
+              "Invisibility"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "OVERGROWTH",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Root",
+                  "Disarm",
+                  "AoE",
+                  "Magic damage",
+                  "Spell immunity pierced",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "EYES IN THE FOREST",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Vision",
+              "Shard"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "troll_warlord": {
+    "abilities": [
+      {
+        "name": "BATTLE STANCE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack type swap",
+              "Armor increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "WHIRLING AXES (RANGE)",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Slow",
+                  "Magic damage",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WHIRLING AXES (MELEE)",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Miss",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "FERVOR",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Attack speed increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "BERSERKER'S RAGE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Movement speed increase"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Attack modifire",
+                  "Root",
+                  "Slow",
+                  "Attack speed reduce",
+                  "Dispeble normal",
+                  "Spell immunity pierced"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "BATTLE TRANCE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack speed increase",
+              "Lifesteal",
+              "Movement speed increase",
+              "Death protect",
+              "Active",
+              "Undispeble"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "tusk": {
+    "abilities": [
+      {
+        "name": "ICE SHARDS",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Barricade"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "SNOWBALL",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Stun",
+              "Magic damage",
+              "Active",
+              "Dispeble strong"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "Banish",
+                  "Forced movement"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "Banish",
+                  "Forced movement"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "TAG TEAM",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Undispeble"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Aura",
+                  "AoE",
+                  "Phisical damage",
+                  "Slow",
+                  "Attack modifire"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WALRUS PUNCH!",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Stun",
+              "Crit",
+              "Attack modifire",
+              "Active",
+              "Phisical damage",
+              "Undispeble"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "DRUNKING BUDDIES",
+        "scenarios": [
+          {
+            "target": "ally",
+            "tags": [
+              "Forced movement",
+              "Movement speed increase",
+              "Armor increase",
+              "Active",
+              "Dispeble normal",
+              "Shard"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Forced movement",
+                  "Movement speed increase",
+                  "Armor increase",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WALRUS KICK",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Forced movement",
+              "Magic damage",
+              "Slow",
+              "Active",
+              "Dispeble normal",
+              "Aghanim"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "BITTER CHILL",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Passive",
+              "Aura",
+              "Attack speed reduce"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "abyssal_underlord": {
+    "abilities": [
+      {
+        "name": "FIRESTORM",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Void zone",
+                  "AoE",
+                  "Magic damage",
+                  "Dispeble normal",
+                  "Percentage damage"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "PIT OF MALICE",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Root",
+                  "Void zone",
+                  "Magic damage",
+                  "Dispeble normal",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ATROPHY AURA",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Passive",
+              "Attack damage reduce",
+              "Aura"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Attack damage increase"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "FIEND'S GATE",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Global"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Teleport/Blink",
+                  "interruptible"
+                ]
+              },
+              {
+                "target": "ally",
+                "tags": [
+                  "Teleport/Blink",
+                  "interruptible"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "Teleport/Blink",
+                  "interruptible"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "undying": {
+    "abilities": [
+      {
+        "name": "DECAY",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Magic damage",
+                  "Stats reduce",
+                  "Undispeble"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "Stats increase",
+                  "Undispeble"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "SOUL RIP",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Active"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Health regen",
+              "Active"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Health regen"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "TOMBSTONE",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Summons",
+              "Phisical damage"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Slow",
+                  "Undispeble"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "FLESH GOLEM",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Stats increase",
+              "Active",
+              "Movement speed increase",
+              "Undispeble"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Slow",
+                  "Attack modifire",
+                  "Damage resistance reduce",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "CEASELESS DIRGE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Rebirth",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "ursa": {
+    "abilities": [
+      {
+        "name": "EARTHSHOCK",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Forced movement",
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Slow",
+                  "AoE",
+                  "Magic damage",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "OVERPOWER",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack speed increase",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "FURY SWIPES",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Phisical damage",
+              "Attack modifire",
+              "Passive",
+              "Undispeble",
+              "Spell immunity pierced"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "ENRAGE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Damage resistance",
+              "Status resistance",
+              "Strong dispel",
+              "Undispeble"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "MAUL",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack damage increase",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "vengefulspirit": {
+    "abilities": [
+      {
+        "name": "MAGIC MISSILE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Stun",
+              "Magic damage",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "WAVE OF TERROR",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Vision"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Armor reduce",
+                  "Attack damage reduce"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "VENGEANCE AURA",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack damage increase",
+              "Passive"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "Aura",
+                  "AoE",
+                  "Attack damage increase"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "NETHER SWAP",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Forced movement",
+              "Active",
+              "Magic damage"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Teleport/Blink",
+                  "Barrier",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Forced movement",
+              "Barrier",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Teleport/Blink",
+                  "Barrier",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "venomancer": {
+    "abilities": [
+      {
+        "name": "VENOMOUS GALE",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Slow",
+                  "AoE",
+                  "Magic damage",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "SNAKEBITE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Active",
+              "Spell immunity pierced",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "PLAGUE WARD",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Summons",
+              "Phisical damage",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "NOXIOUS PLAGUE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Slow",
+              "Bounced",
+              "Magic damage",
+              "Percentage damage",
+              "Active",
+              "Undispeble"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "POISON STING",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Slow",
+              "Magic damage",
+              "Dispeble normal",
+              "Attack modifire"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "viper": {
+    "abilities": [
+      {
+        "name": "PISON ATTACK",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Slow",
+              "Magic damage",
+              "Magic resistance reduce",
+              "Active",
+              "Attack modifire",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "NETHERTOXIN",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Void zone",
+                  "Magic damage",
+                  "Attack speed reduce"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "CORROSIVE SKIN",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Magic resistance"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Attack speed reduce"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "VIPER STRIKE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Break",
+              "Magic damage",
+              "Undispeble",
+              "Spell immunity pierced",
+              "Active",
+              "Attack speed reduce"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "NOSEDIVE",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Slow",
+                  "Dispeble normal",
+                  "AoE",
+                  "Void zone",
+                  "Magic damage",
+                  "Attack speed reduce"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "Forced movement"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "PREDATOR",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Attack damage increase",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "visage": {
+    "abilities": [
+      {
+        "name": "GRAVE CHILL",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Slow",
+              "Attack speed reduce",
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Movement speed increase",
+                  "Attack speed increase"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "SOUL ASSUMPTION",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "GRAVEKEEPER'S CLOAK",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Damage resistance",
+              "Passive"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "SUMMON FAMILIARS",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Summons",
+              "Phisical damage",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "STONEFORM",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Stun",
+                  "Magic damage",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "SILENT AS THE GRAVE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Invisibility",
+              "Active",
+              "Free move",
+              "Movement speed increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "void_spirit": {
+    "abilities": [
+      {
+        "name": "ATHER REMNANT",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Forced movement",
+                  "Stun",
+                  "Magic damage",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "DISSIMILATE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Banish",
+              "Active",
+              "Teleport/Blink"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "RESONANT PULSE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Barrier",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ASTRAL STEP",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Damage from attack",
+                  "Phisical damage",
+                  "Slow",
+                  "Attack effect proc",
+                  "AoE"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "Teleport/Blink"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "warlock": {
+    "abilities": [
+      {
+        "name": "FATAL BONDS",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "AoE",
+              "Magic damage",
+              "Phisical damage",
+              "Pure damage",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "SHADOW WORD",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Active",
+              "Dispeble normal",
+              "AoE",
+              "Aura"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "Health regen",
+                  "AoE",
+                  "Aura"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "AoE",
+                  "Aura",
+                  "Health regen"
+                ]
+              }
+            ]
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Active",
+              "Health regen",
+              "Dispeble normal",
+              "Aura",
+              "AoE"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Aura",
+                  "AoE"
+                ]
+              },
+              {
+                "target": "self",
+                "tags": [
+                  "AoE",
+                  "Aura",
+                  "Health regen"
+                ]
+              }
+            ]
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Health regen"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "AoE",
+                  "Aura"
+                ]
+              },
+              {
+                "target": "ally",
+                "tags": [
+                  "AoE",
+                  "Aura",
+                  "Health regen"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "UPHEAVAL",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "interruptible"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Slow",
+                  "Magic damage",
+                  "AoE",
+                  "Void zone"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "CHAOTIC OFFERING",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Summons",
+              "Phisical damage",
+              "Magic damage"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Stun",
+                  "Dispeble strong",
+                  "Spell immunity pierced",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ELDRITCH SUMMONING",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Summons",
+              "Passive",
+              "Magic damage"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "weaver": {
+    "abilities": [
+      {
+        "name": "THE SWARM",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Summons",
+                  "Phisical damage",
+                  "Armor reduce"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "SHIKUCHI",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Invisibility",
+              "Movement speed increase",
+              "Slow resistance",
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "GEMINATE ATTACK",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Passive",
+              "Active",
+              "Attack effect proc",
+              "Attack modifire",
+              "Phisical damage",
+              "Damage from attack"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "TIME LAPSE",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Teleport/Blink",
+              "Active",
+              "Health regen",
+              "Mana regen"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "THREADS OF FATE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Passive",
+              "Slow",
+              "Dispeble normal"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Attack damage increase"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "windrunner": {
+    "abilities": [
+      {
+        "name": "SHACKLESHOT",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Stun",
+              "Active",
+              "Dispeble strong"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "POWERSHOT",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Slow",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "WINDRUN",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Movement speed increase",
+              "Evasion"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "FOCUS FIRE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "self",
+                "tags": [
+                  "Attack speed increase",
+                  "Attack damage reduce"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "GALE FORCE",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Forced movement",
+                  "AoE",
+                  "Void zone"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "TAILWIND",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Movement speed increase"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "winter_wyvern": {
+    "abilities": [
+      {
+        "name": "ARCTIC BURN",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Free move",
+              "Attack range increase",
+              "Undispeble"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "Percentage damage",
+                  "Dispeble normal",
+                  "Slow"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "SPLINTER BLAST",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "AoE",
+              "Slow",
+              "Active",
+              "Dispeble normal"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "ally",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "AoE",
+                  "Slow",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "COLD EMBRACE",
+        "scenarios": [
+          {
+            "target": "ally",
+            "tags": [
+              "Attack damage resistance",
+              "Health regen",
+              "Stun",
+              "Active",
+              "Undispeble"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "self",
+            "tags": [
+              "Stun",
+              "Health regen",
+              "Active",
+              "Attack damage resistance",
+              "Undispeble"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "WINTER'S CURSE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Stun",
+              "Undispeble",
+              "Taunt",
+              "Active",
+              "Spell immunity pierced"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "witch_doctor": {
+    "abilities": [
+      {
+        "name": "PARALYZING CASK",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Bounced",
+              "Stun",
+              "Magic damage",
+              "Dispeble normal",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "VOODOO RESTORATION",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Health regen",
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "ally",
+                "tags": [
+                  "Health regen",
+                  "Aura",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MALEDICT",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "AoE",
+                  "Magic damage",
+                  "Undispeble"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "DEATH WARD",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Summons",
+              "Pure damage",
+              "Spell immunity pierced",
+              "Active",
+              "interruptible"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "VOODOO SWITCHEROO",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Banish",
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "point",
+                "tags": [
+                  "Summons",
+                  "Pure damage",
+                  "Spell immunity pierced"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "GRIS-GRIS",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Active",
+              "Gold bonus"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "skeleton_king": {
+    "abilities": [
+      {
+        "name": "WRAITHFIRE BLAST",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Stun",
+              "Slow",
+              "Magic damage",
+              "Active",
+              "Dispeble strong"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "BONE GUARD",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Summons",
+              "Active",
+              "Phisical damage"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "MORTAL STRIKE",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Crit",
+              "Attack modifire",
+              "Passive",
+              "Phisical damage"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "REINCARNATION",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Passive",
+              "Unbreakable",
+              "Rebirth"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Slow",
+                  "AoE"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "VAMPIRIC SPIRIT",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Death protect",
+              "Passive",
+              "Lifesteal"
+            ],
+            "sideEffects": []
+          }
+        ]
+      }
+    ]
+  },
+  "zuus": {
+    "abilities": [
+      {
+        "name": "ARC LIGHTNING",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Bounced",
+              "Magic damage",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "LIGHTNING BOLT",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Stun",
+              "Magic damage",
+              "Active",
+              "True sight",
+              "Vision"
+            ],
+            "sideEffects": []
+          },
+          {
+            "target": "point",
+            "tags": [
+              "Vision",
+              "True sight",
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Stun",
+                  "Magic damage"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "HEAVENLY JUMP",
+        "scenarios": [
+          {
+            "target": "self",
+            "tags": [
+              "Forced movement",
+              "Active"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Slow",
+                  "Magic damage",
+                  "Attack speed reduce",
+                  "Dispeble normal"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "THUNDERGOD'S WRATH",
+        "scenarios": [
+          {
+            "target": "allEnemies",
+            "tags": [
+              "Magic damage",
+              "Global",
+              "Vision",
+              "True sight",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "LIGHTNING HANDS",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Bounced",
+              "Shard",
+              "Attack modifire",
+              "Active"
+            ],
+            "sideEffects": []
+          }
+        ]
+      },
+      {
+        "name": "NIMBUS",
+        "scenarios": [
+          {
+            "target": "point",
+            "tags": [
+              "Active",
+              "Global",
+              "AoE",
+              "Vision"
+            ],
+            "sideEffects": [
+              {
+                "target": "enemy",
+                "tags": [
+                  "Magic damage",
+                  "True sight",
+                  "Stun"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "STATIC FIELD",
+        "scenarios": [
+          {
+            "target": "enemy",
+            "tags": [
+              "Magic damage",
+              "Passive",
+              "Percentage damage"
             ],
             "sideEffects": []
           }

@@ -1,0 +1,161 @@
+{
+  "heroName": "Kez",
+  "innateAbility": {
+    "name": "Switch Discipline",
+    "hotkey": "D",
+    "description": "Switches between his weapons — the Kazurai Katana and the Shodo Sai.The higher Kez's level, the lower the cooldown.",
+    "type": "Passive / No / Toggle",
+    "traits": {
+      "Cast Animation": "0 + 0",
+      "Move Speed Bonus": "12% (With level 10 Right Talent 18%)",
+      "Main Attack Damage per Agi": "1.12 (With level 10 Right Talent 1.18)",
+      "Cooldown": "8"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Echo Slash",
+      "hotkey": "Q",
+      "description": "Slashes forward in a line with his Katana, instant attacks and applies a brief movement speed slow to affected enemy units.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.2 + 0",
+        "Hero Attack Damage Bonus": "20/40/60/80",
+        "Cooldown": "21/18/15/12",
+        "Mana Cost": "75/90/105/120"
+      }
+    },
+    {
+      "name": "Falcon Rush",
+      "hotkey": "Q",
+      "description": "Rushes toward enemy units within a distance with movement speed and slow resistance bonus.When attacking, echoes will be created, dealing secondary attacks.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Slow Resist Bonus": "15%/30%/45%/60%",
+        "Duration": "3.75/4.5/5.25/6 (With level 15 Right Talent 5.75/6.5/7.25/8)",
+        "Attack Speed Bonus": " (With level 20 Left Talent 40)",
+        "Cooldown": "21/18/15/12",
+        "Mana Cost": "85/90/95/100"
+      }
+    },
+    {
+      "name": "Grappling Claw",
+      "hotkey": "W",
+      "description": "Swings on a grappling hook toward the unit-targeted tree or enemy. Applies movement speed slow on the affected enemy until Kez reaches it.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "650/750/850/950",
+        "Cooldown": "13/11/9/7",
+        "Mana Cost": "40"
+      }
+    },
+    {
+      "name": "Talon Toss",
+      "hotkey": "W",
+      "description": "Throws a Sai-based projectile that damages and silences the unit-targeted enemy.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0",
+        "Cast Range": "650/750/850/950",
+        "Attack Damage Instance": "60/120/180/240",
+        "Cooldown": "13/11/9/7",
+        "Mana Cost": "60/65/70/75"
+      }
+    },
+    {
+      "name": "Kazurai Katana",
+      "hotkey": "E",
+      "description": "All abilities and Katana-based attacks apply health regeneration reduction, with a stacking damage over time debuff based on the attack damage dealt.",
+      "type": "Passive / Unit",
+      "traits": {
+        "Min Damage Threshold": "1",
+        "Damage Dealt to Damage per Second": "3%/6%/9%/12% (With level 20 Right Talent 7%/10%/13%/16%)",
+        "Cast Animation": "0.35 + 1.12",
+        "Cast Range": "225",
+        "Stack Value to Damage Factor": "0.5  (Upgradable by Aghanim's Shard. 1)",
+        "Self Attack Damage Reduction": "100%",
+        "Cooldown": "24/18/12/6",
+        "Mana Cost": "40"
+      }
+    },
+    {
+      "name": "Shodo Sai",
+      "hotkey": "E",
+      "description": "Grants a passive chance for critical hits on attacks. Some abilities can also apply a temporary mark on affected enemy units.",
+      "type": "Passive / Point",
+      "traits": {
+        "Crit Damage": "125%/150%/175%/200% (With level 25 Right Talent 205%/230%/255%/280%)",
+        "Cast Animation": "0 + 0",
+        "Cast Range": "Global",
+        "Parry Crit Damage Bonus": "50%",
+        "Cooldown": "20/15/10/5",
+        "Mana Cost": "24/18/12/6"
+      }
+    },
+    {
+      "name": "Cancel",
+      "hotkey": "E",
+      "description": "Instantly cancels parrying and stop blocking incoming physical attacks.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "1"
+      }
+    },
+    {
+      "name": "Raptor Dance",
+      "hotkey": "R",
+      "description": "Applies a Basic Dispel upon cast.Enters into an uncontrollable state that grants brief invulnerability then absolute magic resistance for the cast time and for the entire ability duration.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "1 + 0",
+        "Base Damage": "40/70/100",
+        "Max Health as Damage": "2.5%",
+        "Cooldown": "40/35/30",
+        "Mana Cost": "100/125/150"
+      }
+    },
+    {
+      "name": "Raven's Veil",
+      "hotkey": "R",
+      "description": "Releases a veil of smoke within the radius while briefly reducing their vision. Affected enemy units regain their vision over time.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Move Speed Bonus": "15%/25%/35%",
+        "Cooldown": "40/35/30",
+        "Mana Cost": "100/125/150"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+1 Echo Slash Attack-0.6 Echo Slash Interval",
+      "right": "+80% Shodo Sai Critical Strike"
+    },
+    {
+      "level": 20,
+      "left": "+40 Falcon Rush Attack Speed",
+      "right": "+4% Kazurai Katana Damage per Second"
+    },
+    {
+      "level": 15,
+      "left": "+1 Raptor Dance Strike",
+      "right": "+2s Falcon Rush Duration"
+    },
+    {
+      "level": 10,
+      "left": "+50 Raptor Dance Radius",
+      "right": "+6% Katana Mode Attack Damage+6% Sai Mode Move Speed"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Escape",
+    "Disabler"
+  ],
+  "facets": []
+}

@@ -1,0 +1,129 @@
+{
+  "heroName": "Shadow Shaman",
+  "innateAbility": {
+    "name": "Fowl Play",
+    "hotkey": "",
+    "description": "Applies Hex on himself, with bonus movement speed, whenever Rhasta takes lethal damage.Additionally spawns a flock of uncontrollable chicken illusions with pseudo-random behavior.",
+    "type": "Passive",
+    "traits": {
+      "Set Current Health": "1",
+      "Move Speed Bonus": "5%",
+      "Damage Reduction": "100%",
+      "Duration": "1",
+      "Cooldown": "120"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Ether Shock",
+      "hotkey": "Q",
+      "description": "Creates a cone of ethereal energy that strikes multiple enemy units.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 1.23",
+        "Cast Range": "600",
+        "Damage": "125/190/255/320 (With level 25 Right Talent 375/440/505/570)",
+        "Cooldown": "14/12/10/8",
+        "Mana Cost": "90/105/120/135"
+      }
+    },
+    {
+      "name": "Hex",
+      "hotkey": "W",
+      "description": "Transforms an enemy unit into a harmless beast, with all special abilities disabled.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0 + 1.13",
+        "Cast Range": "550",
+        "Duration": "2/2.3/2.6/2.9",
+        "Current Health as Damage": "100%",
+        "Cooldown": "24/20/16/12",
+        "Mana Cost": "130/150/170/190"
+      }
+    },
+    {
+      "name": "Shackles",
+      "hotkey": "E",
+      "description": "Magically binds an enemy unit so that it cannot move or attack, dealing damage over time.",
+      "type": "Unit / Channeled",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "450 (Upgradable by Aghanim's Scepter. 600)",
+        "Damage Interval": "(Upgradable by Aghanim's Scepter. 0.9)",
+        "Base Damage per Instance": "4.17/5.33/6.11/6.67",
+        "Damage to Heal Factor": "1",
+        "Damage Bonus per Interval": "7.08/5.67/4.72/4.05",
+        "Damage Radius": "(Upgradable by Aghanim's Scepter. 600)",
+        "Damage Factor": "(Upgradable by Aghanim's Scepter. 1)",
+        "Cooldown": "14/13/12/11",
+        "Mana Cost": "125/140/155/170"
+      }
+    },
+    {
+      "name": "Urnaconda",
+      "hotkey": "",
+      "description": "Launches a projectile and deals damage to enemy units within the area-targeted location.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "650",
+        "Damage Radius": "225",
+        "Damage": "275",
+        "Damage Factor": "4",
+        "Cooldown": "50",
+        "Mana Cost": "140"
+      }
+    },
+    {
+      "name": "Mass Serpent Ward",
+      "hotkey": "R",
+      "description": "Summons a number of Serpent Wards to attack enemy units and enemy buildings.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.3 + 0.97",
+        "Cast Range": "550",
+        "Duration": "45",
+        "Bonus Attack Targets": "1",
+        "Cooldown": "110/105/100",
+        "Mana Cost": "200/350/550"
+      }
+    },
+    {
+      "name": "Serpent Ward (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+1 Serpent Ward Attack Target",
+      "right": "+250 Ether Shock Damage"
+    },
+    {
+      "level": 20,
+      "left": "x1.5 Serpent Ward Hit Count",
+      "right": "+1.5s Shackles Duration"
+    },
+    {
+      "level": 15,
+      "left": "Hex Applies Break",
+      "right": "+160 Serpent Ward Attack Range"
+    },
+    {
+      "level": 10,
+      "left": "+1.75 Mana Regen",
+      "right": "+170 Shackles Total Damage"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Pusher",
+    "Disabler",
+    "Nuker",
+    "Initiator"
+  ],
+  "facets": []
+}

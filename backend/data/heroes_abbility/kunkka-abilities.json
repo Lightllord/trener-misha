@@ -1,0 +1,128 @@
+{
+  "heroName": "Kunkka",
+  "innateAbility": {
+    "name": "Admiral's Rum",
+    "hotkey": "",
+    "description": "Douses himself with the Admiral's signature rum upon taking additional player-based damage instances when reaching a certain health threshold.The Rum buff grants bonus movement speed and damage reduction for a period of time.",
+    "type": "Passive",
+    "traits": {
+      "Health Threshold": "65%",
+      "Move Speed Bonus": "7.75%",
+      "Damage Reduction": "18%",
+      "Rum Damage Timer": "5 (With level 10 Right Talent 6)",
+      "Move Speed Bonus Increase": "0.25%",
+      "Damage Reduction Factor": "2",
+      "Cooldown": "50.5"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Torrent",
+      "hotkey": "Q",
+      "description": "Summons a rising torrent that, after a short delay, stuns and hurls enemy units into the sky.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.4 + 0",
+        "Cast Range": "1300",
+        "Total Damage": "110/180/250/320 (With level 15 Right Talent 137.5/225/312.5/400)",
+        "Cooldown": "16/14/12/10",
+        "Mana Cost": "90"
+      }
+    },
+    {
+      "name": "Tidebringer",
+      "hotkey": "W",
+      "description": "Grants increased damage and cleaves a large area of effect in front of Kunkka for a single strike.",
+      "type": "Autocast / Active Attack Modifier",
+      "traits": {
+        "Cast Animation": "0.4 + 0.3",
+        "Cast Range": "150",
+        "Cleave Damage": "150% (With level 20 Left Talent 230%)",
+        "Attack Damage Bonus": "35/70/105/140 (With level 15 Left Talent 110/145/180/215)",
+        "Armor Piercing Bonus": "25%",
+        "Cooldown": "13/10/7/4"
+      }
+    },
+    {
+      "name": "X Marks the Spot",
+      "hotkey": "E",
+      "description": "Marks the unit-targeted hero's current position with an X, and returns it to the X after several seconds.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0",
+        "Cast Range": "550/700/850/1000",
+        "Cooldown": "24/20/16/12",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Return",
+      "hotkey": "E",
+      "description": "Kunkka can return the marked hero to the X at anytime during the duration.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.2 + 0",
+        "Cooldown": "1"
+      }
+    },
+    {
+      "name": "Tidal Wave",
+      "hotkey": "F",
+      "description": "Calls upon a tidal wave from behind Kunkka that deals damage, disarms, and drags enemy units along it.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.2 + 1",
+        "Cast Range": "1050",
+        "Radius": "750 (With level 25 Right Talent 850)",
+        "Damage": "180",
+        "Cooldown": "12",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Ghostship",
+      "hotkey": "R",
+      "description": "Summons a ghostly ship that sails through the battle before smashing apart, damaging and stunning all enemies caught near the wreckage.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "1000",
+        "Impact Damage": "350/475/600",
+        "Volley Ghostship Damage Ratio": "40%",
+        "Cooldown": "90/80/70",
+        "Mana Cost": "125/175/225"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+25% Tidebringer Armor Piercing",
+      "right": "+100 Spell Area-of-Effect Bonus"
+    },
+    {
+      "level": 20,
+      "left": "+80% Tidebringer Cleave",
+      "right": "-4s Torrent Cooldown"
+    },
+    {
+      "level": 15,
+      "left": "+75 Tidebringer Damage",
+      "right": "x1.25 Torrent Damage/Stun Duration"
+    },
+    {
+      "level": 10,
+      "left": "+1s Tidebringer 60% Move Speed Slow",
+      "right": "+1s Admiral's Rum Rum Timer/Hangover Duration"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Support",
+    "Disabler",
+    "Initiator",
+    "Durable",
+    "Nuker"
+  ],
+  "facets": []
+}

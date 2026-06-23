@@ -1,0 +1,131 @@
+{
+  "heroName": "Shadow Demon",
+  "innateAbility": {
+    "name": "Menace",
+    "hotkey": "",
+    "description": "Imbues attacks with an offensive stacking debuff that amplifies incoming damage taken by the affected enemy unit.",
+    "type": "Passive",
+    "traits": {
+      "Damage Amp per Stack": "0.9%",
+      "Duration": "8",
+      "Damage Amp Increase": "0.1%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Disruption",
+      "hotkey": "Q",
+      "description": "Sends the hero to the hidden dimension for a short duration.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.6",
+        "Cast Range": "675",
+        "Base Attack Damage Bonus": "20/35/50/65",
+        "Damage Dealt": "20%/30%/40%/50%",
+        "Damage Taken": "300%",
+        "Duration": "8/10/12/14",
+        "Cooldown": "26/24/22/20 ( 0)",
+        "Mana Cost": "120"
+      }
+    },
+    {
+      "name": "Disseminate",
+      "hotkey": "W",
+      "description": "Whenever the affected unit takes damage, all enemy units, including the target itself if it is an enemy, also receive a portion of that damage.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.6",
+        "Cast Range": "700/775/850/925",
+        "Radius": "675",
+        "Damage Shared": "16%/24%/32%/40% (With level 20 Right Talent 31%/39%/47%/55%)",
+        "Duration": "6",
+        "Enemy Damage Amp": "16%/24%/32%/40% (With level 20 Right Talent 31%/39%/47%/55%)",
+        "Cooldown": "26/22/18/14",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Shadow Poison",
+      "hotkey": "E",
+      "description": "Deals damage in a straight line and applies additional stack damage if the debuff is present.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.25 + 0",
+        "Cast Range": "1500",
+        "Base Damage": "24/36/48/60 (With level 10 Right Talent 27.6/41.4/55.2/69)",
+        "Multiplied Final Damage": "24/36/48/60 (With level 10 Right Talent 27.6/41.4/55.2/69)",
+        "Final Damage Increment": "60 (With level 10 Right Talent 69)",
+        "Cooldown": "2.5 ( 1.5)",
+        "Mana Cost": "40"
+      }
+    },
+    {
+      "name": "Shadow Poison Release",
+      "hotkey": "D",
+      "description": "Releases the accumulated Shadow Poison from its stacks, dealing damage to all affected enemy units.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cooldown": "1"
+      }
+    },
+    {
+      "name": "Demonic Cleanse",
+      "hotkey": "F",
+      "description": "Dispels debuffs continuously on the affected allied unit, then heals it at the end of the duration.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.6",
+        "Cast Range": "800",
+        "Min Heal": "0",
+        "Max Heal": "450",
+        "Cooldown": "60",
+        "Mana Cost": "150"
+      }
+    },
+    {
+      "name": "Demonic Purge",
+      "hotkey": "R",
+      "description": "Dispels buff and slows the enemy unit for the duration.The unit slowly regains its movement speed until the end of the duration, upon which the cumulative damage is applied.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.6",
+        "Cast Range": "800",
+        "Min Damage": "0",
+        "Max Damage": "300/450/600",
+        "Duration": "5",
+        "Cooldown": "70/65/60 ( 50/45/40)",
+        "Mana Cost": "150/175/200"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "2 Disruption Charges",
+      "right": "Demonic Purge Applies Shadow Poison Over Time"
+    },
+    {
+      "level": 20,
+      "left": "-20s Demonic Purge Cooldown",
+      "right": "+15% Disseminate Shared Damage"
+    },
+    {
+      "level": 15,
+      "left": "-1s Shadow Poison Cooldown",
+      "right": "+20 Move Speed"
+    },
+    {
+      "level": 10,
+      "left": "+8 Strength",
+      "right": "+15% Shadow Poison Damage"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Disabler",
+    "Initiator",
+    "Nuker"
+  ],
+  "facets": []
+}

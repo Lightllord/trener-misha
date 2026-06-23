@@ -1,0 +1,102 @@
+{
+  "heroName": "Night Stalker",
+  "innateAbility": {
+    "name": "Hunter in the Night",
+    "hotkey": "",
+    "description": "Balanar is in his element at night, attacking and moving with great swiftness.These ability bonuses are only granted at nighttime.",
+    "type": "Passive",
+    "traits": {
+      "Move Speed Bonus": "24% (Upgradable by Aghanim's Scepter. 39%)",
+      "Attack Speed Bonus": "38 (Upgradable by Aghanim's Scepter. 88)",
+      "Status Resist Bonus": " (With level 15 Left Talent 20%)",
+      "Move Speed Bonus Lvl Up Interval": "3",
+      "Move Speed Bonus Increase": "2%",
+      "Attack Speed Bonus Increase": "2"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Void",
+      "hotkey": "Q",
+      "description": "Damages and applies a movement speed slow on the unit-targeted enemy.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.47",
+        "Cast Range": "525",
+        "Damage": "80/160/240/320",
+        "Cooldown": "11/10/9/8 ( 10/9/8/7)",
+        "Mana Cost": "90/95/100/105"
+      }
+    },
+    {
+      "name": "Crippling Fear",
+      "hotkey": "W",
+      "description": "Silences and applies damage over time while near the Night Stalker for the duration.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Radius": "375 (With level 20 Right Talent 450)",
+        "Damage per Second": "25/30/35/40 (With level 10 Left Talent 35/40/45/50)",
+        "Damage Duration": "4.5/5/5.5/6",
+        "Cooldown": "30/25/20/15",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Midnight Feast",
+      "hotkey": "E",
+      "description": "Self-heals utilizing lifesteal when attacking enemy units.",
+      "type": "Passive / Unit",
+      "traits": {
+        "Cast Animation": "0 + 0.63",
+        "Cast Range": "125",
+        "Current Health as Damage": "100%",
+        "Max Health as Health Restore": "10%/15%/20%/25%",
+        "Cooldown": "39/36/33/30"
+      }
+    },
+    {
+      "name": "Dark Ascension",
+      "hotkey": "R",
+      "description": "Grants Night Stalker flying movement, unobstructed vision and bonus attack damage during his ascension.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Attack Damage Bonus": "50/100/150 (With level 15 Right Talent 75/125/175)",
+        "Duration": "30",
+        "Cooldown": "140/135/130 ( 105/100/95)",
+        "Mana Cost": "125/175/225"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-35s Dark Ascension Cooldown",
+      "right": "+100 Midnight Feast Lifesteal"
+    },
+    {
+      "level": 20,
+      "left": "+15 Strength",
+      "right": "+75 Crippling Fear Radius"
+    },
+    {
+      "level": 15,
+      "left": "+20% Hunter in the Night Status Resist",
+      "right": "+25 Dark Ascension Attack Damage"
+    },
+    {
+      "level": 10,
+      "left": "+10 Crippling Fear DPS",
+      "right": "-1s Void Cooldown"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Initiator",
+    "Durable",
+    "Disabler",
+    "Nuker"
+  ],
+  "facets": []
+}

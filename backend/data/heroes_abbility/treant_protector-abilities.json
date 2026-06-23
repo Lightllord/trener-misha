@@ -1,0 +1,131 @@
+{
+  "heroName": "Treant Protector",
+  "innateAbility": {
+    "name": "Nature's Guise",
+    "hotkey": "",
+    "description": "Grants bonus movement speed and tree-walking when near trees.",
+    "type": "Passive / No",
+    "traits": {
+      "Damage Threshold": "0",
+      "Move Speed Bonus": "10%",
+      "Cast Animation": "0 + 0",
+      "Cooldown": "36"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Nature's Grasp",
+      "hotkey": "",
+      "description": "Creates vines towards the target location. Vines slow down and deal damage to enemy units that walk through.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.2 + 0.7",
+        "Cast Range": "1500",
+        "Damage per Second": "35/50/65/80 (With level 15 Left Talent 60/75/90/105)",
+        "Creep Damage Factor": "0.65",
+        "Cooldown": "23/21/19/17",
+        "Mana Cost": "90"
+      }
+    },
+    {
+      "name": "Leech Seed",
+      "hotkey": "W",
+      "description": "A successful attack now deals spell damage bonus and binds the enemy unit.",
+      "type": "Autocast / Active Attack Modifier",
+      "traits": {
+        "Cast Animation": "0.6 + 0.4",
+        "Cast Range": "150",
+        "Spell Damage Bonus": "20/40/60/80 (With level 20 Left Talent 100/120/140/160)",
+        "Heal Radius": "650",
+        "Max Heal Targets": "5",
+        "Heal": "15/25/35/45",
+        "Attack Damage to Heal Bonus Factor": "0.2 (With level 15 Right Talent 0.3)",
+        "Creep Heal Factor": "0.5",
+        "Cooldown": "15/12/9/6 ( 12/9/6/3)"
+      }
+    },
+    {
+      "name": "Living Armor",
+      "hotkey": "E",
+      "description": "Applies a buff that negates all damage types from all player-controlled sources.The damage negation value reduces per damage instance negated, and removes the buff entirely once the damage negated value reaches nil.",
+      "type": "Point / Unit / Area",
+      "traits": {
+        "Cast Animation": "0.3 + 0.66",
+        "Cast Range": "Global",
+        "Damage Negation Threshold": "20",
+        "Damage Negated": "60/80/100/120 (With level 20 Right Talent 80/100/120/140)",
+        "Value Reduction per Damage Instance Negated": "20",
+        "Duration": "12",
+        "Heal per Second": "4/7/10/13 (With level 10 Right Talent 7/10/13/16)",
+        "Radius": "450",
+        "Cooldown": "24/21/18/15",
+        "Mana Cost": "65/70/75/80"
+      }
+    },
+    {
+      "name": "Eyes In The Forest",
+      "hotkey": "D",
+      "description": "Enchants a tree, which grants Treant unobstructed vision in that location.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.83",
+        "Cast Range": "350",
+        "Duration": "360",
+        "Cooldown": "2",
+        "Mana Cost": "30"
+      }
+    },
+    {
+      "name": "Treant's Eyes (Summoned   Attached Unit)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Overgrowth",
+      "hotkey": "R",
+      "description": "Deals damage per second and binds all debuff-affected enemy units within the radius.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.5 + 1.17",
+        "Radius": "800",
+        "Damage per Second": "95",
+        "Splash Damage": "60%",
+        "Duration": "16",
+        "Cooldown": "110/100/90 ( 85/75/65)",
+        "Mana Cost": "200/250/300"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+450 Living Armor Radius",
+      "right": "-3s Leech Seed Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "+80 Leech Seed Damage/Heal",
+      "right": "+20 Living Armor Damage Block"
+    },
+    {
+      "level": 15,
+      "left": "+25 Nature's Grasp Damage",
+      "right": "+0.1 Leech Seed Damage to Heal Factor"
+    },
+    {
+      "level": 10,
+      "left": "+50 Base Damage",
+      "right": "+3 Living Armor Heal per Second"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Initiator",
+    "Durable",
+    "Disabler",
+    "Escape"
+  ],
+  "facets": []
+}

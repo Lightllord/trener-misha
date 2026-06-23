@@ -1,0 +1,107 @@
+{
+  "heroName": "Mirana",
+  "innateAbility": {
+    "name": "Celestial Quiver",
+    "hotkey": "D",
+    "description": "Infuses Mirana's next succesful attack with magicial attack damage bonus.",
+    "type": "Autocast / Unit",
+    "traits": {
+      "Cast Animation": "0.35 + 0.7",
+      "Cast Range": "630",
+      "Magical Attack Damage Bonus": "5 (With level 20 Left Talent 55)",
+      "Magical Attack Damage Bonus Increase": "3",
+      "Cooldown": "0"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Starstorm",
+      "hotkey": "Q",
+      "description": "Calls down a meteor wave to damage all enemy units within the radius.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.4 + 0",
+        "Damage": "75/150/225/300 (With level 20 Right Talent 275/350/425/500)",
+        "Secondary Meteor Damage Factor": "0.8",
+        "Cooldown": "12 ( 10)",
+        "Mana Cost": "80/90/100/110"
+      }
+    },
+    {
+      "name": "Sacred Arrow",
+      "hotkey": "W",
+      "description": "Fires a long-range arrow that stuns and damages the first enemy unit it impacts.",
+      "type": "Point / No",
+      "traits": {
+        "Cast Animation": "0.5 + 0",
+        "Cast Range": "3000",
+        "Base Damage": "60/160/260/360",
+        "Max Damage Bonus": "180",
+        "Current Health as Damage": "100%",
+        "First Damage Factor": "(Upgradable by Aghanim's Scepter. 1)",
+        "Secondary Damage Factor": "(Upgradable by Aghanim's Scepter. 0.8)",
+        "Cooldown": "19/18/17/16 ( 17/16/15/14)",
+        "Mana Cost": "90"
+      }
+    },
+    {
+      "name": "Leap",
+      "hotkey": "E",
+      "description": "Leaps forward while Sagan empowers her with both movement speed bonus and attack speed bonus.",
+      "type": "No / Vector",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Move Speed Bonus": "6%/12%/18%/24%",
+        "Attack Speed Bonus": "25/50/75/100 (With level 15 Left Talent 125/150/175/200)",
+        "Duration": "5",
+        "Cooldown": "0",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Moonlight Shadow",
+      "hotkey": "R",
+      "description": "Turn allied heroes invisible and grants movement speed bonus.The invisibility applied restores itself after the fade delay as long as the buff duration is active.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.5 + 0",
+        "Radius": "Global",
+        "Damage Amp": "9%/12%/15%",
+        "Move Speed Bonus": "9%/12%/15%",
+        "Duration": "18",
+        "Cooldown": "120/110/100 ( 90/80/70)",
+        "Mana Cost": "125"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-30s Moonlight Shadow Cooldown",
+      "right": "Sacred Arrow Multishot"
+    },
+    {
+      "level": 20,
+      "left": "+50 Celestial Quiver Damage",
+      "right": "+200 Starstorm Damage"
+    },
+    {
+      "level": 15,
+      "left": "+100 Leap Attack Speed",
+      "right": "+20% Moonlight Shadow Evasion"
+    },
+    {
+      "level": 10,
+      "left": "+150 Leap Distance",
+      "right": "-2s Starstorm Cooldown"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Support",
+    "Escape",
+    "Nuker",
+    "Disabler"
+  ],
+  "facets": []
+}

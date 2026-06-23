@@ -1,0 +1,107 @@
+{
+  "heroName": "Lina",
+  "innateAbility": {
+    "name": "Slow Burn",
+    "hotkey": "",
+    "description": "All Lina's spells now applies a portion of the impact damage as damage over time.",
+    "type": "Passive",
+    "traits": {
+      "Impact Damage to Damage per Second": "0.64 (With level 25 Right Talent 0.8)",
+      "Crit Damage": "150%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Dragon Slave",
+      "hotkey": "Q",
+      "description": "Sends out a wave of fire that scorches every enemy in its path.",
+      "type": "Point / Unit",
+      "traits": {
+        "Cast Animation": "0.35 + 0.38",
+        "Cast Range": "1075",
+        "Damage": "65/125/185/245",
+        "Cooldown": "11/10/9/8 ( 8/7/6/5)",
+        "Mana Cost": "90/100/110/120"
+      }
+    },
+    {
+      "name": "Light Strike Array",
+      "hotkey": "W",
+      "description": "Stuns and damages enemy units within the radius.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.45 + 0.43",
+        "Cast Range": "700",
+        "Damage": "80/125/170/215 (With level 15 Left Talent 190/235/280/325)",
+        "Cooldown": "13/11/9/7",
+        "Mana Cost": "100/110/120/130"
+      }
+    },
+    {
+      "name": "Fiery Soul",
+      "hotkey": "E",
+      "description": "Grants a stack of bonus attack speed and bonus movement speed per enemy unit affected per ability cast.",
+      "type": "Passive",
+      "traits": {
+        "Move Speed Bonus per Stack": "1%/1.5%/2%/2.5% (With level 20 Left Talent 2%/2.5%/3%/3.5%)",
+        "Attack Speed Bonus per Stack": "8/16/24/32 (With level 20 Left Talent 18/26/34/42)"
+      }
+    },
+    {
+      "name": "Flame Cloak",
+      "hotkey": "D",
+      "description": "Lina ascends and grants herself unobstructed movement, spell damage amplification and bonus magic resistance.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Magic Resist Bonus": "35%",
+        "Spell Amp Bonus": "35%",
+        "Duration": "7",
+        "Cooldown": "25",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Laguna Blade",
+      "hotkey": "R",
+      "description": "Fires off a bolt of lightning at a single enemy unit, dealing massive damage.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.4",
+        "Cast Range": "750",
+        "Damage": "400/580/760",
+        "Cooldown": "70/60/50 ( 50/40/30)",
+        "Mana Cost": "150/300/450"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+150% Critical StrikeOn Slow Burn-affected Units",
+      "right": "+0.16 Slow Burn Damage Factor+1s Slow Burn Duration"
+    },
+    {
+      "level": 20,
+      "left": "+10 Fiery Soul Attack Speed per Stack+1% Fiery Soul Move Speed per Stack",
+      "right": "-20s Laguna Blade Cooldown"
+    },
+    {
+      "level": 15,
+      "left": "+110 Light Strike Array Damage",
+      "right": "+5% Fiery Soul Magic Resist per Stack"
+    },
+    {
+      "level": 10,
+      "left": "-3s Dragon Slave Cooldown",
+      "right": "+25 Attack Damage"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Carry",
+    "Nuker",
+    "Disabler"
+  ],
+  "facets": []
+}

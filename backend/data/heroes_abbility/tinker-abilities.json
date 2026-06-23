@@ -1,0 +1,130 @@
+{
+  "heroName": "Tinker",
+  "innateAbility": {
+    "name": "Eureka!",
+    "hotkey": "",
+    "description": "Grants Tinker an item-based cooldown reduction per intelligence, with a cap.",
+    "type": "Passive",
+    "traits": {}
+  },
+  "abilities": [
+    {
+      "name": "Laser",
+      "hotkey": "Q",
+      "description": "Blinds and damages the unit-targeted enemy.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.4 + 1",
+        "Cast Range": "600",
+        "Damage": "75/150/225/300 (With level 15 Left Talent 125/200/275/350)",
+        "Current Health Reduction": "(Upgradable by Aghanim's Scepter. 13%)",
+        "Max Health Reduction": "(Upgradable by Aghanim's Scepter. 13%)",
+        "Cooldown": "19/18/17/16",
+        "Mana Cost": "95/105/115/125 ( 85/94/103/112)"
+      }
+    },
+    {
+      "name": "March of the Machines",
+      "hotkey": "W",
+      "description": "Enlists an army of robotic minions to destroy enemy units in an area around Tinker.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.53 + 0.63",
+        "Cast Range": "300",
+        "Detonate Damage": "13/22/31/40",
+        "Duration": "6 (With level 10 Right Talent 7)",
+        "Heal per Second": "(Upgradable by Aghanim's Scepter. 35)",
+        "Heal Duration": "(Upgradable by Aghanim's Scepter. 4)",
+        "Cooldown": "35/33/31/29",
+        "Mana Cost": "100/120/140/160 ( 90/108/126/144)"
+      }
+    },
+    {
+      "name": "Deploy Turrets",
+      "hotkey": "E",
+      "description": "Drops a group of uncontrollable turrets within the area-targeted location.Deals damage and applies a knockback on enemy units within the radius.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.1 + 0.77",
+        "Cast Range": "600",
+        "First Damage": "40/80/120/160",
+        "Damage per Missile": "20/40/60/80 (With level 20 Right Talent 80/100/120/140)",
+        "Damage Radius": "200",
+        "Splash Damage Factor": "0.5",
+        "Cooldown": "24/22/20/18",
+        "Mana Cost": "100/120/140/160"
+      }
+    },
+    {
+      "name": "Keen Cannon (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Warp Flare",
+      "hotkey": "D",
+      "description": "Fires a damaging flare towards an enemy unit and applies a debuff that reduces both the affected enemy unit's cast range and attack range.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.5",
+        "Cast Range": "700",
+        "Damage": "150",
+        "Cooldown": "15",
+        "Mana Cost": "80 ( 72)"
+      }
+    },
+    {
+      "name": "Keen Conveyance",
+      "hotkey": "F",
+      "description": "Globally convey to an allied unit conditionally.Self-cast automatically convey to the fountain after a certain distance.",
+      "type": "Point / Unit / Channeled",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "Global",
+        "Cooldown": "50",
+        "Mana Cost": "75 ( 67)"
+      }
+    },
+    {
+      "name": "Rearm",
+      "hotkey": "R",
+      "description": "Resets the cooldown of Tinker's abilities. Does not affect item abilities cooldowns.",
+      "type": "No / Channeled",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "5.5/5/4.5",
+        "Mana Cost": "100/150/200 ( 90/135/180)"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-0.25s Rearm Channel Time",
+      "right": "+250 Laser Radius"
+    },
+    {
+      "level": 20,
+      "left": "-0.5s Keen Conveyance Channel Time",
+      "right": "+60 Deploy Turrets Missile Damage"
+    },
+    {
+      "level": 15,
+      "left": "+50 Laser Damage",
+      "right": "+100 Deploy Turrets Self Knockback"
+    },
+    {
+      "level": 10,
+      "left": "+10% Manacost/Manaloss Reduction",
+      "right": "+1s March of the Machines Duration"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Nuker",
+    "Pusher"
+  ],
+  "facets": []
+}

@@ -17,6 +17,7 @@ function makeInsight(overrides: Partial<Insight> = {}): Insight {
     payload: "payload",
     description: "desc",
     importance: "medium",
+    ttlMs: 999_999_999,
     createdAt: Date.now(),
     ...overrides,
   };

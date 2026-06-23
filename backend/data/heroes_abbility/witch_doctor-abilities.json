@@ -1,0 +1,122 @@
+{
+  "heroName": "Witch Doctor",
+  "innateAbility": {
+    "name": "Consume",
+    "hotkey": "",
+    "description": "Starts the game with a neutral consumable item — Gris-Gris.This can be consumed anytime to grant the stored gold to the Doctor.",
+    "type": "No",
+    "traits": {
+      "Stored Gold to Bonus Gold Factor": "1"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Paralyzing Cask",
+      "hotkey": "Q",
+      "description": "Launches a cask that ricochets between enemy units, stunning and damaging those it hits.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.52",
+        "Cast Range": "600",
+        "First Damage": "55/70/85/100",
+        "Damage Increment per Bounce": "20",
+        "Cooldown": "20/18/16/14 ( 17/15/13/11)",
+        "Mana Cost": "80/100/120/140"
+      }
+    },
+    {
+      "name": "Voodoo Restoration",
+      "hotkey": "W",
+      "description": "Activates an aura to heal nearby allied units, costing mana every second to keep the aura active.",
+      "type": "Toggle / Aura",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Radius": "650",
+        "Heal per Second": "20/30/40/50",
+        "Max Health as Heal per Second": " (With level 20 Left Talent 1%)",
+        "Cooldown": "0",
+        "Mana Cost": "25"
+      }
+    },
+    {
+      "name": "Maledict",
+      "hotkey": "E",
+      "description": "Curses all enemy heroes within the radius, causing them to take a set amount of damage each second.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.35 + 0",
+        "Cast Range": "600",
+        "Radius": "200",
+        "Damage per Second": "15/20/25/30",
+        "Duration": "12 (With level 15 Left Talent 16)",
+        "Current Health Loss to Damage": "16%/24%/32%/40%",
+        "Next Current Health Loss to Damage Factor": "0.75",
+        "Cooldown": "30/26/22/18",
+        "Mana Cost": "105/110/115/120"
+      }
+    },
+    {
+      "name": "Voodoo Switcheroo",
+      "hotkey": "D",
+      "description": "The Doctor turns into the Death Ward of its corresponding level while being hidden.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.1 + 0.73",
+        "Duration": "2.5",
+        "Cooldown": "50",
+        "Mana Cost": "200"
+      }
+    },
+    {
+      "name": "Death Ward",
+      "hotkey": "R",
+      "description": "Summons a deadly ward to attack enemy heroes within its attack range.",
+      "type": "Point / Channeled",
+      "traits": {
+        "Cast Animation": "0.35 + 0",
+        "Cast Range": "500",
+        "Pure Attack Damage": "60/90/120 (With level 25 Left Talent 100/130/160)",
+        "Attack Damage Bonus": " (With level 25 Left Talent 40)",
+        "Cooldown": "100/90/80",
+        "Mana Cost": "200"
+      }
+    },
+    {
+      "name": "Death Ward (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {
+        "Attack Damage Bonus": " (With level 25 Left Talent 40)"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+40 Death Ward Damage",
+      "right": "+6 Paralyzing Cask Bounces"
+    },
+    {
+      "level": 20,
+      "left": "+1% Voodoo Restoration Max Health as Heal",
+      "right": "Maledict Radius Damage On Every Burst"
+    },
+    {
+      "level": 15,
+      "left": "+4s Maledict Duration+1 Maledict Intervals",
+      "right": "-3s Paralyzing Cask Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "+200 Health",
+      "right": "x0.75 Voodoo Restoration Mana per Second"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Nuker",
+    "Disabler"
+  ],
+  "facets": []
+}

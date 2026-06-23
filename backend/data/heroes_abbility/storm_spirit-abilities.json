@@ -1,0 +1,102 @@
+{
+  "heroName": "Storm Spirit",
+  "innateAbility": {
+    "name": "Galvanized",
+    "hotkey": "",
+    "description": "Innately grants Storm Spirit permanent mana regeneration bonus over time in certain conditions.",
+    "type": "Passive",
+    "traits": {
+      "Mana Regen Bonus per Gained Charge": "0.1",
+      "Mana Regen Bonus per Charge": "0.2"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Static Remnant",
+      "hotkey": "Q",
+      "description": "Creates an remnant of Raijin at his current location, and moves to the point-targeted position upon cast.The remnant grants vision within the radius for a period of time.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0 + 1.1",
+        "Cast Range": "800",
+        "Damage Radius": "300",
+        "Damage": "100/160/240/280 (With level 15 Left Talent 160/220/300/340)",
+        "Cooldown": "3.5 ( 2.25)",
+        "Mana Cost": "70/80/90/100"
+      }
+    },
+    {
+      "name": "Electric Vortex",
+      "hotkey": "W",
+      "description": "Pulls an enemy unit to Raijin's location.",
+      "type": "Unit / No",
+      "traits": {
+        "Cast Animation": "0.3 + 0.77",
+        "Cast Range": "300 (Upgradable by Aghanim's Scepter. 0)",
+        "Duration": "1.1/1.4/1.7/2 (With level 20 Right Talent 1.3/1.6/1.9/2.2)",
+        "Cooldown": "20/18/16/14",
+        "Mana Cost": "60/70/80/90"
+      }
+    },
+    {
+      "name": "Overload",
+      "hotkey": "E",
+      "description": "Raijin overloads and creates an electrical charge upon an ability cast.The next attack deals damage and applies a slow within attacked enemy unit's radius.",
+      "type": "Passive / No",
+      "traits": {
+        "Damage Radius": "300",
+        "Damage": "25/50/75/100",
+        "Bounce Damage Factor": " (With level 25 Right Talent 0.5)",
+        "Cast Animation": "0 + 0",
+        "Radius": "(Upgradable by Aghanim's Shard. 750)",
+        "Attack Speed Bonus": "(Upgradable by Aghanim's Shard. 40)",
+        "Cooldown": "( 30)",
+        "Mana Cost": "( 100)"
+      }
+    },
+    {
+      "name": "Ball Lightning",
+      "hotkey": "R",
+      "description": "Charging across the battlefield until he depletes his mana or reaches his target.The damage increases linearly as Raijin travels, starting from the cast location.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "Global",
+        "Damage Radius": "200",
+        "Distance to Damage": "6/10/14",
+        "Cooldown": "0",
+        "Mana Cost": "25 + 7.5% × MaxMP"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Auto Remnant in Ball Lightning",
+      "right": "Overload Attack Bounce"
+    },
+    {
+      "level": 20,
+      "left": "-1.25s Static Remnant Cooldown",
+      "right": "+0.2s Electric Vortex Duration"
+    },
+    {
+      "level": 15,
+      "left": "+60 Static Remnant Damage",
+      "right": "+250 Health"
+    },
+    {
+      "level": 10,
+      "left": "+1.5 Mana Regen",
+      "right": "+20% Overload Move Speed Slow+20 Overload Attack Speed Slow"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Escape",
+    "Nuker",
+    "Initiator",
+    "Disabler"
+  ],
+  "facets": []
+}

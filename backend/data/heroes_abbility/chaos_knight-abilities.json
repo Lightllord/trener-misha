@@ -1,0 +1,98 @@
+{
+  "heroName": "Chaos Knight",
+  "innateAbility": {
+    "name": "Fundamental Forging",
+    "hotkey": "",
+    "description": "Grants an additional random enchantment that does not provide negative stats whenever crafting a neutral item.",
+    "type": "Passive",
+    "traits": {
+      "Number of Enchantment Bonus": "1"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Chaos Bolt",
+      "hotkey": "Q",
+      "description": "Throws a bolt at the unit-targeted enemy that stuns for a random duration and deals a random amount of damage.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.4 + 0.4",
+        "Cast Range": "600",
+        "Min Damage": "90/120/150/180",
+        "Max Damage": "155/240/325/410",
+        "Damage Dealt": "(Upgradable by Aghanim's Shard. 45%/65%/85%)",
+        "Damage Taken": "(Upgradable by Aghanim's Shard. 325%)",
+        "Duration": "(Upgradable by Aghanim's Shard. 6)",
+        "Cooldown": "13/12/11/10 ( 10/9/8/7)",
+        "Mana Cost": "110"
+      }
+    },
+    {
+      "name": "Reality Rift",
+      "hotkey": "W",
+      "description": "Teleports Chaos Knight and all illusions he has and the targeted unit to a point along the line between both of them.Applies armor reduction to the affected enemy unit.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.6",
+        "Cast Range": "600/650/700/750",
+        "Duration": "6",
+        "Cooldown": "15/12/9/6",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Chaos Strike",
+      "hotkey": "E",
+      "description": "Chaos Knight and his illusions' attacks have a chance to deal a critical strike of varying strength, in addition to a lifesteal for the percentage of the damage.",
+      "type": "Passive",
+      "traits": {
+        "Min Crit Damage": "120%",
+        "Max Crit Damage": "150%/190%/230%/270%"
+      }
+    },
+    {
+      "name": "Phantasm",
+      "hotkey": "R",
+      "description": "Summons several phantasm copies of the Chaos Knight from alternate dimensions.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.4 + 0",
+        "Damage Dealt": "60%/80%/100%",
+        "Damage Taken": "325% (With level 25 Left Talent 200%)",
+        "Duration": "30",
+        "Cooldown": "85/80/75",
+        "Mana Cost": "100/200/300"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-125% Phantasm Damage Taken",
+      "right": "+10% Chaos Strike Chance"
+    },
+    {
+      "level": 20,
+      "left": "Reality Rift Pierces Spell Immunity",
+      "right": "+0.6 Min/Max Chaos Bolt Duration"
+    },
+    {
+      "level": 15,
+      "left": "+10 Strength",
+      "right": "-3s Chaos Bolt Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "+225 Reality Rift Pull Distance",
+      "right": "+30% Chaos Strike Lifesteal"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Disabler",
+    "Durable",
+    "Pusher",
+    "Initiator"
+  ],
+  "facets": []
+}

@@ -1,0 +1,150 @@
+{
+  "heroName": "Phoenix",
+  "innateAbility": {
+    "name": "Dying Light",
+    "hotkey": "",
+    "description": "Deals damage over time to all enemy units centered around Phoenix based on its current health ratio.",
+    "type": "Passive",
+    "traits": {
+      "Radius": "400",
+      "Damage Interval": "0.2",
+      "Current Health Loss per Interval": "0.7% (With level 10 Left Talent 0.9%)"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Icarus Dive",
+      "hotkey": "Q",
+      "description": "Dives forward to the point-targeted direction in an arc with a fixed distance, then orbiting back to its original position.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "Global",
+        "Damage per Second": "15/35/55/75",
+        "Cooldown": "40/35/30/25",
+        "Mana Cost": "0"
+      }
+    },
+    {
+      "name": "Stop Icarus Dive",
+      "hotkey": "Q",
+      "description": "Immediately cancels and stops Icarus Dive.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Fire Spirits",
+      "hotkey": "W",
+      "description": "Summons a number of fire spirits orbiting around Phoenix at the cost of its health.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "50/40/30/20",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Launch Fire Spirit",
+      "hotkey": "W",
+      "description": "Each fire spirit can be launched independently at an area-targeted location. Applies damage over time and an attack speed slow on affected enemy units.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "1400",
+        "Damage per Second": "20/40/60/80 (With level 15 Right Talent 40/60/80/100)",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Sun Ray",
+      "hotkey": "E",
+      "description": "Expels a light beam that damages enemy units at the cost of its own health. The longer the duration, the more the damage increases.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "1200",
+        "Damage per Second": "15/20/25/30",
+        "Max Health as Damage Bonus per Second": "1.5%/3%/4.5%/6% (With level 20 Right Talent 2.75%/4.25%/5.75%/7.25%)",
+        "Heal per Second": "7/10/13/16",
+        "Max Health as Heal per Second": "0.4%/0.8%/1.2%/1.6%",
+        "Cooldown": "30",
+        "Mana Cost": "100/110/120/130"
+      }
+    },
+    {
+      "name": "Stop Sun Ray",
+      "hotkey": "E",
+      "description": "Immediately cancels and stops Sun Ray.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Toggle Movement",
+      "hotkey": "D",
+      "description": "Phoenix moves forward slowly during Sun Ray while toggled on.",
+      "type": "Toggle",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Supernova",
+      "hotkey": "R",
+      "description": "Willingly ends its current life and transforms into a burning sun that scorches enemy units within the radius.The Phoenix Sun can only be destroyed by enemy heroes' attacks.",
+      "type": "No / Unit",
+      "traits": {
+        "Cast Animation": "0.01 + 0.5",
+        "Radius": "1200",
+        "Damage per Second": "50/80/110",
+        "Set Reborn Current Health": "100%",
+        "Cast Range": "(Upgradable by Aghanim's Scepter. 450)",
+        "Cooldown": "120",
+        "Mana Cost": "150/200/250"
+      }
+    },
+    {
+      "name": "Phoenix Sun (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+1000 Icarus Dive Cast Range",
+      "right": "+2 Supernova Hit Count"
+    },
+    {
+      "level": 20,
+      "left": "+0.6s Supernova Stun Duration",
+      "right": "+1.25% Sun Ray Max Health to Damage"
+    },
+    {
+      "level": 15,
+      "left": "+25 Health Regen",
+      "right": "+20 Fire Spirits Damage per Second"
+    },
+    {
+      "level": 10,
+      "left": "+1% Dying Light Missing Health as Damage",
+      "right": "+25% Icarus Dive Slow"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Nuker",
+    "Initiator",
+    "Escape",
+    "Disabler"
+  ],
+  "facets": []
+}

@@ -1,0 +1,111 @@
+{
+  "heroName": "Leshrac",
+  "innateAbility": {
+    "name": "Defilement",
+    "hotkey": "",
+    "description": "Grants self flat bonus area-of-effect per current intelligence.",
+    "type": "Passive",
+    "traits": {
+      "Radius Bonus per Int": "0.7"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Split Earth",
+      "hotkey": "Q",
+      "description": "Deals damage and stuns enemy units for a short duration within the area-targeted location.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.7 + 0.67",
+        "Cast Range": "650",
+        "Damage": "115/170/225/280",
+        "Cooldown": "11",
+        "Mana Cost": "80/100/120/140"
+      }
+    },
+    {
+      "name": "Diabolic Edict",
+      "hotkey": "W",
+      "description": "Deals pure damage within the radius.The lesser the enemy units, the more the damage dealt to those units.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.5 + 0.87",
+        "Radius": "450",
+        "Damage Interval": "0.2 (With level 25 Right Talent 0.13)",
+        "Damage per Explosion": "9/16/23/30",
+        "Duration": "8",
+        "Building Damage Factor": "1",
+        "Cooldown": "22/21/20/19",
+        "Mana Cost": "90/120/150/180"
+      }
+    },
+    {
+      "name": "Lightning Storm",
+      "hotkey": "E",
+      "description": "Summons a lightning storm that damages the unit-targeted enemy, then jumps to nearby enemy units.Applies a movement speed slow to all affected enemy units.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 1.04",
+        "Cast Range": "600",
+        "Damage": "90/140/190/240 (With level 15 Right Talent 170/220/270/320)",
+        "Cooldown": "4",
+        "Mana Cost": "80/100/120/140"
+      }
+    },
+    {
+      "name": "Nihilism",
+      "hotkey": "D",
+      "description": "Leshrac and all enemy units within the radius turns ethereal.Affected units cannot attack, have their movement speed slowed, and reduces all affected enemy units' magic resistance.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Self Move Speed Bonus": "40%",
+        "Cooldown": "25",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Pulse Nova",
+      "hotkey": "R",
+      "description": "Deals damage per second within the radius centered around Leshrac once toggled on.Drains Leshrac's mana per second toggled on.",
+      "type": "Toggle",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage per Second": "80/135/180 (With level 20 Left Talent 110/165/210)",
+        "Damage Reduction": " (With level 15 Left Talent 10%)",
+        "Cooldown": "1",
+        "Mana Cost": "50/60/70"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Pulse Nova Procs Lightning Storm",
+      "right": "+20 Diabolic Edict Explosions"
+    },
+    {
+      "level": 20,
+      "left": "+30 Pulse Nova Damage",
+      "right": "+1 Diabolic Edict Max Target"
+    },
+    {
+      "level": 15,
+      "left": "+10% Pulse Nova Active Damage Reduction",
+      "right": "+80 Lightning Storm Damage"
+    },
+    {
+      "level": 10,
+      "left": "+4 Armor",
+      "right": "+1.5 Mana Regen"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Support",
+    "Nuker",
+    "Pusher",
+    "Disabler"
+  ],
+  "facets": []
+}

@@ -1,0 +1,144 @@
+{
+  "heroName": "Brewmaster",
+  "innateAbility": {
+    "name": "Liquid Courage",
+    "hotkey": "D",
+    "description": "Grants self a status resistance buff whenever Brewmaster's max health falls below a certain threshold.The lower Brewmaster's health, the greater the status resistance.",
+    "type": "Passive / Unit",
+    "traits": {
+      "Min Bonus Health Threshold": "50%",
+      "Max Bonus Health Threshold": "20%",
+      "Min Status Resist Bonus": "0%",
+      "Max Status Resist Bonus": "10.5%",
+      "Max Move Speed Bonus": "30%",
+      "Max Status Resist Bonus Increase": "0.5%",
+      "Cast Animation": "0 + 0",
+      "Cast Range": "(Upgradable by Aghanim's Shard. 800)",
+      "Max Health as Regen": "(Upgradable by Aghanim's Shard. 3%)",
+      "Duration": "(Upgradable by Aghanim's Shard. 5)",
+      "Cooldown": "( 20)",
+      "Mana Cost": "( 50)"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Thunder Clap",
+      "hotkey": "Q",
+      "description": "Slams the ground, dealing damage and applies a movement speed slow and attack speed slow within the radius.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.3 + 0.5",
+        "Damage": "80/160/240/320",
+        "Duration": "4/4.25/4.5/4.75",
+        "Cooldown": "18/16/14/12",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Cinder Brew",
+      "hotkey": "W",
+      "description": "Drenches enemy units within the radius with a debuff upon cast, then rolls the whole barrel toward the area-targeted direction.The barrel damages and applies debuff to all enemy units the barrel collides with on its way.Upon reaching the impact location, the barrel explodes, damaging and drenching enemy units within the radius with the same debuff.",
+      "type": "Area / Point",
+      "traits": {
+        "Cast Animation": "0.2 + 0.4",
+        "Cast Range": "950",
+        "Collision Damage": "40/70/100/130",
+        "Total Damage Instances": "8",
+        "Total Proc Damage": "80/160/240/320 (With level 15 Right Talent 112/224/336/448)",
+        "Cooldown": "19/17/15/13",
+        "Mana Cost": "50/60/70/80"
+      }
+    },
+    {
+      "name": "Drunken Brawler",
+      "hotkey": "E",
+      "description": "Switches stance based on the element the Brewmaster controls, granting bonuses and adapting to the battlefield.",
+      "type": "No / Toggle / Passive",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Armor Bonus": "3/5/7/9",
+        "Magic Resist Bonus": "8%/12%/16%/20%",
+        "Move Speed Bonus": "4%/6%/8%/10%",
+        "Attack Speed Bonus": "10/20/30/40",
+        "Crit Damage": "120%/140%/160%/180%",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Primal Split",
+      "hotkey": "R",
+      "description": "Splits Brewmaster into elements of nature, forming various specialized Brewling warriors, each with their own abilities.If any of them survives until the end of its summoned timer, the Brewmaster reappears.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.55 + 0",
+        "Duration": "16/18/20/20",
+        "Base Attack Damage Bonus": " (With level 10 Right Talent 13)",
+        "Health Bonus": " (With level 15 Left Talent 600)",
+        "Cooldown": "140/130/120/120 ( 125/115/105/105)",
+        "Mana Cost": "150/200/250/250"
+      }
+    },
+    {
+      "name": "Earth (Summoned Ancient  Creep-Hero)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Storm (Summoned Ancient  Creep-Hero)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Fire (Summoned Ancient  Creep-Hero)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Primal Split Cancel",
+      "hotkey": "R",
+      "description": "Reunites all elements back to one, and ends Primal Split immediately.Brewmaster reappears based on the Primal Split Brewlings priority.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Current Health to Damage": "100%",
+        "Cooldown": "0"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Cinder Brew Applies Fear Upon Proc",
+      "right": "+1.5x Drunken Brawler Stance Bonuses"
+    },
+    {
+      "level": 20,
+      "left": "+110 Attack Speed",
+      "right": "-12s Primal Split Cooldown"
+    },
+    {
+      "level": 15,
+      "left": "+600 Brewlings Health",
+      "right": "x1.4 Cinder Brew Damage/Duration"
+    },
+    {
+      "level": 10,
+      "left": "+2s Drunken Brawler Brewed Up +1s Drunken Brawler Duration",
+      "right": "+13 Brewlings Base Damage"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Initiator",
+    "Durable",
+    "Disabler",
+    "Nuker"
+  ],
+  "facets": []
+}

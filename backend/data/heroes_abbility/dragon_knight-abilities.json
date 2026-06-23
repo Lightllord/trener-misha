@@ -1,0 +1,121 @@
+{
+  "heroName": "Dragon Knight",
+  "innateAbility": {
+    "name": "Dragon Blood",
+    "hotkey": "",
+    "description": "The life blood of the Dragon improves health regeneration and strengthens armor per level.",
+    "type": "Passive",
+    "traits": {
+      "Health Regen Bonus": "2 (With level 25 Right Talent 14)",
+      "Armor Bonus": "2 (With level 25 Right Talent 14)",
+      "Health Regen Bonus Increase": "0.5",
+      "Armor Bonus Increase": "0.5",
+      "Health Regen Bonus Factor": "1.5",
+      "Armor Bonus Factor": "1.5"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Breathe Fire",
+      "hotkey": "Q",
+      "description": "Damages and applies an attack damage reduction debuff on all affected enemy units.",
+      "type": "Point / Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.53",
+        "Cast Range": "1350",
+        "Damage": "80/160/240/320 (With level 20 Left Talent 300/380/460/540)",
+        "Attack Damage Reduction": "20%/24%/28%/32%",
+        "Cooldown": "14/13/12/11 ( 12/11/10/9)",
+        "Mana Cost": "90/95/100/105"
+      }
+    },
+    {
+      "name": "Dragon Tail",
+      "hotkey": "W",
+      "description": "Stuns and deals damage within a small radius.",
+      "type": "Unit / Area",
+      "traits": {
+        "Cast Animation": "0 + 0.6",
+        "Cast Range": "500",
+        "Damage": "60/90/120/150",
+        "Cooldown": "16/14/12/10",
+        "Mana Cost": "70/80/90/100"
+      }
+    },
+    {
+      "name": "Wyrm's Wrath",
+      "hotkey": "E",
+      "description": "Imbues Davion's attacks with magical attack damage bonus.",
+      "type": "Passive",
+      "traits": {
+        "Magical Attack Damage Bonus": "10/20/30/40 (With level 25 Left Talent 15/30/45/60)",
+        "Area-of-Effect Bonus": "25/50/75/100 (With level 25 Left Talent 37.5/75/112.5/150)"
+      }
+    },
+    {
+      "name": "Fireball",
+      "hotkey": "D",
+      "description": "Dealing damage over time within the radius.Has reduced cast range in human form.",
+      "type": "Area / Aura",
+      "traits": {
+        "Cast Animation": "0.2 + 0.6",
+        "Cast Range": "950",
+        "Radius": "300/325/350/375 (With level 25 Left Talent 312.5/350/387.5/425)",
+        "Damage per Second": "85",
+        "Duration": "6",
+        "Cooldown": "20",
+        "Mana Cost": "80"
+      }
+    },
+    {
+      "name": "Elder Dragon Form",
+      "hotkey": "R",
+      "description": "Dragon Knight assumes the form of the Elder Dragon, increasing the range of his abilities, gaining bonus movement speed, and a ranged attack with various properties. The Dragon evolves per level. The bonuses are cumulative.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0.5",
+        "Attack Range Bonus": "350 (With level 20 Right Talent 500)",
+        "Cast Range Bonus": "350",
+        "Move Speed Bonus": "25/30/35/40",
+        "Duration": "60",
+        "Damage per Second": "25/25/25/35",
+        "Radius": "0/375/375/450",
+        "Splash Attack Damage": "0%/75%/75%/100%",
+        "Magic Resist Bonus": "20%",
+        "Cooldown": "100",
+        "Mana Cost": "50"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "x1.5 Wyrm's Wrath Ability Bonus Factor",
+      "right": "+12 Dragon Blood Health Regen/Armor"
+    },
+    {
+      "level": 20,
+      "left": "+220 Breathe Fire Damage",
+      "right": "+150 Elder Dragon Form Attack Range"
+    },
+    {
+      "level": 15,
+      "left": "+300 Health",
+      "right": "+0.4s Dragon Tail Stun"
+    },
+    {
+      "level": 10,
+      "left": "-2s Breathe Fire Cooldown",
+      "right": "+15 Attack Damage"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Pusher",
+    "Durable",
+    "Disabler",
+    "Initiator",
+    "Nuker"
+  ],
+  "facets": []
+}

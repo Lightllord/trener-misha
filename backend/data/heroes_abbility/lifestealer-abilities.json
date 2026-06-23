@@ -1,0 +1,112 @@
+{
+  "heroName": "Lifestealer",
+  "innateAbility": {
+    "name": "Ghoul Frenzy",
+    "hotkey": "",
+    "description": "The higher N'aix' level, the greater the self bonus attack speed granted.",
+    "type": "Passive",
+    "traits": {
+      "Attack Speed Bonus Increase": "4"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Rage",
+      "hotkey": "Q",
+      "description": "Grants bonus movement speed, bonus magic resistance, and debuff immunity for the entire duration.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Move Speed Bonus": "6%/9%/12%/15%",
+        "Magic Resist Bonus": "80%",
+        "Duration": "3/4/5/6 (With level 25 Left Talent 4/5/6/7)",
+        "Cooldown": "20/19/18/17",
+        "Mana Cost": "80/100/120/140"
+      }
+    },
+    {
+      "name": "Open Wounds",
+      "hotkey": "W",
+      "description": "Rends the unit-targeted enemy, slowing the its movement speed and allowing all allied units to regain health for a percentage of the damage dealt to debuff-affected unit.Lifesteals from all damage instances dealt, including spell damage.",
+      "type": "Unit / Passive",
+      "traits": {
+        "Cast Animation": "0.2 + 0.4",
+        "Cast Range": "300/400/500/600",
+        "Damage as Lifesteal": "20%/30%/40%/50% (With level 20 Left Talent 45%/55%/65%/75%)",
+        "Duration": "7",
+        "Attack Speed Bonus": "50",
+        "Cooldown": "30/25/20/15",
+        "Mana Cost": "90"
+      }
+    },
+    {
+      "name": "Feast",
+      "hotkey": "E",
+      "description": "Deals damage and lifesteals for a percentage of the target's max health.",
+      "type": "Passive",
+      "traits": {
+        "Max Health as Lifesteal": "1.45%/2.05%/2.65%/3.25% (With level 25 Right Talent 2.45%/3.05%/3.65%/4.25%)",
+        "Max Health as Damage": "1.45%/2.05%/2.65%/3.25%. (With level 25 Right Talent 2.45%/3.05%/3.65%/4.25%)",
+        "Max Health per Stack": "1"
+      }
+    },
+    {
+      "name": "Infest",
+      "hotkey": "R",
+      "description": "Infests the body of a target unit, becoming undetectable, and healing for a portion of his max health every second while inside.Does not work on enemy heroes.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0",
+        "Cast Range": "150 (Upgradable by Aghanim's Scepter. 500)",
+        "Max Health as Health Regen Bonus": "3%/4%/5% (Upgradable by Aghanim's Scepter. 6%/8%/10%)",
+        "Target Max Health Bonus": "400/800/1200 (With level 20 Right Talent 448/896/1344)",
+        "Target Move Speed Bonus": "15%/20%/25% (With level 20 Right Talent 27%/32%/37%)",
+        "Creep Max Health Loss per Second": "1.5%/0.75%/0%",
+        "Cooldown": "80/65/50 ( 20)",
+        "Mana Cost": "100/125/150"
+      }
+    },
+    {
+      "name": "Consume",
+      "hotkey": "R",
+      "description": "Eats the host body from the inside out, exploding from within and dealing damage to enemy units within the radius.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Radius": "700",
+        "Damage": "150/275/400 (With level 15 Right Talent 325/450/575)",
+        "Current Health to Damage per Second Factor": "(Upgradable by Aghanim's Shard. 0.3)",
+        "Cooldown": "0"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+1s Rage Duration",
+      "right": "+1% Feast Lifesteal/Damage"
+    },
+    {
+      "level": 20,
+      "left": "+25% Open Wounds Lifesteal",
+      "right": "+12% Infest Ally Move Speed/Health"
+    },
+    {
+      "level": 15,
+      "left": "+50 Attack SpeedOn Open Wounds-affected Units",
+      "right": "+175 Consume Damage"
+    },
+    {
+      "level": 10,
+      "left": "+20 Move Speed",
+      "right": "+4 all stats"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Durable",
+    "Escape",
+    "Disabler"
+  ],
+  "facets": []
+}

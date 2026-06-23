@@ -1,0 +1,118 @@
+{
+  "heroName": "Naga Siren",
+  "innateAbility": {
+    "name": "Eelskin",
+    "hotkey": "",
+    "description": "Grants the Naga Siren bonus evasion.",
+    "type": "Passive",
+    "traits": {
+      "Evasion Bonus": "4%",
+      "Evasion Bonus Increase": "0.1%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Mirror Image",
+      "hotkey": "Q",
+      "description": "Creates multiple images of herself under Naga's control.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.4 + 0",
+        "Damage Dealt": "25%/30%/35%/40% (With level 15 Right Talent 35%/40%/45%/50%)",
+        "Damage Taken": "350% (With level 15 Left Talent 275%)",
+        "Duration": "26",
+        "Cooldown": "40/35/30/25 ( 30/25/20/15)",
+        "Mana Cost": "75/90/105/120"
+      }
+    },
+    {
+      "name": "Ensnare",
+      "hotkey": "W",
+      "description": "Interrupts the target and traps them in place, preventing movement or blinking.Can target invulnerable and sleeping units.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.47",
+        "Cast Range": "500/525/550/575 (Upgradable by Aghanim's Scepter. 800/840/880/920)",
+        "Duration": "2.75/3.5/4.25/5",
+        "Cooldown": "21/18/15/12",
+        "Mana Cost": "70/80/90/100"
+      }
+    },
+    {
+      "name": "Reel In",
+      "hotkey": "D",
+      "description": "The Siren channels and reels in all ensnared units to her within the radius without disabling them.",
+      "type": "No / Channeled",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "8"
+      }
+    },
+    {
+      "name": "Rip Tide",
+      "hotkey": "E",
+      "description": "After a number of attacks of the Siren and her images, they all collectively and simutaneously hit all nearby enemy units with a damaging wave of water that lowers armor for a duration.",
+      "type": "Passive",
+      "traits": {
+        "Damage": "30/40/50/60 (With level 10 Left Talent 39/52/65/78)",
+        "Duration": "4"
+      }
+    },
+    {
+      "name": "Song of the Siren",
+      "hotkey": "R",
+      "description": "All enemy units in range of the Naga are put into a magical stasis where they cannot act or be attacked, while allied units recover a percentage of their health per second.",
+      "type": "No / Aura",
+      "traits": {
+        "Cast Animation": "1 + 0.3",
+        "Radius": "900/1150/1400",
+        "Duration": "7",
+        "Max Health as Health Regen Bonus": "1%/2%/3% (Upgradable by Aghanim's Shard. 2%/3%/4%)",
+        "Max Mana as Mana Regen Bonus": "(Upgradable by Aghanim's Shard. 4%)",
+        "Cooldown": "160/130/100 ( 135/105/75)",
+        "Mana Cost": "150/250/350"
+      }
+    },
+    {
+      "name": "Song of the Siren End",
+      "hotkey": "R",
+      "description": "Releases all enemy units from Naga's stasis so they can be targeted again.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0.97",
+        "Cooldown": "1"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+25 Agility",
+      "right": "-10s Mirror Image Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "+1 Mirror Image Illusion",
+      "right": "-25s Song of the Siren Cooldown"
+    },
+    {
+      "level": 15,
+      "left": "-75% Mirror Image Illusion Damage Taken",
+      "right": "+10% Mirror Image Damage"
+    },
+    {
+      "level": 10,
+      "left": "+30% Rip Tide Damage",
+      "right": "+125 Reel In Move Speed"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Support",
+    "Pusher",
+    "Disabler",
+    "Initiator",
+    "Escape"
+  ],
+  "facets": []
+}

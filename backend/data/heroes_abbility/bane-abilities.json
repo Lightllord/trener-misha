@@ -1,0 +1,114 @@
+{
+  "heroName": "Bane",
+  "innateAbility": {
+    "name": "Ichor of Nyctasha",
+    "hotkey": "",
+    "description": "Applies a permanent status resistance reduction debuff stack on the dying enemy hero.The status resistance reduction is only applied to debuff sourced to Bane.",
+    "type": "Passive",
+    "traits": {
+      "Duration": ""
+    }
+  },
+  "abilities": [
+    {
+      "name": "Enfeeble",
+      "hotkey": "Q",
+      "description": "Deals damage per second while reducing the affected enemy unit's total attack damage and cast range.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.57",
+        "Cast Range": "700/800/900/1000",
+        "Damage per Second": "12/18/24/30 (With level 15 Right Talent 25/31/37/43)",
+        "Attack Damage Reduction": "55%/60%/65%/70%",
+        "Duration": "9",
+        "Cooldown": "22/17/12/7",
+        "Mana Cost": "100/110/120/130"
+      }
+    },
+    {
+      "name": "Brain Sap",
+      "hotkey": "W",
+      "description": "Feasts on the vital energies of an enemy unit, self-heals and deals pure damage.",
+      "type": "Unit / Area",
+      "traits": {
+        "Cast Animation": "0.2 + 0.5",
+        "Cast Range": "625 (With level 10 Right Talent 750)",
+        "Damage": "90/160/230/300 (With level 25 Right Talent 365/435/505/575)",
+        "Damage to Heal Factor": "1",
+        "Secondary Damage to Heal Factor": "(Upgradable by Aghanim's Shard. 0.3)",
+        "Radius": "(Upgradable by Aghanim's Shard. 550)",
+        "Cooldown": "17/15/13/11 ( 14/12/10/8)",
+        "Mana Cost": "105/120/135/140"
+      }
+    },
+    {
+      "name": "Nightmare",
+      "hotkey": "E",
+      "description": "Puts the affected unit to sleep. Units affected are awaken when damaged.The affected unit is now forcefully moved toward the vector-targeted direction over the total debuff duration.If the affected unit was directly attacked, the Nightmare is passed to the attacking unit.",
+      "type": "Unit / Vector",
+      "traits": {
+        "Cast Animation": "0.4 + 0.57",
+        "Cast Range": "550/600/650/700",
+        "Cooldown": "25/22/19/16 ( 22/19/16/13)",
+        "Mana Cost": "120/130/140/150"
+      }
+    },
+    {
+      "name": "Nightmare End",
+      "hotkey": "E",
+      "description": "Releases the victim from its ongoing Nightmare.",
+      "type": "Toggle",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Fiend's Grip",
+      "hotkey": "R",
+      "description": "Grips and disables an enemy unit.Deals damage and steals mana based on the affected unit's max mana per interval.",
+      "type": "Unit / Channeled",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "625",
+        "Damage Interval": "0.5",
+        "Damage per Instance": "35/55/75",
+        "Damage to Heal Factor": "1",
+        "Damage Taken": "(Upgradable by Aghanim's Scepter. 225%)",
+        "Current Health as Damage": "(Upgradable by Aghanim's Scepter. 100%)",
+        "Duration": "(Upgradable by Aghanim's Scepter. 20)",
+        "Cooldown": "120/110/100 ( 75/65/55)",
+        "Mana Cost": "200/300/400"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+3s Fiend's Grip Duration",
+      "right": "+275 Brain Sap Damage/Heal"
+    },
+    {
+      "level": 20,
+      "left": "+30 Move Speed",
+      "right": "-3s Nightmare Cooldown"
+    },
+    {
+      "level": 15,
+      "left": "+5% Fiend's Grip Max Mana Drain",
+      "right": "+13 Enfeeble Damage per Second"
+    },
+    {
+      "level": 10,
+      "left": "+20% Enfeeble Cast Range Reduction",
+      "right": "+125 Brain Sap Cast Range"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Disabler",
+    "Nuker",
+    "Durable"
+  ],
+  "facets": []
+}

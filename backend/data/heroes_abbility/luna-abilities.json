@@ -1,0 +1,96 @@
+{
+  "heroName": "Luna",
+  "innateAbility": {
+    "name": "Lunar Blessing",
+    "hotkey": "",
+    "description": "Grants allied heroes bonus attack damage within the radius.Lunar Blessing is more effective on Luna.",
+    "type": "Passive / Aura",
+    "traits": {
+      "Attack Damage Bonus": "1",
+      "Self Bonus Factor": "2",
+      "Flat Attack Damage Bonus": " (With level 25 Right Talent 25)",
+      "Self Night Vision Bonus": "225",
+      "Attack Damage Bonus Increase": "1",
+      "Self Night Vision Bonus Increase": "25"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Lucent Beam",
+      "hotkey": "Q",
+      "description": "Calls a beam of lunar energy down upon an enemy, damaging and briefly stunning them.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.4 + 0.47",
+        "Cast Range": "800",
+        "Damage": "75/150/225/300 (With level 15 Left Talent 155/230/305/380)",
+        "Cooldown": "9/8/7/6",
+        "Mana Cost": "90/100/110/120"
+      }
+    },
+    {
+      "name": "Lunar Orbit",
+      "hotkey": "W",
+      "description": "Luna's glaive spirals out, rotates around her, and instantly attacks collided enemy units for a portion of her attack damage.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Duration": "5/6/7/8",
+        "Move Speed Bonus": "(Upgradable by Aghanim's Shard. 20%)",
+        "Damage Reduction": "8%/12%/16%/20%  (Upgradable by Aghanim's Shard. 18%/22%/26%/30%)",
+        "Cooldown": "40/35/30/25",
+        "Mana Cost": "65/70/75/80"
+      }
+    },
+    {
+      "name": "Moon Glaives",
+      "hotkey": "E",
+      "description": "Luna's attacks bounce between enemy units, and deals lesser damage per bounce.",
+      "type": "Passive / No",
+      "traits": {
+        "Damage Factor per Bounce": "0.5/0.55/0.6/0.65 (With level 10 Right Talent 0.55/0.6/0.65/0.7)"
+      }
+    },
+    {
+      "name": "Eclipse",
+      "hotkey": "R",
+      "description": "Temporary obscures the sun, turning the day into night, while showering enemy units with lucent strikes in a radius around Luna.There is a max number of times that a single target can be struck per cast.",
+      "type": "No / Unit / Area",
+      "traits": {
+        "Cast Animation": "0.5 + 0.37",
+        "Damage Factor": "1",
+        "Cast Range": "(Upgradable by Aghanim's Scepter. 2500)",
+        "Cooldown": "105 ( 65)",
+        "Mana Cost": "150/200/250"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Lucent Beam Multicast",
+      "right": "+25 Lunar Blessing Flat Attack Damage Bonus"
+    },
+    {
+      "level": 20,
+      "left": "1.5x Lunar Orbit Orbit Speed/Instant Attack Damage",
+      "right": "-40s Eclipse Cooldown"
+    },
+    {
+      "level": 15,
+      "left": "+80 Lucent Beam Damage",
+      "right": "+1 Lunar Orbit Glaives"
+    },
+    {
+      "level": 10,
+      "left": "+0.5s Lucent Beam Stun Duration",
+      "right": "-5% Moon Glaives Damage Reduction"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Nuker",
+    "Pusher"
+  ],
+  "facets": []
+}

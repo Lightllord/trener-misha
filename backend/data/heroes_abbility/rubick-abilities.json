@@ -1,0 +1,123 @@
+{
+  "heroName": "Rubick",
+  "innateAbility": {
+    "name": "Curiosity",
+    "hotkey": "",
+    "description": "Grants bonus base attack damage, flat bonus area-of-effect, bonus incoming buff duration amplification, and outgoing debuff duration amplification per stack.",
+    "type": "Passive",
+    "traits": {
+      "Base Attack Damage per Stack": "1 (With level 25 Right Talent 1.5)",
+      "Area-of-Effect Bonus per Stack": "2 (With level 25 Right Talent 3)",
+      "Duration": "20",
+      "Damage Timer": "3"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Telekinesis",
+      "hotkey": "Q",
+      "description": "Lifts the unit-targeted enemy into the air briefly, then hurls them back at the ground.The affected unit lands on the ground with such force that it stuns other enemy units within the radius.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.1 + 0.97",
+        "Cast Range": "550/575/600/625",
+        "Cooldown": "22/19/16/13 ( 20/17/14/11)",
+        "Mana Cost": "110"
+      }
+    },
+    {
+      "name": "Telekinesis Land",
+      "hotkey": "Q",
+      "description": "Chooses the area-targeted location the affected unit will land when Telekinesis finishes, and stuns other enemy units within the radiusThe lifted unit is not stunned upon landing.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "Global",
+        "Landing Damage": " (With level 20 Left Talent 300)",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Fade Bolt",
+      "hotkey": "W",
+      "description": "The projectile travels between enemy units, with each bounce instance deal lesser damage.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.1 + 0.93",
+        "Cast Range": "800",
+        "Base Damage": "85/165/245/325",
+        "Bounce Damage Factor": "0.94",
+        "Attack Damage Reduction": "6%/12%/18%/24% (With level 20 Right Talent 18%/24%/30%/36%)",
+        "Spell Damage Reduction": "6%/12%/18%/24% (With level 20 Right Talent 18%/24%/30%/36%)",
+        "Cooldown": "16/14/12/10 ( 12/10/8/6)",
+        "Mana Cost": "110/125/140/155"
+      }
+    },
+    {
+      "name": "Arcane Supremacy",
+      "hotkey": "E",
+      "description": "Rubick's mastery of the arcane allows him to have a larger cast range and increased potency.",
+      "type": "Passive",
+      "traits": {
+        "Cast Range Bonus": "60/120/180/240",
+        "Spell Damage Amp": "11%/16%/21%/26%"
+      }
+    },
+    {
+      "name": "Spell Steal",
+      "hotkey": "R",
+      "description": "Rubick studies the trace magical essence of the affected enemy hero, learning the secrets of the last ability that it casts.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.1 + 0.93",
+        "Cast Range": "1000 (Upgradable by Aghanim's Scepter. 1400)",
+        "Cooldown Reduction Bonus": "10%/20%/30%",
+        "Spell Damage Amp": " (With level 25 Left Talent 40%)",
+        "Cooldown": "16/10/4",
+        "Mana Cost": "25"
+      }
+    },
+    {
+      "name": "Stolen Spell 1",
+      "hotkey": "D",
+      "description": "The acquired ability of Spell Steal will take this slot.",
+      "type": "Passive",
+      "traits": {}
+    },
+    {
+      "name": "Stolen Spell 2",
+      "hotkey": "D",
+      "description": "The acquired sub-abilities of Spell Steal will take this slot, unless explicitly stated.",
+      "type": "Passive",
+      "traits": {}
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+40% Stolen Spells Spell Damage Amp",
+      "right": "x1.5 Curiosity Ability Effects Factor"
+    },
+    {
+      "level": 20,
+      "left": "+300 Telekinesis Land Spell Damage",
+      "right": "+12% Fade Bolt Attack Damage/Spell Damage Reduction"
+    },
+    {
+      "level": 15,
+      "left": "-4s Fade Bolt Cooldown",
+      "right": "x0.4 Stolen Spells Mana Cost Factor"
+    },
+    {
+      "level": 10,
+      "left": "+200 Health",
+      "right": "-2s Telekinesis Cooldown"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Disabler",
+    "Nuker"
+  ],
+  "facets": []
+}

@@ -39,6 +39,9 @@ export interface MatchState {
 
   /** Остальные герои в матче из CV. abilities отсутствуют, inventory только с именами предметов */
   otherHeroes: HeroState[]
+
+  /** gameTime последнего CV-осмотра врага игроком (клик по герою). 0 — ни разу */
+  lastEnemyInspectAt: number
 }
 
 /** Внутренний формат CV-детектора — не входит в MatchState напрямую */

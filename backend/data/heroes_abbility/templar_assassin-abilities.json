@@ -1,0 +1,131 @@
+{
+  "heroName": "Templar Assassin",
+  "innateAbility": {
+    "name": "Inner Peace",
+    "hotkey": "",
+    "description": "Grants bonus health regeneration and bonus mana regeneration as long as Lanaya remains still.The bonus regeneration values winds-up linearly from nil to its max value.",
+    "type": "Passive",
+    "traits": {
+      "Min Health Regen Bonus": "0",
+      "Min Mana Regen Bonus": "0",
+      "Max Health Regen Bonus": "2.7",
+      "Max Mana Regen Bonus": "2.2",
+      "Max Health Regen Increase": "0.3"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Refraction",
+      "hotkey": "Q",
+      "description": "Grants all damage barrier instances that negates damage.Both the damage negation component and the bonus attack damage component have a limited number of instances and are independent of each other.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Max Barrier Instances": "3/4/5/6 (With level 25 Left Talent 7/8/9/10)",
+        "Damage Negation Threshold": "30",
+        "Barrier": "30",
+        "Duration": "30",
+        "Attack Damage Bonus": "15/30/45/60  (Upgradable by Aghanim's Shard. 45/60/75/90)",
+        "Cooldown": "14",
+        "Mana Cost": "95"
+      }
+    },
+    {
+      "name": "Meld",
+      "hotkey": "W",
+      "description": "Conceals herself, becoming invisible as long as she remains still.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0.53",
+        "Attack Damage Instance": "50/100/150/200",
+        "Attack Range Bonus": " (With level 15 Right Talent 225)",
+        "Cooldown": "11/9/7/5",
+        "Mana Cost": "35/40/45/50"
+      }
+    },
+    {
+      "name": "Psi Blades",
+      "hotkey": "E",
+      "description": "Attacks slice through the attacked unit, spilling and damaging enemy units reduced by a percentage per unit behind it.",
+      "type": "Passive",
+      "traits": {
+        "Attack Damage to Spill Damage Factor": "0.7/0.8/0.9/1",
+        "Attack Range Bonus": "50/100/150/200"
+      }
+    },
+    {
+      "name": "Psionic Projection",
+      "hotkey": "F",
+      "description": "Teleports Lanaya to the nearest Psionic Trap after channeling and detonates it upon arrival, damaging, silencing, and slowing enemy units around it.",
+      "type": "Point / Channeled",
+      "traits": {
+        "Cast Animation": "0.2 + 0",
+        "Cast Range": "Global",
+        "Damage": "400",
+        "Cooldown": "10",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Psionic Trap",
+      "hotkey": "R",
+      "description": "Places mystical traps that invisibly monitor enemy movements.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "1800",
+        "Duration": "",
+        "Current Health Threshold": "100%",
+        "Cooldown": "11/8/5",
+        "Mana Cost": "15"
+      }
+    },
+    {
+      "name": "Psionic Trap (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {
+        "Current Health Threshold": "100%"
+      }
+    },
+    {
+      "name": "Trap",
+      "hotkey": "D",
+      "description": "When sprung at Lanaya's command, the traps apply a movement speed slow based on the charged-up time.Only deals damage over time if the trap is fully charged.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Total Charged-up Damage": "200/300/400",
+        "Cooldown": "0.5"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+4 Refraction Instances",
+      "right": "+0.8s Meld Bash"
+    },
+    {
+      "level": 20,
+      "left": "+4 Meld Armor Reduction",
+      "right": "Refraction Applies Basic Dispel"
+    },
+    {
+      "level": 15,
+      "left": "+3 Max Psionic Traps",
+      "right": "+225 Meld Attack Range"
+    },
+    {
+      "level": 10,
+      "left": "+10% Trap Move Speed Slow",
+      "right": "+1.5s Meld Debuff Duration"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Escape"
+  ],
+  "facets": []
+}

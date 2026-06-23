@@ -1,0 +1,101 @@
+{
+  "heroName": "Invoker",
+  "innateAbility": {
+    "name": "Invoke",
+    "hotkey": "R",
+    "description": "Combines the properties of all current Orb element instances into a new spell.The higher the Orbs' level, the lower the ability cooldown.",
+    "type": "No",
+    "traits": {
+      "Cast Animation": "0 + 0",
+      "Orb Ability Level Bonus": "(Upgradable by Aghanim's Scepter. 1)",
+      "Cooldown": "7"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Quas",
+      "hotkey": "Q",
+      "description": "Manipulates the ice element of Invoker's abilities.Each active Quas orb instance grants health regeneration bonus corresponding to the orb's ability level.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Health Regen Base Bonus per Instance": "1 (With level 25 Left Talent 2)",
+        "Str Bonus per Lvl": "1",
+        "Health Regen Bonus per Lvl": "1 (With level 25 Left Talent 2)",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Wex",
+      "hotkey": "W",
+      "description": "Manipulates the storm element of Invoker's abilities.Each active orb instance grants Invoker passive traits according to the orb's ability level.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Move Speed Base Bonus per Instance": "0.6% (With level 25 Left Talent 1.2%)",
+        "Attack Speed Base Bonus per Instance": "1 (With level 25 Left Talent 2)",
+        "Agi Bonus": "1",
+        "Move Speed Bonus per Level": "0.6% (With level 25 Left Talent 1.2%)",
+        "Attack Speed Bonus per Level": "1 (With level 25 Left Talent 2)",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Exort",
+      "hotkey": "E",
+      "description": "Manipulates the fire element of Invoker's abilities.Each active orb instance grants Invoker passive traits according to the orb's ability level.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Attack Damage Base Bonus per Instance": "2 (With level 25 Left Talent 4)",
+        "Int Bonus": "1",
+        "Attack Damage Bonus per Level": "2 (With level 25 Left Talent 4)",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Invoked Spell 1",
+      "hotkey": "D",
+      "description": "New invoked abilities are always placed in the fourth ability slot.",
+      "type": "Passive",
+      "traits": {}
+    },
+    {
+      "name": "Invoked Spell 2",
+      "hotkey": "F",
+      "description": "The previous invoked ability is moved to the fifth slot in the process, while the previous ability in the fifth slot is lost.",
+      "type": "Passive",
+      "traits": {}
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "2x Quas / Wex / Exort Active Bonuses",
+      "right": "Radial Deafening Blast"
+    },
+    {
+      "level": 20,
+      "left": "x0.50 Forged Spirit Armor Reduction",
+      "right": "+2 Chaos Meteors"
+    },
+    {
+      "level": 15,
+      "left": "-6s Cold Snap Cooldown",
+      "right": "+25 Alacrity Damage/Speed"
+    },
+    {
+      "level": 10,
+      "left": "-5s Tornado Cooldown",
+      "right": "+50 Ice Wall DPS"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Nuker",
+    "Disabler",
+    "Escape",
+    "Pusher"
+  ],
+  "facets": []
+}

@@ -1,0 +1,100 @@
+{
+  "heroName": "Huskar",
+  "innateAbility": {
+    "name": "Blood Magic",
+    "hotkey": "",
+    "description": "Huskar does not have mana.Mana cost of all sources are converted to health cost for the Sacred Warrior.",
+    "type": "Passive",
+    "traits": {
+      "Mana Cost to Self Spell Damage Factor": "1"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Inner Fire",
+      "hotkey": "Q",
+      "description": "In a fiery rage, Huskar damages, silences, and pushes all nearby enemy units away to a fixed distance,",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.35 + 1.09",
+        "Radius": "500",
+        "Damage": "110/180/250/320",
+        "Cooldown": "17/15/13/11",
+        "Mana Cost": "0"
+      }
+    },
+    {
+      "name": "Burning Spear",
+      "hotkey": "W",
+      "description": "Ignites his spears aflame with his health, dealing damage over time with his regular attack.Multiple attacks will stack additional damage.",
+      "type": "Autocast / Active Attack Modifier",
+      "traits": {
+        "Cast Animation": "0.3 + 0.5",
+        "Cast Range": "400",
+        "Damage per Second": "4/8/12/16 (With level 15 Right Talent 9/13/17/21)",
+        "Max Health as Damage per Second": "0.5%",
+        "Duration": "9 (With level 25 Right Talent 15)",
+        "Cooldown": "0",
+        "Mana Cost": "0"
+      }
+    },
+    {
+      "name": "Berserker's Blood",
+      "hotkey": "E",
+      "description": "Huskar's injuries feed his power, giving increased attack speed, magic resistance and health regeneration based on missing health.Grants health regeneration bonus based on a percentage of Huskar's strength.",
+      "type": "Passive",
+      "traits": {
+        "Max Bonus Health Threshold": "10%",
+        "Max Attack Speed Bonus": "170/220/270/320",
+        "Max Magic Resistance Bonus": "15%/20%/25%/30%",
+        "Strength as Max Health Regen Bonus Factor": "0.25/0.4/0.55/0.7 (With level 20 Right Talent 0.55/0.7/0.85/1)",
+        "Health Cost Heal Delay": "(Upgradable by Aghanim's Shard. 2)",
+        "Max Health as Heal per Debuff Dispelled": "(Upgradable by Aghanim's Shard. 3%)",
+        "Cooldown": "( 20)",
+        "Mana Cost": "( 0)"
+      }
+    },
+    {
+      "name": "Life Break",
+      "hotkey": "R",
+      "description": "Leaps at an enemy target, shattering a percentage of its current health, and slowing both its movement speed and attack speed.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.5",
+        "Cast Range": "550 (Upgradable by Aghanim's Scepter. 800)",
+        "Current Health as Damage": "32%/38%/44% (With level 25 Left Talent 54%/60%/66%)",
+        "Self Current Health as Damage": "32%/38%/44%",
+        "Magic Resist Bonus": "60%",
+        "Cooldown": "16/14/12 ( 11/9/7)"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+22% Life Break Current Health as Damage",
+      "right": "+6s Burning Spear Duration"
+    },
+    {
+      "level": 20,
+      "left": "-5s Life Break Cooldown",
+      "right": "+30% Berserker's Blood Health Regen Factor"
+    },
+    {
+      "level": 15,
+      "left": "12% Lifesteal",
+      "right": "+5 Burning Spear Damage per Second"
+    },
+    {
+      "level": 10,
+      "left": "+2s Life Break Slow Duration",
+      "right": "+0.75s Inner Fire Duration"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Durable",
+    "Initiator"
+  ],
+  "facets": []
+}

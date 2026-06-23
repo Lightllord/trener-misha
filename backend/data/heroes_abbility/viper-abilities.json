@@ -1,0 +1,114 @@
+{
+  "heroName": "Viper",
+  "innateAbility": {
+    "name": "Predator",
+    "hotkey": "",
+    "description": "Attacks apply an additional physical spell damage instance based on the target's current health and Viper's level.",
+    "type": "Passive",
+    "traits": {
+      "Health Loss Factor": "0.15 (With level 20 Left Talent 0.5)",
+      "Health Loss Factor Increase": "0.05"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Poison Attack",
+      "hotkey": "Q",
+      "description": "Intensifies Viper's venom, adding an effect to his normal attack that applies a stacking movement speed slow and magic resistance reduction while dealing damage over time.",
+      "type": "Autocast / Active Attack Modifier",
+      "traits": {
+        "Cast Animation": "0.33 + 1",
+        "Cast Range": "600",
+        "Damage per Second per Stack": "4/8/12/16 (With level 15 Left Talent 4.15/8.15/12.15/16.15)",
+        "Damage Factor": "(Upgradable by Aghanim's Shard. 0.4)",
+        "Mana Cost": "20"
+      }
+    },
+    {
+      "name": "Nethertoxin",
+      "hotkey": "W",
+      "description": "Releases a Nethertoxin at the area-targeted location, affected enemy units take an increasing damage over time based on the duration they remain in it.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.2 + 0.5",
+        "Cast Range": "900",
+        "Damage Interval": "0.5",
+        "Min Damage per Instance": "7.5/12.5/17.5/22.5 (With level 15 Right Talent 7.75/12.75/17.75/22.75)",
+        "Max Damage per Instance": "17.5/32.5/47.5/62.5 (With level 15 Right Talent 17.75/32.75/47.75/62.75)",
+        "Duration": "6.5/7/7.5/8",
+        "Min Magic Resist Bonus": "",
+        "Max Magic Resist Bonus": "(Upgradable by Aghanim's Scepter. 150%)",
+        "Cooldown": "14",
+        "Mana Cost": "70"
+      }
+    },
+    {
+      "name": "Corrosive Skin",
+      "hotkey": "E",
+      "description": "Exudes an infectious toxin that damages and slows the attack speed of any enemy that damages the Netherdrake within the radius.",
+      "type": "Passive",
+      "traits": {
+        "Radius": "1200",
+        "Min Damage per Second": "10/15/20/25 (With level 10 Left Talent 25/30/35/40)",
+        "Duration": "4",
+        "Max Damage per Second": "(Upgradable by Aghanim's Scepter. 15/22.5/30/37.5)",
+        "Min Magic Resist Bonus": "10%/15%/20%/25%"
+      }
+    },
+    {
+      "name": "Nosedive",
+      "hotkey": "D",
+      "description": "The Netherdrake slams into the ground, applying a more potent Corrosive Skin to enemy units within the radius.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.1 + 0",
+        "Cast Range": "700",
+        "Damage per Second": "10/15/20/25 (With level 15 Left Talent 25/30/35/40)",
+        "Cooldown": "25",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Viper Strike",
+      "hotkey": "R",
+      "description": "Breaks the targeted enemy unit's passive abilities, slows its movement speed and attack speed, while dealing damage over time.The slowing effect reduces incrementally over the duration of the ability.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.53",
+        "Cast Range": "750",
+        "Damage per Second": "70/100/150 (With level 20 Right Talent 140/170/220)",
+        "Cooldown": "50/40/30 ( 25/20/15)",
+        "Mana Cost": "100/150/200 ( 50/75/100)"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-50% Viper Strike Mana Cost/Cooldown",
+      "right": "+25 Nethertoxin Radius per 0.5s Intervals"
+    },
+    {
+      "level": 20,
+      "left": "+0.35 Predator Health Loss to Damage Factor",
+      "right": "+70 Viper Strike Damage per Second"
+    },
+    {
+      "level": 15,
+      "left": "+0.15 Poison Attack Slow/Damage Factor",
+      "right": "+20/+40 Nethertoxin Min/Max Damage"
+    },
+    {
+      "level": 10,
+      "left": "+15 Corrosive Skin Damage Per Second",
+      "right": "+1s Viper Strike Duration"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Durable",
+    "Initiator",
+    "Disabler"
+  ],
+  "facets": []
+}

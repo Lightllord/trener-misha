@@ -1,0 +1,129 @@
+{
+  "heroName": "Broodmother",
+  "innateAbility": {
+    "name": "Spider's Milk",
+    "hotkey": "",
+    "description": "Grants a lifesteal-based heal over time buff per enemy hero killed within the radius to Broodmother and her player-controlled units.",
+    "type": "Passive",
+    "traits": {
+      "Radius": "600",
+      "Enemy Max Health as Heal per Instance": "1.9%",
+      "Duration": "3",
+      "Enemy Max Health as Heal Increase": "0.1%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Insatiable Hunger",
+      "hotkey": "Q",
+      "description": "Grants a base attack damage bonus and lifesteal aura to Broodmother and all Spiderlings within the radius.",
+      "type": "No / Aura",
+      "traits": {
+        "Cast Animation": "0.2 + 0.5",
+        "Base Attack Damage Factor": "1.4/1.5/1.6/1.7",
+        "Duration": "8/10/12/14",
+        "Base Attack Damage Increase per Second": "(Upgradable by Aghanim's Shard. 4%)",
+        "Cooldown": "45/40/35/30",
+        "Mana Cost": "80"
+      }
+    },
+    {
+      "name": "Spin Web",
+      "hotkey": "W",
+      "description": "Spins a large web that grants Arachnia a bonus movement speed and bonus health regeneration within its radius.These webs do not expire until the max amount of webs are reached, destroying the oldest spun web.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.2 + 0.5",
+        "Cast Range": "Global",
+        "Turn Rate Bonus": "0.2",
+        "Move Speed Bonus": "10%/22%/34%/46% (With level 25 Left Talent 17%/29%/41%/53%)",
+        "Cooldown": "0",
+        "Mana Cost": "40"
+      }
+    },
+    {
+      "name": "Spin Web (   Uncategorized Units)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Incapacitating Bite",
+      "hotkey": "E",
+      "description": "Applies a movement speed slow and blind debuff per successful attack.The debuff-affected units have a chance to miss their attacks.",
+      "type": "Passive",
+      "traits": {
+        "Attack Damage Bonus": "3/6/9/12 (With level 15 Right Talent 8/11/14/17)"
+      }
+    },
+    {
+      "name": "Spinner's Snare",
+      "hotkey": "D",
+      "description": "Creates invisible web-snares next to any current webs that acts as a trap. The snares have an activation delay.",
+      "type": "Point / Vector",
+      "traits": {
+        "Cast Animation": "0.2 + 0.5",
+        "Cast Range": "Global",
+        "Damage per Second": "100",
+        "Cooldown": "0",
+        "Mana Cost": "70"
+      }
+    },
+    {
+      "name": "Spawn Spiderlings",
+      "hotkey": "R",
+      "description": "Broodmother injects her young into an enemy unit and dealing damage.Upon the affected unit's death, her babies mature, hatching young Spiderlings to aid her in the battlefield.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.5",
+        "Cast Range": "900",
+        "Damage": "0",
+        "Health Bonus": "175",
+        "Duration": "2",
+        "Cooldown": "9/8/7",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Spiderling (Summoned   Creep)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {
+        "Health Bonus": "175",
+        "Damage": "0",
+        "Duration": "2"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+7% Spin Web Move SpeedUnlocks Max Move Speed",
+      "right": "-0.15s Insatiable Hunger Base Attack Time"
+    },
+    {
+      "level": 20,
+      "left": "+20% Incapacitating Bite Slow/Miss Chance",
+      "right": "-6s Spin Web Restore Time"
+    },
+    {
+      "level": 15,
+      "left": "+175 Spiderlings Health",
+      "right": "+5 Incapacitating Bite Attack Damage"
+    },
+    {
+      "level": 10,
+      "left": "+20% Insatiable Hunger Lifesteal",
+      "right": "+80 Spawn Spiderlings Damage"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Pusher",
+    "Escape",
+    "Nuker"
+  ],
+  "facets": []
+}

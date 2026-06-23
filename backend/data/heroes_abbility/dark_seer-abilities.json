@@ -1,0 +1,118 @@
+{
+  "heroName": "Dark Seer",
+  "innateAbility": {
+    "name": "Quick Wit",
+    "hotkey": "",
+    "description": "Grants self flat bonus attack speed per current intelligence.",
+    "type": "Passive",
+    "traits": {
+      "Attack Speed Bonus per Int": "1",
+      "Max Health as Heal": "10%",
+      "Max Health as Heal Increase": "1.5%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Vacuum",
+      "hotkey": "Q",
+      "description": "Creates a vacuum within the area-targeted location that sucks in all enemy units within the radius, interrupting and dealing damage.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.4 + 0.4",
+        "Cast Range": "450/500/550/600",
+        "Damage": "70/130/190/250",
+        "Cooldown": "60/50/40/30",
+        "Mana Cost": "60/90/120/150"
+      }
+    },
+    {
+      "name": "Ion Shell",
+      "hotkey": "W",
+      "description": "Surrounds the target unit with a bristling shield that damages enemy units in an area around it.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.9",
+        "Cast Range": "800",
+        "Damage Radius": "275 (With level 10 Left Talent 340)",
+        "Damage per Second": "30/50/70/90 (With level 20 Left Talent 80/100/120/140)",
+        "Duration": "20/22/24/26",
+        "Cooldown": "9 ( 0)",
+        "Mana Cost": "100/110/120/130"
+      }
+    },
+    {
+      "name": "Surge",
+      "hotkey": "E",
+      "description": "Charges an allied unit with power, granting a brief max movement speed burst and phase movement. The allied unit cannot be slowed.",
+      "type": "Unit / Area",
+      "traits": {
+        "Cast Animation": "0.4 + 0.57",
+        "Cast Range": "600",
+        "Duration": "(Upgradable by Aghanim's Shard. 7)",
+        "Damage Interval": "(Upgradable by Aghanim's Shard. 0.5)",
+        "Damage per Second": "(Upgradable by Aghanim's Shard. 40)",
+        "Radius": "350",
+        "Cooldown": "24/19/14/9 ( 22.5/17.5/12.5/7.5)",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Normal Punch",
+      "hotkey": "",
+      "description": "The next attack on an enemy hero has True Strike, damages, and stuns based on Dark Seer's recently moved distance.",
+      "type": "Passive",
+      "traits": {
+        "Min Damage": "10",
+        "Max Damage": "400",
+        "Damage Dealt": "70%/80%/90% (With level 10 Right Talent 85%/95%/105%)",
+        "Damage Taken": "200%",
+        "Duration": "6",
+        "Counter Bonus": "600",
+        "Cooldown": "10"
+      }
+    },
+    {
+      "name": "Wall of Replica",
+      "hotkey": "R",
+      "description": "Raises a wall of light that slows and creates replicas of any enemy hero who crosses it.These replicas serve at the Dark Seer's will, they last until destroyed or until the wall duration ends.",
+      "type": "Point / Vector",
+      "traits": {
+        "Cast Animation": "0.2 + 0.73",
+        "Cast Range": "1000",
+        "Damage Upon Illusion Creation": "25/40/55",
+        "Damage Dealt": "70%/80%/90% (With level 10 Right Talent 85%/95%/105%)",
+        "Damage Taken": "200%",
+        "Cooldown": "100 ( 60)",
+        "Mana Cost": "125/250/375"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+350 Surge Radius",
+      "right": "2 Ion Shell Charges"
+    },
+    {
+      "level": 20,
+      "left": "+50 Ion Shell Damage",
+      "right": "-40s Wall of Replica Cooldown"
+    },
+    {
+      "level": 15,
+      "left": "-1.5s Surge Cooldown",
+      "right": "+75 Vacuum Radius"
+    },
+    {
+      "level": 10,
+      "left": "+65 Ion Shell Radius",
+      "right": "+15% Wall of Replica-based Illusion Damage"
+    }
+  ],
+  "roles": [
+    "Initiator",
+    "Escape",
+    "Disabler"
+  ],
+  "facets": []
+}

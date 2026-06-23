@@ -1,0 +1,88 @@
+{
+  "heroName": "Shadow Fiend",
+  "innateAbility": {
+    "name": "Necromastery",
+    "hotkey": "",
+    "description": "Grants bonus attack damage per stack from unit kills, and loses a portion of stacks upon death.",
+    "type": "Passive",
+    "traits": {
+      "Attack Damage Bonus per Stack": "1.35",
+      "Attack Damage Bonus Increase": "0.15",
+      "Spell Damage Bonus per Stack": "3"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Shadowraze",
+      "hotkey": "Q",
+      "description": "Adds a stacking damage amplifier on the target that causes the enemy to take bonus Shadowraze damage per stack.Has no stack limit.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.55 + 0",
+        "Spell Damage Increase per Stack": "3",
+        "Cooldown": "9",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Feast of Souls",
+      "hotkey": "D",
+      "description": "Grants self bonus movement speed and bonus attack speed upon cast.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0.2",
+        "Move Speed Bonus": "4%/6%/8%/10%",
+        "Attack Speed Bonus": "35/50/65/80 (With level 10 Left Talent 65/80/95/110)",
+        "Cooldown": "21",
+        "Mana Cost": "60/65/70/75"
+      }
+    },
+    {
+      "name": "Presence of the Dark Lord",
+      "hotkey": "F",
+      "description": "Reduces the armor of enemy units within the radius.",
+      "type": "Passive / Aura",
+      "traits": {}
+    },
+    {
+      "name": "Requiem of Souls",
+      "hotkey": "R",
+      "description": "Gathers his captured souls to release them as lines of demonic energy, units near Nevermore can be damaged by several lines of energy.Enemy units damaged are feared, and have both its movement speed and magic resistance reduced with a duration based on each line hit.",
+      "type": "No / Passive",
+      "traits": {
+        "Cast Animation": "1.67 + 0.9",
+        "Damage per Line": "80/120/160",
+        "Self-Heal per Return Line": "(Upgradable by Aghanim's Scepter. 80/120/160)",
+        "Cooldown": "120/110/100 ( 90/80/70)",
+        "Mana Cost": "150/175/200"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Shadowraze Instant Attacks",
+      "right": "+30% Feast of Souls Cast Animation Speed"
+    },
+    {
+      "level": 20,
+      "left": "+0.2s Requiem of Souls Debuff Duration per Line",
+      "right": "+5 Necromastery Max Stacks"
+    },
+    {
+      "level": 15,
+      "left": "+2 Feast of Souls Necromastery Stack per Hero",
+      "right": "+2 Presence of the Dark Lord Armor Reduction"
+    },
+    {
+      "level": 10,
+      "left": "+30 Feast of Souls Attack Speed",
+      "right": "+30 Shadowraze Stack Damage"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Nuker"
+  ],
+  "facets": []
+}

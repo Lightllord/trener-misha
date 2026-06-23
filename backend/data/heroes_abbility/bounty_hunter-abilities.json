@@ -1,0 +1,107 @@
+{
+  "heroName": "Bounty Hunter",
+  "innateAbility": {
+    "name": "Big Game Hunter",
+    "hotkey": "",
+    "description": "Applies a debuff to certain top networth enemy heroes.Grants Gondar a kill gold bonus or an assist gold bonus upon killing the debuff-affected enemy hero.",
+    "type": "Passive",
+    "traits": {}
+  },
+  "abilities": [
+    {
+      "name": "Shuriken Toss",
+      "hotkey": "Q",
+      "description": "Hurls a deadly shuriken at an enemy unit, dealing damage and slowing the target.",
+      "type": "Unit / Passive",
+      "traits": {
+        "Cast Animation": "0.3 + 0.43",
+        "Cast Range": "375/425/475/525 (Upgradable by Aghanim's Scepter. 600)",
+        "Damage": "100/170/240/310 (With level 25 Right Talent 350/420/490/560)",
+        "Attack Damage Bonus to Spell Damage Factor": "(Upgradable by Aghanim's Scepter. 1)",
+        "Cooldown": "5",
+        "Mana Cost": "75/85/90/95"
+      }
+    },
+    {
+      "name": "Jinada",
+      "hotkey": "W",
+      "description": "Deals bonus damage and stealing some unreliable gold when off-cooldown.",
+      "type": "Autocast / Active Attack Modifier",
+      "traits": {
+        "Cast Animation": "0.59 + 0.59",
+        "Cast Range": "150",
+        "Attack Damage Bonus": "70/105/140/175",
+        "Cooldown": "9/7/5/3 ( 0)"
+      }
+    },
+    {
+      "name": "Shadow Walk",
+      "hotkey": "E",
+      "description": "Gondar becomes invisible and gains the ability to move through other units until he attacks or uses another ability.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Move Speed Bonus": "11%/14%/17%/20%",
+        "Damage Reduction": " (With level 15 Right Talent 30%)",
+        "Cooldown": "18/17/16/15 ( 13/12/11/10)",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Friendly Shadow",
+      "hotkey": "D",
+      "description": "Applies an invisibility buff based on Shadow Walk of the corresponding level. Has a slightly longer fade time duration for allied heroes.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "650",
+        "Cooldown": "15",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Track",
+      "hotkey": "R",
+      "description": "Grants True Sight, applies an incoming damage amplification debuff, and information on how much gold the affected enemy unit is carrying.If the Tracked enemy unit dies, Gondar collects a bonus gold bounty.Track does not break Gondar's Shadow Walk upon cast.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.43",
+        "Cast Range": "1000",
+        "Damage Amp": "8%/12%/16%",
+        "Gold Bonus": "130/225/320 (With level 15 Left Talent 180/275/370)",
+        "Radius": "1200",
+        "Ally Bonus Gold": "50/90/130 (With level 15 Left Talent 100/140/180)",
+        "Duration": "25",
+        "Cooldown": "6/5/4",
+        "Mana Cost": "50"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "No Jinada Cooldown",
+      "right": "+250 Shuriken Toss Damage"
+    },
+    {
+      "level": 20,
+      "left": "+50 Jinada Gold Steal",
+      "right": "Track Grants Shared Vision"
+    },
+    {
+      "level": 15,
+      "left": "+50 Track Gold",
+      "right": "-30% Shadow Walk Incoming Damage"
+    },
+    {
+      "level": 10,
+      "left": "+30 Attack Damage",
+      "right": "+0.6s Shuriken Toss Slow"
+    }
+  ],
+  "roles": [
+    "Escape",
+    "Nuker"
+  ],
+  "facets": []
+}

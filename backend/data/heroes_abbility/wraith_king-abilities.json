@@ -1,0 +1,103 @@
+{
+  "heroName": "Wraith King",
+  "innateAbility": {
+    "name": "Vampiric Spirit",
+    "hotkey": "",
+    "description": "Delays the death of Wraith King when killed.The King enters Wraith Form, granting himself bonus attack speed and bonus movement speed, with unobstructed movement, for a short duration.The current Wraith duration is then subtracted from the total respawn time once the King dies.",
+    "type": "Passive",
+    "traits": {
+      "Move Speed Bonus": "20%",
+      "Attack Speed Bonus": "55",
+      "Duration": "4.25 (Upgradable by Aghanim's Scepter. 5.25)"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Wraithfire Blast",
+      "hotkey": "Q",
+      "description": "Sears an enemy unit with a spectral fire projectile that stuns and damages on hit, then slows and damages over time.",
+      "type": "Unit / Passive",
+      "traits": {
+        "Cast Animation": "0.35 + 0.5",
+        "Cast Range": "525",
+        "First Damage": "80/100/120/140",
+        "Damage per Second": "20/40/60/80",
+        "Cooldown": "14/12/10/8",
+        "Mana Cost": "95/110/125/140"
+      }
+    },
+    {
+      "name": "Bone Guard",
+      "hotkey": "W",
+      "description": "The King can summon Skeletons to fight for him.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.1 + 0.6",
+        "Building Damage Factor": "0.585",
+        "Hero Damage Factor": "1.25",
+        "Cooldown": "42",
+        "Mana Cost": "70/80/90/100"
+      }
+    },
+    {
+      "name": "Wraith King Skeleton (Summoned   Creep)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Mortal Strike",
+      "hotkey": "E",
+      "description": "Passively deals critical damage on an attack with a cooldown.",
+      "type": "Passive",
+      "traits": {
+        "Crit Damage": "160%/200%/240%/280%",
+        "Attack Damage to Pure Damage Factor": "(Upgradable by Aghanim's Shard. 0.75)",
+        "Cooldown": "5 ( 3)"
+      }
+    },
+    {
+      "name": "Reincarnation",
+      "hotkey": "R",
+      "description": "The Wraith King reforms after death, allowing him to resurrect when killed in battle.Applies a movement speed slow and an attack speed slow upon death to enemy heroes within the radius when off-cooldown.",
+      "type": "Passive / Self",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Current Health as Self Damage": "100%",
+        "Cooldown": "180/150/120 ( 170/140/110)",
+        "Mana Cost": "220/110/0"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Reincarnation Casts Wraithfire Blast",
+      "right": "-2s Mortal Strike Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "+5 Bone Guard Skeletons Spawned",
+      "right": "+50 Attack Speed"
+    },
+    {
+      "level": 15,
+      "left": "+350 Health",
+      "right": "+0.75s Wraithfire Blast Stun Duration"
+    },
+    {
+      "level": 10,
+      "left": "+2 Wraithfire Blast Slow Duration",
+      "right": "+8% Vampiric Spirit Lifesteal"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Support",
+    "Durable",
+    "Disabler",
+    "Initiator"
+  ],
+  "facets": []
+}

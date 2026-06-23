@@ -1,0 +1,116 @@
+{
+  "heroName": "Windranger",
+  "innateAbility": {
+    "name": "Tailwind",
+    "hotkey": "",
+    "description": "Grants self bonus movement speed upon ability casts.The bonus movement speed value decays linearly after a fixed duration.",
+    "type": "Passive",
+    "traits": {
+      "Move Speed Bonus per Stack": "35%",
+      "Duration": "2.5 (Upgradable by Aghanim's Scepter. 3.5)"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Shackleshot",
+      "hotkey": "Q",
+      "description": "Shackles the targeted-unit to another enemy unit or tree in a line directly behind it.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.15 + 0.45",
+        "Cast Range": "800",
+        "Cooldown": "16/14/12/10",
+        "Mana Cost": "70/80/90/100"
+      }
+    },
+    {
+      "name": "Powershot",
+      "hotkey": "W",
+      "description": "Charges her bow up briefly for a single powerful shot. The longer the charge, the potent the arrow fired.The arrow damages and slows all enemy units along its path. Reduces damage by a factor per enemy unit hit.",
+      "type": "Point / Channeled",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "3000",
+        "Damage Radius": "125",
+        "Max Damage": "170/270/370/470",
+        "Damage Factor per Hit": "0.85 (With level 15 Left Talent 1)",
+        "Min Health to Kill Threshold": "10%",
+        "Max Health to Kill Threshold": "15%",
+        "Cooldown": "12/11/10/9",
+        "Mana Cost": "90/100/110/120"
+      }
+    },
+    {
+      "name": "Windrun",
+      "hotkey": "E",
+      "description": "Grants self movement speed bonus and absolute evasion, evading all incoming physical attacks.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Move Speed Bonus": "60%",
+        "Duration": "3/4/5/6 (With level 10 Left Talent 3.75/4.75/5.75/6.75)",
+        "Cooldown": "14/13/12/11",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Gale Force",
+      "hotkey": "D",
+      "description": "Summons a strong wind that pulls all enemies in the area-targeted location toward the vector-targeted direction.",
+      "type": "Point / Vector",
+      "traits": {
+        "Cast Animation": "0.2 + 0.47",
+        "Cast Range": "1200",
+        "Radius": "900",
+        "Duration": "3",
+        "Cooldown": "25",
+        "Mana Cost": "125"
+      }
+    },
+    {
+      "name": "Focus Fire",
+      "hotkey": "R",
+      "description": "Grants self a massive attack speed bonus against a single enemy unit or enemy building, while sacrificing a portion of her own attack damage.Does not reduce the potency of attack modifier sources or on-hit effects.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "600",
+        "Attack Speed Bonus": "350/425/500",
+        "Self Attack Damage": "0.75 (With level 20 Left Talent 0.85)",
+        "Duration": "20",
+        "Cooldown": "50/40/30",
+        "Mana Cost": "75/100/125"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-16s Focus Fire Cooldown per Kill",
+      "right": "Powershot Instant Kills Enemy Heroes"
+    },
+    {
+      "level": 20,
+      "left": "-10% Focus Fire Damage Reduction",
+      "right": "+0.75s Shackleshot Duration"
+    },
+    {
+      "level": 15,
+      "left": "-15% Powershot Damage Reduction",
+      "right": "+40 Tailwind Max Move Speed"
+    },
+    {
+      "level": 10,
+      "left": "+0.75s Windrun Duration",
+      "right": "+1s Powershot Slow Duration"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Support",
+    "Disabler",
+    "Escape",
+    "Nuker"
+  ],
+  "facets": []
+}

@@ -1,0 +1,99 @@
+{
+  "heroName": "Skywrath Mage",
+  "innateAbility": {
+    "name": "Shield of the Scion",
+    "hotkey": "",
+    "description": "Encloses Dragonus in a magical damage barrier per spell damage instance applied to enemy heroes.",
+    "type": "Passive",
+    "traits": {
+      "Stack per Damage Instance": "1",
+      "Barrier per Stack": "13.5",
+      "Barrier Value Increase": "1.5"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Arcane Bolt",
+      "hotkey": "Q",
+      "description": "Launches a slow-moving bolt to the unit-targeted enemy that deals bonus damage based on current intelligence.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.1 + 0.9",
+        "Cast Range": "875 (With level 10 Left Talent 1000)",
+        "Base Damage": "60/90/120/150",
+        "Int Damage Bonus Factor": "1.5 (With level 25 Right Talent 3)",
+        "Cooldown": "5/4/3/2",
+        "Mana Cost": "70"
+      }
+    },
+    {
+      "name": "Concussive Shot",
+      "hotkey": "W",
+      "description": "Sets a long range shot that hits the closest hero.Upon impact, the projectile deals damage and slows all affected enemy units within the radius.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 1.03",
+        "Area Damage": "120/180/240/300",
+        "Radius": "Global",
+        "Cooldown": "15/14/13/12",
+        "Mana Cost": "80/85/90/95"
+      }
+    },
+    {
+      "name": "Ancient Seal",
+      "hotkey": "E",
+      "description": "Reduces the unit-targeted enemy's magic resistance.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.1 + 0.97",
+        "Cast Range": "700/750/800/850",
+        "Cooldown": "14 ( 8)",
+        "Mana Cost": "80/90/100/110"
+      }
+    },
+    {
+      "name": "Mystic Flare",
+      "hotkey": "R",
+      "description": "Deals massive damage that is distributed evenly among all enemy heroes within the radius.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.1 + 0",
+        "Cast Range": "1200",
+        "Damage Radius": "170",
+        "Damage Interval": "0.1",
+        "Total Damage": "800/1200/1600 (With level 25 Left Talent 1200/1600/2000)",
+        "Current Health as Damage": "100%",
+        "Cooldown": "55/35/15",
+        "Mana Cost": "300/550/800"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+400 Mystic Flare Damage",
+      "right": "+1.5x Arcane Bolt Intelligence Factor"
+    },
+    {
+      "level": 20,
+      "left": "+10% Ancient Seal Magic Resist Reduction",
+      "right": "Global Concussive Shot"
+    },
+    {
+      "level": 15,
+      "left": "+20% Concussive Shot Slow",
+      "right": "-6s Ancient Seal Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "+125 Arcane Bolt Cast Range",
+      "right": "+1.5 Mana Regen"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Nuker",
+    "Disabler"
+  ],
+  "facets": []
+}

@@ -1,0 +1,130 @@
+{
+  "heroName": "Pangolier",
+  "innateAbility": {
+    "name": "Fortune Favors the Bold",
+    "hotkey": "",
+    "description": "Most items and ability effects, both defensive and offensive, that utilizes pseudo-random distribution has a reduced chance to occur when interacting with Pangolier.",
+    "type": "Passive",
+    "traits": {
+      "Radius": "1200"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Swashbuckle",
+      "hotkey": "Q",
+      "description": "Dashes along to the point-targeted location, then slashes all enemy units in the vector-targeted direction.",
+      "type": "Point / Vector",
+      "traits": {
+        "Cast Animation": "0.15 + 0",
+        "Cast Range": "575/650/725/800",
+        "Set Attack Damage": "35/65/95/125",
+        "Cooldown": "19/16/13/10 ( 17/14/11/8)",
+        "Mana Cost": "85/90/95/100"
+      }
+    },
+    {
+      "name": "Shield Crash",
+      "hotkey": "W",
+      "description": "Jumps in the air and slams back to the ground in front of his current position, damaging and applying a movement speed slow within the radius.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0.54",
+        "Damage": "60/120/180/240",
+        "Barrier": "50/100/150/200 (With level 15 Left Talent 175/225/275/325)",
+        "Barrier Duration": "6",
+        "Total Damage Factor": "(Upgradable by Aghanim's Scepter. 0.75)",
+        "Cooldown": "15/12/9/6 ( 13.5/10.5/7.5/4.5)",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Lucky Shot",
+      "hotkey": "E",
+      "description": "Donté's attacks and spell damage applied have a chance to additionally apply a movement speed slow while reducing the affected enemy units' armor.",
+      "type": "Passive",
+      "traits": {
+        "Min Damage Threshold": "",
+        "Duration": "3.5/4/4.5/5"
+      }
+    },
+    {
+      "name": "Roll Up",
+      "hotkey": "D",
+      "description": "Curls into Donté's Gyroshell form.Grants debuff immunity and the ability to turn.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.1 + 1.03",
+        "Magic Resist Bonus": "80%",
+        "Cooldown": "40",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "End Roll Up",
+      "hotkey": "D",
+      "description": "Instantly ends Pangolier's Roll Up.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Rolling Thunder",
+      "hotkey": "R",
+      "description": "Curls into a ball and rolls out. Donté has increased magic resistance and is debuff immune.While rolling, he moves at an increased speed and can move through trees.Applies a knockback, stuns enemy units within the collision radius, and deals bonus spell damage based on his current total attack damage.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "1.2 + 0",
+        "Magic Resist Bonus": "80%",
+        "Base Damage": "100/200/300",
+        "Attack Damage to Spell Damage Bonus Factor": "0.8",
+        "Turn Rate Bonus": "165°",
+        "Cooldown": "100/90/80 ( 85/75/65)",
+        "Mana Cost": "100/125/150"
+      }
+    },
+    {
+      "name": "Stop Rolling",
+      "hotkey": "R",
+      "description": "Instantly halts Pangolier's Rolling Thunder.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-15s Rolling Thunder Cooldown",
+      "right": "+0.2x Swashbuckle Slash Instant Attack Damage"
+    },
+    {
+      "level": 20,
+      "left": "-1.5 Shield Crash Cooldown",
+      "right": "+2s Rolling Thunder Duration"
+    },
+    {
+      "level": 15,
+      "left": "+125 Shield Crash Damage Barrier",
+      "right": "-2s Swashbuckle Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "+200 Swashbuckle Slash Range",
+      "right": "+2 Lucky Shot Armor Reduction"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Nuker",
+    "Disabler",
+    "Durable",
+    "Escape",
+    "Initiator"
+  ],
+  "facets": []
+}

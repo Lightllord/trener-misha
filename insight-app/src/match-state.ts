@@ -136,6 +136,7 @@ export class MatchStateManager {
       enemyBuildings,
       heroPositions: this.heroPositions,
       otherHeroes: [],
+      lastEnemyInspectAt: 0,
     }
   }
 

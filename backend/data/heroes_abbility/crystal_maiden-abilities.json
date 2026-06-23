@@ -1,0 +1,120 @@
+{
+  "heroName": "Crystal Maiden",
+  "innateAbility": {
+    "name": "Glacial Guard",
+    "hotkey": "",
+    "description": "Grants the Maiden a physical damage barrier corresponding to the mana cost spent on abilities.",
+    "type": "Passive",
+    "traits": {
+      "Mana Cost to Barrier": "0.3 (With level 20 Right Talent 0.5)",
+      "Mana Cost to Barrier Increase": "0.02"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Crystal Nova",
+      "hotkey": "Q",
+      "description": "Damages and applies movement speed slow to all enemy units in the area-targeted location.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.3 + 0.6",
+        "Cast Range": "700",
+        "Damage": "110/160/210/260 (With level 25 Left Talent 410/460/510/560)",
+        "Duration": "4",
+        "Cooldown": "11/10/9/8 ( 6.5/5.5/4.5/3.5)",
+        "Mana Cost": "115/135/155/175"
+      }
+    },
+    {
+      "name": "Frostbite",
+      "hotkey": "W",
+      "description": "Encases an enemy unit in ice. Applies damage over time while prohibiting movement and attack.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.6",
+        "Cast Range": "600 (With level 15 Right Talent 700)",
+        "Damage per Second": "100",
+        "Creep Damage Factor": "4",
+        "Cooldown": "9/8/7/6",
+        "Mana Cost": "125/135/145/155"
+      }
+    },
+    {
+      "name": "Arcane Aura",
+      "hotkey": "E",
+      "description": "Grants additional mana regeneration to allied units on the map.Grants a greater bonus to allied units closer to the Maiden.",
+      "type": "Passive / Aura",
+      "traits": {
+        "Base Mana Regen Bonus": "0.4/0.6/0.8/1",
+        "Proximity Bonus Factor": "3",
+        "Self Mana Regen Bonus": "1.44/2.52/3.84/5.4"
+      }
+    },
+    {
+      "name": "Crystal Clone",
+      "hotkey": "D",
+      "description": "Creates a Crystal Clone of Rylai in her place while sliding to the area-targeted direction and disjointing incoming projectiles.",
+      "type": "Point / Vector",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage Threshold": "150",
+        "Damage Dealt": "100%",
+        "Damage Taken": "100%",
+        "Duration": "5",
+        "Cooldown": "12",
+        "Mana Cost": "150"
+      }
+    },
+    {
+      "name": "Freezing Field",
+      "hotkey": "R",
+      "description": "Surrounds Crystal Maiden with random icy explosions that slow all enemy units and deal massive damage within the radius.",
+      "type": "No / Channeled",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Explosion Damage Radius": "320",
+        "Damage per Explosion": "110/180/250 (With level 20 Left Talent 160/230/300)",
+        "Cooldown": "100/95/90",
+        "Mana Cost": "200/400/600"
+      }
+    },
+    {
+      "name": "Stop Freezing Field",
+      "hotkey": "R",
+      "description": "Rylai commands the Freezing Field to halt as she wishes.She can now move, albeit slower, cast other abilities and attack during Freezing Field. Can still be interrupted by enemies.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "1"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+300 Crystal Nova Damage",
+      "right": "+1s Frostbite Duration"
+    },
+    {
+      "level": 20,
+      "left": "+50 Freezing Field Damage",
+      "right": "+0.2 Glacial Guard Mana Cost to Barrier Factor"
+    },
+    {
+      "level": 15,
+      "left": "-4.5s Crystal Nova Cooldown",
+      "right": "+100 Frostbite Cast Range"
+    },
+    {
+      "level": 10,
+      "left": "+12 Intelligence",
+      "right": "+200 Health"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Disabler",
+    "Nuker"
+  ],
+  "facets": []
+}

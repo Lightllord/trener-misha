@@ -1,0 +1,128 @@
+{
+  "heroName": "Timbersaw",
+  "innateAbility": {
+    "name": "Exposure Therapy",
+    "hotkey": "",
+    "description": "Timbersaw restores a flat amount of mana per tree destroyed.",
+    "type": "Passive",
+    "traits": {
+      "Heal per Destroyed Tree": "12"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Whirling Death",
+      "hotkey": "Q",
+      "description": "Deals damage and bonus damage per destroyed tree within the radius centered around Timbersaw, while reducing the affected enemy hero's primary attribute for a brief duration.",
+      "type": "No Target",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Radius": "325",
+        "Base Damage": "60/120/180/240",
+        "Damage Bonus per Tree": "9/16/23/30 (With level 25 Right Talent 84/91/98/105)",
+        "Cooldown": "7.5/7/6.5/6",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Timber Chain",
+      "hotkey": "W",
+      "description": "Fires a chain that embeds itself in the first tree it hits, pulling Timbersaw towards it.Deals damage to enemy units within Timbersaw's travel path.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "750/900/1050/1200 (With level 25 Left Talent 1313/1575/1838/2100)",
+        "Damage Radius": "225",
+        "Damage": "45/105/165/225",
+        "Cooldown": "4",
+        "Mana Cost": "60/70/80/90"
+      }
+    },
+    {
+      "name": "Reactive Armor",
+      "hotkey": "E",
+      "description": "Grants bonus armor and bonus health regeneration whenever an enemy hero attacks Timbersaw.",
+      "type": "Passive / No",
+      "traits": {
+        "Armor Bonus per Stack": "0.4/0.5/0.6/0.7",
+        "Health Regen Bonus per Stack": "0.5/0.6/0.7/0.8 (With level 10 Right Talent 0.75/0.85/0.95/1.05)",
+        "Cast Animation": "0 + 0",
+        "Base Barrier": "(Upgradable by Aghanim's Scepter. 150)",
+        "Barrier Regen per Second": "(Upgradable by Aghanim's Scepter. 100)",
+        "Barrier Regen Bonus per Enemy": "(Upgradable by Aghanim's Scepter. 75)",
+        "Max Barrier": "(Upgradable by Aghanim's Scepter. 800)",
+        "Duration": "(Upgradable by Aghanim's Scepter. 8)",
+        "Base Damage": "(Upgradable by Aghanim's Scepter. 200)",
+        "Barrier to Spell Damage Bonus Factor": "(Upgradable by Aghanim's Scepter. 1)",
+        "Cooldown": "( 45)",
+        "Mana Cost": "( 200)"
+      }
+    },
+    {
+      "name": "Flamethrower",
+      "hotkey": "F",
+      "description": "Releases a destructive flame in the direction Timbersaw is facing.Deals damage per second, applies a movement speed slow and destroys trees within an area.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage per Second": "70",
+        "Damage Factor": "0.5",
+        "Cooldown": "20",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Chakram",
+      "hotkey": "R",
+      "description": "Launches a saw-blade that deals damage, applies a movement speed slow, and cuts down trees in its path when launched and retracted.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.15 + 0",
+        "Cast Range": "1200",
+        "Contact Damage": "75/150/225",
+        "Damage per Second": "50/75/100",
+        "Min Move Speed Slow Health Threshold": "5%",
+        "Cooldown": "8",
+        "Mana Cost": "90/120/150"
+      }
+    },
+    {
+      "name": "Return Chakram",
+      "hotkey": "R",
+      "description": "Returns the Chakram to Timbersaw.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "x1.75 Timber Chain Range/Projectile Speed",
+      "right": "+75 Whirling Death Tree Bonus Damage"
+    },
+    {
+      "level": 20,
+      "left": "+6% Chakram Move Speed Slow",
+      "right": "+12 Exposure Therapy Heal per Tree Destroyed"
+    },
+    {
+      "level": 15,
+      "left": "+6 Reactive Armor Max Stacks+1 Reactive Armor Stack per Hero Attack",
+      "right": "+2% Whirling Death Attributes Reduction"
+    },
+    {
+      "level": 10,
+      "left": "+1.5 Mana Regen",
+      "right": "+0.25 Reactive Armor Health Regen per Stack"
+    }
+  ],
+  "roles": [
+    "Nuker",
+    "Durable",
+    "Escape"
+  ],
+  "facets": []
+}

@@ -1,0 +1,95 @@
+{
+  "heroName": "Razor",
+  "innateAbility": {
+    "name": "Unstable Current",
+    "hotkey": "",
+    "description": "Grants bonus movement speed.",
+    "type": "Passive",
+    "traits": {
+      "Move Speed Bonus": "1%",
+      "Move Speed Bonus Increase": "1%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Plasma Field",
+      "hotkey": "Q",
+      "description": "Releases a plasma wave that grows in power as it expands, but also zaps on contraction, slowing and dealing damage to enemy units caught in its path.Each enemy unit can be hit twice, once each upon expanding and contracting. The further the distance, the stronger the effect.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage Width": "100",
+        "Min Damage": "35/40/45/50",
+        "Max Damage": "80/115/150/185",
+        "Damage Factor": "0.7",
+        "Cooldown": "13/12/11/10",
+        "Mana Cost": "125"
+      }
+    },
+    {
+      "name": "Static Link",
+      "hotkey": "W",
+      "description": "Creates a charged link between Razor and an enemy unit, the enemy unit loses attack damage incrementally while being linked to Razor.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "550",
+        "Attack Damage Change per Second": "6/12/18/24 (With level 15 Right Talent 12/18/24/30)",
+        "Cooldown": "44/36/28/20",
+        "Mana Cost": "65"
+      }
+    },
+    {
+      "name": "Storm Surge",
+      "hotkey": "E",
+      "description": "When attacked by an enemy, Razor has a chance to release a Forked Lightning that strikes the attacking source, prioritizing the attacker's unit-type.",
+      "type": "Passive",
+      "traits": {
+        "Damage": "50/90/130/170 (With level 20 Right Talent 67.5/121.5/175.5/229.5)"
+      }
+    },
+    {
+      "name": "Eye of the Storm",
+      "hotkey": "R",
+      "description": "A powerful lightning storm strikes out at enemy units with the lowest health, dealing damage and reducing their armor.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage per Strike": "60/75/90",
+        "Duration": "30",
+        "Damage Factor": "(Upgradable by Aghanim's Scepter. 1)",
+        "Cooldown": "80/70/60",
+        "Mana Cost": "100/150/200"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Static Link Attack Speed Change",
+      "right": "Secondary Plasma Field"
+    },
+    {
+      "level": 20,
+      "left": "-0.1s Eye of the Storm Strike Interval",
+      "right": "x1.35 Storm Surge Damage/Move Speed Slow"
+    },
+    {
+      "level": 15,
+      "left": "+12 Strength",
+      "right": "+6 Static Link Attack Damage Change"
+    },
+    {
+      "level": 10,
+      "left": "+4 Armor",
+      "right": "+0.75s Plasma Field Slow Duration"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Durable",
+    "Nuker",
+    "Pusher"
+  ],
+  "facets": []
+}

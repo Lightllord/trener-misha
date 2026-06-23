@@ -1,0 +1,121 @@
+{
+  "heroName": "Enchantress",
+  "innateAbility": {
+    "name": "Rabble-Rouser",
+    "hotkey": "",
+    "description": "All neutral creeps conditionally deals more damage to Enchantress' enemy units.",
+    "type": "Passive",
+    "traits": {
+      "Damage Amp Increase": "4%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Impetus",
+      "hotkey": "Q",
+      "description": "Deal additional distance-based damage between Enchantress and the enemy target.The farther the target, the greater the damage.",
+      "type": "Autocast / Active Attack Modifier",
+      "traits": {
+        "Cast Animation": "0.3 + 0.7",
+        "Cast Range": "575",
+        "Distance to Damage Factor": "0.05/0.1/0.15/0.2 (With level 25 Right Talent 0.115/0.165/0.215/0.265)",
+        "Illusion Damage Factor": "2",
+        "Cooldown": "6/4/2/0",
+        "Mana Cost": "40/45/50/55"
+      }
+    },
+    {
+      "name": "Enchant",
+      "hotkey": "W",
+      "description": "Charms an enemy hero or non-allied creep, applying a basic dispel and slowing its movement.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.67",
+        "Cast Range": "500/600/700/800",
+        "Max Health Bonus": " (With level 20 Left Talent 150)",
+        "Attack Damage Bonus": " (With level 20 Left Talent 25)",
+        "Armor Bonus": " (With level 10 Right Talent 5)",
+        "Attack Range Bonus": "100/150/200/250",
+        "Damage Factor": "0.9",
+        "Attack Speed Bonus": " (With level 15 Right Talent 30)",
+        "Cooldown": "30/24/18/12",
+        "Mana Cost": "70"
+      }
+    },
+    {
+      "name": "Nature's Attendants",
+      "hotkey": "E",
+      "description": "A cloud of wisps heals Enchantress and allied units nearby.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.3 + 0.93",
+        "Heal per Second per Wisp": "4/8/12/16 (With level 15 Left Talent 12/16/20/24)",
+        "Duration": "7/9/11/13",
+        "Move Speed Bonus": " (With level 10 Left Talent 30)",
+        "Cooldown": "35",
+        "Mana Cost": "140"
+      }
+    },
+    {
+      "name": "Sproink",
+      "hotkey": "D",
+      "description": "Leaps backward and disjoints incoming projectiles.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "10",
+        "Mana Cost": "60"
+      }
+    },
+    {
+      "name": "Little Friends",
+      "hotkey": "F",
+      "description": "Roots the unit-targeted enemy correspondingly to the amount of units within the radius.Enchantress then orders creeps of all factions, including neutral creeps, centered around the debuff-affected unit within the radius to attack the unit.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "750",
+        "Move Speed Bonus": "100%",
+        "Attack Speed Bonus": "70",
+        "Cooldown": "20",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Untouchable",
+      "hotkey": "R",
+      "description": "Enchantress beguiles her enemies, slowing their attacks when she is attacked.",
+      "type": "Passive",
+      "traits": {}
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+80 Untouchable Attack Speed Slow",
+      "right": "+6.5% Impetus Damage"
+    },
+    {
+      "level": 20,
+      "left": "+150 Health Aura+25 Attack Damage Aura",
+      "right": "+9 Nature's Attendants Wisps"
+    },
+    {
+      "level": 15,
+      "left": "+8 Nature's Attendants Heal per Wisp",
+      "right": "+30 Attack Speed Aura"
+    },
+    {
+      "level": 10,
+      "left": "+30 Nature's Attendants Self Move Speed",
+      "right": "+5 Armor Aura"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Pusher",
+    "Durable",
+    "Disabler"
+  ],
+  "facets": []
+}

@@ -1,0 +1,106 @@
+{
+  "heroName": "Sniper",
+  "innateAbility": {
+    "name": "Keen Scope",
+    "hotkey": "",
+    "description": "The greater the distance between the attacked enemy and Sniper, the greater the attack damage applied.",
+    "type": "Passive",
+    "traits": {
+      "Attack Damage Bonus": "1.5%",
+      "Attack Damage Increase": "0.05%",
+      "Attack Damage to Max Damage Bonus Factor": "1.08"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Shrapnel",
+      "hotkey": "Q",
+      "description": "Consumes a charge to launch a ball of shrapnel that showers and revealing the target area in explosive pellets.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "1800",
+        "Damage per Second": "30/45/60/75 (With level 20 Left Talent 39/58/78/97)",
+        "Cooldown": "0",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Headshot",
+      "hotkey": "W",
+      "description": "Grants Sniper a chance to deal extra damage and briefly knocks back the attacked enemy unit.",
+      "type": "Passive",
+      "traits": {
+        "Damage": "20/50/80/110 (With level 10 Left Talent 50/80/110/140)"
+      }
+    },
+    {
+      "name": "Take Aim",
+      "hotkey": "E",
+      "description": "Sniper takes aim with addtional attack range, he is slowed with reduced vision for the duration.",
+      "type": "No / Passive",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Vision Bonus": "500/750/1000/1250",
+        "Duration": "3 (With level 20 Right Talent 5)",
+        "Attack Speed Bonus": " (With level 15 Right Talent 45)",
+        "Cooldown": "20/18/16/14",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Concussive Grenade",
+      "hotkey": "D",
+      "description": "Damages, stuns, and applies a knockback to all affected enemy units within the area-targeted location.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.1 + 0.8",
+        "Cast Range": "600",
+        "Damage": "200",
+        "Cooldown": "10",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Assassinate",
+      "hotkey": "R",
+      "description": "Locks onto a unit-targeted enemy.After a short aiming duration, Sniper fires a devastating shot at long range and mini-stuns the target. 4",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.5 + 1.47",
+        "Cast Range": "3000",
+        "Spell Damage": "300/400/500 (With level 15 Left Talent 450/550/650)",
+        "Attack Damage Factor": "1",
+        "Cooldown": "20/15/10",
+        "Mana Cost": "175"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+50 Max Headshot Knock Distance",
+      "right": "-30s Shrapnel Restore Time"
+    },
+    {
+      "level": 20,
+      "left": "+30% Shrapnel Damage",
+      "right": "+2s Take Aim Duration"
+    },
+    {
+      "level": 15,
+      "left": "+150 Assassinate Damage",
+      "right": "+45 Take Aim Active Attack Speed"
+    },
+    {
+      "level": 10,
+      "left": "+30 Headshot Damage",
+      "right": "+50 Take Aim Attack Range"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Nuker"
+  ],
+  "facets": []
+}

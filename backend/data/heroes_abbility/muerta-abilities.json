@@ -1,0 +1,110 @@
+{
+  "heroName": "Muerta",
+  "innateAbility": {
+    "name": "Supernatural",
+    "hotkey": "",
+    "description": "Grants bonus spell damage amplification stacks each time Muerta kills an enemy hero or within the death radius, and loses a portion of stacks upon death.",
+    "type": "Passive",
+    "traits": {
+      "Spell Damage Amp": "1%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Dead Shot",
+      "hotkey": "Q",
+      "description": "Fires a ghostly trickshot at an enemy unit or tree.Upon impact, it damages and applies a movement speed slow, the bullet then ricochets in the vector-targeted direction.",
+      "type": "Unit / Vector",
+      "traits": {
+        "Cast Animation": "0.15 + 1.03",
+        "Cast Range": "1000 (With level 10 Right Talent 1300)",
+        "Initial Bullet Damage": "100/175/250/325 (Upgradable by Aghanim's Scepter. 225/300/375/450)",
+        "Ricochet Damage": "100/175/250/325 (Upgradable by Aghanim's Scepter. 225/300/375/450)",
+        "Cooldown": "16/14/12/10 ( 0)",
+        "Mana Cost": "100/120/140/160"
+      }
+    },
+    {
+      "name": "The Calling",
+      "hotkey": "W",
+      "description": "Summons a group of revenants that slowly circle the area-targeted location.Applies a movement speed slow to affected enemy units within the radius.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.1 + 1.13",
+        "Cast Range": "600",
+        "Damage": "45/90/135/180",
+        "Self Max Health Regen Bonus per Second": " (With level 15 Right Talent 3%)",
+        "Cooldown": "30/28/26/24",
+        "Mana Cost": "135/150/165/180"
+      }
+    },
+    {
+      "name": "Gunslinger",
+      "hotkey": "E",
+      "description": "When enabled, Muerta's attacks have a chance to fire a second shot at another enemy unit on the same attack.",
+      "type": "Toggle / Passive",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Bonus Attack Targets": "1",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Spectral Slug",
+      "hotkey": "D",
+      "description": "Applies a knockback, damages, slows, and turns the unit-targeted enemy Ethereal.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.77",
+        "Cast Range": "500",
+        "Damage": "225",
+        "Cooldown": "12",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Pierce the Veil",
+      "hotkey": "R",
+      "description": "Transforms into her Corporeal Form, Muerta is now Ethereal and is immune to all physical damage instances.Grants bonus base attack damage and phase movement.",
+      "type": "No / Passive",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Attack Damage Bonus": "70%/85%/100%",
+        "Duration": "8 (With level 20 Right Talent 10)",
+        "Magical Attack Damage Factor": "1",
+        "Physical Attack Damage Factor": "0",
+        "Damage Reduction": "100%",
+        "Cooldown": "75/60/45",
+        "Mana Cost": "150/250/350"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "2 Dead Shot Charges",
+      "right": "+20% Gunslinger Proc Chance"
+    },
+    {
+      "level": 20,
+      "left": "+2 The Calling Revenants",
+      "right": "+2 Pierce the Veil Duration"
+    },
+    {
+      "level": 15,
+      "left": "+15 Intelligence",
+      "right": "+3% The Calling Self Max Health Regen"
+    },
+    {
+      "level": 10,
+      "left": "+20 Attack Speed",
+      "right": "+300 Dead Shot Cast Range"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Nuker",
+    "Disabler"
+  ],
+  "facets": []
+}

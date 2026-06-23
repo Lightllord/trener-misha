@@ -1,0 +1,138 @@
+{
+  "heroName": "Alchemist",
+  "innateAbility": {
+    "name": "Greevil's Greed",
+    "hotkey": "",
+    "description": "Synthesizes additional gold from killed enemy units.Alchemist earns base bonus gold and extra bonus gold per last hit. If Alchemist kills another unit which grants gold within a short duration, an additional instance of bonus gold is added to the total.",
+    "type": "Passive",
+    "traits": {
+      "Base Gold Bonus": "2",
+      "Gold Bonus per Stack": "2",
+      "Max Gold Bonus": "16",
+      "Gold Bonus to Attack Damage Bonus Factor": " (With level 15 Left Talent 3)",
+      "Self Gold Bonus Multiplier": "2",
+      "Base Gold Bonus per Granted Scepter": "(Upgradable by Aghanim's Scepter. 3)",
+      "Max Gold Bonus per Granted Scepter": "(Upgradable by Aghanim's Scepter. 3)"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Acid Spray",
+      "hotkey": "Q",
+      "description": "Enemy units who step across the contaminated terrain take damage per second and have their armor reduced.",
+      "type": "Area / Aura",
+      "traits": {
+        "Cast Animation": "0.1 + 0.8",
+        "Cast Range": "900",
+        "Radius": "350/400/450/500",
+        "Damage per Second": "25/30/35/40",
+        "Duration": "15",
+        "Stack per Damage Interval": "1",
+        "Cooldown": "21",
+        "Mana Cost": "120"
+      }
+    },
+    {
+      "name": "Unstable Concoction",
+      "hotkey": "W",
+      "description": "Brews up an unstable concoction that the Alchemist can throw at an enemy hero, to stun and deal damage within the radius around the explosion.The longer the brew, the more the damage and the longer the stun. While brewing, Alchemist moves faster.The brew reaches its max power after a period of time, and explodes himself if not thrown before the max brew time.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "775",
+        "Radius": "250 (With level 10 Left Talent 400)",
+        "Move Speed Bonus": "4%/8%/12%/16%",
+        "Min Damage": "0",
+        "Max Damage": "150/220/290/360 (With level 20 Left Talent 550/620/690/760)",
+        "Cooldown": "17",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Unstable Concoction Throw",
+      "hotkey": "W",
+      "description": "The longer the concoction brews, the more the potent.Throw it before it blows up!",
+      "type": "Unit / Area",
+      "traits": {
+        "Cast Animation": "0.2 + 0.5",
+        "Cast Range": "775",
+        "Radius": "250 (With level 10 Left Talent 400)",
+        "Min Damage": "0",
+        "Max Damage": "150/220/290/360 (With level 20 Left Talent 550/620/690/760)",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Corrosive Weaponry",
+      "hotkey": "E",
+      "description": "Each successful attack applies a stacking slow and base attack damage reduction.",
+      "type": "Passive",
+      "traits": {
+        "Base Attack Damage Reduction per Stack": "2.5%/3%/3.5%/4% (With level 10 Right Talent 3.5%/4%/4.5%/5%)",
+        "Duration": "4",
+        "Stack per Damage Interval": "1"
+      }
+    },
+    {
+      "name": "Berserk Potion",
+      "hotkey": "D",
+      "description": "Throws a potion at an allied unit, applying a basic dispel and granting them bonus attack speed, movement speed and health regeneration.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.63",
+        "Cast Range": "800",
+        "Move Speed Bonus": "30",
+        "Attack Speed Bonus": "50",
+        "Health Regen Bonus": "40",
+        "Duration": "15",
+        "Cooldown": "35",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Chemical Rage",
+      "hotkey": "R",
+      "description": "Reduces the ogre's base attack time while granting bonus movement speed and health regeneration.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Health Regen Bonus": "50/85/120 (With level 25 Left Talent 100/135/170)",
+        "Move Speed Bonus": "20/30/40 (With level 25 Right Talent 70/80/90)",
+        "Duration": "30",
+        "Cooldown": "60",
+        "Mana Cost": "50/75/100"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+50 Chemical Rage Health Regen",
+      "right": "+50 Chemical Rage Move Speed"
+    },
+    {
+      "level": 20,
+      "left": "+400 Unstable Concoction Max Damage",
+      "right": "-0.1s Chemical Rage Base Attack Time"
+    },
+    {
+      "level": 15,
+      "left": "+3 Attack Damage Bonus per Greevil's Greed Stack",
+      "right": "+1 Acid Spray Armor Reduction"
+    },
+    {
+      "level": 10,
+      "left": "+150 Unstable Concoction Radius",
+      "right": "+1% Corrosive Weaponry Move Speed Slow/Base Damage Reduction per Stack"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Support",
+    "Durable",
+    "Disabler",
+    "Initiator",
+    "Nuker"
+  ],
+  "facets": []
+}

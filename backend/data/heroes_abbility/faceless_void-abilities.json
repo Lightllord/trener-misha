@@ -1,0 +1,105 @@
+{
+  "heroName": "Faceless Void",
+  "innateAbility": {
+    "name": "Distortion Field",
+    "hotkey": "",
+    "description": "Grants an incoming ranged attack projectile slow aura that affects all allied heroes within the radius.",
+    "type": "Passive / Aura",
+    "traits": {}
+  },
+  "abilities": [
+    {
+      "name": "Time Walk",
+      "hotkey": "Q",
+      "description": "Rushes to a target location while healing up from any damage taken in the last few seconds.",
+      "type": "Point / Passive",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "Global",
+        "Damage Taken to Self-Heal Factor": "1",
+        "Damage Timer": "2 (With level 10 Left Talent 2.5)",
+        "Landing Damage": "(Upgradable by Aghanim's Scepter. 18/22/26/30)",
+        "Cooldown": "21/16/11/6 ( 20/15/10/5)",
+        "Mana Cost": "40"
+      }
+    },
+    {
+      "name": "Reverse Time Walk",
+      "hotkey": "D",
+      "description": "Available for a short time after landing Time Walk.If used in a certain time period, Faceless Void will reverse time walk back to the previous and first cast location.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0.5"
+      }
+    },
+    {
+      "name": "Time Dilation",
+      "hotkey": "W",
+      "description": "Applies a time dilation debuff to enemy units within the radius, decelerating their cooldowns.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.1 + 0.4",
+        "Radius": "700",
+        "Duration": "7/8/9/10",
+        "Damage per Second per Stack": "4/6/8/10 (With level 10 Right Talent 10/12/14/16)",
+        "Cooldown": "28/24/20/16",
+        "Mana Cost": "90"
+      }
+    },
+    {
+      "name": "Time Lock",
+      "hotkey": "E",
+      "description": "Adds a chance for an attack to lock an enemy unit in time while attacking it a second time.",
+      "type": "Passive",
+      "traits": {
+        "Damage": "18/22/26/30 (With level 15 Right Talent 53/57/61/65)"
+      }
+    },
+    {
+      "name": "Chronosphere",
+      "hotkey": "R",
+      "description": "Trap all units caught within the radius and causes Faceless Void to move very quickly inside it.Reveals invisible enemy units within the sphere.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.35 + 0.35",
+        "Cast Range": "500",
+        "Radius": "500 (With level 25 Left Talent 640)",
+        "Duration": "3.75/4.25/4.75",
+        "Attack Speed Bonus": " (With level 20 Right Talent 80)",
+        "Cooldown": "155/145/135",
+        "Mana Cost": "125/200/275"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+140 Chronosphere Radius",
+      "right": "+20% Backtrack Chance"
+    },
+    {
+      "level": 20,
+      "left": "-1s Time Walk Cooldown",
+      "right": "+80 Attack Speed During Chronosphere"
+    },
+    {
+      "level": 15,
+      "left": "+125 Time Walk Max Travel Distance",
+      "right": "+35 Time Lock Damage"
+    },
+    {
+      "level": 10,
+      "left": "+0.5s Time Walk Damage Timer",
+      "right": "+6 Time Dilation Damage per Second"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Initiator",
+    "Disabler",
+    "Escape",
+    "Durable"
+  ],
+  "facets": []
+}

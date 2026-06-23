@@ -1,0 +1,135 @@
+{
+  "heroName": "Tiny",
+  "innateAbility": {
+    "name": "Insurmountable",
+    "hotkey": "",
+    "description": "Grants bonus status resistance and bonus slow resistance per current strength.",
+    "type": "Passive",
+    "traits": {}
+  },
+  "abilities": [
+    {
+      "name": "Avalanche",
+      "hotkey": "Q",
+      "description": "Stuns and deals damage over time to enemy units within the radius.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0 + 0.53",
+        "Cast Range": "600 (With level 10 Right Talent 750)",
+        "Number of Damage Instances": "5",
+        "Total Damage": "90/180/270/360 (With level 15 Left Talent 180/270/360/450)",
+        "Cooldown": "23/20/17/14 ( 15/12/9/6)",
+        "Mana Cost": "105/120/135/150"
+      }
+    },
+    {
+      "name": "Toss",
+      "hotkey": "W",
+      "description": "Grabs and Toss the nearest unit, regardless of its faction, within the radius around Tiny.Damages the Toss-affected unit upon landing.",
+      "type": "Unit / Area / Ground",
+      "traits": {
+        "Cast Animation": "0 + 0.53",
+        "Cast Range": "800/900/1000/1100",
+        "Landing Damage": "90/180/270/360",
+        "Damage Radius": "275  (Upgradable by Aghanim's Shard. 400)",
+        "Impact Damage": "90/180/270/360  (Upgradable by Aghanim's Shard. 108/216/324/432)",
+        "Damage Factor": "0.33",
+        "Spell Damage Bonus": "50/200/350",
+        "Landing Damage Bonus": "(Upgradable by Aghanim's Shard. 60/240/420)",
+        "Cooldown": "20/17/14/11 ( 0)",
+        "Mana Cost": "125"
+      }
+    },
+    {
+      "name": "Tree Grab",
+      "hotkey": "E",
+      "description": "Wields a tree as a weapon for a limited number of attacks.Grants Tiny bonus attack range, and a psuedo-cleave attack effect until the tree is thrown.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 1.24",
+        "Cast Range": "200",
+        "Area Damage Length": "400",
+        "Area Damage Radius": "200",
+        "Attack Damage to Area Damage Factor": "0.7/0.8/0.9/1",
+        "Unit Attack Damage Bonus": "10/20/30/40 (With level 20 Right Talent 70/80/90/100)",
+        "Attack Damage Factor": "1.3/1.4/1.5/1.6",
+        "Cooldown": "16/13/10/7",
+        "Mana Cost": "40/35/30/25"
+      }
+    },
+    {
+      "name": "Tree Throw",
+      "hotkey": "E",
+      "description": "Throws the wielded tree at the unit-targeted enemy, proccing his attack on it and splashing damage around the enemy unit.",
+      "type": "Unit / Point",
+      "traits": {
+        "Cast Animation": "0.2 + 1.13",
+        "Cast Range": "1000",
+        "Splash Damage": "10/20/30/40 (With level 20 Right Talent 70/80/90/100)",
+        "Splash Damage Bonus": "(Upgradable by Aghanim's Shard. 50)",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Tree Volley",
+      "hotkey": "D",
+      "description": "Tiny channels to throw random trees within the radius towards the area-targeted location.",
+      "type": "Area / Channeled",
+      "traits": {
+        "Cast Animation": "0.2 + 0",
+        "Cast Range": "1200",
+        "Damage Radius": "400",
+        "Cooldown": "17",
+        "Mana Cost": "150"
+      }
+    },
+    {
+      "name": "Grow",
+      "hotkey": "R",
+      "description": "Gains craggy mass, increasing his attack damage, and armor while slowing his total attack speed.",
+      "type": "Passive",
+      "traits": {
+        "Base Attack Damage Bonus": "60/120/180",
+        "Armor Bonus": "5/10/15",
+        "Move Speed Bonus": "10/20/30",
+        "Toss Spell Damage Bonus": "50/200/350"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "2 Toss Charges",
+      "right": "-8s Avalanche Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "Toss Requires no Target",
+      "right": "+60 Tree Grab Base Damage"
+    },
+    {
+      "level": 15,
+      "left": "+90 Avalanche Damage",
+      "right": "+10 Strength"
+    },
+    {
+      "level": 10,
+      "left": "+2 Tree Grab Attack Count",
+      "right": "+150 Avalanche Cast Range"
+    },
+    {
+      "level": 15,
+      "left": "Base",
+      "right": "615"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Nuker",
+    "Pusher",
+    "Initiator",
+    "Durable",
+    "Disabler"
+  ],
+  "facets": []
+}

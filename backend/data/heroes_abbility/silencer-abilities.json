@@ -1,0 +1,103 @@
+{
+  "heroName": "Silencer",
+  "innateAbility": {
+    "name": "Suffer In Silence",
+    "hotkey": "",
+    "description": "Grants Silencer outgoing damage amplification against silenced units.Inversely, incoming damage sources from silenced units are less effective on Silencer.",
+    "type": "Passive",
+    "traits": {
+      "Damage Amp": "5% (With level 10 Left Talent 12%)",
+      "Damage Reduction": "5% (With level 10 Left Talent 12%)",
+      "Damage Manipulation Increase": "0.5%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Arcane Curse",
+      "hotkey": "Q",
+      "description": "Applies a curse on affected enemy units within the radius, dealing damage over time and slowing their movement speed.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.3 + 0.37",
+        "Cast Range": "850",
+        "First Damage": "20/40/60/80",
+        "Damage per Second": "16/24/32/40",
+        "Cooldown": "22/20/18/16",
+        "Mana Cost": "120/130/140/150"
+      }
+    },
+    {
+      "name": "Glaives of Wisdom",
+      "hotkey": "W",
+      "description": "Each attack drains and grants the affected enemy hero's intelligence to Silencer.The attack deals additional damage corresponding to Silencer's current intelligence.",
+      "type": "Autocast / Active Attack Modifier",
+      "traits": {
+        "Cast Animation": "0.5 + 0.5",
+        "Cast Range": "600",
+        "Int Damage Factor": "0.35/0.5/0.65/0.8 (With level 25 Right Talent 1.65/1.8/1.95/2.1)",
+        "Duration": "10/20/30/40 (With level 20 Right Talent 50/60/70/80)",
+        "Bounce Damage Factor": "(Upgradable by Aghanim's Shard. 1)",
+        "Cooldown": "0",
+        "Mana Cost": "12/14/16/18"
+      }
+    },
+    {
+      "name": "Last Word",
+      "hotkey": "E",
+      "description": "Enchants an enemy unit while granting vision over it.Deals damage corresponding to the intelligence difference between Silencer and the affected unit.",
+      "type": "Unit / Area",
+      "traits": {
+        "Cast Animation": "0.3 + 0.47",
+        "Cast Range": "900",
+        "Base Damage": "120/160/200/240",
+        "Int Difference Damage Factor": "1/1.5/2/2.5",
+        "Radius": "250",
+        "Cooldown": "22/18/14/10",
+        "Mana Cost": "100/105/110/115"
+      }
+    },
+    {
+      "name": "Global Silence",
+      "hotkey": "R",
+      "description": "Stops all sounds, preventing enemy heroes and units on the map from casting abilities.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.3 + 0.37",
+        "Radius": "Global",
+        "Duration": "4.5/5.25/6 (With level 25 Left Talent 6.5/7.25/8)",
+        "Cooldown": "120 ( 105)",
+        "Mana Cost": "300/450/600"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+2s Global Silence Duration",
+      "right": "+1.3 Glaives of Wisdom Damage Factor"
+    },
+    {
+      "level": 20,
+      "left": "+250 Last Word Radius",
+      "right": "+40s Glaives of Wisdom Buff/Debuff Duration"
+    },
+    {
+      "level": 15,
+      "left": "+2s Arcane Curse Base Duration+1s Arcane Curse Penalty Duration",
+      "right": "-15s Global Silence Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "+7% Suffer In Silence Damage Amp/Reduction",
+      "right": "+25 Attack Speed"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Support",
+    "Disabler",
+    "Initiator",
+    "Nuker"
+  ],
+  "facets": []
+}

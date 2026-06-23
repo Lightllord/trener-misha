@@ -1,0 +1,94 @@
+{
+  "heroName": "Riki",
+  "innateAbility": {
+    "name": "Backstab",
+    "hotkey": "",
+    "description": "Successful attacks apply an agility-based spell damage bonus to enemy units from behind.",
+    "type": "Passive",
+    "traits": {
+      "Agi to Spell Damage": "0.55 (With level 20 Right Talent 0.85)",
+      "Agi to Spell Damage Increase": "0.05"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Smoke Screen",
+      "hotkey": "Q",
+      "description": "Throws down a smoke bomb that blinds and silences enemy units.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "550",
+        "Cooldown": "15/14/13/12 ( 12/11/10/9)",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Blink Strike",
+      "hotkey": "W",
+      "description": "Teleports behind the target unit, momentarily slowing and striking them with attack damage bonus if it is an enemy.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "600/700/800/900 (With level 25 Left Talent 1100/1200/1300/1400)",
+        "Attack Damage Bonus": "25/35/45/55",
+        "Cooldown": "13/10/7/4 ( 12/9/6/3)",
+        "Mana Cost": "50/55/60/65"
+      }
+    },
+    {
+      "name": "Tricks of the Trade",
+      "hotkey": "E",
+      "description": "Phases out of the world while striking random enemy units from behind in an area around him.",
+      "type": "Area / Channeled / Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "400 (Upgradable by Aghanim's Scepter. 900)",
+        "Set Attack Damage": "25/50/75/100",
+        "Instant Attack Damage Factor": " (With level 15 Right Talent 0.15)",
+        "Ally Move Speed Bonus": "(Upgradable by Aghanim's Scepter. 15%)",
+        "Cooldown": "21/18/15/12 ( 17/14/11/8)",
+        "Mana Cost": "65"
+      }
+    },
+    {
+      "name": "Cloak and Dagger",
+      "hotkey": "R",
+      "description": "Riki fades into the shadows, becoming invisible. When Riki attacks, he becomes visible again.",
+      "type": "Passive",
+      "traits": {
+        "Move Speed Bonus": " (With level 10 Left Talent 10%)",
+        "Kill XP Bonus": "130/260/390",
+        "Assist XP Bonus": "100"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+500 Blink Strike Cast Range",
+      "right": "-4s Tricks of the Trade Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "-1s Blink Strike Cooldown",
+      "right": "+0.3 Backstab Agility Factor"
+    },
+    {
+      "level": 15,
+      "left": "-3s Smoke Screen Cooldown",
+      "right": "x0.15 Tricks of the Trade Instant Attack Damage Bonus Factor"
+    },
+    {
+      "level": 10,
+      "left": "+10% Cloak and Dagger Move Speed",
+      "right": "+50 Smoke Screen Radius"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Escape",
+    "Disabler"
+  ],
+  "facets": []
+}

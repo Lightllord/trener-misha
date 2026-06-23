@@ -1,0 +1,121 @@
+{
+  "heroName": "Juggernaut",
+  "innateAbility": {
+    "name": "Bladeform",
+    "hotkey": "",
+    "description": "Grants self bonus base agility and bonus movement speed when Juggernaut is not taking damage.",
+    "type": "Passive",
+    "traits": {
+      "Base Agi Bonus per Stack": "2.5%",
+      "Move Speed Bonus per Stack": "1%",
+      "Damage Timer": "2",
+      "Damage Threshold": "0",
+      "Agi Bonus per Stack Increase": "0.1%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Blade Fury",
+      "hotkey": "Q",
+      "description": "Becomes debuff immune and deals damage to nearby enemy units within a fixed interval.Applies a strong dispel at the end of the spin.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Radius": "260",
+        "Damage Interval": "0.2",
+        "Damage per Second": "85/115/145/175 (With level 20 Left Talent 205/235/265/295)",
+        "Duration": "5",
+        "Move Speed Bonus": " (With level 15 Left Talent 45)",
+        "Attack Damage Reduction": "100%",
+        "Magic Resist Bonus": "80%",
+        "Cooldown": "30/26/22/18",
+        "Mana Cost": "110"
+      }
+    },
+    {
+      "name": "Healing Ward",
+      "hotkey": "E",
+      "description": "Summons a Healing Ward which heals nearby allied units a portion of their max health.",
+      "type": "Area / Aura",
+      "traits": {
+        "Cast Animation": "0.3 + 0.47",
+        "Cast Range": "350",
+        "Max Health as Health Regen Bonus": "2%/3%/4%/5% (Upgradable by Aghanim's Shard. 3.5%/4.5%/5.5%/6.5%)",
+        "Cooldown": "60 ( 48)",
+        "Mana Cost": "120"
+      }
+    },
+    {
+      "name": "Healing Ward (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Blade Dance",
+      "hotkey": "E",
+      "description": "Grants Juggernaut a chance to deal critical damage on each attack.",
+      "type": "Passive",
+      "traits": {
+        "Crit Damage": "140%/160%/180%/200% (With level 20 Right Talent 155%/175%/195%/215%)"
+      }
+    },
+    {
+      "name": "Swiftslash",
+      "hotkey": "D",
+      "description": "Performs a short Omnislash of the corresponding level.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.5",
+        "Cast Range": "450",
+        "Duration": "1",
+        "Cooldown": "25",
+        "Mana Cost": "150"
+      }
+    },
+    {
+      "name": "Omnislash",
+      "hotkey": "R",
+      "description": "Applies a basic dispel upon cast, leaps toward the unit-targeted enemy.Juggernaut then slashes the target and other nearby enemy units at an increased attack rate, while being invulnerable for the duration.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.5",
+        "Cast Range": "450",
+        "Attack Damage Bonus": "25/30/35",
+        "Attack Speed Bonus": "40",
+        "Duration": "3/3.25/3.5 (With level 25 Right Talent 4/4.25/4.5)",
+        "Cooldown": "120 ( 105)",
+        "Mana Cost": "200/275/350"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+40% Blade Dance Lifesteal",
+      "right": "+1s Omnislash Duration"
+    },
+    {
+      "level": 20,
+      "left": "+120 Blade Fury Damage per Second",
+      "right": "+15% Blade Dance Crit Damage"
+    },
+    {
+      "level": 15,
+      "left": "+45 Blade Fury Move Speed",
+      "right": "-15s Omnislash Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "-1s Bladeform Stack Gain Interval",
+      "right": "-12s Healing Ward Cooldown"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Pusher",
+    "Escape"
+  ],
+  "facets": []
+}

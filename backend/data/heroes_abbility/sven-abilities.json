@@ -1,0 +1,96 @@
+{
+  "heroName": "Sven",
+  "innateAbility": {
+    "name": "Wrath of God",
+    "hotkey": "",
+    "description": "Grants Sven additional base attack damage per strength.",
+    "type": "Passive",
+    "traits": {
+      "Str to Base Attack Damage Bonus": "0.08",
+      "Str to Base Attack Damage Increase": "0.02"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Storm Hammer",
+      "hotkey": "Q",
+      "description": "Sven unleashes his magical gauntlet that deals damage and stuns enemy units in a small area around the target.",
+      "type": "Unit / Area",
+      "traits": {
+        "Cast Animation": "0.2 + 0",
+        "Cast Range": "600 (Upgradable by Aghanim's Scepter. 750)",
+        "Damage": "(Upgradable by Aghanim's Scepter. 260/340/420/500)",
+        "Cooldown": "21/18/15/12 ( 16/14/11/9)",
+        "Mana Cost": "110 ( 83)"
+      }
+    },
+    {
+      "name": "Great Cleave",
+      "hotkey": "W",
+      "description": "Sven cleaves all nearby enemy units with his attack.",
+      "type": "Passive",
+      "traits": {
+        "Cleave Damage": "60%/70%/80%/90% (With level 15 Left Talent 85%/95%/105%/115%)"
+      }
+    },
+    {
+      "name": "Warcry",
+      "hotkey": "E",
+      "description": "Sven's Warcry heartens his allied heroes for battle, increasing their armor and movement speed.",
+      "type": "No / Aura",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Move Speed Bonus": "6%/9%/12%/15% (Upgradable by Aghanim's Shard. 9%/12%/15%/18%)",
+        "Armor Bonus": "5/8/11/14 (With level 20 Left Talent 13/16/19/22)",
+        "Duration": "8 (With level 10 Right Talent 13)",
+        "Barrier": "(Upgradable by Aghanim's Shard. 300)",
+        "Cooldown": "36/32/28/24",
+        "Mana Cost": "30/35/40/45"
+      }
+    },
+    {
+      "name": "God's Strength",
+      "hotkey": "R",
+      "description": "The rough strength grants bonus attack damage and slow resistance for the duration.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Attack Damage Bonus": "110%/150%/190% (With level 25 Right Talent 160%/200%/240%)",
+        "Slow Resist Bonus": "40% (With level 10 Left Talent 60%)",
+        "Duration": "30",
+        "Cooldown": "110/105/100 ( 98/93/88)",
+        "Mana Cost": "100/125/150"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+1s Storm Hammer Stun Duration",
+      "right": "+50% God's Strength Damage"
+    },
+    {
+      "level": 20,
+      "left": "+8 Warcry Armor",
+      "right": "x0.75 Storm Hammer Cooldown/Mana Cost Factor"
+    },
+    {
+      "level": 15,
+      "left": "+25% Great Cleave Damage",
+      "right": "-12s God's Strength Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "+20% God's Strength Slow Resistance",
+      "right": "+5s Warcry Duration"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Disabler",
+    "Initiator",
+    "Durable",
+    "Nuker"
+  ],
+  "facets": []
+}

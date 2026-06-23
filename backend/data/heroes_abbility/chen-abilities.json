@@ -1,0 +1,119 @@
+{
+  "heroName": "Chen",
+  "innateAbility": {
+    "name": "Zealot",
+    "hotkey": "D",
+    "description": "Initiates a divine faith on the unit-targeted player-controlled unit he favors, teleporting it next to Chen after a short delay.Alternatively, self-casting the ability teleports all Chen's player-controlled units to himself.Offensive player-based damage applied on the affected units dispel and cancel the teleport component.",
+    "type": "Unit",
+    "traits": {
+      "Cast Animation": "0.3 + 0.7",
+      "Cast Range": "Global",
+      "Damage Threshold": "0",
+      "Unit Max Health Bonus": " (With level 10 Left Talent 25%)",
+      "Base Attack Damage Increase": "2 (With level 10 Left Talent 2.5)",
+      "Health Increase": "12",
+      "Base Attack Damage Bonus Increase": "1",
+      "Base Damage": "25",
+      "Current Health as Damage": "20%",
+      "Damage to Ally Heal Factor": "0.5",
+      "Cooldown": "10",
+      "Mana Cost": "50"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Penitence",
+      "hotkey": "Q",
+      "description": "Deals damage and applies a movement speed slow on the debuff-affected enemy unit.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.77",
+        "Cast Range": "800",
+        "Damage": "50/75/100/125 (With level 10 Right Talent 125/150/175/200)",
+        "Attack Speed Bonus": "20/40/60/80",
+        "Cooldown": "20/17/14/11",
+        "Mana Cost": "80/90/100/110"
+      }
+    },
+    {
+      "name": "Holy Persuasion",
+      "hotkey": "W",
+      "description": "Persuades an enemy or neutral creep, excluding ancient creeps, for Chen's purposes.Grants Chen a portion of the gold bounty of the Persuaded unit.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.87",
+        "Cast Range": "Global",
+        "Set Creep Max Health": "400 (With level 20 Left Talent 1700)",
+        "Set Creep Current Health/Mana": "100%",
+        "Move Speed Bonus": "5/10/20/30",
+        "Damage Amp": "5%/10%/15%/20%",
+        "Ability Level Bonus": "(Upgradable by Aghanim's Shard. 1)",
+        "Damage Timer": "3",
+        "Creep Max Health Bonus Increase": "50",
+        "Attack Damage Factor": "0.6",
+        "Cooldown": "15",
+        "Mana Cost": "110/130/150/170"
+      }
+    },
+    {
+      "name": "Divine Favor",
+      "hotkey": "E",
+      "description": "Grants a health regeneration bonus aura within the radius.",
+      "type": "Passive / Unit",
+      "traits": {
+        "Health Regen Bonus": "1.5/3/4.5/6",
+        "Cast Animation": "0.2 + 1",
+        "Cast Range": "1200",
+        "Armor Bonus": "5/10/15/20",
+        "Health Restore Amp": "5%/10%/15%/20% (With level 20 Right Talent 20%/25%/30%/35%)",
+        "Duration": "6",
+        "Cooldown": "20/18/16/14",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Hand of God",
+      "hotkey": "R",
+      "description": "Heals all allied heroes and his player-controlled units globally.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.3 + 0.93",
+        "Radius": "Global",
+        "First Heal": "200/300/400",
+        "Heal per Second": "(Upgradable by Aghanim's Scepter. 40/60/80)",
+        "Heal Duration": "10",
+        "Current Health as Heal": "100%",
+        "Magic Resist Bonus": "(Upgradable by Aghanim's Scepter. 60%)",
+        "Cooldown": "150/130/110 ( 110/90/70)",
+        "Mana Cost": "200/300/400"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Hand of God Full Health Restore for Chen and all of his Summons",
+      "right": "Hand of God Strong Dispels"
+    },
+    {
+      "level": 20,
+      "left": "+1300 Persuaded Unit Min Health",
+      "right": "+15% Divine Favor Heal Amp"
+    },
+    {
+      "level": 15,
+      "left": "+15% Penitence Slow",
+      "right": "+12% Persuaded Unit Damage Amp"
+    },
+    {
+      "level": 10,
+      "left": "25% Zealot Max Health",
+      "right": "+75 Penitence Damage"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Pusher"
+  ],
+  "facets": []
+}

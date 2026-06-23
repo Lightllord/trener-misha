@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Item Editor — Dota 2</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      display: flex; height: 100vh;
+      font-family: monospace; font-size: 13px;
+      background: #111; color: #ccc;
+      overflow: hidden;
+    }
+
+    /* ── Sidebar ── */
+    #sidebar {
+      width: 240px; min-width: 240px;
+      background: #1a1a2a; border-right: 1px solid #2a2a3a;
+      display: flex; flex-direction: column;
+    }
+    #search { padding: 10px; border-bottom: 1px solid #2a2a3a; }
+    #search input {
+      width: 100%; padding: 6px 8px;
+      background: #111; border: 1px solid #333;
+      color: #ccc; font-family: monospace; font-size: 12px; outline: none;
+    }
+    #search input:focus { border-color: #7c7cff; }
+    #item-list { flex: 1; overflow-y: auto; list-style: none; }
+    #item-list li {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 12px; cursor: pointer;
+      border-bottom: 1px solid #1e1e2e; user-select: none;
+    }
+    #item-list li:hover { background: #252540; }
+    #item-list li.active { background: #2a2a4a; color: #fff; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; background: #333; }
+    .dot.filled { background: #5c9e5c; }
+
+    /* ── Main ── */
+    #main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    #item-header {
+      padding: 14px 20px 10px; border-bottom: 1px solid #2a2a3a;
+      font-size: 16px; font-weight: bold; color: #c9aa71; min-height: 46px;
+    }
+    #form-area { flex: 1; overflow-y: auto; padding: 14px 20px; }
+    #empty-state {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      color: #333; font-size: 14px;
+    }
+
+    /* ── Ability block ── */
+    .ability-block {
+      border: 1px solid #2a2a3a; margin-bottom: 16px; background: #13132a;
+    }
+    .ability-header {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 10px; border-bottom: 1px solid #2a2a3a;
+      background: #1a1a3a;
+    }
+    .ability-name {
+      flex: 1; background: transparent; border: none;
+      color: #d0d0ff; font-family: monospace; font-size: 13px;
+      font-weight: bold; outline: none;
+    }
+    .ability-name::placeholder { color: #444; font-weight: normal; }
+
+    /* ── Scenario block ── */
+    .scenario-block {
+      border-top: 1px solid #2a2a3a;
+    }
+    .scenario-header {
+      display: flex; align-items: center; gap: 8px;
+      padding: 5px 10px; border-bottom: 1px solid #222;
+    }
+    .scenario-label {
+      flex: 1; font-size: 11px; text-transform: uppercase;
+      letter-spacing: 1px; font-weight: bold;
+    }
+    .tags-search {
+      width: 100%; padding: 5px 10px;
+      background: #0e0e1e; border: none; border-bottom: 1px solid #222;
+      color: #aaa; font-family: monospace; font-size: 11px; outline: none;
+    }
+    .tags-search::placeholder { color: #333; }
+    .tags-search:focus { border-bottom-color: #555; }
+    .tags-grid {
+      padding: 7px 10px; display: flex; flex-wrap: wrap; gap: 4px;
+      min-height: 32px;
+    }
+    .tag {
+      padding: 2px 7px; border: 1px solid #2a2a3a; border-radius: 3px;
+      background: #1a1a2a; color: #555;
+      cursor: pointer; font-family: monospace; font-size: 11px;
+      user-select: none;
+    }
+    .tag:hover { border-color: #555; color: #999; }
+    .tag.selected { border-color: #7c7cff; color: #c0c0ff; background: #25254a; }
+
+    /* ── Side effects ── */
+    .side-effects-wrap {
+      margin: 0 8px 6px;
+      border: 1px dashed #252535;
+    }
+    .side-effects-label {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+      color: #3a3a5a; padding: 3px 8px;
+      border-bottom: 1px solid #252535;
+    }
+    .side-effect-block { border-top: 1px solid #1e1e2e; }
+    .side-effect-block .scenario-header { background: #0e0e1e; padding: 4px 8px; }
+    .side-effect-block .scenario-label  { font-size: 10px; }
+    .side-effect-block .tags-search     { background: #090910; font-size: 10px; }
+    .side-effect-block .tags-grid       { padding: 5px 8px; gap: 3px; }
+    .side-effect-block .tag             { font-size: 10px; padding: 2px 6px; }
+    .add-side-effect-row {
+      padding: 4px 8px; border-top: 1px solid #1e1e2e;
+    }
+    .add-side-effect-select {
+      padding: 3px 5px; background: #0e0e1e; border: 1px dashed #252535;
+      color: #444; font-family: monospace; font-size: 10px; cursor: pointer; outline: none;
+    }
+    .add-side-effect-select:hover { border-color: #555; color: #888; }
+    .scenario-target-select {
+      flex: 1; background: transparent; border: none;
+      font-family: monospace; font-size: 11px; font-weight: bold;
+      text-transform: uppercase; letter-spacing: 1px;
+      cursor: pointer; outline: none;
+    }
+
+    /* ── Add scenario ── */
+    .add-scenario-row {
+      padding: 6px 10px; border-top: 1px solid #2a2a3a;
+    }
+    .add-scenario-select {
+      padding: 4px 6px; background: #1a1a2a; border: 1px dashed #333;
+      color: #555; font-family: monospace; font-size: 11px; cursor: pointer;
+      outline: none;
+    }
+    .add-scenario-select:hover { border-color: #7c7cff; color: #a0a0ff; }
+
+    /* ── Remove buttons ── */
+    .rm-btn {
+      background: none; border: none; color: #444;
+      cursor: pointer; font-size: 13px; line-height: 1; padding: 2px 4px;
+      flex-shrink: 0;
+    }
+    .rm-btn:hover { color: #c05050; }
+
+    /* ── Add ability ── */
+    #add-ability {
+      display: block; width: 100%; padding: 8px;
+      background: #1a1a2a; border: 1px dashed #2a2a3a;
+      color: #555; font-family: monospace; font-size: 12px;
+      cursor: pointer; text-align: center; margin-bottom: 14px;
+    }
+    #add-ability:hover { border-color: #7c7cff; color: #a0a0ff; }
+
+    /* ── Actions ── */
+    #actions {
+      padding: 10px 20px; border-top: 1px solid #2a2a3a;
+      display: flex; align-items: center; gap: 12px;
+    }
+    #save-btn {
+      padding: 7px 20px; background: #3a3aba; border: 1px solid #7c7cff;
+      color: #fff; font-family: monospace; font-size: 12px; cursor: pointer;
+    }
+    #save-btn:hover { background: #4a4aca; }
+    #save-btn:disabled { opacity: 0.4; cursor: default; }
+    #status { font-size: 11px; color: #666; }
+    #status.ok  { color: #5c9e5c; }
+    #status.err { color: #c05050; }
+  </style>
+</head>
+<body>
+
+<div id="sidebar">
+  <div id="search">
+    <input type="text" id="search-input" placeholder="Поиск предмета..." autocomplete="off">
+  </div>
+  <ul id="item-list"></ul>
+</div>
+
+<div id="main">
+  <div id="empty-state">← Выберите предмет</div>
+  <div id="item-header" style="display:none"></div>
+  <div id="form-area" style="display:none">
+    <div id="abilities-container"></div>
+    <button id="add-ability">+ Добавить эффект</button>
+  </div>
+  <div id="actions" style="display:none">
+    <button id="save-btn">Сохранить</button>
+    <span id="status"></span>
+  </div>
+</div>
+
+<script>
+  const TARGETS = [
+    { key: 'enemy',      label: 'Враг',           color: '#7a3a3a' },
+    { key: 'ally',       label: 'Союзник',         color: '#3a5a8a' },
+    { key: 'self',       label: 'Себя',            color: '#6a3a8a' },
+    { key: 'point',      label: 'Точка',           color: '#3a6a3a' },
+    { key: 'allEnemies', label: 'Все враги',       color: '#8a5a3a' },
+    { key: 'allAllies',  label: 'Все союзники',    color: '#3a6a6a' },
+    { key: 'creep',      label: 'Крип',            color: '#6a5a3a' },
+  ];
+  const TARGET_MAP = Object.fromEntries(TARGETS.map(t => [t.key, t]));
+
+  let items = [], notes = {}, allTags = [];
+  let currentKey = null;
+  let abilities = [];
+
+  const itemList     = document.getElementById('item-list');
+  const searchInput  = document.getElementById('search-input');
+  const itemHeader   = document.getElementById('item-header');
+  const formArea     = document.getElementById('form-area');
+  const actions      = document.getElementById('actions');
+  const emptyState   = document.getElementById('empty-state');
+  const container    = document.getElementById('abilities-container');
+  const addAbilityBtn = document.getElementById('add-ability');
+  const saveBtn      = document.getElementById('save-btn');
+  const statusEl     = document.getElementById('status');
+
+  async function init() {
+    const [iRes, nRes, tRes] = await Promise.all([
+      fetch('/api/items'), fetch('/api/notes'), fetch('/api/tags'),
+    ]);
+    items   = await iRes.json();
+    notes   = await nRes.json();
+    allTags = await tRes.json();
+    renderList(items);
+  }
+
+  function hasData(key) {
+    const n = notes[key];
+    return n && Array.isArray(n.abilities) && n.abilities.length > 0;
+  }
+
+  function filteredItems() {
+    const q = searchInput.value.trim().toLowerCase();
+    return q ? items.filter(i => i.displayName.toLowerCase().includes(q) || i.key.includes(q)) : items;
+  }
+
+  function renderList(list) {
+    itemList.innerHTML = '';
+    for (const item of list) {
+      const li = document.createElement('li');
+      if (item.key === currentKey) li.classList.add('active');
+      const dot = document.createElement('span');
+      dot.className = 'dot' + (hasData(item.key) ? ' filled' : '');
+      const name = document.createElement('span');
+      name.textContent = item.displayName;
+      li.append(dot, name);
+      li.addEventListener('click', () => selectItem(item));
+      itemList.append(li);
+    }
+  }
+
+  function loadAbilitiesFromNotes(saved) {
+    if (!saved || !Array.isArray(saved.abilities)) return [];
+    return saved.abilities.map(a => ({
+      name: a.name ?? '',
+      scenarios: a.scenarios
+        ? a.scenarios.map(s => ({
+            target: s.target,
+            tags: new Set(s.tags ?? []),
+            sideEffects: (s.sideEffects ?? []).map(se => ({ target: se.target, tags: new Set(se.tags ?? []) })),
+          }))
+        : (a.tags?.length ? [{ target: 'enemy', tags: new Set(a.tags), sideEffects: [] }] : []),
+    }));
+  }
+
+  function selectItem(item) {
+    currentKey = item.key;
+    abilities = loadAbilitiesFromNotes(notes[item.key]);
+
+    itemHeader.textContent = item.displayName;
+    itemHeader.style.display = '';
+    formArea.style.display = '';
+    actions.style.display = '';
+    emptyState.style.display = 'none';
+    setStatus('', '');
+
+    renderAbilities();
+    renderList(filteredItems());
+  }
+
+  function renderAbilities() {
+    container.innerHTML = '';
+    abilities.forEach((ab, ai) => {
+      const block = document.createElement('div');
+      block.className = 'ability-block';
+
+      const header = document.createElement('div');
+      header.className = 'ability-header';
+
+      const nameInput = document.createElement('input');
+      nameInput.className = 'ability-name';
+      nameInput.type = 'text';
+      nameInput.value = ab.name;
+      nameInput.placeholder = 'Название эффекта...';
+      nameInput.addEventListener('input', () => { abilities[ai].name = nameInput.value; });
+
+      const rmAbility = document.createElement('button');
+      rmAbility.className = 'rm-btn';
+      rmAbility.textContent = '✕';
+      rmAbility.title = 'Удалить эффект';
+      rmAbility.addEventListener('click', () => { abilities.splice(ai, 1); renderAbilities(); });
+
+      header.append(nameInput, rmAbility);
+      block.append(header);
+
+      ab.scenarios.forEach((sc, si) => {
+        block.append(buildScenarioBlock(ai, si, sc));
+      });
+
+      const addRow = document.createElement('div');
+      addRow.className = 'add-scenario-row';
+
+      const usedKeys = new Set(ab.scenarios.map(s => s.target));
+      const remaining = TARGETS.filter(t => !usedKeys.has(t.key));
+
+      if (remaining.length > 0) {
+        const sel = document.createElement('select');
+        sel.className = 'add-scenario-select';
+        const defaultOpt = document.createElement('option');
+        defaultOpt.value = '';
+        defaultOpt.textContent = '+ добавить сценарий';
+        sel.append(defaultOpt);
+        for (const t of remaining) {
+          const opt = document.createElement('option');
+          opt.value = t.key;
+          opt.textContent = t.label;
+          sel.append(opt);
+        }
+        sel.addEventListener('change', () => {
+          if (!sel.value) return;
+          const newSc = { target: sel.value, tags: new Set(), sideEffects: [] };
+          const order = TARGETS.map(t => t.key);
+          abilities[ai].scenarios.push(newSc);
+          abilities[ai].scenarios.sort((a, b) => order.indexOf(a.target) - order.indexOf(b.target));
+          renderAbilities();
+        });
+        addRow.append(sel);
+      }
+
+      block.append(addRow);
+      container.append(block);
+    });
+  }
+
+  function buildScenarioBlock(ai, si, sc) {
+    const t = TARGET_MAP[sc.target] ?? { label: sc.target, color: '#555' };
+
+    const wrap = document.createElement('div');
+    wrap.className = 'scenario-block';
+
+    const header = document.createElement('div');
+    header.className = 'scenario-header';
+    header.style.borderLeft = `3px solid ${t.color}`;
+
+    const targetSel = document.createElement('select');
+    targetSel.className = 'scenario-target-select';
+    targetSel.style.color = t.color;
+    const usedByOthers = new Set(abilities[ai].scenarios.filter((_, i) => i !== si).map(s => s.target));
+    for (const opt of TARGETS.filter(tt => !usedByOthers.has(tt.key))) {
+      const o = document.createElement('option');
+      o.value = opt.key; o.textContent = opt.label;
+      if (opt.key === sc.target) o.selected = true;
+      targetSel.append(o);
+    }
+    targetSel.addEventListener('change', () => {
+      sc.target = targetSel.value;
+      const order = TARGETS.map(tt => tt.key);
+      abilities[ai].scenarios.sort((a, b) => order.indexOf(a.target) - order.indexOf(b.target));
+      renderAbilities();
+    });
+
+    const rmBtn = document.createElement('button');
+    rmBtn.className = 'rm-btn';
+    rmBtn.textContent = '✕';
+    rmBtn.title = 'Удалить сценарий';
+    rmBtn.addEventListener('click', () => {
+      abilities[ai].scenarios.splice(si, 1);
+      renderAbilities();
+    });
+
+    header.append(targetSel, rmBtn);
+
+    const searchEl = document.createElement('input');
+    searchEl.className = 'tags-search';
+    searchEl.type = 'text';
+    searchEl.placeholder = 'Фильтр тегов...';
+
+    const grid = document.createElement('div');
+    grid.className = 'tags-grid';
+
+    function buildTags(filter) {
+      grid.innerHTML = '';
+      const q = filter.trim().toLowerCase();
+      for (const tag of allTags) {
+        if (q && !tag.toLowerCase().includes(q)) continue;
+        const btn = document.createElement('button');
+        btn.className = 'tag' + (sc.tags.has(tag) ? ' selected' : '');
+        btn.textContent = tag;
+        btn.addEventListener('click', () => {
+          if (sc.tags.has(tag)) { sc.tags.delete(tag); btn.classList.remove('selected'); }
+          else                  { sc.tags.add(tag);    btn.classList.add('selected'); }
+        });
+        grid.append(btn);
+      }
+    }
+
+    buildTags('');
+    searchEl.addEventListener('input', () => buildTags(searchEl.value));
+
+    sc.sideEffects = sc.sideEffects ?? [];
+    const seWrap = document.createElement('div');
+    seWrap.className = 'side-effects-wrap';
+
+    const seLabel = document.createElement('div');
+    seLabel.className = 'side-effects-label';
+    seLabel.textContent = 'Побочные эффекты';
+    seWrap.append(seLabel);
+
+    function renderSideEffects() {
+      [...seWrap.children].forEach(c => { if (c !== seLabel && !c.classList.contains('add-side-effect-row')) c.remove(); });
+      const addSERow = seWrap.querySelector('.add-side-effect-row');
+      if (addSERow) addSERow.remove();
+
+      sc.sideEffects.forEach((se, sei) => {
+        const seBlock = document.createElement('div');
+        seBlock.className = 'side-effect-block';
+
+        const seHeader = document.createElement('div');
+        seHeader.className = 'scenario-header';
+        const st = TARGET_MAP[se.target] ?? { label: se.target, color: '#555' };
+        seHeader.style.borderLeft = `3px solid ${st.color}`;
+
+        const seSel = document.createElement('select');
+        seSel.className = 'scenario-target-select';
+        seSel.style.color = st.color;
+        const usedSEKeys = new Set([sc.target, ...sc.sideEffects.filter((_, i) => i !== sei).map(s => s.target)]);
+        for (const opt of TARGETS.filter(tt => !usedSEKeys.has(tt.key))) {
+          const o = document.createElement('option');
+          o.value = opt.key; o.textContent = opt.label;
+          if (opt.key === se.target) o.selected = true;
+          seSel.append(o);
+        }
+        seSel.addEventListener('change', () => {
+          se.target = seSel.value;
+          const order = TARGETS.map(tt => tt.key);
+          sc.sideEffects.sort((a, b) => order.indexOf(a.target) - order.indexOf(b.target));
+          renderSideEffects();
+        });
+
+        const seRm = document.createElement('button');
+        seRm.className = 'rm-btn';
+        seRm.textContent = '✕';
+        seRm.addEventListener('click', () => { sc.sideEffects.splice(sei, 1); renderSideEffects(); });
+
+        seHeader.append(seSel, seRm);
+
+        const seSearch = document.createElement('input');
+        seSearch.className = 'tags-search';
+        seSearch.type = 'text';
+        seSearch.placeholder = 'Фильтр тегов...';
+
+        const seGrid = document.createElement('div');
+        seGrid.className = 'tags-grid';
+
+        function buildSETags(filter) {
+          seGrid.innerHTML = '';
+          const q = filter.trim().toLowerCase();
+          for (const tag of allTags) {
+            if (q && !tag.toLowerCase().includes(q)) continue;
+            const btn = document.createElement('button');
+            btn.className = 'tag' + (se.tags.has(tag) ? ' selected' : '');
+            btn.textContent = tag;
+            btn.addEventListener('click', () => {
+              if (se.tags.has(tag)) { se.tags.delete(tag); btn.classList.remove('selected'); }
+              else                  { se.tags.add(tag);    btn.classList.add('selected'); }
+            });
+            seGrid.append(btn);
+          }
+        }
+
+        buildSETags('');
+        seSearch.addEventListener('input', () => buildSETags(seSearch.value));
+        seBlock.append(seHeader, seSearch, seGrid);
+        seWrap.append(seBlock);
+      });
+
+      const usedSE = new Set([sc.target, ...sc.sideEffects.map(s => s.target)]);
+      const remainingSE = TARGETS.filter(t => !usedSE.has(t.key));
+      const addRow = document.createElement('div');
+      addRow.className = 'add-side-effect-row';
+      if (remainingSE.length > 0) {
+        const sel = document.createElement('select');
+        sel.className = 'add-side-effect-select';
+        const def = document.createElement('option');
+        def.value = ''; def.textContent = '+ побочный эффект';
+        sel.append(def);
+        for (const t of remainingSE) {
+          const opt = document.createElement('option');
+          opt.value = t.key; opt.textContent = t.label;
+          sel.append(opt);
+        }
+        sel.addEventListener('change', () => {
+          if (!sel.value) return;
+          const order = TARGETS.map(t => t.key);
+          sc.sideEffects.push({ target: sel.value, tags: new Set() });
+          sc.sideEffects.sort((a, b) => order.indexOf(a.target) - order.indexOf(b.target));
+          renderSideEffects();
+        });
+        addRow.append(sel);
+      }
+      seWrap.append(addRow);
+    }
+
+    renderSideEffects();
+    wrap.append(header, searchEl, grid, seWrap);
+    return wrap;
+  }
+
+  addAbilityBtn.addEventListener('click', () => {
+    abilities.push({ name: '', scenarios: [] });
+    renderAbilities();
+    const inputs = container.querySelectorAll('.ability-name');
+    inputs[inputs.length - 1]?.focus();
+  });
+
+  searchInput.addEventListener('input', () => renderList(filteredItems()));
+
+  async function save() {
+    if (!currentKey) return;
+    saveBtn.disabled = true;
+    setStatus('', '');
+
+    notes[currentKey] = {
+      abilities: abilities.map(a => ({
+        name: a.name,
+        scenarios: a.scenarios.map(s => ({
+          target: s.target,
+          tags: [...s.tags],
+          sideEffects: (s.sideEffects ?? []).map(se => ({ target: se.target, tags: [...se.tags] })),
+        })),
+      })),
+    };
+
+    try {
+      const res = await fetch('/api/notes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(notes),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setStatus('Сохранено', 'ok');
+      renderList(filteredItems());
+    } catch (e) {
+      setStatus('Ошибка: ' + e.message, 'err');
+    } finally {
+      saveBtn.disabled = false;
+    }
+  }
+
+  function setStatus(text, cls) { statusEl.textContent = text; statusEl.className = cls; }
+
+  saveBtn.addEventListener('click', save);
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); save(); }
+  });
+
+  init();
+</script>
+</body>
+</html>

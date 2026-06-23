@@ -1,0 +1,101 @@
+{
+  "heroName": "Vengeful Spirit",
+  "innateAbility": {
+    "name": "Retribution",
+    "hotkey": "",
+    "description": "Attacks now fire traces of her soul that punch the enemy on contact, making Shen akin to a melee unit with her attacks having the same attack range-type behavior.Shen benefits from both melee and ranged attack type bonuses.",
+    "type": "Passive",
+    "traits": {
+      "Damage Amp": "20%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Magic Missile",
+      "hotkey": "Q",
+      "description": "Fires a magic missile at an enemy unit, stunning and dealing damage.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.5",
+        "Cast Range": "650 (With level 10 Left Talent 750)",
+        "Damage": "100/180/260/340",
+        "Cooldown": "14/13/12/11 ( 12/11/10/9)",
+        "Mana Cost": "90/95/100/105"
+      }
+    },
+    {
+      "name": "Wave of Terror",
+      "hotkey": "W",
+      "description": "Lets loose a wicked cry, weakening the armor of enemies and giving vision of the path ahead.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.3 + 0.5",
+        "Cast Range": "1400",
+        "Damage": "60/80/100/120",
+        "Attack Damage Reduction": "10%/15%/20%/25%",
+        "Duration": "8",
+        "Reduction Value to Bonus Value Factor": "0.25",
+        "Cooldown": "16/14/12/10",
+        "Mana Cost": "40"
+      }
+    },
+    {
+      "name": "Vengeance Aura",
+      "hotkey": "E",
+      "description": "Shen's presence increases the damage of nearby friendly heroes.",
+      "type": "Passive",
+      "traits": {
+        "Radius": "1200",
+        "Attack Damage Bonus": "10%/15%/20%/25% (With level 25 Right Talent 26%/31%/36%/41%)",
+        "Self Bonus Factor": "1.25 (Upgradable by Aghanim's Scepter. 1.35)",
+        "Damage Dealt": "(Upgradable by Aghanim's Scepter. 100%)",
+        "Damage Taken": "(Upgradable by Aghanim's Scepter. 100%)"
+      }
+    },
+    {
+      "name": "Nether Swap",
+      "hotkey": "R",
+      "description": "Instantaneously swaps positions with eithier a targeted allied unit or targeted enemy unit, and interrupts their channeling abilities.If the swapped unit is an enemy unit, the reposition deals damage to the affected enemy unit.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.4 + 0",
+        "Cast Range": "850/975/1100",
+        "Damage": "150/300/450 (With level 10 Right Talent 300/450/600)",
+        "Barrier": "150/300/450 (With level 10 Left Talent 300/450/600)",
+        "Duration": "10",
+        "Cooldown": "46/38/30 ( 28/20/12)",
+        "Mana Cost": "100/150/200"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-18s Nether Swap Cooldown",
+      "right": "+16% Vengeance Aura Attack Damage Bonus"
+    },
+    {
+      "level": 20,
+      "left": "-2s Magic Missile Cooldown",
+      "right": "+25% Wave of Terror Attack Damage/Armor Change"
+    },
+    {
+      "level": 15,
+      "left": "+0.3s Magic Missile Stun",
+      "right": "-3 Wave of Terror Armor"
+    },
+    {
+      "level": 10,
+      "left": "+100 Magic Missile Cast Range",
+      "right": "+150 Nether Swap Damage/ Damage Barrier"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Initiator",
+    "Disabler",
+    "Nuker",
+    "Escape"
+  ],
+  "facets": []
+}

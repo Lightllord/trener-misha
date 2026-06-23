@@ -6,6 +6,7 @@
   "description": "Scrape Dota 2 patch notes and update hero analysis in heroes_extend.json",
   "scripts": {
     "scrape": "node src/scrape-patch.mjs",
+    "scrape:heroes": "node src/scrape-heroes.mjs",
     "apply": "node src/apply-patch-notes.mjs",
     "apply:dry": "node src/apply-patch-notes.mjs --dry-run",
     "apply:resume": "node src/apply-patch-notes.mjs --resume"

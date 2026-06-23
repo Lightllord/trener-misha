@@ -1,0 +1,134 @@
+{
+  "heroName": "Hoodwink",
+  "innateAbility": {
+    "name": "Mistwoods Wayfarer",
+    "hotkey": "",
+    "description": "Has a chance to redirect incoming attacks to a nearby tree, destroying it in the process.The tree search radius is centered around Hoodwink.",
+    "type": "Passive",
+    "traits": {}
+  },
+  "abilities": [
+    {
+      "name": "Acorn Shot",
+      "hotkey": "Q",
+      "description": "Fires an acorn attack on the unit-targeted enemy.The acorn bounces to nearby targets, slowing them and dealing a percentage of Hoodwink's attack with bonus damage.",
+      "type": "Point / Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 1.37",
+        "Cast Range": "675/700/725/750",
+        "Instant Attack Damage Bonus": "45/90/135/180",
+        "Cooldown": "19/16/13/10 ( 0)",
+        "Mana Cost": "70/80/90/100"
+      }
+    },
+    {
+      "name": "Bushwhack",
+      "hotkey": "W",
+      "description": "Tosses a net trap that stuns enemy heroes if they are near a tree in the area-targeted location.Applies damage over time to all debuff-affected enemy units.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.2 + 1.07",
+        "Cast Range": "1100",
+        "Total Damage": "90/180/270/360 (With level 10 Right Talent 140/230/320/410)",
+        "Cooldown": "15/14/13/12",
+        "Mana Cost": "90/100/110/120"
+      }
+    },
+    {
+      "name": "Scurry",
+      "hotkey": "E",
+      "description": "When activated, Hoodwink gains bonus movement speed, phased movement, and tree-walking for a brief time.",
+      "type": "No / Passive",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Move Speed Bonus": "15%/20%/25%/30%",
+        "Duration": "3/3.5/4/4.5",
+        "Cooldown": "0",
+        "Mana Cost": "35"
+      }
+    },
+    {
+      "name": "Decoy",
+      "hotkey": "D",
+      "description": "Turns invisible instantaneously while increasing her movement speed.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "Global",
+        "Move Speed Bonus": "15%",
+        "Damage Taken": "200%",
+        "Spell Damage Factor": "0.6",
+        "Cooldown": "30",
+        "Mana Cost": "60"
+      }
+    },
+    {
+      "name": "Hunter's Boomerang",
+      "hotkey": "F",
+      "description": "Tosses a boomerang in an arc that deals damage as it pass through enemy units.",
+      "type": "Point / Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 1.03",
+        "Cast Range": "1100",
+        "Damage": "250",
+        "Spell Damage Amp": "20%",
+        "Cooldown": "18",
+        "Mana Cost": "125"
+      }
+    },
+    {
+      "name": "Sharpshooter",
+      "hotkey": "R",
+      "description": "Charges up and fires a deadly bolt from her crossbow.After winding up for a while, the bolt is fired automatically and Hoodwink is knocked back for a distance from the force of the shot.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0 + 9.5",
+        "Cast Range": "3000",
+        "Min Damage": "120/195/270 (With level 25 Right Talent 200/275/350)",
+        "Max Damage": "600/975/1350 (With level 25 Right Talent 1000/1375/1750)",
+        "Creep Damage Factor": "0.5",
+        "Cooldown": "45",
+        "Mana Cost": "100/150/200"
+      }
+    },
+    {
+      "name": "End Sharpshooter",
+      "hotkey": "R",
+      "description": "Release the charged shot, regain ability to move and attack.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "2 Acorn Shot Charges",
+      "right": "+400 Sharpshooter Max Damage"
+    },
+    {
+      "level": 20,
+      "left": "+2 Acorn Shot Bounces",
+      "right": "Sharpshooter Grants Vision and True Sight During Wind-up"
+    },
+    {
+      "level": 15,
+      "left": "+10 Agility",
+      "right": "+1 Scurry Ability Charge"
+    },
+    {
+      "level": 10,
+      "left": "+175 Health",
+      "right": "+50 Bushwhack Damage"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Nuker",
+    "Escape",
+    "Disabler"
+  ],
+  "facets": []
+}

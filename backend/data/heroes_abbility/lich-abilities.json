@@ -1,0 +1,124 @@
+{
+  "heroName": "Lich",
+  "innateAbility": {
+    "name": "Sacrifice",
+    "hotkey": "E",
+    "description": "Sacrifices an allied unit and converts its current health to mana restore Lich.",
+    "type": "Unit",
+    "traits": {
+      "Cast Animation": "0.4 + 0.93",
+      "Cast Range": "700",
+      "Current Health as Damage": "100%",
+      "Current Health to Mana Restore Factor": "0.42",
+      "Cooldown": "2",
+      "Mana Cost": "0"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Frost Blast",
+      "hotkey": "Q",
+      "description": "Blasts the target enemy unit with damaging frost, dealing area damage and slowing movement and attack speed for a duration.The primary target receives both base and area damage.",
+      "type": "Unit / Area",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "575/600/625/650",
+        "Base Damage": "40/80/120/160",
+        "Area Damage": "80/120/160/200 (With level 10 Left Talent 205/245/285/325)",
+        "Cooldown": "7 ( 3.5)",
+        "Mana Cost": "110/120/130/140"
+      }
+    },
+    {
+      "name": "Frost Shield",
+      "hotkey": "W",
+      "description": "Applies a shield around the unit-targeted ally.Deals damage per second and slowing the enemy's movement speed centered around the buff-affected allied unit.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "800",
+        "Damage per Second": "18/32/46/60",
+        "Damage Reduction": "45%/50%/55%/60% (With level 10 Right Talent 55%/60%/65%/70%)",
+        "Health Regen Bonus": " (With level 25 Right Talent 50)",
+        "Cooldown": "30/25/20/15",
+        "Mana Cost": "100/110/120/130"
+      }
+    },
+    {
+      "name": "Sinister Gaze",
+      "hotkey": "E",
+      "description": "Hypnotizes an enemy unit, causing it to move towards a point between the Lich and the enemy unit while draining a percentage of its current mana.",
+      "type": "Unit / Channeled / Area",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "600",
+        "Radius": "(Upgradable by Aghanim's Scepter. 400)",
+        "Cooldown": "24/22/20/18",
+        "Mana Cost": "25"
+      }
+    },
+    {
+      "name": "Ice Spire",
+      "hotkey": "D",
+      "description": "Conjures an Ice Spire for his rituals, slowing enemy units around it.",
+      "type": "Point / Passive",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "750",
+        "Duration": "15",
+        "Damage Radius": "200 (With level 10 Left Talent 325)",
+        "Damage on Death": "80/120/160/200 (With level 10 Left Talent 205/245/285/325)",
+        "Cooldown": "25",
+        "Mana Cost": "150"
+      }
+    },
+    {
+      "name": "Ice Spire (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Chain Frost",
+      "hotkey": "R",
+      "description": "Releases an orb of frost that bounces between nearby enemy units, slowing and subsequently increasing its damage each time it bounces.",
+      "type": "Unit / Passive",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "750",
+        "First Damage": "250/400/550",
+        "Damage Increment per Bounce": "15/20/25",
+        "Cooldown": "100/80/60",
+        "Mana Cost": "180/300/420"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Unlimited Chain Frost Bounces",
+      "right": "+50 Frost Shield Health Regen"
+    },
+    {
+      "level": 20,
+      "left": "Chain Frost Upon Death",
+      "right": "2 Frost Shield Charges"
+    },
+    {
+      "level": 15,
+      "left": "-3.5s Frost Blast Cooldown",
+      "right": "+0.3s Sinister Gaze Duration"
+    },
+    {
+      "level": 10,
+      "left": "+125 Frost Blast Radius/Damage",
+      "right": "+10% Frost Shield Damage Reduction"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Nuker"
+  ],
+  "facets": []
+}

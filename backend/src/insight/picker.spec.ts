@@ -66,9 +66,9 @@ class TestPicker extends InsightPicker {
 function addWithConfig(
   name: InsightName,
   payload: string,
-  config: InsightConfig,
+  config: Omit<InsightConfig, "ttlMs">,
 ): Insight {
-  const scope = tempConfig(name, config);
+  const scope = tempConfig(name, { ttlMs: 999_999_999, ...config });
   const inserted = addInsight(name, payload);
   scope.restore();
   assert.ok(inserted);

@@ -1,0 +1,121 @@
+{
+  "heroName": "Disruptor",
+  "innateAbility": {
+    "name": "Electromagnetic Repulsion",
+    "hotkey": "",
+    "description": "Damages and knocks all enemy units back within the radius, whenever the Stormcrafter accumulates a certain amount of damage taken.",
+    "type": "Passive",
+    "traits": {
+      "Damage Threshold": "250",
+      "Int to Damage": "1.5",
+      "Damage Timer": "7",
+      "Cooldown": "5"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Thunder Strike",
+      "hotkey": "Q",
+      "description": "Repeatedly strikes the unit with lightning.Exposes the affected enemy target, with each strike damaging nearby enemy units in a small radius, slowing both their movement and attack speeds for its duration.",
+      "type": "Unit / Area",
+      "traits": {
+        "Cast Animation": "0.05 + 0",
+        "Cast Range": "800",
+        "Damage per Strike": "25/55/85/115",
+        "Damage Increment per Strike": " (With level 10 Left Talent 15)",
+        "Cooldown": "18/15/12/9",
+        "Mana Cost": "115/120/125/130"
+      }
+    },
+    {
+      "name": "Glimpse",
+      "hotkey": "W",
+      "description": "Teleports the target hero back to where it was a few seconds ago.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.05 + 0.83",
+        "Cast Range": "600/1000/1400/1800",
+        "Min Distance to Damage": "0",
+        "Max Distance to Damage": "1400",
+        "Min Damage": "25",
+        "Max Damage": "100/160/220/280 (With level 15 Right Talent 400/460/520/580)",
+        "Distance to Damage Bonus Factor": "0.2/0.25/0.3/0.35 (With level 15 Right Talent 0.35/0.4/0.45/0.5)",
+        "Current Health as Damage": "100%",
+        "Cooldown": "24/22/20/18 ( 0)",
+        "Mana Cost": "70/85/100/115"
+      }
+    },
+    {
+      "name": "Kinetic Field",
+      "hotkey": "E",
+      "description": "After a short formation time, creates a circular barrier of kinetic energy that manipulates affected enemy's movement speed to point where they cannot pass.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.05 + 0",
+        "Cast Range": "900",
+        "Barrier Radius": "350",
+        "Damage per Second": "0",
+        "Duration": "2.6/3.2/3.8/4.4 (With level 20 Right Talent 3.6/4.2/4.8/5.4)",
+        "Cooldown": "20/18/16/14",
+        "Mana Cost": "70"
+      }
+    },
+    {
+      "name": "Kinetic Fence",
+      "hotkey": "E",
+      "description": "After a short formation time, creates a wall-barrier of kinetic energy that slows enemy units down to the point where they cannot pass through it.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.05 + 0",
+        "Cast Range": "1200",
+        "Damage per Second": "0",
+        "Duration": "4.4 (With level 20 Right Talent 5.4)",
+        "Cooldown": "14",
+        "Mana Cost": "70"
+      }
+    },
+    {
+      "name": "Static Storm",
+      "hotkey": "R",
+      "description": "Creates a damaging static storm that also silences all enemy units in the area for the duration.The damage starts off weak, but gradually increases in power over the duration.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.05 + 0",
+        "Cast Range": "800",
+        "Max Damage per Second": "200/275/350 (With level 15 Left Talent 260/335/410)",
+        "Duration": "6",
+        "Cooldown": "100/85/70",
+        "Mana Cost": "125/175/225"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+6 Thunder Strike Strikesx0.5 Thunder Strike Strike Interval",
+      "right": "2 Glimpse Charges"
+    },
+    {
+      "level": 20,
+      "left": "+75 Static Storm Radius",
+      "right": "+1s Kinetic Field Duration+1s Kinetic Fence Duration"
+    },
+    {
+      "level": 15,
+      "left": "+60 Static Storm Damage per Second",
+      "right": "+15% Glimpse Distance to Damage+300 Glimpse Max Damage"
+    },
+    {
+      "level": 10,
+      "left": "+15 Thunder Strike Damage per Strike",
+      "right": "+20 Move Speed"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Disabler",
+    "Nuker",
+    "Initiator"
+  ],
+  "facets": []
+}

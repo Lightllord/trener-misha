@@ -33,3 +33,9 @@ insight-app/.venv/
 backend/data/draft.json
 patch-updater/.patch-progress.json
 patch-updater/patch-notes.json
+
+# Local scratch / backups
+TEMP/
+/cv/
+hero-notes.backup.json
+bugs.md

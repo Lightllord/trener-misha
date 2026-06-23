@@ -1,0 +1,108 @@
+{
+  "heroName": "Gyrocopter",
+  "innateAbility": {
+    "name": "Afterburner",
+    "hotkey": "",
+    "description": "Grants movement speed bonus for a short duration after Gyrocopter damages an enemy unit with his attacks or abilities.",
+    "type": "Passive",
+    "traits": {
+      "Move Speed Bonus per Stack": "1",
+      "Duration": "4.9"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Rocket Barrage",
+      "hotkey": "Q",
+      "description": "Launches a salvo of rockets at nearby enemy units in a radius around the Gyrocopter.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage per Rocket": "8/14/20/26 (With level 20 Left Talent 22/28/34/40)",
+        "Cooldown": "7/6.5/6/5.5",
+        "Mana Cost": "85"
+      }
+    },
+    {
+      "name": "Homing Missile",
+      "hotkey": "W",
+      "description": "Fires a homing missile to seek the unit-targeted enemy. Dealing damage and stunning when it reaches the target.Enemy units can destroy the missile before it reaches its target.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "1050",
+        "Damage": "90/180/270/360 (With level 10 Right Talent 112.5/225/337.5/450)",
+        "Cooldown": "30/24/18/12",
+        "Mana Cost": "120/130/140/150"
+      }
+    },
+    {
+      "name": "Homing Missile (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Flak Cannon",
+      "hotkey": "E",
+      "description": "Gyrocopter now has a limited amount of attacks that hits all enemy units within the radius.Lasts until all the attacks are used or until the duration ends.",
+      "type": "No / Passive",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Duration": "12",
+        "Attack Damage Bonus": " (With level 15 Left Talent 25)",
+        "Cooldown": "25 ( 19)",
+        "Mana Cost": "50/60/70/80"
+      }
+    },
+    {
+      "name": "Side Gunner",
+      "hotkey": "",
+      "description": "The Side Gunner unit that attacks automatically, and prioritizes furthest enemy unit away within its attack radius.",
+      "type": "Passive",
+      "traits": {}
+    },
+    {
+      "name": "Call Down",
+      "hotkey": "R",
+      "description": "Call down a series of aerial missile strikes that slow and damage enemy units in a target area.",
+      "type": "Point / Vector",
+      "traits": {
+        "Cast Animation": "0.3 + 0.5",
+        "Cast Range": "1000",
+        "Damage": "200/350/500",
+        "Cooldown": "75/65/55 ( 35/25/15)",
+        "Mana Cost": "150/200/250"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-40s Call Down Cooldown",
+      "right": "-6s Flak Cannon Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "+14 Rocket Barrage Damage",
+      "right": "+3 Flak Cannon Attacks"
+    },
+    {
+      "level": 15,
+      "left": "+25 Flak Cannon Damage",
+      "right": "+0.3s Homing Missile Stun Duration"
+    },
+    {
+      "level": 10,
+      "left": "+150 Health",
+      "right": "+25% Homing Missile Damage"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Nuker",
+    "Disabler"
+  ],
+  "facets": []
+}

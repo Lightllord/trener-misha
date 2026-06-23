@@ -1,0 +1,127 @@
+{
+  "heroName": "Terrorblade",
+  "innateAbility": {
+    "name": "Dark Unity",
+    "hotkey": "",
+    "description": "Grants Terrorblade's images within the aura radius outgoing damage bonus.",
+    "type": "Passive",
+    "traits": {
+      "Damage Dealt Bonus": "60%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Reflection",
+      "hotkey": "Q",
+      "description": "Terrorblade brings forth an invulnerable dark reflection of all enemy heroes in a target area. Affected enemy heroes are slowed and attacked by their reflection.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.3 + 1.66",
+        "Cast Range": "700",
+        "Radius": "400",
+        "Damage Dealt": "30%/45%/60%/75%",
+        "Duration": "5",
+        "Cooldown": "23/20/17/14",
+        "Mana Cost": "60/65/70/75"
+      }
+    },
+    {
+      "name": "Conjure Image",
+      "hotkey": "W",
+      "description": "Conjures an illusion of Terrorblade correspondingly to his current health.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.15 + 0.7",
+        "Damage Dealt": "25%/30%/35%/40%",
+        "Damage Taken": "250%",
+        "Duration": "34 (With level 20 Left Talent 42)",
+        "Cooldown": "16 ( 14)",
+        "Mana Cost": "50/60/70/80"
+      }
+    },
+    {
+      "name": "Metamorphosis",
+      "hotkey": "E",
+      "description": "Transforms into a powerful demon with a ranged attack.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Attack Damage Bonus": "20/40/60/80",
+        "Attack Range Bonus": "450/500/550/600",
+        "Duration": "35/40/45/50 (With level 25 Left Talent 65/70/75/80)",
+        "Cooldown": "145/140/135/130 ( 135/130/125/120)",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Demon Zeal",
+      "hotkey": "D",
+      "description": "Grants bonus health regeneration, bonus movement speed, and bonus attack speed within the radius to all affected illusions.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.2 + 0.5",
+        "Health Regen Bonus": "20",
+        "Move Speed Bonus": "60",
+        "Attack Speed Bonus": "100",
+        "Duration": "25",
+        "Radius": "1200",
+        "Cooldown": "45",
+        "Mana Cost": "0"
+      }
+    },
+    {
+      "name": "Terror Wave",
+      "hotkey": "F",
+      "description": "Causes a wave to travel outwards in all directions fearing all enemy units upon impact.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage": "200",
+        "Cooldown": "90",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Sunder",
+      "hotkey": "R",
+      "description": "Severing the life from both Terrorblade and a target hero, exchanging a percentage of both units' current health.Some health points must remain after the exchange.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.35 + 0.8",
+        "Cast Range": "475",
+        "Current Health Percentage Change": "100%",
+        "Min Current Health": "35%/30%/25% (With level 15 Left Talent 10%/5%/0%)",
+        "Cooldown": "110/75/40 ( 80/45/10)",
+        "Mana Cost": "100/75/50"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+30s Metamorphosis Duration",
+      "right": "-30s Sunder Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "+8s Conjure Image Duration",
+      "right": "+10 all stats"
+    },
+    {
+      "level": 15,
+      "left": "-25% Sunder Min Current Health Change",
+      "right": "-10s Metamorphosis Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "-2s Conjure Image Cooldown",
+      "right": "+1s Reflection Duration"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Pusher",
+    "Nuker"
+  ],
+  "facets": []
+}

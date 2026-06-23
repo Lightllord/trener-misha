@@ -1,0 +1,116 @@
+{
+  "heroName": "Undying",
+  "innateAbility": {
+    "name": "Ceaseless Dirge",
+    "hotkey": "",
+    "description": "Instantly respawns in the fountain upon Undying's death after the effect delay.",
+    "type": "Passive",
+    "traits": {
+      "Cooldown": "480"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Decay",
+      "hotkey": "Q",
+      "description": "Reduces strength from all enemy heroes and deals damage within the radius.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "650",
+        "Radius": "325",
+        "Damage": "20/60/100/140 (With level 10 Right Talent 50/90/130/170)",
+        "Creep Damage Factor": "2",
+        "Cooldown": "13/10/7/4 ( 11/8/5/2)",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Soul Rip",
+      "hotkey": "W",
+      "description": "Undying rips health away from all nearby units and uses it to heal an ally, or damage an enemy.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "750",
+        "Damage per Unit": "14/26/38/50 (With level 15 Right Talent 26/38/50/62)",
+        "Heal per Unit": "14/26/38/50 (With level 15 Right Talent 26/38/50/62)",
+        "Cooldown": "15/12/9/6",
+        "Mana Cost": "80/90/100/110"
+      }
+    },
+    {
+      "name": "Tombstone",
+      "hotkey": "E",
+      "description": "Summons a Tombstone at the targeted point. Zombies will frequently spawn next to every enemy unit in the area around the Tombstone, and attack them.",
+      "type": "Point / Unit / Passive",
+      "traits": {
+        "Cast Animation": "0.6 + 0",
+        "Cast Range": "500",
+        "Duration": "30",
+        "Base Attack Damage Bonus": " (With level 15 Left Talent 20)",
+        "Cooldown": "80 ( 65)",
+        "Mana Cost": "125/150/175/200"
+      }
+    },
+    {
+      "name": "Tombstone (Summoned Ancient  Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Undying Zombie (Summoned   Creep)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {
+        "Base Attack Damage Bonus": " (With level 15 Left Talent 20)"
+      }
+    },
+    {
+      "name": "Flesh Golem",
+      "hotkey": "R",
+      "description": "Undying transforms into a horrifying flesh golem that grants a percentage strength increase with flat bonus movement speed.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Str Bonus Factor": "1.4/1.5/1.6 (With level 25 Right Talent 1.9/2/2.1)",
+        "Move Speed Bonus": "20",
+        "Damage Amp": "25%/30%/35%",
+        "Cooldown": "140",
+        "Mana Cost": "100/125/150"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Tombstone On Death",
+      "right": "+50% Flesh Golem Strength Bonus"
+    },
+    {
+      "level": 20,
+      "left": "+4 Tombstone Hit Count",
+      "right": "-2s Decay Cooldown"
+    },
+    {
+      "level": 15,
+      "left": "+20 Zombie Base Attack Damage",
+      "right": "+12 Soul Rip Damage/Heal"
+    },
+    {
+      "level": 10,
+      "left": "-15s Tombstone Cooldown",
+      "right": "+30 Decay Damage"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Durable",
+    "Disabler",
+    "Nuker"
+  ],
+  "facets": []
+}

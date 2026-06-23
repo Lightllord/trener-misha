@@ -1,0 +1,119 @@
+{
+  "heroName": "Earth Spirit",
+  "innateAbility": {
+    "name": "Stone Remnant",
+    "hotkey": "D",
+    "description": "Call a Stone Remnant to the target location. Stone Remnants have no vision and are invulnerable, and interacts with all Earth Spirit's abilities.The ability passively grants Kaolin attack damage bonus per unused charge.",
+    "type": "Point",
+    "traits": {
+      "Cast Animation": "0 + 0",
+      "Cast Range": "1100",
+      "Attack Damage Bonus per Charge": "3%",
+      "Attack Damage Bonus": "7.5%",
+      "Cooldown": "0"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Boulder Smash",
+      "hotkey": "Q",
+      "description": "Kicks the target enemy or allied unit, sending them in the direction Kaolin is facing.The traveling unit damages all enemy units it hits.",
+      "type": "Point / Unit / No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "150",
+        "Damage": "110/180/250/320 (With level 15 Left Talent 190/260/330/400)",
+        "Radius": "350",
+        "Cooldown": "20/17/14/11 ( 18/15/12/9)",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Rolling Boulder",
+      "hotkey": "W",
+      "description": "After a slight delay, Kaolin gathers himself and rolls to the point-targeted location.Being disabled during the effect delay interrupts the ability cast.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "3000",
+        "Base Damage": "60/70/80/90",
+        "Str to Damage Factor": "1 (With level 20 Left Talent 2.75)",
+        "Stone Speed Bonus": "600",
+        "Stun Duration Bonus": "0.3/0.5/0.7/0.9",
+        "Cooldown": "16/12/8/4",
+        "Mana Cost": "50"
+      }
+    },
+    {
+      "name": "Geomagnetic Grip",
+      "hotkey": "E",
+      "description": "Pulls the targeted allied unit toward Kaolin.Silences other enemy units hit by the pulled allied unit.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.1 + 0",
+        "Cast Range": "550/600/650/700 (Upgradable by Aghanim's Shard. 825/900/975/1050)",
+        "Stone Damage": "75/150/225/300 (With level 25 Left Talent 325/400/475/550)",
+        "Radius": "350",
+        "Cooldown": "13 ( 10)",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Enchant Remnant",
+      "hotkey": "F",
+      "description": "Temporarily enchants a hero, granting them the properties of a Stone Remnant.After a short duration the remnant shatters, releasing the hero and damaging nearby enemies.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.57",
+        "Cast Range": "175",
+        "Damage Radius": "450",
+        "Damage": "450",
+        "Cooldown": "45",
+        "Mana Cost": "150"
+      }
+    },
+    {
+      "name": "Magnetize",
+      "hotkey": "R",
+      "description": "Applies a Magnetize damage per interval debuff to all enemy heroes within the proximity radius.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.2 + 0",
+        "Damage per Second": "45/90/135 (With level 20 Right Talent 58.5/117/175.5)",
+        "Duration": "6 (With level 20 Right Talent 7.8)",
+        "Cooldown": "100/90/80",
+        "Mana Cost": "100"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+250 Geomagnetic Grip Remnant Damage",
+      "right": "Earth Spirit Self- Magnetizes"
+    },
+    {
+      "level": 20,
+      "left": "x1.75 Rolling Boulder Strength to Damage",
+      "right": "x1.3 Magnetize Damage/Duration"
+    },
+    {
+      "level": 15,
+      "left": "+80 Boulder Smash Damage",
+      "right": "+0.3s Rolling Boulder Stun Duration"
+    },
+    {
+      "level": 10,
+      "left": "+150 Rolling Boulder Distance",
+      "right": "-2s Boulder Smash Cooldown"
+    }
+  ],
+  "roles": [
+    "Nuker",
+    "Escape",
+    "Disabler",
+    "Initiator",
+    "Durable"
+  ],
+  "facets": []
+}

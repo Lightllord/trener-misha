@@ -1,0 +1,116 @@
+{
+  "heroName": "Visage",
+  "innateAbility": {
+    "name": "Silent as the Grave",
+    "hotkey": "F",
+    "description": "Grants Visage and its Familiars bonus movement speed with flying movement for the duration.",
+    "type": "No",
+    "traits": {
+      "Cast Animation": "0 + 0",
+      "Move Speed Bonus": "12% (Upgradable by Aghanim's Scepter. 24%)",
+      "Duration": "2 (Upgradable by Aghanim's Scepter. 4)",
+      "Attack Damage Bonus": "10% (Upgradable by Aghanim's Scepter. 20%)",
+      "Cooldown": "45.75",
+      "Mana Cost": "50"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Grave Chill",
+      "hotkey": "Q",
+      "description": "Drains both the movement speed and attack speed of the unit-targeted enemy.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.57",
+        "Cast Range": "625",
+        "Cooldown": "17/15/13/11",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Soul Assumption",
+      "hotkey": "W",
+      "description": "Focuses all gathered Soul Assumption charges to a single spell projectile, and deals damage corresponding to the gathered charges.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.57",
+        "Cast Range": "1000",
+        "Base Damage": "20",
+        "Damage per Charge": "70 (With level 20 Right Talent 95)",
+        "Damage Counter Radius": "1800",
+        "Charge Gain Damage Threshold": "100",
+        "Min Damage Threshold": "2",
+        "Max Damage Threshold": "3000",
+        "Damage Timer": "6",
+        "Cooldown": "4 ( 3)",
+        "Mana Cost": "110"
+      }
+    },
+    {
+      "name": "Gravekeeper's Cloak",
+      "hotkey": "E",
+      "description": "Generates a stone-layered buff that manipulates incoming damage. Removes a stack per player-based damage taken above a certain damage threshold.",
+      "type": "Passive / No",
+      "traits": {
+        "Min Damage Threshold Proc": "",
+        "Damage Reduction per Stack": "8%/12%/16%/20%",
+        "Max Damage Reduction": "80%",
+        "Cast Animation": "0 + 0",
+        "Max Health Restore": "(Upgradable by Aghanim's Shard. 25%)",
+        "Duration": "(Upgradable by Aghanim's Shard. 6)",
+        "Damage": "(Upgradable by Aghanim's Shard. 60/100/140)",
+        "Cooldown": "( 65)",
+        "Mana Cost": "( 125)"
+      }
+    },
+    {
+      "name": "Summon Familiars",
+      "hotkey": "R",
+      "description": "Conjures blind and controllable Familiars to fight for Visage. Familiars have flying movement and can turn into Stone Form.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Duration": "",
+        "Cooldown": "120/110/100",
+        "Mana Cost": "150"
+      }
+    },
+    {
+      "name": "Familiar (Summoned Ancient  Creep-Hero)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+1 Summoned Familiars",
+      "right": "-2s Gravekeeper's Cloak Downtime"
+    },
+    {
+      "level": 20,
+      "left": "+1 Armor Corruption to Visage and Familiars",
+      "right": "+25 Soul Assumption Damage per Charge"
+    },
+    {
+      "level": 15,
+      "left": "Soul Assumption Multishot",
+      "right": "+2s Grave Chill Duration"
+    },
+    {
+      "level": 10,
+      "left": "+6 Base Attack Damage to Visage and Familiars",
+      "right": "-1s Soul Assumption Cooldown"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Nuker",
+    "Durable",
+    "Disabler",
+    "Pusher"
+  ],
+  "facets": []
+}

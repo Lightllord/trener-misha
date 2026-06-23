@@ -1,0 +1,102 @@
+{
+  "heroName": "Sand King",
+  "innateAbility": {
+    "name": "Caustic Finale",
+    "hotkey": "",
+    "description": "Injects a venom per successful attack that causes enemy units to violently explode when they die.The damage radius is centered on Sand King.",
+    "type": "Passive",
+    "traits": {
+      "Base Damage": "17",
+      "Max Health as Damage Bonus": "2.5%",
+      "Duration": "4.5",
+      "Base Damage Increase": "3",
+      "Max Health as Damage Increase": "0.5%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Burrowstrike",
+      "hotkey": "Q",
+      "description": "Burrows into the ground and tunnels forward, damaging and stunning enemy units above Sand King as he resurfaces.",
+      "type": "Point / Unit",
+      "traits": {
+        "Cast Animation": "0 + 0.53",
+        "Cast Range": "550/625/700/775 (With level 15 Left Talent 750/825/900/975)",
+        "Damage": "80/150/220/290",
+        "Cooldown": "14/13/12/11 ( 11/10/9/8)",
+        "Mana Cost": "100/110/120/130"
+      }
+    },
+    {
+      "name": "Sand Storm",
+      "hotkey": "W",
+      "description": "Creates a sandstorm that damages enemy units within the radius. The sandstorm immediately dissipates upon leaving the effect radius.",
+      "type": "No / Aura",
+      "traits": {
+        "Cast Animation": "0 + 0.5",
+        "Radius": "475/550/625/700",
+        "Damage per Second": "30/50/70/90 (With level 15 Right Talent 55/75/95/115)",
+        "Duration": "16/20/24/28",
+        "Cooldown": "40/34/28/22",
+        "Mana Cost": "85"
+      }
+    },
+    {
+      "name": "Stinger",
+      "hotkey": "E",
+      "description": "Attacks and strikes an area with bonus spell damage.The strike additionally applies a movement speed slow to all enemy units within the radius.",
+      "type": "Point / Area",
+      "traits": {
+        "Cast Animation": "0.4 + 0",
+        "Cast Range": "200",
+        "Spell Damage Bonus": "50/75/100/125 (With level 25 Right Talent 175/200/225/250)",
+        "Proximity Damage Factor": "1.4",
+        "Cooldown": "15/12/9/6",
+        "Mana Cost": "35/40/45/50"
+      }
+    },
+    {
+      "name": "Epicenter",
+      "hotkey": "R",
+      "description": "After its cast point, Sand King causes the ground beneath to shudder violently. All enemy units within the radius are damaged and slowed.Each subsequent pulse increases the Epicenter radius.",
+      "type": "No / Passive",
+      "traits": {
+        "Cast Animation": "2 + 0",
+        "Damage per Pulse": "60/70/80 (Upgradable by Aghanim's Shard. 70/80/90)",
+        "Stinger Spell Damage Factor": "(Upgradable by Aghanim's Scepter. 0.4)",
+        "Cooldown": "120/110/100",
+        "Mana Cost": "150/225/300"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+35% Sand Storm Slow and Blind",
+      "right": "+125 Stinger Damage"
+    },
+    {
+      "level": 20,
+      "left": "+6 Epicenter Pulses",
+      "right": "-3s Burrowstrike Cooldown"
+    },
+    {
+      "level": 15,
+      "left": "+200 Burrowstrike Cast Range",
+      "right": "+25 Sand Storm Damage per Second"
+    },
+    {
+      "level": 10,
+      "left": "+100 Caustic Finale Radius",
+      "right": "+12% Stinger Slow"
+    }
+  ],
+  "roles": [
+    "Initiator",
+    "Disabler",
+    "Support",
+    "Nuker",
+    "Escape"
+  ],
+  "facets": []
+}

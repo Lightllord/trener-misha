@@ -1,0 +1,105 @@
+{
+  "heroName": "Abaddon",
+  "innateAbility": {
+    "name": "Withering Mist",
+    "hotkey": "",
+    "description": "Damage instances applied by Abaddon applies a dormant debuff that activates when the affected enemy unit is below the max health threshold.",
+    "type": "Passive",
+    "traits": {
+      "Max Health Threshold": "40%",
+      "Health Restore Reduction": "29.5%",
+      "Health Restore Reduction Increase": "0.5%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Mist Coil",
+      "hotkey": "Q",
+      "description": "Damages an enemy unit or heals an allied unit, at the cost of some of Abaddon's health.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.25 + 0.4",
+        "Cast Range": "625",
+        "Damage": "95/170/245/320 (With level 15 Left Talent 130/205/280/355)",
+        "Ally Heal": "95/170/245/320 (With level 15 Left Talent 130/205/280/355)",
+        "Self Damage Factor": "0.4",
+        "Radius": "350",
+        "Cooldown": "8/7/6/5",
+        "Mana Cost": "50/55/60/65"
+      }
+    },
+    {
+      "name": "Aphotic Shield",
+      "hotkey": "W",
+      "description": "Applies a strong dispel, and creates a barrier to absorbs a set amount of damage before expiring on the affected allied unit.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.33",
+        "Cast Range": "550",
+        "Duration": "12",
+        "Health Regen Bonus": " (With level 10 Left Talent 8)",
+        "Damage Radius": "675",
+        "Damage": "120/150/180/210 (With level 20 Right Talent 200/230/260/290)",
+        "Barrier": "120/150/180/210 (With level 20 Right Talent 200/230/260/290)",
+        "Damage Reflected Factor": "(Upgradable by Aghanim's Shard. 0.75)",
+        "Cooldown": "12/10/8/6",
+        "Mana Cost": "110/120/130/140"
+      }
+    },
+    {
+      "name": "Curse of Avernus",
+      "hotkey": "E",
+      "description": "Applies a debuff that damages over time and slows the movement speed slow of the affected enemy unit.",
+      "type": "Passive",
+      "traits": {
+        "Damage per Second": "15/25/35/45 (With level 10 Right Talent 45/55/65/75)",
+        "Attack Speed Bonus": "10/20/30/40 (With level 25 Right Talent 75/85/95/105)"
+      }
+    },
+    {
+      "name": "Borrowed Time",
+      "hotkey": "R",
+      "description": "Removes most debuffs when activated, all damage taken will self-heal instead for the entire duration.",
+      "type": "No / Passive / Aura",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage Received to Heal": "100%",
+        "Duration": "4/5/6 (Upgradable by Aghanim's Scepter. 7/8/9)",
+        "Current Health Threshold": "400",
+        "Damage Radius": "400",
+        "Damage per Second": "100",
+        "Self Damage Factor": "1",
+        "Ally Health Threshold Proc": "(Upgradable by Aghanim's Scepter. 550)",
+        "Cooldown": "85/75/65 ( 75/65/55)"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+350 Mist Coil Radius",
+      "right": "+65 Curse of Avernus Attack Speed Bonus"
+    },
+    {
+      "level": 20,
+      "left": "+100 Borrowed Time Immolation Damage per Second",
+      "right": "+80 Aphotic Shield Barrier/Damage"
+    },
+    {
+      "level": 15,
+      "left": "+35 Mist Coil Heal/Damage",
+      "right": "-10s Borrowed Time Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "+8 Aphotic Shield Health Regen",
+      "right": "+30 Curse of Avernus Damage per Second"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Carry",
+    "Durable"
+  ],
+  "facets": []
+}

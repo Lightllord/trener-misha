@@ -1,0 +1,99 @@
+{
+  "heroName": "Pudge",
+  "innateAbility": {
+    "name": "Flesh Heap",
+    "hotkey": "",
+    "description": "Grants bonus strength whenever Pudge kills an enemy hero or when an enemy hero dies within his vicinity.",
+    "type": "Passive",
+    "traits": {
+      "Str Bonus per Stack": "2 (With level 25 Left Talent 3)"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Meat Hook",
+      "hotkey": "Q",
+      "description": "Launches a bloody hook toward a unit or location.The hook will snag the first unit it encounters, dragging the unit back to Pudge and dealing damage.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "1300",
+        "Damage": "150/220/290/360 (With level 15 Left Talent 300/370/440/510)",
+        "Current Health as Damage": "100%",
+        "Hit Distance to Damage Factor": "(Upgradable by Aghanim's Shard. 0.2)",
+        "Cooldown": "18/16/14/12 ( 14/12/10/8)",
+        "Mana Cost": "120"
+      }
+    },
+    {
+      "name": "Rot",
+      "hotkey": "W",
+      "description": "A toxic cloud that deals intense damage and slows movement — harming not only enemy units but Pudge himself.",
+      "type": "Toggle / Aura",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Radius": "250 (Upgradable by Aghanim's Scepter. 450)",
+        "Damage per Second": "30/60/90/120 (Upgradable by Aghanim's Scepter. 120/150/180/210)",
+        "Health Restore Reduction": "(Upgradable by Aghanim's Scepter. 20%)",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Meat Shield",
+      "hotkey": "E",
+      "description": "Negates all damage types from all sources while active.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage Negated": "8/14/20/26 (With level 25 Left Talent 12/21/30/39)",
+        "Duration": "4/5/6/7",
+        "Cooldown": "20/19/18/17",
+        "Mana Cost": "65/70/75/80"
+      }
+    },
+    {
+      "name": "Dismember",
+      "hotkey": "R",
+      "description": "Chows down and pulls the unit-targeted enemy up to a certain minimum distance.",
+      "type": "Unit / Channeled",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "200",
+        "Base Damage per Second": "80/100/120 (With level 25 Right Talent 120/150/180)",
+        "Str to Damage Factor": "0.3/0.6/0.9 (With level 25 Right Talent 0.45/0.9/1.35)",
+        "Damage to Self-Heal Factor": "1",
+        "Cooldown": "30/25/20",
+        "Mana Cost": "100/130/170"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+1.5x Flesh Heap Strength Bonus+1.5x Meat Shield Damage Negation",
+      "right": "1.5x Dismember Damage/Heal"
+    },
+    {
+      "level": 20,
+      "left": "-4s Meat Hook Cooldown",
+      "right": "+0.75s Dismember Duration"
+    },
+    {
+      "level": 15,
+      "left": "+150 Meat Hook Damage",
+      "right": "8% Spell Lifesteal"
+    },
+    {
+      "level": 10,
+      "left": "+10% Rot Slow",
+      "right": "+5 Armor"
+    }
+  ],
+  "roles": [
+    "Disabler",
+    "Initiator",
+    "Durable",
+    "Nuker"
+  ],
+  "facets": []
+}

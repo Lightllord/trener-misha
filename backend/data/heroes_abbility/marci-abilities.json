@@ -1,0 +1,107 @@
+{
+  "heroName": "Marci",
+  "innateAbility": {
+    "name": "Special Delivery",
+    "hotkey": "D",
+    "description": "Marci whistles and instantly teleports her Courier to her.",
+    "type": "No",
+    "traits": {
+      "Cast Animation": "1 + 0.4",
+      "Courier Lvl Bonus": "3",
+      "Hit Count Bonus": "1",
+      "Creeps Hit Count Bonus": "2",
+      "Cooldown": "215"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Dispose",
+      "hotkey": "Q",
+      "description": "Grabs the unit-targeted ally or enemy unit and throws it effortlessly behind her, damaging and slowing the unit if it's an enemy.Additionally damages and applies a movement speed slow to all enemy units within the landing radius.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 1.04",
+        "Cast Range": "175",
+        "Landing Damage": "60/150/240/330 (With level 15 Right Talent 175/265/355/445)",
+        "Cooldown": "16/14/12/10",
+        "Mana Cost": "80"
+      }
+    },
+    {
+      "name": "Rebound",
+      "hotkey": "W",
+      "description": "Marci bounds to the targeted unit, choosing a direction and distance she will spring away from it. Grants the targeted ally a short duration movement speed bonus.Upon reaching the unit, Marci leaps to her landing point, damaging and stunning enemy units within the radius.",
+      "type": "Unit / Vector",
+      "traits": {
+        "Cast Animation": "0.1 + 0",
+        "Cast Range": "450/550/650/750",
+        "Ally Move Speed Bonus": "15%/20%/25%/30%",
+        "Damage": "75/150/225/300 (Upgradable by Aghanim's Shard. 90/180/270/360)",
+        "Cooldown": "24/20/16/12",
+        "Mana Cost": "70/80/90/100"
+      }
+    },
+    {
+      "name": "Bodyguard",
+      "hotkey": "E",
+      "description": "Passively grants Marci lifesteal and bonus attack damage.",
+      "type": "Passive / Unit",
+      "traits": {
+        "Attack Damage Bonus": "9%/13.5%/18%/22.5% (With level 15 Left Talent 18%/22.5%/27%/31.5%)",
+        "Cast Animation": "0.2 + 0.8",
+        "Cast Range": "600",
+        "Shared Barrier": "90/160/230/300",
+        "Duration": "7",
+        "Attack Damage to Barrier Restore Factor": "0.3",
+        "Cooldown": "20",
+        "Mana Cost": "60"
+      }
+    },
+    {
+      "name": "Unleash",
+      "hotkey": "R",
+      "description": "Taps a hidden power, increasing movement speed while gaining flurry charges that allow Marci to deliver a rapid sequence of strikes.Unlocks max attack speed upon cast.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.2 + 0.34",
+        "Move Speed Bonus": "15% (With level 20 Left Talent 30%)",
+        "Duration": "16",
+        "Self Attack Speed Bonus": "700/925/1150",
+        "Radius": "800",
+        "Pulse Damage": "50/100/150",
+        "Cooldown": "80/70/60 ( 70/60/50)",
+        "Mana Cost": "100/125/150"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Bodyguard Strong Dispel",
+      "right": "+6s Unleash Duration per Hero Kill"
+    },
+    {
+      "level": 20,
+      "left": "+15% Unleash Move Speed",
+      "right": "+0.75s Rebound Stun Duration"
+    },
+    {
+      "level": 15,
+      "left": "+12% Bodyguard Damage",
+      "right": "+115 Dispose Damage"
+    },
+    {
+      "level": 10,
+      "left": "+50 Rebound Landing Radius",
+      "right": "+1.5s Dispose Slow Duration"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Carry",
+    "Initiator",
+    "Disabler",
+    "Escape"
+  ],
+  "facets": []
+}

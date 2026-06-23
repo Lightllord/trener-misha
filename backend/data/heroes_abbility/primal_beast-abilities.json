@@ -1,0 +1,129 @@
+{
+  "heroName": "Primal Beast",
+  "innateAbility": {
+    "name": "Colossal",
+    "hotkey": "",
+    "description": "Innately grants the Beast slow resistance bonus.",
+    "type": "Passive",
+    "traits": {
+      "Slow Resist Bonus": "10%",
+      "Self Health Threshold": "100",
+      "Slow Resist Bonus Increase": "1%",
+      "Area-of-Effect Bonus Increase": "0.5%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Onslaught",
+      "hotkey": "Q",
+      "description": "The Beast charges! Enemy units are damaged and stunned on impact. The longer the charge, the farther the onslaught.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "Global",
+        "Damage": "75/170/265/360",
+        "Cooldown": "25/22/19/16",
+        "Mana Cost": "120"
+      }
+    },
+    {
+      "name": "Begin Onslaught",
+      "hotkey": "Q",
+      "description": "The Beast begins the rush to the specified location.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "0.3"
+      }
+    },
+    {
+      "name": "Trample",
+      "hotkey": "W",
+      "description": "The Beast stomps over everything, all enemy units around it are damaged per distance traveled.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Radius": "200",
+        "Base Damage": "15/30/45/60",
+        "Attack Damage to Spell Damage Factor": "0.35 (With level 20 Right Talent 0.55)",
+        "Duration": "5.5",
+        "Magic Resist Bonus": " (With level 10 Left Talent 25%)",
+        "Colossal Bonuses": " (With level 25 Right Talent 100%)",
+        "Cooldown": "30/27/24/21 ( 25/22/19/16)",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Uproar",
+      "hotkey": "E",
+      "description": "The Beast accumulate Uproar stacks for every offensive damage instance it takes.",
+      "type": "Passive / No",
+      "traits": {
+        "Damage Threshold per Stack": "50",
+        "Min Damage Instance": "20",
+        "Max Damage Instance": "2000",
+        "Damage Timer": "20",
+        "Cast Animation": "0 + 0",
+        "Attack Damage Bonus per Stack": "10/20/30/40",
+        "Armor Bonus per Stack": "2/3/4/5 (With level 15 Left Talent 8/9/10/11)",
+        "Damage per Ray": "(Upgradable by Aghanim's Scepter. 100)",
+        "Cooldown": "0"
+      }
+    },
+    {
+      "name": "Rock Throw",
+      "hotkey": "D",
+      "description": "The Beast throws a rock at the target location that stuns and damages enemies.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.25 + 0.75",
+        "Cast Range": "1800",
+        "Damage": "325",
+        "Cooldown": "20",
+        "Mana Cost": "85"
+      }
+    },
+    {
+      "name": "Pulverize",
+      "hotkey": "R",
+      "description": "The Beast grabs the target enemy and slams them into the ground repeatedly. Damages and stuns other enemy units within the radius.Each consecutive slam increases the damage dealt.",
+      "type": "Unit / Area / Channeled",
+      "traits": {
+        "Cast Animation": "0.2 + 0",
+        "Cast Range": "200",
+        "Base Damage": "100/175/250",
+        "Damage Increment per Slam": "20/40/60",
+        "Cooldown": "45/40/35",
+        "Mana Cost": "100"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "x1.67 Pulverize Duration",
+      "right": "2x Colossal Trample Bonus Factor"
+    },
+    {
+      "level": 20,
+      "left": "Active Uproar Basic Dispels",
+      "right": "+20% Trample Attack Factor"
+    },
+    {
+      "level": 15,
+      "left": "+6 Armor per Uproar Stack",
+      "right": "-5s Trample Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "+25% Trample Self Magic Resistance",
+      "right": "+25 Attack Damage"
+    }
+  ],
+  "roles": [
+    "Initiator",
+    "Durable",
+    "Disabler"
+  ],
+  "facets": []
+}

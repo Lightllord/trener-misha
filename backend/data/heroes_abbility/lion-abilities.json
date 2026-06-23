@@ -1,0 +1,111 @@
+{
+  "heroName": "Lion",
+  "innateAbility": {
+    "name": "To Hell and Back",
+    "hotkey": "",
+    "description": "Both kills and assists credited to Lion now grants self an outgoing debuff duration amplification corresponding to death-affected enemy hero's respawn time.",
+    "type": "Passive",
+    "traits": {
+      "Spell Damage Amp": "20% (With level 15 Left Talent 35%)",
+      "Duration": "90"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Earth Spike",
+      "hotkey": "Q",
+      "description": "Rock spikes burst from the earth along a straight path.Enemy units are hurled into the air, then are stunned and take damage when they fall.",
+      "type": "Point / Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "650 (With level 25 Left Talent 1250)",
+        "Damage": "105/170/235/300",
+        "Cooldown": "14/13/12/11",
+        "Mana Cost": "90/110/130/150"
+      }
+    },
+    {
+      "name": "Hex",
+      "hotkey": "W",
+      "description": "Transforms an enemy unit into a harmless beast, with all abilities disabled.",
+      "type": "Unit / Area",
+      "traits": {
+        "Cast Animation": "0 + 0.53",
+        "Cast Range": "575/600/625/650",
+        "Duration": "2/2.4/2.8/3.2",
+        "Current Health as Damage": "100%",
+        "Radius": "250",
+        "Cooldown": "24/20/16/12 ( 21.5/17.5/13.5/9.5)",
+        "Mana Cost": "110/140/170/200"
+      }
+    },
+    {
+      "name": "Mana Drain",
+      "hotkey": "E",
+      "description": "Channels and draws mana for the affected unit for Lion himself, while applying a movement speed slow.",
+      "type": "Unit / Channeled",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "850",
+        "Ally Move Speed Bonus": "7.5%/10%/12.5%/15% (With level 10 Right Talent 17.5%/20%/22.5%/25%)",
+        "Self Magic Resist Bonus": "(Upgradable by Aghanim's Shard. 80%)",
+        "Cooldown": "15/12/9/6"
+      }
+    },
+    {
+      "name": "Finger of Death",
+      "hotkey": "R",
+      "description": "Deals damage to the unit-targeted enemy after an effect delay.",
+      "type": "Unit / Area",
+      "traits": {
+        "Cast Animation": "0.3 + 0.5",
+        "Cast Range": "900",
+        "Damage": "600/725/850 (Upgradable by Aghanim's Scepter. 700/825/950)",
+        "Damage Bonus per Kill": "30 (With level 20 Right Talent 50)",
+        "Cooldown": "110/70/30 ( 80/50/20)",
+        "Mana Cost": "200/400/600"
+      }
+    },
+    {
+      "name": "Fist of Death",
+      "hotkey": "R",
+      "description": "Turns Lion into a melee unit upon cast, with attacks having melee behavior and cleaves briefly.",
+      "type": "Passive",
+      "traits": {
+        "Cleave Damage": "50% (Upgradable by Aghanim's Scepter. 75%)",
+        "Duration": "20 (Upgradable by Aghanim's Scepter. 30)",
+        "Attack Damage Bonus": "20/30/40",
+        "Attack Damage Bonus Increase per Stack": "30 (With level 20 Right Talent 50)"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+600 Earth Spike Cast Range/Travel Distance",
+      "right": "+250 Hex Radius"
+    },
+    {
+      "level": 20,
+      "left": "+2 Earth Spike Multishot",
+      "right": "+20 Finger of Death Spell Damage/Attack Damage Bonus per Kill"
+    },
+    {
+      "level": 15,
+      "left": "+15% To Hell and Back Debuff/Spell Damage Amp",
+      "right": "-2.5s Hex Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "+20 Move Speed",
+      "right": "+10% Mana Drain Slow"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Disabler",
+    "Nuker",
+    "Initiator"
+  ],
+  "facets": []
+}

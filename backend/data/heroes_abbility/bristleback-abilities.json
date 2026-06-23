@@ -1,0 +1,110 @@
+{
+  "heroName": "Bristleback",
+  "innateAbility": {
+    "name": "Prickly",
+    "hotkey": "",
+    "description": "Grants both outgoing damage amplification and debuff duration amplification against enemy units behind Bristleback.",
+    "type": "Passive",
+    "traits": {
+      "Damage Amp": "1.045  0.005"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Viscous Nasal Goo",
+      "hotkey": "Q",
+      "description": "Covers a target in snot, causing it to have reduced armor and movement speed. Multiple casts stack and refresh the duration.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Cast Range": "650 (With level 15 Right Talent 900)",
+        "Duration": "5",
+        "Cooldown": "1.75",
+        "Mana Cost": "12/16/20/24"
+      }
+    },
+    {
+      "name": "Quill Spray",
+      "hotkey": "W",
+      "description": "Sprays enemy units with quills dealing damage in an area of effect around Rigwarl.Deals additional bonus damage per current stack on the debuff-affected enemy unit.",
+      "type": "Autocast-off / No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Radius": "700",
+        "Max Damage": "500",
+        "Base Damage": "25/45/65/85",
+        "Stack Damage": "30 (With level 20 Left Talent 50)",
+        "Duration": "14",
+        "Cooldown": "3",
+        "Mana Cost": "35"
+      }
+    },
+    {
+      "name": "Bristleback",
+      "hotkey": "E",
+      "description": "Rigwarl takes less damage if he is hit on the sides or rear.",
+      "type": "Passive / Point",
+      "traits": {
+        "Rear Damage Reduction": "16%/24%/32%/40% (With level 15 Left Talent 24%/32%/40%/48%)",
+        "Side Damage Reduction": "8%/12%/16%/20% (With level 15 Left Talent 12%/16%/20%/24%)",
+        "Damage Threshold": "275/250/225/200 (With level 25 Right Talent 245/220/195/170)",
+        "Cast Animation": "0 + 0",
+        "Cast Range": "Global",
+        "Cooldown": "( 24)",
+        "Mana Cost": "( 125)"
+      }
+    },
+    {
+      "name": "Hairball",
+      "hotkey": "D",
+      "description": "Coughs a quill-packed hairball toward and erupts at the point-targeted location.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.1 + 0.6",
+        "Cast Range": "750",
+        "Radius": "700",
+        "Cooldown": "15",
+        "Mana Cost": "60"
+      }
+    },
+    {
+      "name": "Warpath",
+      "hotkey": "R",
+      "description": "Grants self flat bonus attack damage and bonus movement speed every time Rigwarl casts a spell.",
+      "type": "Passive / No",
+      "traits": {
+        "Attack Damage Bonus per Stack": "12/16/20 (With level 25 Left Talent 30/34/38)",
+        "Move Speed Bonus per Stack": "2%/2.5%/3%"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+18 Warpath Attack Damage Bonus per Stack",
+      "right": "-30 Bristleback Damage Threshold"
+    },
+    {
+      "level": 20,
+      "left": "+20 Quill Stack Damage",
+      "right": "+25 Health Regen"
+    },
+    {
+      "level": 15,
+      "left": "+8% Bristleback Back Damage Reduction+4% Bristleback Side Damage Reduction",
+      "right": "+250 Viscous Nasal Goo Cast Range"
+    },
+    {
+      "level": 10,
+      "left": "+1.5 Mana Regen",
+      "right": "+25 Attack Speed"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Durable",
+    "Initiator",
+    "Nuker"
+  ],
+  "facets": []
+}

@@ -1,0 +1,126 @@
+{
+  "heroName": "Zeus",
+  "innateAbility": {
+    "name": "Static Field",
+    "hotkey": "",
+    "description": "All of the Zeus' abilities, and his attacks, excluding item abilities, deals damage equal to a percentage of the affected enemy units' current health.",
+    "type": "Passive",
+    "traits": {
+      "Current Health as Damage": "3.45%",
+      "Current Health as Damage Increase": "0.05%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Arc Lightning",
+      "hotkey": "Q",
+      "description": "Hurls a bolt of lightning that bounce through nearby enemy units that deals damage.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.63",
+        "Cast Range": "800",
+        "Damage": "105/130/155/180 (With level 20 Right Talent 165/190/215/240)",
+        "Cooldown": "1.6 ( 1.28)",
+        "Mana Cost": "85/90/95/100 ( 68/72/76/80)"
+      }
+    },
+    {
+      "name": "Lightning Bolt",
+      "hotkey": "W",
+      "description": "Calls down a bolt of lightning to strike an enemy unit, causing damage and applies a stun.Can be cast on the ground, affecting the closest enemy hero within the search radius.",
+      "type": "Unit / Point / Area",
+      "traits": {
+        "Cast Animation": "0.25 + 0.72",
+        "Cast Range": "700/750/800/850",
+        "Damage": "140/220/300/380",
+        "Duration": "5",
+        "Radius": "325",
+        "Cooldown": "6",
+        "Mana Cost": "120/125/130/135"
+      }
+    },
+    {
+      "name": "Heavenly Jump",
+      "hotkey": "E",
+      "description": "Leaps forward and shocks the closest visible nearby enemy unit, prioritizing heroes, dealing damage as well as reducing their movement and attack speed.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage": "25/50/75/100",
+        "Cooldown": "26/22/18/14 ( 0)",
+        "Mana Cost": "50/60/70/80"
+      }
+    },
+    {
+      "name": "Nimbus",
+      "hotkey": "D",
+      "description": "Creates a storm cloud anywhere on the map that automatically casts Lightning Bolt on nearby enemy units.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.2 + 0.64",
+        "Cast Range": "Global",
+        "Radius": "450",
+        "Duration": "30",
+        "Cooldown": "45",
+        "Mana Cost": "275"
+      }
+    },
+    {
+      "name": "Nimbus (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Lightning Hands",
+      "hotkey": "F",
+      "description": "Attacks now create Arc Lightning that deal a percentage of its damage.Can be toggled off to stop this effect.",
+      "type": "Toggle",
+      "traits": {
+        "Damage": "52.5/65/77.5/90 (With level 20 Right Talent 82.5/95/107.5/120)",
+        "Attack Speed Bonus": "30"
+      }
+    },
+    {
+      "name": "Thundergod's Wrath",
+      "hotkey": "R",
+      "description": "Strikes all enemy heroes globally with a bolt of lightning and damaging them.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.4 + 0.43",
+        "Damage": "300/475/650 (With level 15 Right Talent 375/550/725)",
+        "Duration": "3",
+        "Cooldown": "130",
+        "Mana Cost": "250/375/500"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "3 Heavenly Jump Charges",
+      "right": "+325 Lightning Bolt Radius"
+    },
+    {
+      "level": 20,
+      "left": "+0.5s Lightning Bolt Ministun",
+      "right": "+60 Arc Lightning Damage"
+    },
+    {
+      "level": 15,
+      "left": "x0.8 Arc Lightning Mana Cost/Cooldown",
+      "right": "+75 Thundergod's Wrath Damage"
+    },
+    {
+      "level": 10,
+      "left": "+200 Health",
+      "right": "+1 Heavenly Jump Target"
+    }
+  ],
+  "roles": [
+    "Nuker",
+    "Carry"
+  ],
+  "facets": []
+}

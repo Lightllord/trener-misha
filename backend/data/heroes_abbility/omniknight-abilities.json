@@ -1,0 +1,104 @@
+{
+  "heroName": "Omniknight",
+  "innateAbility": {
+    "name": "Degen Aura",
+    "hotkey": "",
+    "description": "Grants self an aura that applies movement speed slow to enemy units within the radius.",
+    "type": "Passive / Aura",
+    "traits": {
+      "Radius": "325 (With level 20 Right Talent 475)"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Purification",
+      "hotkey": "Q",
+      "description": "Instantly heals a friendly unit and damages all nearby enemy units.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 1.4",
+        "Cast Range": "700",
+        "Damage Radius": "260",
+        "Damage": "90/160/230/300 (With level 25 Right Talent 250/320/390/460)",
+        "Heal": "90/160/230/300 (With level 25 Right Talent 250/320/390/460)",
+        "Damage Factor": "(Upgradable by Aghanim's Shard. 0.65)",
+        "Heal Factor": "(Upgradable by Aghanim's Shard. 0.65)",
+        "Cooldown": "15/14/13/12 ( 12/11/10/9)",
+        "Mana Cost": "90/105/120/135"
+      }
+    },
+    {
+      "name": "Repel",
+      "hotkey": "W",
+      "description": "Grants the unit-targeted ally debuff immunity and bonus health regeneration.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 1.33",
+        "Cast Range": "700 (With level 10 Right Talent 900)",
+        "Health Regen Bonus": "8/12/16/20",
+        "Magic Resist Bonus": "60%",
+        "Cooldown": "40/35/30/25",
+        "Mana Cost": "90/105/120/135"
+      }
+    },
+    {
+      "name": "Hammer of Purity",
+      "hotkey": "E",
+      "description": "Grants bonus attack range while dealing additional pure spell damage corresponding to a portion of Omniknight's main attack damage for one attack.",
+      "type": "Autocast / Unit",
+      "traits": {
+        "Cast Animation": "0.433 + 0.567",
+        "Cast Range": "225",
+        "Base Damage": "25/45/65/85",
+        "Main Attack Damage to Damage Factor": "1.3/1.5/1.7/1.9 (With level 25 Left Talent 2.05/2.25/2.45/2.65)",
+        "Spell Damage to Heal per Second Factor": "0.35",
+        "Damage Threshold": "0",
+        "Damage Timer": "1",
+        "Duration": "5",
+        "Cooldown": "13/10/7/4 ( 12.5/9.5/6.5/3.5)"
+      }
+    },
+    {
+      "name": "Guardian Angel",
+      "hotkey": "R",
+      "description": "Grants allied units within the radius, centered around Omniknight, physical damage immunity.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.4 + 1.07",
+        "Radius": "700 (Upgradable by Aghanim's Scepter. Global)",
+        "Duration": "4/4.75/5.5",
+        "Health Restore Factor": "(Upgradable by Aghanim's Scepter. 1.5)",
+        "Cooldown": "100/90/80 ( 80/70/60)",
+        "Mana Cost": "125/175/225"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+0.75x Hammer of Purity Base Damage Factor",
+      "right": "+160 Purification Damage/Heal"
+    },
+    {
+      "level": 20,
+      "left": "-3s Purification Cooldown",
+      "right": "+150 Degen Aura Radius"
+    },
+    {
+      "level": 15,
+      "left": "-20s Guardian Angel Cooldown",
+      "right": "-0.5s Hammer of Purity Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "+30 Base Attack Damage",
+      "right": "+200 Repel Cast Range"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Durable",
+    "Nuker"
+  ],
+  "facets": []
+}

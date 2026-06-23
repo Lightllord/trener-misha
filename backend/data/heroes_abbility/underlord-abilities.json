@@ -1,0 +1,109 @@
+{
+  "heroName": "Underlord",
+  "innateAbility": {
+    "name": "Invading Force",
+    "hotkey": "",
+    "description": "Grants his allied heroes movement speed bonus and incoming damage reduction once their teleportation completes.",
+    "type": "Passive",
+    "traits": {
+      "Move Speed Bonus": "3.7% (With level 10 Right Talent 8.7%)",
+      "Damage Reduction": "9.5% (With level 10 Right Talent 14.5%)",
+      "Duration": "5",
+      "Move Speed Bonus Factor": "2",
+      "Damage Reduction Factor": "2",
+      "Damage Reduction Increase": "0.5%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Firestorm",
+      "hotkey": "Q",
+      "description": "Calls down waves of fire that damage enemy units in the area-targeted location.",
+      "type": "Area / Unit",
+      "traits": {
+        "Cast Animation": "0.5 + 0.6",
+        "Cast Range": "675",
+        "Damage per Instance": "30/55/80/105",
+        "Max Health as Damage per Interval": "1.5%/2%/2.5%/3% (With level 20 Right Talent 2.1%/2.6%/3.1%/3.6%)",
+        "Cooldown": "16/15/14/13 ( 11/10/9/8)",
+        "Mana Cost": "110/125/140/155"
+      }
+    },
+    {
+      "name": "Pit of Malice",
+      "hotkey": "W",
+      "description": "A deadly pit is conjured at the target location; any unit that enters will be damaged and rooted.Each enemy unit within the pit are affected by cadence.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.25 + 0.63",
+        "Cast Range": "675",
+        "Damage": "20/30/40/50",
+        "Cooldown": "30/25/20/15",
+        "Mana Cost": "110/120/130/140"
+      }
+    },
+    {
+      "name": "Atrophy Aura",
+      "hotkey": "E",
+      "description": "Reduces enemy units' attack damage within the radius.If an enemy unit dies while under this effect, Underlord gains temporary bonus attack damage.",
+      "type": "Passive / Aura",
+      "traits": {
+        "Radius": "900",
+        "Attack Damage Reduction": "8%/16%/24%/32% (With level 20 Left Talent 18%/26%/34%/42%)",
+        "Attack Damage Bonus per Enemy Hero": "30/35/40/45",
+        "Attack Damage Bonus per Enemy Creep": "2/4/6/8"
+      }
+    },
+    {
+      "name": "Fiend's Gate",
+      "hotkey": "R",
+      "description": "Opens one portal next to Underlord and another portal in the target location. Both portals have to be at least a certain distance away from each other.Heroes can channel a portal to teleport to the other side.",
+      "type": "Point",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "Global",
+        "Duration": "20",
+        "Damage per Second": "160",
+        "Cooldown": "110/105/100 ( 100/95/90)",
+        "Mana Cost": "175"
+      }
+    },
+    {
+      "name": "Fiend's Gate (Summoned Ancient  Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+160 Fiend's Gate Immolation Damage per Second",
+      "right": "+0.4s Pit of Malice Root"
+    },
+    {
+      "level": 20,
+      "left": "+10% Atrophy Aura Attack Damage Bonus/Reduction",
+      "right": "+0.6% Firestorm Max Health as Damage"
+    },
+    {
+      "level": 15,
+      "left": "-5s Firestorm Cooldown",
+      "right": "+20% Pit of Malice Slow"
+    },
+    {
+      "level": 10,
+      "left": "+15s Atrophy Aura Duration",
+      "right": "+5% Invading Force Move Speed/Damage Reduction"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Durable",
+    "Nuker",
+    "Disabler",
+    "Escape"
+  ],
+  "facets": []
+}

@@ -1,0 +1,106 @@
+{
+  "heroName": "Troll Warlord",
+  "innateAbility": {
+    "name": "Battle Stance",
+    "hotkey": "Q",
+    "description": "Toggle Off swaps back to Ranged Form.",
+    "type": "No / Toggle",
+    "traits": {
+      "Cast Animation": "0.2 + 0"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Whirling Axes (Ranged)",
+      "hotkey": "W",
+      "description": "Hurls a fistful of axes in a cone shape over a distance, slowing and damaging enemy units.",
+      "type": "Point / Unit",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "950",
+        "Damage": "60/80/100/120 (With level 20 Left Talent 220/240/260/280)",
+        "Cooldown": "9 ( 4)",
+        "Mana Cost": "50 ( 25)"
+      }
+    },
+    {
+      "name": "Whirling Axes (Melee)",
+      "hotkey": "E",
+      "description": "Hurls axes around him in a close range area of effect, damaging enemy units and causing them to miss some attacks.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage": "75/120/165/210 (With level 20 Left Talent 235/280/325/370)",
+        "Cooldown": "9 ( 4)",
+        "Mana Cost": "50 ( 25)"
+      }
+    },
+    {
+      "name": "Fervor",
+      "hotkey": "D",
+      "description": "With each continuous blow on the same target, Troll gains increased attack speed. If Troll changes targets, the stacks drops to nil.",
+      "type": "Passive",
+      "traits": {
+        "Attack Speed Bonus per Stack": "15/20/25/30 (With level 15 Right Talent 19/24/29/34)",
+        "Proc Chance Bonus per Stack": "(Upgradable by Aghanim's Shard. 3%)",
+        "Bonus Attack Targets": "(Upgradable by Aghanim's Shard. 1)"
+      }
+    },
+    {
+      "name": "Berserker's Rage",
+      "hotkey": "F",
+      "description": "Grants different bonuses corresponding to the current Battle Stance.",
+      "type": "Passive",
+      "traits": {
+        "Spell Damage": "10/15/20/25",
+        "Move Speed Bonus": "15/25/35/45 (With level 10 Left Talent 35/45/55/65)"
+      }
+    },
+    {
+      "name": "Battle Trance",
+      "hotkey": "R",
+      "description": "Unleashes a powerful battle trance, that forces Troll to continuously attack the closest enemy unit, prioritizing heroes, within the radius.Grants Troll bonus lifesteal, bonus attack speed, and bonus movement speed.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Attack Speed Bonus": "140/170/200",
+        "Move Speed Bonus": "35%",
+        "Duration": "6.5 (With level 15 Left Talent 7.5)",
+        "Health Threshold": "1",
+        "Set Min Health": "1",
+        "Ally Attack Speed Bonus": " (With level 20 Right Talent 140/170/200)",
+        "Cooldown": "90/80/70",
+        "Mana Cost": "150"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Battle Trance Applies Strong Dispel",
+      "right": "Whirling Axes Pierce Debuff Immunity"
+    },
+    {
+      "level": 20,
+      "left": "+160 Whirling Axes Damage",
+      "right": "Battle Trance Grants Allies Attack Speed"
+    },
+    {
+      "level": 15,
+      "left": "+1s Battle Trance Duration",
+      "right": "+4 Fervor Attack Speed"
+    },
+    {
+      "level": 10,
+      "left": "+20 Berserker's Rage Move Speed",
+      "right": "+2.5s Whirling Axes Debuff Duration"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Pusher",
+    "Disabler",
+    "Durable"
+  ],
+  "facets": []
+}

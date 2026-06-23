@@ -1,0 +1,99 @@
+{
+  "heroName": "Outworld Destroyer",
+  "innateAbility": {
+    "name": "Essence Flux",
+    "hotkey": "",
+    "description": "The Harbinger has a chance to restore a percentage of its max mana per ability cast.",
+    "type": "Passive",
+    "traits": {
+      "Current Mana to Move Speed Bonus": "0.8%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Arcane Orb",
+      "hotkey": "Q",
+      "description": "Adds pure damage to attacks based on the current mana pool.",
+      "type": "Autocast / Active Attack Modifier",
+      "traits": {
+        "Cast Animation": "0.46 + 0.54",
+        "Cast Range": "450",
+        "Current Mana to Damage Factor": "0.1/0.11/0.12/0.13 (With level 25 Right Talent 0.115/0.125/0.135/0.145)",
+        "Cooldown": "4.5/3/1.5/0",
+        "Mana Cost": "20% × CurrentMP"
+      }
+    },
+    {
+      "name": "Astral Imprisonment",
+      "hotkey": "W",
+      "description": "Places a target unit into an astral prison. The hidden unit is invulnerable and disabled.When the astral prison implodes, it deals damage to the target and steals a percentage of their max mana.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.4",
+        "Cast Range": "650 (With level 10 Right Talent 750)",
+        "Damage": "90/180/270/360",
+        "Self Max Mana Bonus Factor": "1",
+        "Cooldown": "18/16/14/12",
+        "Mana Cost": "150"
+      }
+    },
+    {
+      "name": "Objurgation",
+      "hotkey": "E",
+      "description": "Grants the Harbinger an all damage barrier corresponding to its current max mana value.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.2 + 0.57",
+        "Barrier": "120/180/240/300",
+        "Max Mana to Barrier Factor": "0.12 (Upgradable by Aghanim's Scepter. 0.16)",
+        "Duration": "10",
+        "Max Mana Bonus": "80/160/240/320",
+        "Max Health Threshold": "(Upgradable by Aghanim's Scepter. 20%)",
+        "Cooldown": "36/34/32/30 ( 26/24/22/20)",
+        "Mana Cost": "175"
+      }
+    },
+    {
+      "name": "Sanity's Eclipse",
+      "hotkey": "R",
+      "description": "Deals damage to enemy units within the radius corresponding to the difference between the Harbinger's mana and all affected units' mana.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.25 + 0.4",
+        "Cast Range": "700",
+        "Base Damage": "200/300/400",
+        "Max Mana Difference Damage Factor": "0.4",
+        "Cooldown": "140/130/120 ( 80/70/60)",
+        "Mana Cost": "200/300/400"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-60s Sanity's Eclipse Cooldown",
+      "right": "+1.5% Arcane Orb Damage"
+    },
+    {
+      "level": 20,
+      "left": "+12% Astral Imprisonment Max Mana Change",
+      "right": "-10s Objurgation Cooldown"
+    },
+    {
+      "level": 15,
+      "left": "+0.8% Essence Flux Current Mana to Move Speed Bonus",
+      "right": "+5% Essence Flux Mana Restore"
+    },
+    {
+      "level": 10,
+      "left": "+200 Mana",
+      "right": "+100 Astral Imprisonment Cast Range"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Nuker",
+    "Disabler"
+  ],
+  "facets": []
+}

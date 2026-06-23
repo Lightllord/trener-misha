@@ -1,0 +1,122 @@
+{
+  "heroName": "Lycan",
+  "innateAbility": {
+    "name": "Apex Predator",
+    "hotkey": "",
+    "description": "Lycan and his player-controlled units have outgoing damage amplification bonus to neutral creeps per hero level.",
+    "type": "Passive",
+    "traits": {
+      "Radius": "Global",
+      "Damage Amp": "18%",
+      "Damage Amp Increase": "2%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Summon Wolves",
+      "hotkey": "Q",
+      "description": "Summons a pack of wolves to fight for Lycan.In time, these wolves have Permanent Invisibility and Cripple.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.3 + 0.6",
+        "Duration": "50",
+        "Attack Damage Bonus": " (With level 10 Left Talent 14)",
+        "Health Bonus": " (With level 15 Right Talent 375)",
+        "Cooldown": "30",
+        "Mana Cost": "115/120/125/130"
+      }
+    },
+    {
+      "name": "Lycan Wolf (Summoned   Creep)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {
+        "Attack Damage Bonus": " (With level 10 Left Talent 14)",
+        "Health Bonus": " (With level 15 Right Talent 375)"
+      }
+    },
+    {
+      "name": "Howl",
+      "hotkey": "W",
+      "description": "Strike fear while reducing their armor and attack damage of all enemy units within the radius of Lycan and his wolves.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0.3 + 0",
+        "Attack Damage Reduction": "25%/30%/35%/40% (With level 25 Right Talent 0%)",
+        "Duration": "8",
+        "Total Attack Damage Reduction": " (With level 25 Right Talent 25%/30%/35%/40%)",
+        "Cooldown": "22/20/18/16",
+        "Mana Cost": "40"
+      }
+    },
+    {
+      "name": "Feral Impulse",
+      "hotkey": "E",
+      "description": "Grants bonus attack damage and bonus health regeneration to Lycan and all of his player-controlled units.",
+      "type": "Passive / Aura",
+      "traits": {
+        "Radius": "Global",
+        "Attack Damage Bonus": "10%/20%/30%/40% (With level 20 Left Talent 35%/45%/55%/65%)",
+        "Health Regen Bonus": "2/4/6/8"
+      }
+    },
+    {
+      "name": "Shapeshift",
+      "hotkey": "R",
+      "description": "Assumes his lupine form.The lycanthropy sets his base attack range, and grants bonus base night vision for the entire duration.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Base Night Vision Bonus": "1000",
+        "Duration": "25 (With level 20 Right Talent 32)",
+        "Health Bonus": "225/325/425",
+        "Crit Damage": "160%/190%/220%",
+        "Cooldown": "105/95/85 ( 90/80/70)",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Wolf Bite",
+      "hotkey": "D",
+      "description": "Grants the unit-targeted allied hero all of Shapeshift's Wolf Form ability values of its corresponding level after its transformation time.Within the proximity distance, the allied hero's lifesteal in Wolf Form heals Lycan, and Lycan's lifesteal heals the affected allied hero.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.6",
+        "Cast Range": "300",
+        "Duration": "25 (With level 20 Right Talent 32)",
+        "Cooldown": "110/100/90 ( 95/85/75)",
+        "Mana Cost": "150"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "x0.75 Summon Wolves Base Attack Time",
+      "right": "Howl Reduces Total Attack Damage"
+    },
+    {
+      "level": 20,
+      "left": "+25% Feral Impulse Damage",
+      "right": "+7s Shapeshift / Wolf Bite Duration"
+    },
+    {
+      "level": 15,
+      "left": "-15s Shapeshift / Wolf Bite Cooldown",
+      "right": "+375 Summon Wolves Health"
+    },
+    {
+      "level": 10,
+      "left": "+14 Summon Wolves Damage",
+      "right": "+3 Howl Armor Reduction"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Pusher",
+    "Durable",
+    "Escape"
+  ],
+  "facets": []
+}

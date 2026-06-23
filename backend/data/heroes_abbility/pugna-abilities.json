@@ -1,0 +1,108 @@
+{
+  "heroName": "Pugna",
+  "innateAbility": {
+    "name": "Oblivion Savant",
+    "hotkey": "",
+    "description": "Pugna can cast any abilities, including item abilties, while channeling.",
+    "type": "Passive",
+    "traits": {
+      "Spell Damage Amp per Tower Destroyed": "1.5%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Nether Blast",
+      "hotkey": "Q",
+      "description": "An exploding pulse that deals damage to enemy units in the area.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.2 + 0",
+        "Cast Range": "600",
+        "Damage": "95/170/245/320 (With level 25 Right Talent 295/370/445/520)",
+        "Damage Factor": "0.65",
+        "Cooldown": "5 ( 4)",
+        "Mana Cost": "100/115/130/145"
+      }
+    },
+    {
+      "name": "Decrepify",
+      "hotkey": "W",
+      "description": "Slows an enemy unit and reduces its magic resistance while rendering it ethereal.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.4",
+        "Cast Range": "550/600/650/700",
+        "Heal Amp": "10%/15%/20%/25%",
+        "Move Speed Bonus": " (With level 15 Right Talent 30%)",
+        "Cooldown": "16/13/10/7",
+        "Mana Cost": "80"
+      }
+    },
+    {
+      "name": "Nether Ward",
+      "hotkey": "E",
+      "description": "Places a Nether Ward at the target location.",
+      "type": "Point / Passive",
+      "traits": {
+        "Cast Animation": "0.2 + 0.4",
+        "Cast Range": "175 (Upgradable by Aghanim's Shard. 350)",
+        "Duration": "21/24/27/30",
+        "Base Damage": "50/70/90/110",
+        "Enemy Used Mana to Damage Factor": "1/1.2/1.4/1.6 (With level 25 Left Talent 2.9/3.1/3.3/3.5)",
+        "Damage Factor": "(Upgradable by Aghanim's Shard. 0.75)",
+        "Cooldown": "40",
+        "Mana Cost": "80"
+      }
+    },
+    {
+      "name": "Nether Ward (Summoned   Ward)",
+      "hotkey": "",
+      "description": "",
+      "type": "",
+      "traits": {}
+    },
+    {
+      "name": "Life Drain",
+      "hotkey": "R",
+      "description": "When cast on an enemy unit, Life Drain damages the enemy unit and self-heals.When casting on an allied unit, Life Drain succors the allied unit while damaging Pugna.",
+      "type": "Unit / Channeled",
+      "traits": {
+        "Cast Animation": "0.2 + 0",
+        "Cast Range": "700",
+        "Damage per Second": "150/250/350",
+        "Heal per Second": "150/250/350 (With level 20 Right Talent 172.5/287.5/402.5)",
+        "Max Spell Amp Bonus": "(Upgradable by Aghanim's Scepter. 100%)",
+        "Spell Amp Bonus per Second": "(Upgradable by Aghanim's Scepter. 8%)",
+        "Cooldown": "7 ( 3.5)",
+        "Mana Cost": "115/160/205"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+1.9 Mana Flare Mana to Damage Factor",
+      "right": "+200 Nether Blast Damage"
+    },
+    {
+      "level": 20,
+      "left": "+1.5s Decrepify Duration",
+      "right": "+15% Life Drain Heal"
+    },
+    {
+      "level": 15,
+      "left": "+250 Health",
+      "right": "+30% Decrepify Ally Speed"
+    },
+    {
+      "level": 10,
+      "left": "+2 Nether Ward Hit Count",
+      "right": "-1s Nether Blast Cooldown"
+    }
+  ],
+  "roles": [
+    "Nuker",
+    "Pusher"
+  ],
+  "facets": []
+}

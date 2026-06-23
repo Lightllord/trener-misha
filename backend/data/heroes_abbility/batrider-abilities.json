@@ -1,0 +1,102 @@
+{
+  "heroName": "Batrider",
+  "innateAbility": {
+    "name": "Smoldering Resin",
+    "hotkey": "",
+    "description": "Attacks apply a resin that deals a portion of Batrider's attack damage as damage per second.",
+    "type": "Passive",
+    "traits": {
+      "Attack Damage to Damage per Second": "0.2",
+      "Duration": "2 (With level 10 Left Talent 3)"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Sticky Napalm",
+      "hotkey": "Q",
+      "description": "Damages and applies a turn rate slow to all enemy units within the area-targeted location.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cast Range": "600",
+        "First Damage": "5/10/15/20",
+        "Proc Damage per Stack": "2.5/5/7.5/10",
+        "Creep Damage Factor": "0.2",
+        "Building Damage Factor": "(Upgradable by Aghanim's Shard. 0.2)",
+        "Cooldown": "3",
+        "Mana Cost": "22"
+      }
+    },
+    {
+      "name": "Flamebreak",
+      "hotkey": "W",
+      "description": "Hurls an explosive cocktail that explodes when it reaches the target location and deals damage over time to enemy units in the area.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.2 + 0.4",
+        "Cast Range": "1300",
+        "First Damage": "25/50/75/100",
+        "Damage per Second": "25/30/35/40",
+        "Cooldown": "22/19/16/13 ( 16/13/10/7)",
+        "Mana Cost": "110"
+      }
+    },
+    {
+      "name": "Firefly",
+      "hotkey": "E",
+      "description": "Creates a fire trail that damages any enemy units upon contact and destroys trees below Batrider.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Damage Radius": "250",
+        "Damage per Second": "20/40/60/80 (With level 15 Right Talent 50/70/90/110)",
+        "Duration": "15",
+        "Max Move Speed Bonus": "12%/18%/24%/30% (With level 10 Right Talent 17%/23%/29%/35%)",
+        "Cooldown": "48/42/36/30",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Flaming Lasso",
+      "hotkey": "R",
+      "description": "Lassoes an enemy unit, disables and drags them in Batrider's wake.Sucessful teleport sources applied to either Batrider or the debuff-affected enemy unit break the lasso.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.3",
+        "Cast Range": "200",
+        "Damage Interval": "0.5",
+        "Damage per Instance": "31/50/63 (With level 25 Right Talent 21/36/47)",
+        "Cooldown": "90/75/60",
+        "Mana Cost": "125/150/175"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "Flamebreak Applies 4 Sticky Napalm Stacks",
+      "right": "+0.75s Flaming Lasso Duration"
+    },
+    {
+      "level": 20,
+      "left": "-6s Flamebreak Cooldown",
+      "right": "Attacks Applies 1 Sticky Napalm Stack"
+    },
+    {
+      "level": 15,
+      "left": "+0.75% Sticky Napalm Move Speed Slow",
+      "right": "+30 Firefly Damage per Second"
+    },
+    {
+      "level": 10,
+      "left": "+1s Smoldering Resin Duration",
+      "right": "+5% Firefly Max Move Speed"
+    }
+  ],
+  "roles": [
+    "Initiator",
+    "Disabler",
+    "Escape"
+  ],
+  "facets": []
+}

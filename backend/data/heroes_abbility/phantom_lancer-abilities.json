@@ -1,0 +1,102 @@
+{
+  "heroName": "Phantom Lancer",
+  "innateAbility": {
+    "name": "Illusory Armaments",
+    "hotkey": "",
+    "description": "Azwraith's illusion has a min illusion damage dealt factor corresponding to the hero's attack damage value upon creation, for a duration.",
+    "type": "Passive",
+    "traits": {
+      "Min Illusion Damage Dealt": "17%",
+      "Duration": "3 (With level 25 Left Talent 5)",
+      "Min Illusion Damage Dealt Increase": "2%"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Spirit Lance",
+      "hotkey": "Q",
+      "description": "Sends a magical spirit lance to a target enemy unit that damages and slows its movement speed.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.3 + 0.73",
+        "Cast Range": "600/650/700/750",
+        "Damage": "100/160/220/280 (With level 20 Right Talent 200/260/320/380)",
+        "Damage Dealt": "20% (With level 15 Right Talent 70%)",
+        "Damage Taken": "400%",
+        "Duration": "3.5/5/6.5/8",
+        "Cooldown": "10/9/8/7",
+        "Mana Cost": "120"
+      }
+    },
+    {
+      "name": "Doppelganger",
+      "hotkey": "W",
+      "description": "Briefly vanishes from the battlefield.After a delay, Azwraith and any of his nearby illusions reappear at a random position within the targeted location, along with two additional doppelgangers with different properties.Extends all current illusions' duration upon reappearing.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.1 + 0",
+        "Cast Range": "575 (With level 15 Left Talent 700)",
+        "Gathered Illusion Bonus Duration": "2",
+        "Damage Dealt": "20%",
+        "Damage Taken": "600%",
+        "Duration": "8",
+        "Cooldown": "22/18/14/10 ( 18/14/10/6)",
+        "Mana Cost": "70"
+      }
+    },
+    {
+      "name": "Phantom Rush",
+      "hotkey": "E",
+      "description": "When activated, Azwraith quickly charges into range.",
+      "type": "Toggle",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Cooldown": "15/11/7/3"
+      }
+    },
+    {
+      "name": "Juxtapose",
+      "hotkey": "R",
+      "description": "Has a chance to create an illusion of himself per attack.",
+      "type": "Passive / No",
+      "traits": {
+        "Damage Dealt": "15%",
+        "Damage Taken": "600% (With level 20 Left Talent 530%)",
+        "Cast Animation": "0 + 0",
+        "Self Move Speed Bonus": "(Upgradable by Aghanim's Shard. 15%)",
+        "Duration": "(Upgradable by Aghanim's Shard. 8)",
+        "Cooldown": "( 15)",
+        "Mana Cost": "( 75)"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "+2s Illusory Armaments Duration",
+      "right": "-4s Doppelganger Cooldown"
+    },
+    {
+      "level": 20,
+      "left": "-70% Juxtapose Illusion Damage Taken",
+      "right": "+100 Spirit Lance Damage"
+    },
+    {
+      "level": 15,
+      "left": "+125 Doppelganger Cast Range",
+      "right": "+50% Spirit Lance Illusion Damage Dealt"
+    },
+    {
+      "level": 10,
+      "left": "+3% Juxtapose Illusion Proc Chance",
+      "right": "+1s Spirit Lance Slow Duration"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Escape",
+    "Pusher",
+    "Nuker"
+  ],
+  "facets": []
+}

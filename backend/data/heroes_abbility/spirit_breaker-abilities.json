@@ -1,0 +1,112 @@
+{
+  "heroName": "Spirit Breaker",
+  "innateAbility": {
+    "name": "Empowering Haste",
+    "hotkey": "",
+    "description": "Grants Barathrum bonus movement speed stacks whenever upon stunning enemy units.",
+    "type": "Passive",
+    "traits": {
+      "Move Speed Bonus per Stack": "1%",
+      "Duration": "1"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Charge of Darkness",
+      "hotkey": "Q",
+      "description": "Fixes his sight on an enemy unit and starts charging through all objects.Barathrum starts charging at a lower charge speed, and gradually winds-up to the max charge speed.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.1 + 0.5",
+        "Cast Range": "Global",
+        "Min Move Speed Bonus": "68.75/81.25/93.75/106.25 (With level 15 Left Talent 84/96/109/121)",
+        "Max Move Speed Bonus": "275/325/375/425 (With level 15 Left Talent 335/385/435/485)",
+        "Cooldown": "22/19/16/13 ( 18/15/12/9)",
+        "Mana Cost": "80/90/100/110"
+      }
+    },
+    {
+      "name": "Bulldoze",
+      "hotkey": "W",
+      "description": "Grants Barathrum bonus movement speed and status resistance to ram through enemy units.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Move Speed Bonus": "8%/12%/16%/20%",
+        "Status Resist Bonus": "40%/50%/60%/70%",
+        "Duration": "8",
+        "Barrier": " (With level 20 Left Talent 375)",
+        "Cooldown": "22/20/18/16 ( 19/17/15/13)",
+        "Mana Cost": "30/40/50/60"
+      }
+    },
+    {
+      "name": "Greater Bash",
+      "hotkey": "E",
+      "description": "Has a chance to stun and knockback an enemy unit on an attack that deals a portion of Barathrum's current movement speed as damage.",
+      "type": "Passive",
+      "traits": {
+        "Move Speed to Damage": "25%/30%/35%/40% (With level 25 Right Talent 45%/50%/55%/60%)",
+        "Cascading Bash Damage Factor": "(Upgradable by Aghanim's Scepter. 0.05)",
+        "Cooldown": "1.2"
+      }
+    },
+    {
+      "name": "Planar Pocket",
+      "hotkey": "D",
+      "description": "Increases self magic resistance and redirects spells cast by enemy heroes at the target towards him.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0 + 0.5",
+        "Cast Range": "700",
+        "Duration": "6",
+        "Magic Resist Bonus": "40%",
+        "Cooldown": "30",
+        "Mana Cost": "100"
+      }
+    },
+    {
+      "name": "Nether Strike",
+      "hotkey": "R",
+      "description": "Spirit Breaker slips into the nether realm, reappearing next to his hapless victim and striking it.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "1 + 0",
+        "Cast Range": "700",
+        "Damage": "150/250/350",
+        "Cooldown": "75/55/35",
+        "Mana Cost": "125/150/175"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-4s Charge of Darkness Cooldown",
+      "right": "+20% Greater Bash Damage"
+    },
+    {
+      "level": 20,
+      "left": "+375 Bulldoze Barrier",
+      "right": "+8% Empowering Haste Move Speed Bonus"
+    },
+    {
+      "level": 15,
+      "left": "+60 Charge of Darkness Move Speed Bonus",
+      "right": "-3s Bulldoze Cooldown"
+    },
+    {
+      "level": 10,
+      "left": "+4 Armor",
+      "right": "+500 Night Vision"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Initiator",
+    "Disabler",
+    "Durable",
+    "Escape"
+  ],
+  "facets": []
+}

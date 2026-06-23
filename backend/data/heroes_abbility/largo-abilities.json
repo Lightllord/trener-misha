@@ -1,0 +1,135 @@
+{
+  "heroName": "Largo",
+  "innateAbility": {
+    "name": "Encore",
+    "hotkey": "",
+    "description": "Buffs applied to self and allied units, sourced to Largo, have an extended duration.Self-applied debuffs have an extended duration as well.",
+    "type": "Passive",
+    "traits": {}
+  },
+  "abilities": [
+    {
+      "name": "Catchy Lick",
+      "hotkey": "Q",
+      "description": "Pulls the targeted unit a short distance, and applies a basic dispel.Buff or debuffs dispelled from the targeted unit grants self health regeneration bonus.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 1",
+        "Cast Range": "700 (With level 15 Left Talent 800)",
+        "Health Regen Bonus": "4/7/10/13 (With level 10 Left Talent 10/17.5/25/32.5)",
+        "Damage": "85/170/255/340",
+        "Cooldown": "13/11/9/7 ( 0)",
+        "Mana Cost": "80/85/90/95"
+      }
+    },
+    {
+      "name": "Frogstomp",
+      "hotkey": "W",
+      "description": "Tosses froglings to the area-targeted location.The froglings deals damage and stuns all enemy units within the radius in a certain interval.",
+      "type": "Area",
+      "traits": {
+        "Cast Animation": "0.2 + 0.8",
+        "Cast Range": "800",
+        "Damage per Interval": "36/48/60/72 (With level 10 Right Talent 51/63/75/87)",
+        "Cooldown": "20/18/16/14",
+        "Mana Cost": "85/95/105/115"
+      }
+    },
+    {
+      "name": "Croak of Genius",
+      "hotkey": "E",
+      "description": "Grants the buff-affected allied hero mana cost reduction on all abilities.When the buff-affected allied hero casts an ability with mana cost, the remaining buff duration is reduced.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.93",
+        "Cast Range": "800",
+        "Spell Damage Threshold": "0",
+        "Spell Damage Taken to Damage per Second Factor": "0.3/0.35/0.4/0.45",
+        "Max Health as Damage per Second": " (With level 15 Right Talent 1%)",
+        "Cooldown": "25",
+        "Mana Cost": "40"
+      }
+    },
+    {
+      "name": "Amphibian Rhapsody",
+      "hotkey": "R",
+      "description": "Switches the ability bar switches to three song abilities, each with different ability effects.Largo can cast one Amphibian Rhapsody-based abilities at any given time.",
+      "type": "No / Toggle",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Ally Armor Bonus Factor": "0.5",
+        "Cooldown": "2"
+      }
+    },
+    {
+      "name": "Bullbelly Blitz",
+      "hotkey": "Q",
+      "description": "When strummed, grants outgoing spell amplification bonus and magical attack damage bonus to all affected allied heroes within the radius.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Magical Attack Damage Bonus": "20%/25%/30% (With level 25 Right Talent 26%/32.5%/39%)",
+        "Duration": "1",
+        "Damage": "20/30/40 (With level 25 Right Talent 26/39/52)",
+        "Damage Bonus per Groovin' Stack": "(Upgradable by Aghanim's Scepter. 6/10/14)",
+        "Cooldown": "0.2",
+        "Mana Cost": "25/35/45"
+      }
+    },
+    {
+      "name": "Hotfeet Hustle",
+      "hotkey": "W",
+      "description": "When strummed, grants movement speed bonus and slow resistance bonus to all affected allied units within the radius.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Move Speed Bonus": "16%/20%/24% (With level 25 Right Talent 20.8%/26%/31.2%)",
+        "Slow Resist Bonus": "70%/75%/80%",
+        "Move Speed Bonus Duration": "1",
+        "Slow Resist Bonus Duration": "0.3",
+        "Cooldown": "0.2",
+        "Mana Cost": "25/35/45"
+      }
+    },
+    {
+      "name": "Island Elixir",
+      "hotkey": "E",
+      "description": "When strummed, Largo heals allied heroes within the radius.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Heal": "34/56/78 (With level 25 Right Talent 44.2/72.8/101.4)",
+        "Cooldown": "0.2",
+        "Mana Cost": "25/35/45"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "2x Frogstomp Intervals",
+      "right": "x1.3 Amphibian Rhapsody Ability Effects Factor"
+    },
+    {
+      "level": 20,
+      "left": "x0.5 Groovin' Allied Armor Aura",
+      "right": "2 Catchy Lick Charges"
+    },
+    {
+      "level": 15,
+      "left": "+100 Catchy Lick Cast Range+50 Catchy Lick Pull Distance",
+      "right": "+1% Croak of Genius Max Health as Damage per Second"
+    },
+    {
+      "level": 10,
+      "left": "x2.5 Catchy Lick Health Regen",
+      "right": "+15 Frogstomp Damage"
+    }
+  ],
+  "roles": [
+    "Support",
+    "Disabler",
+    "Durable"
+  ],
+  "facets": []
+}

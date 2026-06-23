@@ -1,0 +1,112 @@
+{
+  "heroName": "Necrophos",
+  "innateAbility": {
+    "name": "Sadist",
+    "hotkey": "",
+    "description": "Grants self a bonus health regeneration and bonus mana regeneration stack for a duration per enemy hero kill.",
+    "type": "Passive",
+    "traits": {
+      "Health Regen Bonus": "3.7",
+      "Mana Regen Bonus": "3.7",
+      "Duration": "8 (With level 10 Left Talent 10)",
+      "Health Regen Bonus Increase": "0.3",
+      "Mana Regen Bonus Increase": "0.3"
+    }
+  },
+  "abilities": [
+    {
+      "name": "Death Pulse",
+      "hotkey": "Q",
+      "description": "Releases a wave of death around Necrophos, dealing damage to enemy units and healing allied units.",
+      "type": "No",
+      "traits": {
+        "Cast Animation": "0 + 0.77",
+        "Damage": "100/160/220/280",
+        "Heal": "70/90/110/130 (With level 15 Left Talent 130/150/170/190)",
+        "Cooldown": "8/7/6/5 ( 5.5/4.5/3.5/2.5)",
+        "Mana Cost": "115/130/145/160"
+      }
+    },
+    {
+      "name": "Ghost Shroud",
+      "hotkey": "W",
+      "description": "Turns Necrophos ethereal, and emits a movement speed slow aura that affects enemy units around him.",
+      "type": "No / Aura",
+      "traits": {
+        "Cast Animation": "0 + 0",
+        "Duration": "3/3.5/4/4.5",
+        "Cooldown": "28/24/20/16 ( 25.5/21.5/17.5/13.5)",
+        "Mana Cost": "75"
+      }
+    },
+    {
+      "name": "Heartstopper Aura",
+      "hotkey": "E",
+      "description": "Causes nearby enemy units to lose a percentage of their max health over time.",
+      "type": "Passive / Aura",
+      "traits": {
+        "Max Health Lost per Second": "0.8%/1.3%/1.8%/2.3%",
+        "Health Regen Reduction": " (With level 20 Left Talent 20%)",
+        "Self Health Regen to Health Loss Bonus Factor": "(Upgradable by Aghanim's Scepter. 0.5)"
+      }
+    },
+    {
+      "name": "Death Seeker",
+      "hotkey": "D",
+      "description": "Turns Necrophos into a large death projectile toward the unit-targeted enemy's location.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.2 + 0.6",
+        "Cast Range": "750",
+        "Damage Factor": "1",
+        "Heal Factor": "1",
+        "Cooldown": "19",
+        "Mana Cost": "160"
+      }
+    },
+    {
+      "name": "Reaper's Scythe",
+      "hotkey": "R",
+      "description": "Stuns the unit-targeted enemy hero, then deals damage based on per point of missing health of the affected unit.Any kills under this effect is credited to Necrophos.",
+      "type": "Unit",
+      "traits": {
+        "Cast Animation": "0.45 + 1.5",
+        "Cast Range": "600",
+        "Damage per Missing Health": "0.7/0.8/0.9 (With level 25 Right Talent 1/1.1/1.2)",
+        "Health Regen Bonus per Kill": "1/2/3",
+        "Mana Regen Bonus per Kill": "1/2/3",
+        "Cooldown": "100",
+        "Mana Cost": "250/375/500"
+      }
+    }
+  ],
+  "talents": [
+    {
+      "level": 25,
+      "left": "-2.5s Death Pulse Cooldown",
+      "right": "+0.3 Reaper's Scythe Damage per Missing Health"
+    },
+    {
+      "level": 20,
+      "left": "+20% Heartstopper Aura Health Regen Reduction",
+      "right": "+75 Spell Area-of-Effect Bonus"
+    },
+    {
+      "level": 15,
+      "left": "+60 Death Pulse Heal",
+      "right": "+15% Ghost Shroud Move Speed Slow"
+    },
+    {
+      "level": 10,
+      "left": "+2s Sadist Stack Duration",
+      "right": "-2.5 Ghost Shroud Cooldown"
+    }
+  ],
+  "roles": [
+    "Carry",
+    "Nuker",
+    "Durable",
+    "Disabler"
+  ],
+  "facets": []
+}
