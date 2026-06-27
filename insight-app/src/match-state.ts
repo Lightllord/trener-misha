@@ -15,6 +15,7 @@ import type {
   RawItem,
   RawBuilding,
   RawMinimapEntity,
+  DraftState,
 } from "./types.js"
 import { getZone } from "./mapZones.js"
 
@@ -48,6 +49,9 @@ export class MatchStateManager {
   /** Последние известные позиции героев (сохраняются между тиками) */
   private heroPositions: HeroPositions = {}
 
+  /** Последний распознанный CV драфт (сохраняется между GSI-тиками) */
+  private draft: DraftState | null = null
+
   /** Текущий снапшот состояния (null если матч не идёт) */
   get current(): MatchState | null {
     return this.state
@@ -56,6 +60,12 @@ export class MatchStateManager {
   /** Подписаться на смену фазы игры */
   onPhaseChange(listener: PhaseChangeListener): void {
     this.phaseListeners.push(listener)
+  }
+
+  /** Записать драфт из CV-детектора — попадёт в state на ближайшем пуше */
+  setDraft(draft: DraftState): void {
+    this.draft = draft
+    if (this.state) this.state.draft = draft
   }
 
   /** Обновить состояние из GSI-пакета */
@@ -67,6 +77,7 @@ export class MatchStateManager {
       this.previousPhase = null
       this.seenBuildings.clear()
       this.heroPositions = {}
+      this.draft = null
       return
     }
 
@@ -80,6 +91,7 @@ export class MatchStateManager {
       this.previousPhase = null
       this.seenBuildings.clear()
       this.heroPositions = {}
+      this.draft = null
     }
 
     const phase = parsePhase(raw.map.game_state)
@@ -137,6 +149,7 @@ export class MatchStateManager {
       heroPositions: this.heroPositions,
       otherHeroes: [],
       lastEnemyInspectAt: 0,
+      draft: this.draft,
     }
   }
 

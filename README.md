@@ -12,7 +12,7 @@ Dota 2 real-time voice coaching assistant powered by the OpenAI Realtime API.
 └──────────────┘                └──────────────┘                └──────────────┘
                                        ▲
                                        │ POST /push/state
-                                       │ POST /push/draft
+                                       │ (draft included in MatchState)
                                        │
                                 ┌──────────────┐
                                 │ insight-app  │◄─── Dota 2 GSI POST

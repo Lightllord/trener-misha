@@ -30,7 +30,6 @@ insight-app/cv/debug/
 insight-app/.venv/
 
 # Runtime data
-backend/data/draft.json
 patch-updater/.patch-progress.json
 patch-updater/patch-notes.json
 

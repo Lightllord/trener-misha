@@ -60,6 +60,12 @@ export function formatMatchSnapshot(state: Record<string, unknown> | null): stri
   if (!state) return ""
 
   const score = obj(state["score"])
+  const draft = obj(state["draft"])
+  const radiantPicks = arr(draft["radiant"]).map(v => str(v)).filter(Boolean)
+  const direPicks = arr(draft["dire"]).map(v => str(v)).filter(Boolean)
+  const draftLine = radiantPicks.length > 0 || direPicks.length > 0
+    ? [`<draft radiant="${radiantPicks.join(",")}" dire="${direPicks.join(",")}"/>`]
+    : []
   const player = obj(state["player"])
   const hero = obj(state["hero"])
   const abilities = arr(hero["abilities"])
@@ -110,6 +116,7 @@ export function formatMatchSnapshot(state: Record<string, unknown> | null): stri
   return [
     "<match-snapshot>",
     `<map clock="${num(state["clockTime"])}" day="${bool(state["isDaytime"]) ? "1" : "0"}" r="${num(score["radiant"])}" d="${num(score["dire"])}"/>`,
+    ...draftLine,
     `<player team="${str(player["team"])}" k="${num(player["kills"])}" d="${num(player["deaths"])}" a="${num(player["assists"])}" lh="${num(player["lastHits"])}" dn="${num(player["denies"])}" ks="${num(player["killStreak"])}" gold="${num(player["gold"])}" gpm="${num(player["gpm"])}" xpm="${num(player["xpm"])}"/>`,
     `<hero alive="${bool(hero["alive"]) ? "1" : "0"}" respawn="${num(hero["respawnSeconds"])}" max-hp="${num(hero["maxHealth"])}" max-mana="${num(hero["maxMana"])}" bb="${num(hero["buybackCost"])}/${num(hero["buybackCooldown"])}cd" scepter="${bool(hero["aghanimsScepter"]) ? "1" : "0"}" shard="${bool(hero["aghanimsShard"]) ? "1" : "0"}" attr="${num(hero["attributesLevel"])}" talents="${talents}"/>`,
     "<abilities>",

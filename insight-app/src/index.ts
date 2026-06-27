@@ -49,9 +49,18 @@ function pushToBackend(path: string, data: unknown): void {
   });
 }
 
-// Push draft updates to backend
+function pushState(): void {
+  const state = matchState.current;
+  if (!state) return;
+  state.otherHeroes = playerDetector.getOtherPlayers().map(otherPlayerToHeroState);
+  state.lastEnemyInspectAt = playerDetector.getLastInspectGameTime();
+  pushToBackend("/push/state", state);
+}
+
+// Draft is part of MatchState now — record it and push the merged state.
 draftDetector.onDraftChange((draft) => {
-  pushToBackend("/push/draft", draft);
+  matchState.setDraft(draft);
+  pushState();
 });
 
 matchState.onPhaseChange((newPhase, prevPhase) => {
@@ -127,12 +136,7 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
       }
 
       // Push state to backend after every GSI update
-      const state = matchState.current;
-      if (state) {
-        state.otherHeroes = playerDetector.getOtherPlayers().map(otherPlayerToHeroState);
-        state.lastEnemyInspectAt = playerDetector.getLastInspectGameTime();
-        pushToBackend("/push/state", state);
-      }
+      pushState();
 
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ status: "ok" }));

@@ -1,6 +1,10 @@
 /**
  * In-memory store for game data pushed from insight-app.
  * Replaces the old polling pattern (GET /draft, GET /state).
+ *
+ * The draft lives inside the match state (pushed via /push/state). Manual
+ * corrections from the agent are kept as an overlay here and re-applied to
+ * every incoming state so CV re-detection can never overwrite them.
  */
 
 interface DraftData {
@@ -10,69 +14,54 @@ interface DraftData {
   detectedAt: string;
 }
 
-let draft: DraftData | null = null;
 let state: Record<string, unknown> | null = null;
 let prevState: Record<string, unknown> | null = null;
 
-// Slots manually corrected by the agent — CV will not overwrite these.
-let lockedSlots: { radiant: Set<number>; dire: Set<number> } = {
-  radiant: new Set(),
-  dire: new Set(),
+// Slots manually corrected by the agent — keyed by slot index, re-applied to every state.
+const corrections: { radiant: Map<number, string>; dire: Map<number, string> } = {
+  radiant: new Map(),
+  dire: new Map(),
 };
 
-export function getDraft(): DraftData | null {
-  return draft;
+function isDraftData(val: unknown): val is DraftData {
+  if (typeof val !== "object" || val === null) return false;
+  const d = val as Record<string, unknown>;
+  return Array.isArray(d.radiant) && Array.isArray(d.dire) && Array.isArray(d.confidence);
 }
 
-export function setDraft(data: DraftData): void {
-  if (lockedSlots.radiant.size === 0 && lockedSlots.dire.size === 0) {
-    draft = data;
-    return;
+function applyCorrections(data: Record<string, unknown>): void {
+  if (corrections.radiant.size === 0 && corrections.dire.size === 0) return;
+
+  const draft: DraftData = isDraftData(data.draft)
+    ? data.draft
+    : {
+        radiant: Array(5).fill("unknown") as string[],
+        dire: Array(5).fill("unknown") as string[],
+        confidence: Array(10).fill(0) as number[],
+        detectedAt: new Date().toISOString(),
+      };
+
+  for (const [i, hero] of corrections.radiant) {
+    draft.radiant[i] = hero;
+    draft.confidence[i] = 1.0;
+  }
+  for (const [i, hero] of corrections.dire) {
+    draft.dire[i] = hero;
+    draft.confidence[5 + i] = 1.0;
   }
 
-  // Merge: preserve manually corrected slots, take everything else from CV.
-  const merged: DraftData = {
-    radiant: [...data.radiant],
-    dire: [...data.dire],
-    confidence: [...data.confidence],
-    detectedAt: data.detectedAt,
-  };
+  data.draft = draft;
+}
 
-  if (draft) {
-    for (const i of lockedSlots.radiant) {
-      merged.radiant[i] = draft.radiant[i];
-      merged.confidence[i] = draft.confidence[i];
-    }
-    for (const i of lockedSlots.dire) {
-      merged.dire[i] = draft.dire[i];
-      merged.confidence[5 + i] = draft.confidence[5 + i];
-    }
-  }
-
-  draft = merged;
+export function getDraft(): DraftData | null {
+  const draft = state?.draft;
+  return isDraftData(draft) ? draft : null;
 }
 
 export function correctDraftSlot(team: "radiant" | "dire", slot: number, hero: string): void {
-  if (!draft) {
-    draft = {
-      radiant: Array(5).fill("unknown") as string[],
-      dire: Array(5).fill("unknown") as string[],
-      confidence: Array(10).fill(0) as number[],
-      detectedAt: new Date().toISOString(),
-    };
-  }
-
-  if (team === "radiant") {
-    draft.radiant[slot] = hero;
-    draft.confidence[slot] = 1.0;
-    lockedSlots.radiant.add(slot);
-  } else {
-    draft.dire[slot] = hero;
-    draft.confidence[5 + slot] = 1.0;
-    lockedSlots.dire.add(slot);
-  }
-
-  draft.detectedAt = new Date().toISOString();
+  corrections[team].set(slot, hero);
+  // Reflect immediately so get_match_state returns the correction without waiting for the next push.
+  if (state) applyCorrections(state);
 }
 
 export function getState(): Record<string, unknown> | null {
@@ -84,13 +73,14 @@ export function getPrevState(): Record<string, unknown> | null {
 }
 
 export function setState(data: Record<string, unknown>): void {
+  applyCorrections(data);
   prevState = state;
   state = data;
 }
 
 export function clearGameData(): void {
-  draft = null;
   state = null;
   prevState = null;
-  lockedSlots = { radiant: new Set(), dire: new Set() };
+  corrections.radiant.clear();
+  corrections.dire.clear();
 }

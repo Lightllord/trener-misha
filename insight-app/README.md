@@ -3,7 +3,7 @@
 Local process that runs on the player's machine. Two jobs:
 
 1. Listen for Dota 2 Game State Integration (GSI) HTTP POSTs on `:6074`, parse them into a structured `MatchState`, and push the snapshot to the backend (`POST /push/state`).
-2. Spawn the Python draft detector (`cv/detect_draft.py`) when the game enters the `pre_game` phase and push detected picks to the backend (`POST /push/draft`).
+2. Spawn the Python draft detector (`cv/detect_draft.py`) during hero selection; detected picks are merged into the `MatchState` and shipped with the same `POST /push/state` (no separate draft endpoint).
 
 ## Architecture
 
@@ -18,13 +18,13 @@ Dota 2 ──POST JSON──► insight-app (:6074)
                            │   - parses player, hero, abilities, inventory
                            │   - reconstructs buildings from minimap + GSI
                            │
-                           ├── POST /push/state ──► backend (:3000)
-                           │
-                           │ On phase change → pre_game:
+                           │ On phase change → hero_selection:
                            │   spawn `python cv/detect_draft.py --watch`
                            │   stdout = JSON lines { radiant, dire, confidence }
+                           │   → MatchStateManager.setDraft(draft)
                            │
-                           └── POST /push/draft ──► backend (:3000)
+                           └── POST /push/state ──► backend (:3000)
+                               (draft included in MatchState)
 ```
 
 If the backend is down, pushes are logged once and silently skipped — nothing is buffered. A recovery message is printed when pushes start succeeding again.
@@ -42,8 +42,8 @@ If the backend is down, pushes are logged once and silently skipped — nothing 
 
 - Wraps a Python subprocess: `python -u cv/detect_draft.py --watch --monitor <n>`.
 - Reads JSON lines from stdout, validates the shape, stamps `detectedAt`.
-- Persists to `backend/data/draft.json` and notifies listeners via `onDraftChange(listener)`.
-- `reset()` stops the process and deletes the draft file (called on post_game → hero_selection).
+- Notifies listeners via `onDraftChange(listener)`; `index.ts` records the draft on `MatchStateManager.setDraft()`, so it ships inside `MatchState` via `/push/state` (no separate draft endpoint or file).
+- `reset()` stops the process and drops the in-memory draft (called on post_game → hero_selection).
 
 ## Files
 

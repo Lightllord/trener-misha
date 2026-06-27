@@ -42,6 +42,17 @@ export interface MatchState {
 
   /** gameTime последнего CV-осмотра врага игроком (клик по герою). 0 — ни разу */
   lastEnemyInspectAt: number
+
+  /** Драфт из CV-детектора (null пока составы не распознаны) */
+  draft: DraftState | null
+}
+
+/** Драфт, распознанный CV во время выбора героев */
+export interface DraftState {
+  radiant: string[]
+  dire: string[]
+  confidence: number[]
+  detectedAt: string
 }
 
 /** Внутренний формат CV-детектора — не входит в MatchState напрямую */

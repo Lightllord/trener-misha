@@ -1,29 +1,20 @@
 import { spawn } from "node:child_process"
-import { writeFile, unlink } from "node:fs/promises"
 import { resolve } from "node:path"
 import { resolvePythonPath } from "./python-runtime.js"
+import type { DraftState } from "./types.js"
 
 const INSIGHT_APP_ROOT = resolve(__dirname, "..")
-const PROJECT_ROOT = resolve(INSIGHT_APP_ROOT, "..")
 const SCRIPT_PATH = resolve(INSIGHT_APP_ROOT, "cv", "detect_draft.py")
-const DRAFT_FILE = resolve(PROJECT_ROOT, "backend", "data", "draft.json")
 
 const POLL_INTERVAL_MS = 2000
 
-export interface DraftResult {
-  radiant: string[]
-  dire: string[]
-  confidence: number[]
-  detectedAt: string
-}
-
 /** Опрашивает detect_draft.py раз в 2 с пока идёт hero_selection. */
-export type DraftChangeListener = (draft: DraftResult) => void
+export type DraftChangeListener = (draft: DraftState) => void
 
 export class DraftDetector {
   private intervalId: ReturnType<typeof setInterval> | null = null
   private detecting = false
-  private draft: DraftResult | null = null
+  private draft: DraftState | null = null
   private monitorNum: number
   private changeListeners: DraftChangeListener[] = []
 
@@ -35,7 +26,7 @@ export class DraftDetector {
     this.changeListeners.push(listener)
   }
 
-  get current(): DraftResult | null {
+  get current(): DraftState | null {
     return this.draft
   }
 
@@ -59,7 +50,6 @@ export class DraftDetector {
   reset(): void {
     this.stop()
     this.draft = null
-    unlink(DRAFT_FILE).catch(() => {})
   }
 
   private async runDetection(): Promise<void> {
@@ -134,10 +124,6 @@ export class DraftDetector {
           console.error("[DraftDetector] Listener error:", err)
         }
       }
-
-      writeFile(DRAFT_FILE, JSON.stringify(this.draft, null, 2), "utf-8")
-        .then(() => console.log("[DraftDetector] Saved to", DRAFT_FILE))
-        .catch((err) => console.error("[DraftDetector] Failed to save:", err.message))
     } catch {
       console.error("[DraftDetector] Failed to parse JSON:", jsonLine.slice(0, 100))
     }

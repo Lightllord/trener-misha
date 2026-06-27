@@ -17,22 +17,21 @@ Requires `.env` (see [Environment](#environment-env)). All code must compile cle
 ## Architecture
 
 ```
-Dota 2 GSI → POST → insight-app (:6074) ── POST /push/state ──► backend (gameData)
-                      └─ DraftDetector ─── POST /push/draft ──► backend (gameData)
+Dota 2 GSI ──► insight-app (:6074) ── POST /push/state ──► backend (gameData)
+                  └─ DraftDetector ─┘  (draft merged into MatchState)
 
 Frontend (:5173) ◄── WS ──► backend (:3000) ◄── WS ──► OpenAI Realtime API
                   audio + JSON              audio + events
 ```
 
-`gameData.ts` is the in-memory store for everything pushed in. Voice tools and the draft analyser read from it; nothing polls. The backend is a relay with hooks — binary PCM16 24 kHz audio passes through both directions untouched. Turn detection is **hybrid**: OpenAI's `semantic_vad` handles the normal case (speak → pause → it commits and responds), and interruption stays server-side, surfaced as `audio_interrupted`. But cutting the mic mid-speech sends no trailing silence, so VAD never fires and the turn hangs. To cover that, the client sends a `mic_close` text frame on gate close; if VAD saw real speech it never committed (`userSpeechPending`, armed by `input_audio_buffer.speech_started` and disarmed by `input_audio_buffer.committed`) the backend forces `input_audio_buffer.commit` + `response.create` and nudges the delivery window open. When VAD already committed the turn — or the key was tapped without speaking — `mic_close` is a no-op, so a bare tap never triggers a reply to silence.
+The draft is part of the match state: `DraftDetector` feeds it into the insight-app `MatchStateManager`, and it ships inside `/push/state` (no separate draft endpoint). `gameData.ts` is the in-memory store for everything pushed in. Voice tools and the draft analyser read from it; nothing polls. The backend is a relay with hooks — binary PCM16 24 kHz audio passes through both directions untouched. Turn detection is **hybrid**: OpenAI's `semantic_vad` handles the normal case (speak → pause → it commits and responds), and interruption stays server-side, surfaced as `audio_interrupted`. But cutting the mic mid-speech sends no trailing silence, so VAD never fires and the turn hangs. To cover that, the client sends a `mic_close` text frame on gate close; if VAD saw real speech it never committed (`userSpeechPending`, armed by `input_audio_buffer.speech_started` and disarmed by `input_audio_buffer.committed`) the backend forces `input_audio_buffer.commit` + `response.create` and nudges the delivery window open. When VAD already committed the turn — or the key was tapped without speaking — `mic_close` is a no-op, so a bare tap never triggers a reply to silence.
 
 ## HTTP endpoints
 
 | Method | Path | Body | Purpose |
 |--------|------|------|---------|
 | `GET`  | `/`            | — | Health check |
-| `POST` | `/push/draft`  | `{ radiant[], dire[], confidence[], detectedAt }` | Store latest draft. Triggers `checkAndAnalyzeDraft()` |
-| `POST` | `/push/state`  | `MatchState` (from insight-app) | Store latest game state; runs `diffStates` to enqueue events |
+| `POST` | `/push/state`  | `MatchState` (from insight-app, incl. `draft`) | Store latest game state; runs `diffStates` to enqueue events; triggers `checkAndAnalyzeDraft()` |
 
 The backend never polls `insight-app`; data is pushed and held in-memory (`src/gameData.ts`).
 
@@ -88,8 +87,7 @@ Each file exports one `tool({ … })`; `src/tools/index.ts` re-exports them. Too
 | `run_analysis`    | `analysis.ts`   | Simulated slow analysis (3 s timeout) — delayed |
 | `get_hero_info`   | `heroInfo.ts`   | `heroes_extend.json` |
 | `list_heroes`     | `heroList.ts`   | Full hero list |
-| `get_draft`       | `draft.ts`      | Latest pushed draft |
-| `get_match_state` | `matchState.ts` | Latest parsed GSI state |
+| `get_match_state` | `matchState.ts` | Latest parsed GSI state, incl. the CV draft |
 | `get_matchups`    | `matchups.ts`   | STRATZ: win rate vs every hero (best/worst 5) |
 | `get_builds`      | `builds.ts`     | STRATZ: starting items, boots, core items by phase |
 
@@ -110,7 +108,7 @@ Non-obvious navigation only — files whose role isn't already implied by their 
 |------|------|
 | `src/index.ts`           | HTTP + WS server, session lifecycle, `tryDeliver()` orchestration |
 | `src/agent.ts`           | `RealtimeAgent` — system instructions, voice, tool list |
-| `src/gameData.ts`        | In-memory, push-only store for latest draft + state — nothing polls it |
+| `src/gameData.ts`        | In-memory, push-only store for the latest match state (the draft is a field on it) + the agent's manual draft corrections overlay — nothing polls it |
 | `src/gameEventQueue.ts`  | Event buffer + throttling + fallback-status generation |
 | `src/stateDiff.ts`       | `diffStates(prev, curr)` → `GameEvent[]` |
 | `src/draftAnalysis.ts`   | Background `gpt-5.4-mini` tool-use loop → produces a `draft_analysis` insight |
@@ -128,7 +126,6 @@ Non-obvious navigation only — files whose role isn't already implied by their 
 
 - `heroes_extend.json` — hero notes; updated by `patch-updater`.
 - `stratz/heroes.json`, `stratz/items.json` — STRATZ ID → display-name maps.
-- `draft.json` — gitignored; last draft detected by `insight-app/cv/detect_draft.py`.
 
 ## Environment (`.env`)
 
