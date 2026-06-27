@@ -47,7 +47,7 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
   },
   level_up: {
     unique: false,
-    description: "Player leveled up — mention if the level is a power spike (6, 12, 18, 25).",
+    description: "Player reached a key level (6, 10, 12, 15, 18, 20, 25, 30) — note the power spike or new ability.",
     importance: "low",
     ttlMs: 15_000,
   },

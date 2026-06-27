@@ -1,8 +1,10 @@
 export interface GameEvent {
   type: string;
-  priority: number;   // 1=critical, 2=important, 3=info
   summary: string;
 }
+
+// Levels worth announcing — power spikes / ability unlocks, not every level
+const KEY_LEVELS = [6, 10, 12, 15, 18, 20, 25, 30];
 
 interface PlayerData {
   kills?: number;
@@ -97,6 +99,7 @@ function buildingLabel(b: BuildingData): string {
 export function diffStates(
   prev: Record<string, unknown>,
   curr: Record<string, unknown>,
+  keyItems: Set<string>,
 ): GameEvent[] {
   const events: GameEvent[] = [];
 
@@ -114,7 +117,6 @@ export function diffStates(
     const respawn = cHero.respawnSeconds ?? 0;
     events.push({
       type: "player_died",
-      priority: 1,
       summary: `Ты погиб (${kda}). Респаун через ${respawn}с.`,
     });
   }
@@ -124,25 +126,27 @@ export function diffStates(
     const kda = `${cPlayer.kills ?? 0}/${cPlayer.deaths ?? 0}/${cPlayer.assists ?? 0}`;
     events.push({
       type: "player_kill",
-      priority: 2,
       summary: `Убийство! Счёт ${kda}.`,
     });
   }
 
-  // Level up
+  // Level up — only on key power-spike levels
   if ((cHero.level ?? 0) > (pHero.level ?? 0)) {
-    events.push({
-      type: "level_up",
-      priority: 2,
-      summary: `Уровень ${cHero.level}.`,
-    });
+    const prevLevel = pHero.level ?? 0;
+    const curLevel = cHero.level ?? 0;
+    const spike = KEY_LEVELS.filter((lvl) => lvl > prevLevel && lvl <= curLevel).at(-1);
+    if (spike !== undefined) {
+      events.push({
+        type: "level_up",
+        summary: `Уровень ${spike}.`,
+      });
+    }
   }
 
   // Respawn
   if (pHero.alive === false && cHero.alive === true) {
     events.push({
       type: "respawned",
-      priority: 2,
       summary: "Ты воскрес.",
     });
   }
@@ -151,7 +155,6 @@ export function diffStates(
   if (!pHero.aghanimsScepter && cHero.aghanimsScepter) {
     events.push({
       type: "aghs_scepter",
-      priority: 2,
       summary: "Aghanim's Scepter получен!",
     });
   }
@@ -160,7 +163,6 @@ export function diffStates(
   if (!pHero.aghanimsShard && cHero.aghanimsShard) {
     events.push({
       type: "aghs_shard",
-      priority: 2,
       summary: "Aghanim's Shard получен!",
     });
   }
@@ -170,11 +172,11 @@ export function diffStates(
   const currItems = itemMultiset(c.hero?.inventory?.main ?? []);
   for (const [name, count] of currItems) {
     const prevCount = prevItems.get(name) ?? 0;
-    if (count > prevCount) {
-      const clean = name.replace(/^item_/, "").replaceAll("_", " ");
+    const internalName = name.replace(/^item_/, "");
+    if (count > prevCount && keyItems.has(internalName)) {
+      const clean = internalName.replaceAll("_", " ");
       events.push({
         type: "item_purchased",
-        priority: 3,
         summary: `Куплен ${clean}.`,
       });
     }
@@ -188,7 +190,6 @@ export function diffStates(
   for (const b of allyDestroyed) {
     events.push({
       type: "ally_building_destroyed",
-      priority: 1,
       summary: `Наша ${buildingLabel(b)} уничтожена!`,
     });
   }
@@ -201,7 +202,6 @@ export function diffStates(
   for (const b of enemyDestroyed) {
     events.push({
       type: "enemy_building_destroyed",
-      priority: 2,
       summary: `Вражеская ${buildingLabel(b)} уничтожена.`,
     });
   }

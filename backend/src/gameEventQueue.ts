@@ -30,6 +30,13 @@ let lastInspectReminderMs = 0;
 const notifiedEnemyItems = new Map<string, Set<string>>();
 let keyItemSet: Set<string> | null = null;
 
+// Kick off loading at import so the set is ready before game states arrive;
+// both the enemy item-awareness check and the player item-purchase event filter
+// on it (only importance === 1 items are worth announcing).
+void getCandidateItems()
+  .then((items) => (keyItemSet = new Set(items)))
+  .catch((err) => log("insight", `key-item set load failed: ${String(err)}`));
+
 interface HeroPos {
   x: number;
   y: number;
@@ -190,7 +197,7 @@ export function processStateUpdate(
     log("insight", `enemy key-item check failed: ${String(err)}`),
   );
 
-  const events = diffStates(prev, curr);
+  const events = diffStates(prev, curr, keyItemSet ?? new Set());
   for (const e of events) {
     if (e.type === "player_died") {
       const c = curr as {
