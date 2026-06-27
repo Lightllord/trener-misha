@@ -11,9 +11,9 @@ FRAME_THRESHOLD  = 0.75
 # Origin: innate icon top-left. Positive = right / down.
 # pixel_offset = ratio * innate_h at detection time.
 
-NAME   = {'dx': -4.72, 'dy': -0.68, 'w': 3.18, 'h': 0.42}
-LEVEL  = {'dx': -5.54, 'dy': 1.8, 'w': 0.78, 'h': 0.72}
-ITEM_0 = {'dx': 8.74, 'dy': -0.1, 'w': 1.2, 'h': 0.9}  # from innate RIGHT edge — used by --update-frame
+SKILL_1 = {'dx': 0.94, 'dy': 0.18, 'w': 1.08, 'h': 0.64}
+LEVEL   = {'dx': -5.54, 'dy': 1.8, 'w': 0.78, 'h': 0.72}
+ITEM_0  = {'dx': 8.74, 'dy': -0.1, 'w': 1.2, 'h': 0.9}  # from innate RIGHT edge — used by --update-frame
 
 # Item grid: 2 rows × 3 cols, anchored from the panel frame (right anchor).
 # FRAME_ITEMS_DX: from frame.x to right edge of column 2 (negative = items left of frame).

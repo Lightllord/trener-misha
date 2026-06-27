@@ -17,6 +17,7 @@ const playerDetector = new PlayerDetector(
   2,
   () => matchState.current?.heroPositions ?? {},
   () => matchState.current?.gameTime ?? 0,
+  () => matchState.current?.hero.name ?? "",
 );
 
 let stopTimeoutId: ReturnType<typeof setTimeout> | null = null;

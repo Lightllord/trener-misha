@@ -5,15 +5,15 @@ Click two corners (top-left then bottom-right) of each region.
 Results are saved to player_regions.py and templates/.
 
 Usage:
-    python calibrate_player.py [--monitor N]              # Full calibration (8 clicks)
-    python calibrate_player.py [--monitor N] --tp scroll  # TP scroll template (2 clicks)
-    python calibrate_player.py [--monitor N] --tp empty   # Empty TP slot template (2 clicks)
+    python calibrate_player.py [--monitor N]              # Full calibration (10 clicks)
+    python calibrate_player.py [--monitor N] --skill      # Recalibrate SKILL_1 only (2 clicks; innate auto-detected)
+    python calibrate_player.py [--monitor N] --frame      # Panel frame template only (2 clicks)
 
 Full calibration steps:
-    1. INNATE ABILITY icon  — circular icon to the right of the portrait
-    2. FIRST ITEM SLOT      — leftmost item slot
-    3. HERO NAME text       — text above the portrait
-    4. HERO LEVEL badge     — level number near bottom-left of portrait
+    1. INNATE ABILITY icon   — circular icon to the right of the portrait
+    2. FIRST ITEM SLOT       — leftmost item slot
+    3. FIRST ABILITY icon    — skill 1 (leftmost ability icon)
+    4. HERO LEVEL badge      — level number near bottom-left of portrait
 
 Controls:
     Left click       — place calibration point
@@ -39,7 +39,7 @@ PLAYER_REGIONS_OUT = SCRIPT_DIR / "player_regions.py"
 FULL_STEPS = [
     ("innate",       "INNATE ABILITY icon",                    (0, 200, 255)),
     ("item_0",       "FIRST (leftmost) ITEM SLOT",             (0, 255, 100)),
-    ("name",         "HERO NAME text",                         (255, 200,   0)),
+    ("skill_1",      "FIRST ABILITY (skill 1) icon",           (255, 200,   0)),
     ("level",        "HERO LEVEL badge/number",                (255, 100, 255)),
     ("panel_frame",  "PANEL FRAME (trapezoid on right edge)",  (100, 200, 255)),
 ]
@@ -61,6 +61,7 @@ _base_img: np.ndarray = np.zeros((1, 1, 3), dtype=np.uint8)
 _scale = 1.0        # base_img / original_screen ratio
 _clicks: list[tuple[int, int]] = []   # stored as BASE-IMAGE pixels
 _steps:  list[tuple[str, str, tuple]] = []
+_ref_boxes: list[tuple[float, float, float, float, tuple, str]] = []   # BASE-IMAGE pixels
 _win_name = "calibrate_player"
 
 
@@ -103,6 +104,14 @@ def _render() -> np.ndarray:
 
     total   = len(_steps) * 2
     n_done  = len(_clicks)
+
+    # draw reference boxes (e.g. auto-detected innate) for alignment
+    for bx, by, bw, bh, color, label in _ref_boxes:
+        p1 = _base_to_view(bx, by)
+        p2 = _base_to_view(bx + bw, by + bh)
+        cv2.rectangle(canvas, p1, p2, color, 1)
+        cv2.putText(canvas, label, (p1[0] + 2, p1[1] - 5),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.38, color, 1)
 
     # draw completed rectangles
     for i in range(0, n_done - 1, 2):
@@ -202,8 +211,9 @@ def run_calibration(
     screen_w: int,
     screen_h: int,
     steps: list[tuple[str, str, tuple]],
+    ref_boxes: list[tuple[float, float, float, float, tuple, str]] | None = None,
 ) -> dict[str, dict[str, float]]:
-    global _base_img, _scale, _zoom, _view_ox, _view_oy, _clicks, _steps
+    global _base_img, _scale, _zoom, _view_ox, _view_oy, _clicks, _steps, _ref_boxes
 
     _steps  = steps
     _clicks = []
@@ -214,6 +224,10 @@ def run_calibration(
     # Fit to 85 % of screen height so the OS taskbar doesn't clip the window
     max_display_h = int(screen_h * 0.85)
     _scale = min(1.0, max_display_h / screen_h)
+    _ref_boxes = [
+        (x * _scale, y * _scale, w * _scale, h * _scale, color, label)
+        for (x, y, w, h, color, label) in (ref_boxes or [])
+    ]
     if _scale < 1.0:
         bw = int(screen_w * _scale)
         bh = int(screen_h * _scale)
@@ -283,8 +297,8 @@ def write_player_regions(regions: dict[str, dict[str, float]]) -> None:
             "h":  round( r["h"]       / ih, 4),
         }
 
-    name_off  = off(regions["name"])
-    level_off = off(regions["level"])
+    skill1_off = off(regions["skill_1"])
+    level_off  = off(regions["level"])
     item_off  = off(regions["item_0"], from_right=True)
     slot_w    = round(regions["item_0"]["w"] / ih, 4)
     slot_h    = round(regions["item_0"]["h"] / ih, 4)
@@ -310,9 +324,9 @@ FRAME_THRESHOLD  = 0.75
 # Origin: innate icon top-left. Positive = right / down.
 # pixel_offset = ratio * innate_h at detection time.
 
-NAME   = {name_off}
-LEVEL  = {level_off}
-ITEM_0 = {item_off}  # from innate RIGHT edge — used by --update-frame
+SKILL_1 = {skill1_off}
+LEVEL   = {level_off}
+ITEM_0  = {item_off}  # from innate RIGHT edge — used by --update-frame
 
 # Item grid: 2 rows × 3 cols, anchored from the panel frame (right anchor).
 # FRAME_ITEMS_DX: from frame.x to right edge of column 2 (negative = items left of frame).
@@ -326,7 +340,7 @@ NUM_ITEM_SLOTS = 6
 '''
     PLAYER_REGIONS_OUT.write_text(content, encoding="utf-8")
     print(f"\nSaved: {PLAYER_REGIONS_OUT.name}", file=sys.stderr)
-    for k, v in [("NAME", name_off), ("LEVEL", level_off), ("ITEM_0", item_off)]:
+    for k, v in [("SKILL_1", skill1_off), ("LEVEL", level_off), ("ITEM_0", item_off)]:
         print(f"  {k}: {v}", file=sys.stderr)
     print(f"  SLOT: w={slot_w}  h={slot_h}", file=sys.stderr)
 
@@ -356,6 +370,34 @@ def _match_template_multiscale(
             best_score = val
             best = (loc[0], int(sh * roi_top) + loc[1], nw, nh)
     return best
+
+
+def _offset_from_innate(inn: dict[str, float], r: dict[str, float]) -> dict[str, float]:
+    """Region r as a ratio offset from the innate icon's top-left (innate_h units)."""
+    ih = inn["h"]
+    return {
+        "dx": round((r["x"] - inn["x"]) / ih, 4),
+        "dy": round((r["y"] - inn["y"]) / ih, 4),
+        "w":  round( r["w"]             / ih, 4),
+        "h":  round( r["h"]             / ih, 4),
+    }
+
+
+def _patch_skill_region(skill_off: dict[str, float]) -> None:
+    """Overwrite the SKILL_1 line in player_regions.py (adds it if absent)."""
+    import re
+    if not PLAYER_REGIONS_OUT.exists():
+        print("player_regions.py not found — run full calibration first.", file=sys.stderr)
+        return
+    text = PLAYER_REGIONS_OUT.read_text(encoding="utf-8")
+    text = re.sub(r"^# SKILL_1 is a placeholder.*\n", "", text, flags=re.MULTILINE)
+    line = f"SKILL_1 = {skill_off}"
+    if re.search(r"^SKILL_1\s*=", text, re.MULTILINE):
+        text = re.sub(r"^SKILL_1\s*=.*$", line, text, flags=re.MULTILINE)
+    else:
+        text += f"\n{line}\n"
+    PLAYER_REGIONS_OUT.write_text(text, encoding="utf-8")
+    print(f"  SKILL_1 = {skill_off}", file=sys.stderr)
 
 
 def _patch_player_regions(frame_items_dx: float, frame_items_dy: float) -> None:
@@ -418,6 +460,8 @@ def main() -> None:
     parser.add_argument("--monitor", type=int, default=2)
     parser.add_argument("--frame", action="store_true",
                         help="Extract panel_frame template only (2 clicks)")
+    parser.add_argument("--skill", action="store_true",
+                        help="Recalibrate SKILL_1 only (2 clicks on skill 1; innate auto-detected)")
     parser.add_argument("--update-frame", action="store_true",
                         help="Auto-detect frame position from existing templates and update player_regions.py")
     args = parser.parse_args()
@@ -442,6 +486,28 @@ def main() -> None:
             print("\nplayer_regions.py updated. Run detect_players.py --debug to verify.", file=sys.stderr)
         else:
             print("\nFailed. Check that the panel is visible and templates exist.", file=sys.stderr)
+    elif args.skill:
+        innate_path = TEMPLATES_DIR / "innate_frame.png"
+        if not innate_path.exists():
+            print("innate_frame.png not found. Run full calibration first.", file=sys.stderr)
+            return
+        innate_box = _match_template_multiscale(img_orig, cv2.imread(str(innate_path)), 0.65)
+        if innate_box is None:
+            print("Could not auto-detect the innate icon. Make sure the panel is visible.", file=sys.stderr)
+            return
+        ix, iy, iw, ih = innate_box
+        inn = {"x": float(ix), "y": float(iy), "w": float(iw), "h": float(ih)}
+        print(f"  Innate auto-detected at ({ix},{iy}) {iw}x{ih}", file=sys.stderr)
+
+        steps = [("skill_1", "FIRST ABILITY (skill 1) icon", (255, 200, 0))]
+        ref   = [(ix, iy, iw, ih, (0, 200, 255), "innate (auto)")]
+        print("\nSkill calibration — 2 clicks on skill 1 (innate auto-detected).", file=sys.stderr)
+        results = run_calibration(img_orig, sw, sh, steps, ref_boxes=ref)
+        if "skill_1" not in results:
+            print("Incomplete — need skill_1. Aborting.", file=sys.stderr)
+            return
+        _patch_skill_region(_offset_from_innate(inn, results["skill_1"]))
+        print("\nSKILL_1 updated. Run detect_players.py --debug to verify.", file=sys.stderr)
     elif args.frame:
         key, label, color = ("panel_frame", "PANEL FRAME (trapezoid on right edge)", (100, 200, 255))
         print(f"\nFrame template mode — {label}", file=sys.stderr)

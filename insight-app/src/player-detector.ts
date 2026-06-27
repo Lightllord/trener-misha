@@ -29,6 +29,7 @@ export class PlayerDetector {
   private monitorNum:       number
   private getHeroPositions: () => HeroPositions
   private getGameTime:      () => number
+  private getOwnHeroName:   () => string
 
   // gameTime последней валидной CV-детекции — игрок осматривал инвентарь врага.
   private lastInspectGameTime = 0
@@ -37,10 +38,12 @@ export class PlayerDetector {
     monitorNum: number,
     getHeroPositions: () => HeroPositions,
     getGameTime: () => number,
+    getOwnHeroName: () => string,
   ) {
     this.monitorNum       = monitorNum
     this.getHeroPositions = getHeroPositions
     this.getGameTime      = getGameTime
+    this.getOwnHeroName   = getOwnHeroName
   }
 
   getLastInspectGameTime(): number {
@@ -178,8 +181,10 @@ export class PlayerDetector {
     ) return
 
     const raw = parsed as RawDetection
-    // heroName === "unknown" — это панель собственного героя игрока, а не осмотр врага.
+    // heroName === "unknown" — иконка скилла не распозналась, пропускаем.
     if (raw.heroName === "unknown") return
+    // Панель собственного героя игрока — данные уже приходят из GSI, не дублируем.
+    if (`npc_dota_hero_${raw.heroName}` === this.getOwnHeroName()) return
     if (!isClean(raw.items)) {
       console.log(`[PlayerDetector] ${raw.heroName}: skipped (unknown items)`)
       return

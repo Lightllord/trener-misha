@@ -32,8 +32,8 @@ import mss
 from regions import DRAFT_REGIONS, TEMPLATE_SIZE, CONFIDENCE_THRESHOLD
 
 SCRIPT_DIR = Path(__file__).parent
-ICONS_DIR = SCRIPT_DIR / "icons"
-VARIANTS_DIR = ICONS_DIR / "variants"
+RADIANT_ICONS_DIR = SCRIPT_DIR / "icons_radiant"
+DIRE_ICONS_DIR = SCRIPT_DIR / "icons_dire"
 DEBUG_DIR = SCRIPT_DIR / "debug"
 
 
@@ -44,21 +44,21 @@ def to_gray(img: np.ndarray) -> np.ndarray:
     return cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 
-def load_templates() -> dict[str, list[np.ndarray]]:
-    """Load hero icon templates including arcana/persona variants.
+def load_templates(icons_dir: Path) -> dict[str, list[np.ndarray]]:
+    """Load hero icon templates from icons_dir, including arcana/persona variants.
 
-    Default icons from cv/icons/ plus variants from cv/icons/variants/.
+    Default icons from icons_dir/ plus variants from icons_dir/variants/.
     Variant filenames: {heroname}_v1.png, {heroname}_v2.png, etc.
     Returns dict mapping hero_name -> list of grayscale templates.
     """
     templates: dict[str, list[np.ndarray]] = {}
-    if not ICONS_DIR.exists():
-        print("Error: cv/icons/ not found. Run 'npm run download-icons' first.", file=sys.stderr)
+    if not icons_dir.exists():
+        print(f"Error: {icons_dir.name}/ not found.", file=sys.stderr)
         sys.exit(1)
 
-    icon_files = list(ICONS_DIR.glob("*.png"))
+    icon_files = list(icons_dir.glob("*.png"))
     if not icon_files:
-        print("Error: No icon files found in cv/icons/. Run 'npm run download-icons' first.", file=sys.stderr)
+        print(f"Error: No icon files found in {icons_dir.name}/.", file=sys.stderr)
         sys.exit(1)
 
     # Load default icons
@@ -71,8 +71,9 @@ def load_templates() -> dict[str, list[np.ndarray]]:
 
     # Load variants (arcanas, personas)
     variant_count = 0
-    if VARIANTS_DIR.exists():
-        for vpath in VARIANTS_DIR.glob("*.png"):
+    variants_dir = icons_dir / "variants"
+    if variants_dir.exists():
+        for vpath in variants_dir.glob("*.png"):
             # Parse hero name: "phantom_assassin_v1.png" -> "phantom_assassin"
             stem = vpath.stem
             hero_name = stem.rsplit("_v", 1)[0]
@@ -85,7 +86,8 @@ def load_templates() -> dict[str, list[np.ndarray]]:
             variant_count += 1
 
     total = sum(len(v) for v in templates.values())
-    print(f"Loaded {total} templates ({len(templates)} heroes, {variant_count} variants)", file=sys.stderr)
+    print(f"Loaded {total} templates from {icons_dir.name}/ "
+          f"({len(templates)} heroes, {variant_count} variants)", file=sys.stderr)
     return templates
 
 
@@ -133,10 +135,10 @@ def extract_slots(screen: np.ndarray, region: dict) -> list[np.ndarray]:
 
 
 def match_hero(slot: np.ndarray, templates: dict[str, list[np.ndarray]]) -> tuple[str, float]:
-    """Match a slot against all templates using horizontally-cropped comparison.
+    """Match a slot against all templates.
 
-    Removes ~1/3 from each side of both slot and template before matching
-    to focus on the center of the portrait and ignore side decorations.
+    Templates are grayscale (converted at load time) and resized to the slot
+    size for comparison; no further processing is applied.
     """
     best_name = "unknown"
     best_score = 0.0
@@ -144,11 +146,7 @@ def match_hero(slot: np.ndarray, templates: dict[str, list[np.ndarray]]) -> tupl
 
     for hero_name, hero_templates in templates.items():
         for template in hero_templates:
-            t_h, t_w = template.shape[:2]
-            t_x_off = t_w // 3
-            tmpl_cropped = template[:, t_x_off: t_w - t_x_off]
-
-            resized = cv2.resize(tmpl_cropped, (slot_w, slot_h), interpolation=cv2.INTER_AREA)
+            resized = cv2.resize(template, (slot_w, slot_h), interpolation=cv2.INTER_AREA)
             result = cv2.matchTemplate(slot, resized, cv2.TM_CCOEFF_NORMED)
             _, max_val, _, _ = cv2.minMaxLoc(result)
 
@@ -162,13 +160,7 @@ def match_hero(slot: np.ndarray, templates: dict[str, list[np.ndarray]]) -> tupl
     return best_name, best_score
 
 
-def save_debug_images(
-    screen: np.ndarray,
-    radiant_slots: list[np.ndarray],
-    dire_slots: list[np.ndarray],
-    radiant_results: list[tuple[str, float]],
-    dire_results: list[tuple[str, float]],
-) -> None:
+def save_debug_images(screen: np.ndarray) -> None:
     """Save annotated debug images for calibration and verification."""
     DEBUG_DIR.mkdir(exist_ok=True)
 
@@ -190,27 +182,25 @@ def save_debug_images(
 
     cv2.imwrite(str(DEBUG_DIR / "annotated.png"), annotated)
 
-    # Save individual slot crops with labels (grayscale slots from matching)
-    all_slots = [("radiant", radiant_slots, radiant_results), ("dire", dire_slots, dire_results)]
-    for team, slots, results in all_slots:
-        for i, (slot, (name, conf)) in enumerate(zip(slots, results)):
-            # Slot is grayscale, convert to BGR for annotation
-            if len(slot.shape) == 2:
-                slot_bgr = cv2.cvtColor(slot, cv2.COLOR_GRAY2BGR)
-            else:
-                slot_bgr = slot
-            slot_large = cv2.resize(slot_bgr, (256, 144), interpolation=cv2.INTER_NEAREST)
-            label = f"{name} ({conf:.2f})"
-            cv2.putText(slot_large, label, (5, 135), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 255, 0), 1)
-            cv2.imwrite(str(DEBUG_DIR / f"{team}_slot_{i}_{name}.png"), slot_large)
+    # Save each slot as the raw color crop straight from the screen, before any
+    # grayscale / resize processing.
+    for team, region in DRAFT_REGIONS.items():
+        name = "radiant" if "radiant" in team else "dire"
+        for i, slot_def in enumerate(region["slots"]):
+            x_start = int(slot_def["x_start"] * w)
+            y_start = int(slot_def["y_start"] * h)
+            x_end = int(slot_def["x_end"] * w)
+            y_end = int(slot_def["y_end"] * h)
+            crop = screen[y_start:y_end, x_start:x_end]
+            cv2.imwrite(str(DEBUG_DIR / f"{name}_slot_{i}.png"), crop)
 
     print(f"Debug images saved to {DEBUG_DIR}", file=sys.stderr)
 
 
 def detect_draft(monitor_num: int = 1, debug: bool = False) -> dict:
     """Main detection pipeline: capture screen, match heroes, return results."""
-    templates = load_templates()
-    print(f"Loaded {len(templates)} hero templates", file=sys.stderr)
+    radiant_templates = load_templates(RADIANT_ICONS_DIR)
+    dire_templates = load_templates(DIRE_ICONS_DIR)
 
     screen = capture_screen(monitor_num)
     print(f"Screen captured: {screen.shape[1]}x{screen.shape[0]}", file=sys.stderr)
@@ -221,11 +211,11 @@ def detect_draft(monitor_num: int = 1, debug: bool = False) -> dict:
     radiant_slots = extract_slots(screen, radiant_region)
     dire_slots = extract_slots(screen, dire_region)
 
-    radiant_results = [match_hero(slot, templates) for slot in radiant_slots]
-    dire_results = [match_hero(slot, templates) for slot in dire_slots]
+    radiant_results = [match_hero(slot, radiant_templates) for slot in radiant_slots]
+    dire_results = [match_hero(slot, dire_templates) for slot in dire_slots]
 
     if debug:
-        save_debug_images(screen, radiant_slots, dire_slots, radiant_results, dire_results)
+        save_debug_images(screen)
 
     radiant_names = [name for name, _ in radiant_results]
     dire_names = [name for name, _ in dire_results]
@@ -256,7 +246,8 @@ def watch_mode(monitor_num: int, debug: bool, hotkey: str) -> None:
     """Watch mode with global hotkey (works outside terminal)."""
     import keyboard
 
-    templates = load_templates()
+    radiant_templates = load_templates(RADIANT_ICONS_DIR)
+    dire_templates = load_templates(DIRE_ICONS_DIR)
 
     last_trigger = 0
     debounce_delay = 100
@@ -280,11 +271,11 @@ def watch_mode(monitor_num: int, debug: bool, hotkey: str) -> None:
         radiant_slots = extract_slots(screen, DRAFT_REGIONS["radiant_picks"])
         dire_slots = extract_slots(screen, DRAFT_REGIONS["dire_picks"])
 
-        radiant_results = [match_hero(slot, templates) for slot in radiant_slots]
-        dire_results = [match_hero(slot, templates) for slot in dire_slots]
+        radiant_results = [match_hero(slot, radiant_templates) for slot in radiant_slots]
+        dire_results = [match_hero(slot, dire_templates) for slot in dire_slots]
 
         if debug:
-            save_debug_images(screen, radiant_slots, dire_slots, radiant_results, dire_results)
+            save_debug_images(screen)
 
         result = {
             "radiant": [name for name, _ in radiant_results],

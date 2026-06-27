@@ -95,7 +95,7 @@ def build_preview(raw: np.ndarray, processed: np.ndarray, level: int, saved: boo
 
 
 def show_preview_and_wait(raw: np.ndarray, level: int, already_saved: bool) -> str:
-    processed = preprocess_name(raw)
+    processed = preprocess_level(raw)
     win = "learn_levels"
     cv2.namedWindow(win, cv2.WINDOW_AUTOSIZE)
     while True:

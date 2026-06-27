@@ -10,20 +10,20 @@ Re-run `python calibrate.py` to recalibrate.
 DRAFT_REGIONS = {
     "radiant_picks": {
         "slots": [
-        {"x_start": 0.1281, "y_start": 0.0065, "x_end": 0.1510, "y_end": 0.0676},
-        {"x_start": 0.1917, "y_start": 0.0065, "x_end": 0.2146, "y_end": 0.0667},
-        {"x_start": 0.2573, "y_start": 0.0065, "x_end": 0.2812, "y_end": 0.0667},
-        {"x_start": 0.3229, "y_start": 0.0065, "x_end": 0.3458, "y_end": 0.0648},
-        {"x_start": 0.3880, "y_start": 0.0056, "x_end": 0.4104, "y_end": 0.0667},
+        {"x_start": 0.1120, "y_start": 0.0056, "x_end": 0.1651, "y_end": 0.0287},
+        {"x_start": 0.1766, "y_start": 0.0056, "x_end": 0.2297, "y_end": 0.0287},
+        {"x_start": 0.2406, "y_start": 0.0056, "x_end": 0.2938, "y_end": 0.0287},
+        {"x_start": 0.3057, "y_start": 0.0056, "x_end": 0.3589, "y_end": 0.0287},
+        {"x_start": 0.3703, "y_start": 0.0056, "x_end": 0.4234, "y_end": 0.0287},
         ],
     },
     "dire_picks": {
         "slots": [
-        {"x_start": 0.5891, "y_start": 0.0065, "x_end": 0.6115, "y_end": 0.0667},
-        {"x_start": 0.6547, "y_start": 0.0065, "x_end": 0.6755, "y_end": 0.0676},
-        {"x_start": 0.7208, "y_start": 0.0065, "x_end": 0.7411, "y_end": 0.0667},
-        {"x_start": 0.7859, "y_start": 0.0065, "x_end": 0.8052, "y_end": 0.0667},
-        {"x_start": 0.8479, "y_start": 0.0056, "x_end": 0.8703, "y_end": 0.0676},
+        {"x_start": 0.5766, "y_start": 0.0056, "x_end": 0.6297, "y_end": 0.0287},
+        {"x_start": 0.6411, "y_start": 0.0056, "x_end": 0.6943, "y_end": 0.0287},
+        {"x_start": 0.7063, "y_start": 0.0056, "x_end": 0.7589, "y_end": 0.0287},
+        {"x_start": 0.7698, "y_start": 0.0056, "x_end": 0.8229, "y_end": 0.0287},
+        {"x_start": 0.8349, "y_start": 0.0056, "x_end": 0.8880, "y_end": 0.0287},
         ],
     },
 }
@@ -32,4 +32,4 @@ DRAFT_REGIONS = {
 TEMPLATE_SIZE = (63, 37)
 
 # Minimum confidence threshold for a valid match
-CONFIDENCE_THRESHOLD = 0.6
+CONFIDENCE_THRESHOLD = 0.3

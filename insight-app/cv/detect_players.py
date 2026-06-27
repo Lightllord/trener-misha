@@ -21,7 +21,7 @@ import mss
 
 from player_regions import (
     INNATE_THRESHOLD, FRAME_THRESHOLD,
-    NAME, LEVEL, SLOT_W, SLOT_H, SLOT_GAP, SLOT_GAP_H_PX, ITEMS_OFFSET_X,
+    SKILL_1, LEVEL, SLOT_W, SLOT_H, SLOT_GAP, SLOT_GAP_H_PX, ITEMS_OFFSET_X,
     FRAME_ITEMS_DX, FRAME_ITEMS_DY, NUM_ITEM_SLOTS,
 )
 
@@ -44,11 +44,11 @@ class Box(NamedTuple):
 
 
 class Templates(NamedTuple):
-    innate:         np.ndarray
-    frame:          np.ndarray
-    name_templates: dict[str, np.ndarray]
+    innate:          np.ndarray
+    frame:           np.ndarray
+    skill_templates: dict[str, np.ndarray]
     level_templates: dict[int, np.ndarray]
-    item_templates: dict[str, np.ndarray]
+    item_templates:  dict[str, np.ndarray]
 
 
 # ── template loading ──────────────────────────────────────────────────────────
@@ -68,13 +68,13 @@ def load_all_templates() -> Templates | None:
               file=sys.stderr)
         return None
 
-    name_tmpls: dict[str, np.ndarray] = {}
-    name_dir = SCRIPT_DIR / "name_templates"
-    if name_dir.exists():
-        for p in name_dir.glob("*.png"):
-            img = cv2.imread(str(p), cv2.IMREAD_GRAYSCALE)
+    skill_tmpls: dict[str, np.ndarray] = {}
+    skill_dir = SCRIPT_DIR / "skill_templates"
+    if skill_dir.exists():
+        for p in skill_dir.glob("*.png"):
+            img = cv2.imread(str(p))
             if img is not None:
-                name_tmpls[p.stem] = img
+                skill_tmpls[p.stem] = to_gray(img)
 
     level_tmpls: dict[int, np.ndarray] = {}
     level_dir = SCRIPT_DIR / "level_templates"
@@ -94,11 +94,11 @@ def load_all_templates() -> Templates | None:
                 item_tmpls[p.stem] = to_gray(img)
 
     print(
-        f"Templates loaded: {len(name_tmpls)} heroes, "
+        f"Templates loaded: {len(skill_tmpls)} hero skills, "
         f"{len(level_tmpls)} levels, {len(item_tmpls)} items",
         file=sys.stderr,
     )
-    return Templates(innate, frame, name_tmpls, level_tmpls, item_tmpls)
+    return Templates(innate, frame, skill_tmpls, level_tmpls, item_tmpls)
 
 
 # ── image utilities ───────────────────────────────────────────────────────────
@@ -124,13 +124,6 @@ def crop(screen: np.ndarray, x: int, y: int, w: int, h: int) -> np.ndarray:
     x1, y1 = max(0, x), max(0, y)
     x2, y2 = min(sw, x + w), min(sh, y + h)
     return screen[y1:y2, x1:x2]
-
-
-def preprocess_name(img: np.ndarray) -> np.ndarray:
-    hsv        = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-    white_mask = cv2.inRange(hsv, np.array([  0,   0, 220]), np.array([180,  20, 255]))
-    kernel     = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
-    return cv2.bitwise_not(cv2.dilate(white_mask, kernel, iterations=1))
 
 
 # ── detection ─────────────────────────────────────────────────────────────────
@@ -189,24 +182,26 @@ def derive_regions(innate: Box, frame: Box) -> dict:
             sy = row0_top + row * (slot_h_px + gap_v_px)
             items.append((sx, sy, slot_w_px, slot_h_px))
 
-    return {"name": region(NAME), "level": region(LEVEL), "items": items}
+    return {"skill_1": region(SKILL_1), "level": region(LEVEL), "items": items}
 
 
-def match_hero_name(
-    name_img: np.ndarray,
-    name_templates: dict[str, np.ndarray],
+SKILL_MATCH_THRESHOLD = 0.55
+
+def match_hero_skill(
+    skill_img: np.ndarray,
+    skill_templates: dict[str, np.ndarray],
 ) -> tuple[str, float]:
-    if name_img.size == 0 or not name_templates:
+    if skill_img.size == 0 or not skill_templates:
         return "unknown", 0.0
-    proc = preprocess_name(name_img)
+    sg = to_gray(skill_img)
     best_name, best_score = "unknown", 0.0
-    for hero, tmpl in name_templates.items():
-        t = tmpl if tmpl.shape == proc.shape else cv2.resize(tmpl, (proc.shape[1], proc.shape[0]), interpolation=cv2.INTER_AREA)
-        score = float(cv2.matchTemplate(proc, t, cv2.TM_CCOEFF_NORMED)[0, 0])
-        if score > best_score:
-            best_score = score
+    for hero, tmpl in skill_templates.items():
+        resized = cv2.resize(tmpl, (sg.shape[1], sg.shape[0]), interpolation=cv2.INTER_AREA)
+        _, val, _, _ = cv2.minMaxLoc(cv2.matchTemplate(sg, resized, cv2.TM_CCOEFF_NORMED))
+        if val > best_score:
+            best_score = val
             best_name  = hero
-    return (best_name, best_score) if best_score >= 0.60 else ("unknown", best_score)
+    return (best_name, best_score) if best_score >= SKILL_MATCH_THRESHOLD else ("unknown", best_score)
 
 
 def match_level(
@@ -265,20 +260,20 @@ def detect_once(
     print(f"Frame ({frame.score:.2f})", file=sys.stderr)
 
     regions  = derive_regions(innate, frame)
-    name_img  = crop(screen, *regions["name"])
+    skill_img = crop(screen, *regions["skill_1"])
     level_img = crop(screen, *regions["level"])
     item_imgs = [crop(screen, *r) for r in regions["items"]]
 
-    hero_name, name_score = match_hero_name(name_img, tmpls.name_templates)
+    hero_name, skill_score = match_hero_skill(skill_img, tmpls.skill_templates)
     level      = match_level(level_img, tmpls.level_templates)
     item_results = match_items(item_imgs, tmpls.item_templates)
 
-    print(f"Name:{hero_name}({name_score:.2f}) Lvl:{level} "
+    print(f"Hero:{hero_name}({skill_score:.2f}) Lvl:{level} "
           f"Items:{[f'{n}({s:.2f})' for n,s in item_results]}",
           file=sys.stderr)
 
     if debug:
-        _save_debug(screen, innate, frame, regions, name_img, level_img,
+        _save_debug(screen, innate, frame, regions, skill_img, level_img,
                     item_imgs, item_results)
 
     return {
@@ -314,7 +309,7 @@ def _save_debug(
     innate: Box,
     frame: Box,
     regions: dict,
-    name_img: np.ndarray,
+    skill_img: np.ndarray,
     level_img: np.ndarray,
     item_imgs: list[np.ndarray],
     item_results: list[tuple[str, float]],
@@ -328,7 +323,7 @@ def _save_debug(
     cv2.rectangle(ann, (frame.x, frame.y), (frame.x + frame.w, frame.y + frame.h), (100, 200, 255), 2)
     cv2.putText(ann, f"frame {frame.score:.2f}", (frame.x, frame.y - 4), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (100, 200, 255), 1)
 
-    for key, color, label in [("name", (255, 200, 0), "name"), ("level", (255, 100, 255), "lvl")]:
+    for key, color, label in [("skill_1", (255, 200, 0), "skill1"), ("level", (255, 100, 255), "lvl")]:
         rx, ry, rw, rh = regions[key]
         cv2.rectangle(ann, (rx, ry), (rx + rw, ry + rh), color, 2)
         cv2.putText(ann, label, (rx, ry - 4), cv2.FONT_HERSHEY_SIMPLEX, 0.4, color, 1)
@@ -341,9 +336,12 @@ def _save_debug(
         cv2.putText(ann, f"{score:.2f}", (rx + 1, ry + rh - 2), cv2.FONT_HERSHEY_SIMPLEX, 0.28, color, 1)
 
     cv2.imwrite(str(DEBUG_DIR / "player_annotated.png"), ann)
-    if name_img.size > 0:
-        cv2.imwrite(str(DEBUG_DIR / "player_name.png"),
-                    cv2.resize(name_img, (name_img.shape[1] * 3, name_img.shape[0] * 3), interpolation=cv2.INTER_NEAREST))
+    if skill_img.size > 0:
+        cv2.imwrite(str(DEBUG_DIR / "player_skill.png"),
+                    cv2.resize(skill_img, (skill_img.shape[1] * 3, skill_img.shape[0] * 3), interpolation=cv2.INTER_NEAREST))
+        proc = to_gray(skill_img)
+        cv2.imwrite(str(DEBUG_DIR / "player_skill_processed.png"),
+                    cv2.resize(proc, (proc.shape[1] * 3, proc.shape[0] * 3), interpolation=cv2.INTER_NEAREST))
     if level_img.size > 0:
         cv2.imwrite(str(DEBUG_DIR / "player_level.png"),
                     cv2.resize(level_img, (level_img.shape[1] * 3, level_img.shape[0] * 3), interpolation=cv2.INTER_NEAREST))
