@@ -84,7 +84,6 @@ Each file exports one `tool({ … })`; `src/tools/index.ts` re-exports them. Too
 
 | Tool | File | Source / behavior |
 |------|------|-------------------|
-| `run_analysis`    | `analysis.ts`   | Simulated slow analysis (3 s timeout) — delayed |
 | `get_hero_info`   | `heroInfo.ts`   | `heroes_extend.json` |
 | `list_heroes`     | `heroList.ts`   | Full hero list |
 | `get_match_state` | `matchState.ts` | Latest parsed GSI state, incl. the CV draft |

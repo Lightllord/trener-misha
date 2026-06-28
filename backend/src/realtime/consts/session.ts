@@ -16,6 +16,9 @@ export const SESSION_OPTIONS: SessionOptions = {
         },
         noiseReduction: { type: "near_field" },
       },
+      output: {
+        speed: 1.15,
+      },
     },
   },
 };
