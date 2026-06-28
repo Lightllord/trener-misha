@@ -5,8 +5,8 @@ Captures the screen, locates hero portrait slots in the draft UI,
 and identifies heroes using OpenCV template matching against icon templates.
 
 Usage:
-    python detect_draft.py               # Primary monitor, JSON to stdout
-    python detect_draft.py --monitor 2   # Capture monitor #2
+    python detect_draft.py               # Auto-detect the Dota monitor, JSON to stdout
+    python detect_draft.py --monitor 2   # Force capture of monitor #2
     python detect_draft.py --debug       # Save annotated debug images to cv/debug/
 
 Output JSON format:
@@ -30,6 +30,7 @@ import numpy as np
 import mss
 
 from regions import DRAFT_REGIONS, TEMPLATE_SIZE, CONFIDENCE_THRESHOLD
+from screen import resolve_monitor
 
 SCRIPT_DIR = Path(__file__).parent
 RADIANT_ICONS_DIR = SCRIPT_DIR / "icons_radiant"
@@ -293,8 +294,8 @@ def watch_mode(monitor_num: int, debug: bool, hotkey: str) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Detect Dota 2 draft from screen capture")
-    parser.add_argument("--monitor", type=int, default=2,
-                        help="Monitor number (1=primary, 2=second, etc.)")
+    parser.add_argument("--monitor", type=str, default="auto",
+                        help="Monitor: 'auto' (find the Dota window) or an index (1=primary, 2=second, …)")
     parser.add_argument("--debug", action="store_true", help="Save debug images to cv/debug/")
     parser.add_argument("--watch", action="store_true",
                         help="Watch mode: wait for hotkey and detect on press")
@@ -309,10 +310,13 @@ def main() -> None:
                             help="Global hotkey for watch mode (default: `)")
     args = parser.parse_args()
 
+    # 'auto' → находим монитор с окном dota2.exe; число → берём как есть.
+    monitor_num = resolve_monitor(args.monitor)
+
     if args.watch:
-        watch_mode(args.monitor, args.debug, args.hotkey)
+        watch_mode(monitor_num, args.debug, args.hotkey)
     else:
-        result = detect_draft(monitor_num=args.monitor, debug=args.debug)
+        result = detect_draft(monitor_num=monitor_num, debug=args.debug)
         print(json.dumps(result))
 
 

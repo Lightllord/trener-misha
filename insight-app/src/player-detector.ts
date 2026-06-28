@@ -26,7 +26,7 @@ export class PlayerDetector {
   private stdoutBuf  = ""
   private active     = false
 
-  private monitorNum:       number
+  private monitorNum:       number | "auto"
   private getHeroPositions: () => HeroPositions
   private getGameTime:      () => number
   private getOwnHeroName:   () => string
@@ -35,7 +35,7 @@ export class PlayerDetector {
   private lastInspectGameTime = 0
 
   constructor(
-    monitorNum: number,
+    monitorNum: number | "auto",
     getHeroPositions: () => HeroPositions,
     getGameTime: () => number,
     getOwnHeroName: () => string,

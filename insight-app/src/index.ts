@@ -14,7 +14,7 @@ const BACKEND_URL = "http://localhost:3000";
 const matchState = new MatchStateManager();
 const draftDetector = new DraftDetector();
 const playerDetector = new PlayerDetector(
-  2,
+  "auto", // монитор определяется по окну Доты; см. cv/screen.py
   () => matchState.current?.heroPositions ?? {},
   () => matchState.current?.gameTime ?? 0,
   () => matchState.current?.hero.name ?? "",
@@ -67,7 +67,11 @@ draftDetector.onDraftChange((draft) => {
 matchState.onPhaseChange((newPhase, prevPhase) => {
   console.log(`[insight-app] Phase: ${prevPhase ?? "none"} → ${newPhase}`);
 
-  if (newPhase === "hero_selection" && prevPhase === "loading") {
+  // Запускаем при входе в hero_selection из ЛЮБОЙ фазы: при старте insight-app
+  // из меню переход бывает none → hero_selection (фаза loading не фиксируется),
+  // поэтому привязка к prevPhase === "loading" пропускала детект. start()
+  // идемпотентен (повторный вызов — no-op), так что лишний раз не навредит.
+  if (newPhase === "hero_selection") {
     if (stopTimeoutId) { clearTimeout(stopTimeoutId); stopTimeoutId = null; }
     draftDetector.reset();
     draftDetector.start();

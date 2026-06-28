@@ -15,10 +15,12 @@ export class DraftDetector {
   private intervalId: ReturnType<typeof setInterval> | null = null
   private detecting = false
   private draft: DraftState | null = null
-  private monitorNum: number
+  private monitorNum: number | "auto"
   private changeListeners: DraftChangeListener[] = []
 
-  constructor(monitorNum = 2) {
+  // "auto" → Python сам находит монитор с окном Доты (см. cv/screen.py);
+  // число — ручная фиксация конкретного монитора.
+  constructor(monitorNum: number | "auto" = "auto") {
     this.monitorNum = monitorNum
   }
 

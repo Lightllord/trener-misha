@@ -2,8 +2,8 @@
 Detect hero name, level, and item slots from the Dota 2 player panel.
 
 Usage:
-    python detect_players.py [--monitor N] [--debug]   # single shot
-    python detect_players.py [--monitor N] --watch      # persistent mode
+    python detect_players.py [--monitor auto|N] [--debug]   # single shot
+    python detect_players.py [--monitor auto|N] --watch      # persistent mode
 
 Watch mode: templates are loaded once at startup, then the process reads
 newline triggers from stdin and writes JSON results to stdout.
@@ -24,6 +24,7 @@ from player_regions import (
     SKILL_1, LEVEL, SLOT_W, SLOT_H, SLOT_GAP, SLOT_GAP_H_PX, ITEMS_OFFSET_X,
     FRAME_ITEMS_DX, FRAME_ITEMS_DY, NUM_ITEM_SLOTS,
 )
+from screen import resolve_monitor
 
 SCRIPT_DIR    = Path(__file__).parent
 TEMPLATES_DIR = SCRIPT_DIR / "templates"
@@ -356,19 +357,24 @@ def _save_debug(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--monitor", type=int, default=2)
+    parser.add_argument("--monitor", type=str, default="auto",
+                        help="Monitor: 'auto' (find the Dota window) or an index (1=primary, 2=second, …)")
     parser.add_argument("--debug",  action="store_true")
     parser.add_argument("--watch",  action="store_true",
                         help="Persistent mode: load templates once, detect on stdin newlines")
     args = parser.parse_args()
 
+    # 'auto' → находим монитор с окном dota2.exe; число → берём как есть.
+    # В watch-режиме резолв происходит один раз при старте процесса.
+    monitor_num = resolve_monitor(args.monitor)
+
     if args.watch:
-        watch_mode(args.monitor)
+        watch_mode(monitor_num)
     else:
         tmpls = load_all_templates()
         if tmpls is None:
             sys.exit(1)
-        result = detect_once(args.monitor, tmpls, debug=args.debug)
+        result = detect_once(monitor_num, tmpls, debug=args.debug)
         if result is not None:
             print(json.dumps(result))
 
