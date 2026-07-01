@@ -84,11 +84,11 @@ Each file exports one `tool({ … })`; `src/tools/index.ts` re-exports them. Too
 
 | Tool | File | Source / behavior |
 |------|------|-------------------|
-| `get_hero_info`   | `heroInfo.ts`   | `heroes_extend.json` |
-| `list_heroes`     | `heroList.ts`   | Full hero list |
+| `heroes`          | `heroes.ts`     | `heroes_extend.json`: `list` (all heroes) / `info` (one hero's notes) |
 | `get_match_state` | `matchState.ts` | Latest parsed GSI state, incl. the CV draft |
 | `get_matchups`    | `matchups.ts`   | STRATZ: win rate vs every hero (best/worst 5) |
 | `get_builds`      | `builds.ts`     | STRATZ: starting items, boots, core items by phase |
+| `guides`          | `guides.ts`     | `guides.json`: `list` (id+name+desc) / `get` (one tip by id or fuzzy text) |
 
 ## Adding to the backend
 

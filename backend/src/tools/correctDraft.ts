@@ -5,7 +5,7 @@ import { correctDraftSlot } from "../gameData.js";
 export const correctDraftTool = tool({
   name: "correct_draft",
   description:
-    "Исправить неверно распознанного героя в конкретном слоте драфта. Используй list_heroes чтобы уточнить точное короткое имя героя перед вызовом. Исправленный слот не будет перезаписан screen capture.",
+    "Исправить неверно распознанного героя в конкретном слоте драфта. Используй heroes с командой list, чтобы уточнить точное короткое имя героя перед вызовом. Исправленный слот не будет перезаписан screen capture.",
   parameters: z.object({
     team: z.enum(["radiant", "dire"]).describe("Команда"),
     slot: z.number().int().min(1).max(5).describe("Номер позиции 1–5"),

@@ -8,12 +8,12 @@ export const AGENT_INSTRUCTIONS = `
 
 Примерное описание, когда и как использовать инструменты:
 <tool name="get_match_state">current game state (phase, hero, items, score, buildings, and the draft — both teams' hero picks detected from screen capture)</tool>
-<tool name="correct_draft">исправить неверно распознанного героя в драфте. Перед вызовом уточни точное имя через list_heroes.</tool>
-<tool name="get_hero_info">detailed hero strengths, weaknesses, and mechanics</tool>
-<tool name="list_heroes">full list of all Dota 2 heroes (use to look up exact hero names)</tool>
+<tool name="correct_draft">исправить неверно распознанного героя в драфте. Перед вызовом уточни точное имя через heroes с командой list.</tool>
+<tool name="heroes">справочник по героям. Команда list — полный список всех героев (для уточнения точного имени); команда info — детальные сильные/слабые стороны и механики одного героя.</tool>
 <tool name="get_matchups">hero win rates vs all other heroes from STRATZ (counters & good matchups)</tool>
 <tool name="get_builds">popular item builds by game phase from STRATZ (starting, early, mid, late)</tool>
 <tool name="request_item_advice">фоновый разбор «что купить в этой ситуации» по механикам героев/предметов со сверкой с типичным билдом — результат придёт позже отдельным инсайтом</tool>
+<tool name="guides">готовые советы по игре для неопытных игроков. Команда list — список советов (id, название, контекстное описание); команда get — конкретный совет по id или тексту (текст озвучки + опциональный комментарий для агента).</tool>
 </tools>
 
 <tool-usage>
@@ -21,6 +21,8 @@ When the user asks about the draft, matchup, team compositions, the current game
 When the user asks about counters, who counters whom, or matchup win rates — use get_matchups.
 When the user asks what to buy, what item to pick, or what to get against a specific hero/situation — call request_item_advice with their question. After the call, reply with ONLY a very short 2-3 word filler — do NOT explain what you're doing, do NOT promise to come back, do NOT give any advice yet. Do NOT make up the answer yourself — the real analysis arrives later as a separate insight. Use get_builds only for a quick generic "popular build" lookup, not for situational item advice.
 Combine draft + hero info + matchups to give matchup analysis and actionable coaching advice.
+
+Если игрок не понимает какую-то механику или задаёт вопрос по игре, не связанный напрямую с текущим состоянием матча, и кажется, что ему просто нужен гайд — сначала вызови guides с командой list. Если нашёл релевантный по описанию — достань его через guides с командой get и озвучь то, что пришло в блоке «текст озвучки», следуя ему в среднем один в один (адаптировать под разговор можно, но не более). Если у совета есть «комментарий для агента» — НЕ озвучивай его: это вспомогательная информация лично для тебя, просто следуй алгоритму, который там описан.
 </tool-usage>
 
 <incoming-context>
