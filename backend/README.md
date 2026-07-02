@@ -84,9 +84,8 @@ Each file exports one `tool({ … })`; `src/tools/index.ts` re-exports them. Too
 
 | Tool | File | Source / behavior |
 |------|------|-------------------|
-| `get_hero_info`   | `heroInfo.ts`   | `heroes_extend.json` |
+| `heroes`          | `heroes.ts`     | `heroes_extend.json`: `list` (all heroes) / `info` (one hero's notes) |
 | `get_hero_abilities` | `heroAbilities.ts` | `data/heroes_abbility/<hero>-abilities.json` — cooldowns, mana, damage, talents |
-| `list_heroes`     | `heroList.ts`   | Full hero list |
 | `get_match_state` | `matchState.ts` | Latest parsed GSI state, incl. the CV draft and the player's position (`playerPosition`, 1-5) |
 | `set_player_position` | `setPlayerPosition.ts` | Records the player's position (1-5) in game state; asked for via the `ask_player_position` insight at draft start |
 | `get_matchups`    | `matchups.ts`   | STRATZ: win rate vs every hero (best/worst 5) |
@@ -96,6 +95,7 @@ Each file exports one `tool({ … })`; `src/tools/index.ts` re-exports them. Too
 | `plan_item_build` | `buildPlan.ts`  | Delayed: background full-game ordered build subagent, keyed by position (1-5). Stores the structured plan in `buildStore` and delivers a `build_plan` insight |
 | `get_build_plan`  | `getBuildPlan.ts` | The saved build plan (purchase order) from `buildStore` |
 | `edit_build_plan` | `editBuildPlan.ts` | Synchronous edit of the saved build — add/remove/replace/move an item; returns the updated plan |
+| `guides`          | `guides.ts`     | `guides.json`: `list` (id+name+desc) / `get` (one tip by id or fuzzy text) |
 
 ## Adding to the backend
 
@@ -118,11 +118,17 @@ Non-obvious navigation only — files whose role isn't already implied by their 
 | `src/gameEventQueue.ts`  | Event buffer + throttling + fallback-status generation; also fires `ask_player_position` on the phase transition into `hero_selection` if the position isn't known yet, and `excess_gold` while the player is sitting on 2000+ gold (2000 + buyback cost after 30 minutes). Kills/deaths are batched for `SCORE_CHANGE_BUFFER_MS` (10s) before delivering a single `score_change` insight, so a team fight lands as one report instead of one insight per kill/death. Enemy key-item pickups are batched per hero for `ENEMY_ITEM_BUFFER_MS` (6s) into one `enemy_key_item` report |
 | `src/stateDiff.ts`       | `diffStates(prev, curr)` → `GameEvent[]`; includes edge-triggered Tormentor warning/spawn at the 19:00/20:00 game clock and a repeating wisdom-altar warning every 7 minutes starting at 6:00 |
 | `src/draftAnalysis.ts`   | Background `gpt-5.4-mini` tool-use loop → produces a `draft_analysis` insight |
+| `src/itemAdvice.ts`      | Background subagent answering "what to buy now" over mechanic tags + STRATZ → `item_advice` insight |
+| `src/buildPlan.ts`       | Background subagent composing a full-game ordered build by position over the same knowledge + STRATZ; finishes via a `submit_build` tool that stores a structured `BuildPlan` and delivers a `build_plan` insight |
+| `src/buildMarkup.ts`     | Renders a `BuildPlan` into the text the voice agent reads/edits against |
+| `src/itemKnowledge.ts`   | Cached loaders for the static knowledge base (hero/item tag notes, mechanics glossary, enriched items, ability files) shared by the item subagents |
 | `src/insight/store.ts`   | In-memory insight store keyed by name. Per-name uniqueness from `INSIGHT_CONFIGS` — unique kinds replace in place, others append with an incrementing `number`; tracks used/unused so the picker claims each item once |
 | `src/insight/picker.ts`  | `InsightPicker` — picks what to deliver, owns background thinking, formats injections |
 | `src/deliveryWindow/deliveryWindow.ts` | `DeliveryWindow` — observable gate over the session transport; open while the user is silent, `state()` = full/interrupt/closed |
 | `src/deliveryWindow/debouncedPoll.ts`  | `DebouncedPoll` — 150 ms debounce + 200 ms poll while the window is open; no public stop (the window owns its lifecycle) |
 | `src/stratzApi.ts`       | STRATZ GraphQL client; supports `STRATZ_LOCAL_ADDRESS` binding (bypass VPN) |
+| `src/stratzBuilds.ts`    | Compact STRATZ item-build text summary, shared by `buildPlan.ts` |
+| `src/stratzSkillBuild.ts` | Compact STRATZ skill-build text summary (ability level-up priority + talent win rates) |
 | `src/heroes.ts`          | Loads `heroes_extend.json` + fuzzy name lookup |
 | `src/logger.ts`          | Patches `console.*` to also append to `logs/backend.log` |
 | `src/observability/log.ts` | `log(scope, msg)` / `logError(...)` — tags every line with a `[scope]` |
@@ -131,7 +137,7 @@ Non-obvious navigation only — files whose role isn't already implied by their 
 ## Data (`data/`)
 
 - `heroes_extend.json` — hero notes; updated by `patch-updater`.
-- `stratz/heroes.json`, `stratz/items.json` — STRATZ ID → display-name maps.
+- `stratz/heroes.json`, `stratz/items.json`, `stratz/abilities.json` — STRATZ ID → display-name maps.
 
 ## Environment (`.env`)
 

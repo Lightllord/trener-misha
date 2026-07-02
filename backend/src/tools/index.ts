@@ -1,6 +1,5 @@
-export { heroInfoTool } from "./heroInfo.js";
+export { heroesTool } from "./heroes.js";
 export { heroAbilitiesTool } from "./heroAbilities.js";
-export { heroListTool } from "./heroList.js";
 export { correctDraftTool } from "./correctDraft.js";
 export { setPlayerPositionTool } from "./setPlayerPosition.js";
 export { matchStateTool } from "./matchState.js";
@@ -11,3 +10,4 @@ export { itemAdviceTool } from "./itemAdvice.js";
 export { buildPlanTool } from "./buildPlan.js";
 export { getBuildPlanTool } from "./getBuildPlan.js";
 export { editBuildPlanTool } from "./editBuildPlan.js";
+export { guidesTool } from "./guides.js";

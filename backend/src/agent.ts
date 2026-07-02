@@ -1,9 +1,8 @@
 import { RealtimeAgent } from "@openai/agents/realtime";
 import { AGENT_INSTRUCTIONS } from "./consts/agentInstructions.js";
 import {
-  heroInfoTool,
+  heroesTool,
   heroAbilitiesTool,
-  heroListTool,
   correctDraftTool,
   setPlayerPositionTool,
   matchStateTool,
@@ -14,6 +13,7 @@ import {
   buildPlanTool,
   getBuildPlanTool,
   editBuildPlanTool,
+  guidesTool,
 } from "./tools/index.js";
 
 export const agent = new RealtimeAgent({
@@ -21,9 +21,8 @@ export const agent = new RealtimeAgent({
   voice: "verse",
   instructions: AGENT_INSTRUCTIONS,
   tools: [
-    heroInfoTool,
+    heroesTool,
     heroAbilitiesTool,
-    heroListTool,
     matchStateTool,
     correctDraftTool,
     setPlayerPositionTool,
@@ -34,5 +33,6 @@ export const agent = new RealtimeAgent({
     buildPlanTool,
     getBuildPlanTool,
     editBuildPlanTool,
+    guidesTool,
   ],
 });
