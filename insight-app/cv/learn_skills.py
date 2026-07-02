@@ -6,7 +6,7 @@ Press the capture hotkey while the hero's panel is visible: the skill-1
 icon is captured, saved, and the next hero is selected automatically.
 
 Usage:
-    python learn_skills.py [--monitor N] [--hotkey KEY]
+    python learn_skills.py [--monitor N] [--hotkey KEY] [--hero NAME]
 
 Controls:
     hotkey (~ / ё)  — capture + save current hero, advance to next
@@ -34,7 +34,7 @@ from detect_players import (
 from player_regions import INNATE_THRESHOLD, FRAME_THRESHOLD
 
 SCRIPT_DIR     = Path(__file__).parent
-ICONS_DIR      = SCRIPT_DIR / "icons"
+ICONS_DIR      = SCRIPT_DIR / "icons_original"
 SKILL_TMPL_DIR = SCRIPT_DIR / "skill_templates"
 
 DEBOUNCE_S = 0.5
@@ -44,11 +44,11 @@ DEBOUNCE_S = 0.5
 
 def load_hero_list() -> list[str]:
     if not ICONS_DIR.exists():
-        print("icons/ not found — run npm run download-icons first.", file=sys.stderr)
+        print(f"{ICONS_DIR} not found.", file=sys.stderr)
         sys.exit(1)
     heroes = sorted(p.stem for p in ICONS_DIR.glob("*.png"))
     if not heroes:
-        print("No icons found in icons/.", file=sys.stderr)
+        print(f"No icons found in {ICONS_DIR}.", file=sys.stderr)
         sys.exit(1)
     return heroes
 
@@ -100,8 +100,13 @@ def build_preview(raw: np.ndarray, processed: np.ndarray, hero: str, saved: bool
 
 # ── main loop ─────────────────────────────────────────────────────────────────
 
-def run(monitor_num: int, hotkey: str) -> None:
-    heroes     = load_hero_list()
+def run(monitor_num: int, hotkey: str, hero: str | None = None) -> None:
+    heroes = load_hero_list()
+    if hero is not None:
+        if hero not in heroes:
+            print(f"Unknown hero '{hero}'. Not found in {ICONS_DIR}.", file=sys.stderr)
+            sys.exit(1)
+        heroes = [hero]
     total      = len(heroes)
     SKILL_TMPL_DIR.mkdir(exist_ok=True)
 
@@ -180,8 +185,9 @@ def main() -> None:
     user32  = ctypes.WinDLL("user32", use_last_error=True)
     lang_id = user32.GetKeyboardLayout(0) & 0xFFFF
     parser.add_argument("--hotkey", default="~" if lang_id == 0x409 else "ё")
+    parser.add_argument("--hero", help="Capture only this hero (icon filename stem)")
     args = parser.parse_args()
-    run(args.monitor, args.hotkey)
+    run(args.monitor, args.hotkey, args.hero)
 
 
 if __name__ == "__main__":

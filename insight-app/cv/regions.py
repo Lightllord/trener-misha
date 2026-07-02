@@ -32,4 +32,4 @@ DRAFT_REGIONS = {
 TEMPLATE_SIZE = (63, 37)
 
 # Minimum confidence threshold for a valid match
-CONFIDENCE_THRESHOLD = 0.3
+CONFIDENCE_THRESHOLD = 0.65

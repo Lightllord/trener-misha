@@ -5,7 +5,7 @@ Re-run calibrate_player.py to recalibrate.
 """
 
 INNATE_THRESHOLD = 0.75
-FRAME_THRESHOLD  = 0.75
+FRAME_THRESHOLD  = 0.9
 
 # All offsets relative to detected innate icon height (innate_h).
 # Origin: innate icon top-left. Positive = right / down.
@@ -26,3 +26,8 @@ ITEMS_OFFSET_X = 3     # global horizontal shift for all item slots in absolute 
 FRAME_ITEMS_DX = -1.1
 FRAME_ITEMS_DY = -0.5
 NUM_ITEM_SLOTS = 6
+
+# Crop off the charge-count/cooldown chrome baked into the in-game item slot
+# before matching, so only the item art is compared against the template.
+ITEM_CROP_TOP_PX    = 12
+ITEM_CROP_BOTTOM_PX = 16

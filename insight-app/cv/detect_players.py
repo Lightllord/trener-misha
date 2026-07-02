@@ -23,6 +23,7 @@ from player_regions import (
     INNATE_THRESHOLD, FRAME_THRESHOLD,
     SKILL_1, LEVEL, SLOT_W, SLOT_H, SLOT_GAP, SLOT_GAP_H_PX, ITEMS_OFFSET_X,
     FRAME_ITEMS_DX, FRAME_ITEMS_DY, NUM_ITEM_SLOTS,
+    ITEM_CROP_TOP_PX, ITEM_CROP_BOTTOM_PX,
 )
 from screen import resolve_monitor
 
@@ -222,6 +223,14 @@ def match_level(
     return best_lvl if best_score >= 0.60 else 0
 
 
+def _crop_vertical(img: np.ndarray, top_px: int, bottom_px: int) -> np.ndarray:
+    h = img.shape[0]
+    top, bottom = min(top_px, h), min(bottom_px, h)
+    return img[top:h - bottom, :] if h - top - bottom > 0 else img
+
+
+ITEM_MATCH_THRESHOLD = 0.7
+
 def match_items(
     slot_imgs: list[np.ndarray],
     item_templates: dict[str, np.ndarray],
@@ -232,14 +241,20 @@ def match_items(
             results.append(("empty", 0.0))
             continue
         sg = to_gray(slot_img)
+        sh = sg.shape[0]
+        sg_cropped  = _crop_vertical(sg, ITEM_CROP_TOP_PX, ITEM_CROP_BOTTOM_PX)
+        top_frac    = ITEM_CROP_TOP_PX / sh
+        bottom_frac = ITEM_CROP_BOTTOM_PX / sh
         best_name, best_score = "unknown", 0.0
         for item_name, tmpl in item_templates.items():
-            resized = cv2.resize(tmpl, (sg.shape[1], sg.shape[0]), interpolation=cv2.INTER_AREA)
-            _, val, _, _ = cv2.minMaxLoc(cv2.matchTemplate(sg, resized, cv2.TM_CCOEFF_NORMED))
+            th = tmpl.shape[0]
+            tmpl_cropped = _crop_vertical(tmpl, round(top_frac * th), round(bottom_frac * th))
+            resized = cv2.resize(tmpl_cropped, (sg_cropped.shape[1], sg_cropped.shape[0]), interpolation=cv2.INTER_AREA)
+            _, val, _, _ = cv2.minMaxLoc(cv2.matchTemplate(sg_cropped, resized, cv2.TM_CCOEFF_NORMED))
             if val > best_score:
                 best_score = val
                 best_name  = item_name
-        results.append((best_name if best_score >= 0.30 else "unknown", best_score))
+        results.append((best_name if best_score >= ITEM_MATCH_THRESHOLD else "unknown", best_score))
     return results
 
 
