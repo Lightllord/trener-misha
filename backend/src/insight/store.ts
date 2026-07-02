@@ -24,7 +24,7 @@ function getConfig(name: InsightName): InsightConfig {
 export function addInsight(name: InsightName, payload: string): Insight | null {
   const config = getConfig(name);
 
-  if (config.unique && insights.some((i) => i.name === name && !isExpired(i))) {
+  if (config.unique && insights.some((i) => i.name === name && !i.used && !isExpired(i))) {
     return null;
   }
 

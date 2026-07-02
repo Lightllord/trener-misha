@@ -1,6 +1,7 @@
 export type InsightName =
   | "draft_analysis"
   | "item_advice"
+  | "build_plan"
   | "hero_death"
   | "hero_missing"
   | "enemies_nearby"

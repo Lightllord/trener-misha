@@ -24,29 +24,39 @@ interface StratzHero {
   shortName: string;
 }
 
-interface StratzItem {
+export interface StratzItem {
+  id: number;
+  displayName: string | null;
+}
+
+interface StratzAbility {
   id: number;
   displayName: string;
+  isTalent: boolean;
 }
 
 let heroesMap: Map<number, StratzHero> | null = null;
 let itemsMap: Map<number, StratzItem> | null = null;
+let abilitiesMap: Map<number, StratzAbility> | null = null;
 
 async function loadConstants(): Promise<void> {
-  if (heroesMap && itemsMap) return;
+  if (heroesMap && itemsMap && abilitiesMap) return;
 
   const dataDir = join(__dirname, "..", "data", "stratz");
 
-  const [heroesRaw, itemsRaw] = await Promise.all([
+  const [heroesRaw, itemsRaw, abilitiesRaw] = await Promise.all([
     readFile(join(dataDir, "heroes.json"), "utf-8"),
     readFile(join(dataDir, "items.json"), "utf-8"),
+    readFile(join(dataDir, "abilities.json"), "utf-8"),
   ]);
 
   const heroes = JSON.parse(heroesRaw) as StratzHero[];
   const items = JSON.parse(itemsRaw) as StratzItem[];
+  const abilities = JSON.parse(abilitiesRaw) as StratzAbility[];
 
   heroesMap = new Map(heroes.map((h) => [h.id, h]));
   itemsMap = new Map(items.map((i) => [i.id, i]));
+  abilitiesMap = new Map(abilities.map((a) => [a.id, a]));
 }
 
 export async function getHeroesMap(): Promise<Map<number, StratzHero>> {
@@ -59,6 +69,15 @@ export async function getItemsMap(): Promise<Map<number, StratzItem>> {
   return itemsMap!;
 }
 
+export async function getAbilitiesMap(): Promise<Map<number, StratzAbility>> {
+  await loadConstants();
+  return abilitiesMap!;
+}
+
+function normalizeStratzName(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
 /** Find Stratz hero by name or ID */
 export async function findStratzHero(
   input: string,
@@ -69,16 +88,11 @@ export async function findStratzHero(
   const id = parseInt(input, 10);
   if (!isNaN(id)) return heroes.get(id) ?? null;
 
-  const normalized = input.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const normalized = normalizeStratzName(input);
 
   for (const h of heroes.values()) {
     if (h.shortName.toLowerCase() === normalized) return h;
-    if (
-      h.displayName
-        .toLowerCase()
-        .replace(/[^a-z0-9]/g, "") === normalized
-    )
-      return h;
+    if (normalizeStratzName(h.displayName) === normalized) return h;
   }
 
   // Partial match
@@ -87,6 +101,20 @@ export async function findStratzHero(
     if (h.shortName.toLowerCase().includes(normalized)) return h;
   }
 
+  return null;
+}
+
+/** Find Stratz item by display name (exact, then partial match). */
+export async function findStratzItem(input: string): Promise<StratzItem | null> {
+  const items = await getItemsMap();
+  const normalized = normalizeStratzName(input);
+
+  for (const it of items.values()) {
+    if (it.displayName && normalizeStratzName(it.displayName) === normalized) return it;
+  }
+  for (const it of items.values()) {
+    if (it.displayName && normalizeStratzName(it.displayName).includes(normalized)) return it;
+  }
   return null;
 }
 

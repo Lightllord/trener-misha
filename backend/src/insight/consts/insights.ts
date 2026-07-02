@@ -15,6 +15,13 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
     importance: "high",
     ttlMs: 120_000,
   },
+  build_plan: {
+    unique: true,
+    description:
+      "Full-game item build plan for the player's hero and position: ordered purchase plan that closes enemy mechanics and synergises with the hero, cross-checked against typical STRATZ builds.",
+    importance: "high",
+    ttlMs: 300_000,
+  },
   hero_death: {
     unique: false,
     description: "Player just died — deliver a short tactical tip on what likely went wrong and how to avoid it next life.",

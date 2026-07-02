@@ -1,8 +1,13 @@
 export { heroInfoTool } from "./heroInfo.js";
+export { heroAbilitiesTool } from "./heroAbilities.js";
 export { heroListTool } from "./heroList.js";
 export { correctDraftTool } from "./correctDraft.js";
 export { setPlayerPositionTool } from "./setPlayerPosition.js";
 export { matchStateTool } from "./matchState.js";
 export { matchupsTool } from "./matchups.js";
 export { buildsTool } from "./builds.js";
+export { skillBuildTool } from "./skillBuild.js";
 export { itemAdviceTool } from "./itemAdvice.js";
+export { buildPlanTool } from "./buildPlan.js";
+export { getBuildPlanTool } from "./getBuildPlan.js";
+export { editBuildPlanTool } from "./editBuildPlan.js";

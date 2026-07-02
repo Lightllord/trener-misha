@@ -1,11 +1,19 @@
 /**
- * In-memory store for game data pushed from insight-app.
- * Replaces the old polling pattern (GET /draft, GET /state).
+ * In-memory store for game data pushed from insight-app, plus the derived
+ * session state that rides alongside it (draft corrections, the planned
+ * item build). All of it is scoped to one match and cleared together via
+ * clearGameData() on WS close.
  *
  * The draft lives inside the match state (pushed via /push/state). Manual
  * corrections from the agent are kept as an overlay here and re-applied to
  * every incoming state so CV re-detection can never overwrite them.
+ *
+ * The build plan is populated by the buildPlan subagent via setBuildPlan;
+ * the realtime agent reads it with get_build_plan and mutates it through the
+ * add/remove/replace/move edit operations (each keeps items in purchase order).
  */
+
+import type { BuildItem, BuildPlan, EditAnchor, EditResult } from "./types/build.js";
 
 interface DraftData {
   radiant: string[];
@@ -16,6 +24,7 @@ interface DraftData {
 
 let state: Record<string, unknown> | null = null;
 let prevState: Record<string, unknown> | null = null;
+let buildPlan: BuildPlan | null = null;
 
 // Position (1-5) the agent recorded after asking the player — not detected by
 // CV, so it must be re-applied to every incoming state like draft corrections.
@@ -98,5 +107,79 @@ export function clearGameData(): void {
   prevState = null;
   corrections.radiant.clear();
   corrections.dire.clear();
+  buildPlan = null;
   playerPosition = null;
+}
+
+function normalizeItemName(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function indexOfItem(items: BuildItem[], name: string): number {
+  const target = normalizeItemName(name);
+  return items.findIndex((i) => {
+    const n = normalizeItemName(i.item);
+    return n === target || n.includes(target) || target.includes(n);
+  });
+}
+
+/** Resolve an anchor to an insertion index; defaults to the end of the list. */
+function resolveInsert(items: BuildItem[], anchor: EditAnchor): number {
+  if (anchor.before) {
+    const i = indexOfItem(items, anchor.before);
+    if (i >= 0) return i;
+  }
+  if (anchor.after) {
+    const i = indexOfItem(items, anchor.after);
+    if (i >= 0) return i + 1;
+  }
+  return items.length;
+}
+
+function touchBuildPlan(): void {
+  if (buildPlan) buildPlan.updatedAt = new Date().toISOString();
+}
+
+export function getBuildPlan(): BuildPlan | null {
+  return buildPlan;
+}
+
+export function setBuildPlan(next: BuildPlan): void {
+  buildPlan = next;
+}
+
+export function addBuildItem(item: BuildItem, anchor: EditAnchor = {}): EditResult {
+  if (!buildPlan) return { ok: false, error: "Билд ещё не составлен." };
+  buildPlan.items.splice(resolveInsert(buildPlan.items, anchor), 0, item);
+  touchBuildPlan();
+  return { ok: true, plan: buildPlan };
+}
+
+export function removeBuildItem(name: string): EditResult {
+  if (!buildPlan) return { ok: false, error: "Билд ещё не составлен." };
+  const i = indexOfItem(buildPlan.items, name);
+  if (i < 0) return { ok: false, error: `В билде нет предмета "${name}".` };
+  buildPlan.items.splice(i, 1);
+  touchBuildPlan();
+  return { ok: true, plan: buildPlan };
+}
+
+export function replaceBuildItem(oldName: string, item: BuildItem): EditResult {
+  if (!buildPlan) return { ok: false, error: "Билд ещё не составлен." };
+  const i = indexOfItem(buildPlan.items, oldName);
+  if (i < 0) return { ok: false, error: `В билде нет предмета "${oldName}".` };
+  buildPlan.items.splice(i, 1, item);
+  touchBuildPlan();
+  return { ok: true, plan: buildPlan };
+}
+
+export function moveBuildItem(name: string, anchor: EditAnchor): EditResult {
+  if (!buildPlan) return { ok: false, error: "Билд ещё не составлен." };
+  const from = indexOfItem(buildPlan.items, name);
+  if (from < 0) return { ok: false, error: `В билде нет предмета "${name}".` };
+  const [moved] = buildPlan.items.splice(from, 1);
+  if (!moved) return { ok: false, error: `Не удалось переставить "${name}".` };
+  buildPlan.items.splice(resolveInsert(buildPlan.items, anchor), 0, moved);
+  touchBuildPlan();
+  return { ok: true, plan: buildPlan };
 }

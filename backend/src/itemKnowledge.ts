@@ -1,18 +1,33 @@
 /**
  * Read-only access to the static Dota knowledge base used by the item-advice
- * subagent: ability/item tag notes, the tag glossary, enriched item data and
- * detailed hero ability files. All loaders cache the parsed JSON in memory.
+ * subagent: ability/item tag notes, the tag glossary, enriched item data,
+ * detailed hero ability files, and Aghanim's Scepter/Shard descriptions.
+ * All loaders cache the parsed JSON in memory.
  */
 
 import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { findHero } from "./heroes.js";
 import type {
+  AghanimInfo,
+  HeroAbilityDetail,
   ItemImportance,
   MechanicsGlossary,
   NotesFile,
   TaggedEntity,
 } from "./types/knowledge.js";
+
+interface AghsDescRaw {
+  hero_name: string;
+  has_scepter: boolean;
+  scepter_desc: string;
+  scepter_skill_name: string;
+  scepter_new_skill: boolean;
+  has_shard: boolean;
+  shard_desc: string;
+  shard_skill_name: string;
+  shard_new_skill: boolean;
+}
 
 const dataDir = join(__dirname, "..", "data");
 const abilityDir = join(dataDir, "heroes_abbility");
@@ -23,6 +38,7 @@ let itemNotes: NotesFile | null = null;
 let itemImportance: ItemImportance | null = null;
 let itemsEnriched: Array<Record<string, unknown>> | null = null;
 let abilityFiles: string[] | null = null;
+let aghsDesc: Map<string, AghsDescRaw> | null = null;
 
 async function loadJson<T>(relPath: string): Promise<T> {
   const raw = await readFile(join(dataDir, relPath), "utf-8");
@@ -81,6 +97,27 @@ export async function getItemTags(
   return key ? { key, entity: itemNotes[key] } : null;
 }
 
+/** Candidate items (importance === 1) that carry at least one of the given tags. */
+export async function findItemsByTags(
+  tags: string[],
+): Promise<Array<{ item: string; entity: TaggedEntity }>> {
+  if (!itemNotes) itemNotes = await loadJson<NotesFile>("item-notes.json");
+  const wanted = new Set(tags.map((t) => t.toLowerCase()));
+  if (!wanted.size) return [];
+
+  const candidates = await getCandidateItems();
+  const matches: Array<{ item: string; entity: TaggedEntity }> = [];
+  for (const key of candidates) {
+    const entity = itemNotes[key];
+    if (!entity) continue;
+    const hasTag = entity.abilities.some((a) =>
+      a.scenarios.some((s) => s.tags.some((t) => wanted.has(t.toLowerCase()))),
+    );
+    if (hasTag) matches.push({ item: key, entity });
+  }
+  return matches;
+}
+
 /** Item internal names that are worth recommending (importance === 1). */
 export async function getCandidateItems(): Promise<string[]> {
   if (!itemImportance)
@@ -111,10 +148,44 @@ export async function getItemDetail(
   return partial;
 }
 
+function stripHtml(value: string): string {
+  return value.replace(/<[^>]+>/g, "");
+}
+
+async function loadAghsDesc(): Promise<Map<string, AghsDescRaw>> {
+  if (!aghsDesc) {
+    const raw = await loadJson<AghsDescRaw[]>("aghs_desc.json");
+    aghsDesc = new Map(raw.map((r) => [r.hero_name, r]));
+  }
+  return aghsDesc;
+}
+
+/** What Aghanim's Scepter/Shard give this hero (odota/dotaconstants), for hero-specific tagging. */
+export async function getAghanimInfo(name: string): Promise<AghanimInfo | null> {
+  const hero = await findHero(name);
+  if (!hero) return null;
+
+  const map = await loadAghsDesc();
+  const raw = map.get(`npc_dota_hero_${hero.shortName}`);
+  if (!raw) return null;
+
+  return {
+    heroName: hero.displayName,
+    hasScepter: raw.has_scepter,
+    scepterDesc: stripHtml(raw.scepter_desc),
+    scepterSkillName: raw.scepter_skill_name,
+    scepterNewSkill: raw.scepter_new_skill,
+    hasShard: raw.has_shard,
+    shardDesc: stripHtml(raw.shard_desc),
+    shardSkillName: raw.shard_skill_name,
+    shardNewSkill: raw.shard_new_skill,
+  };
+}
+
 /** Detailed ability file (numbers, cooldowns, talents) for a hero. */
 export async function getHeroAbilityDetail(
   name: string,
-): Promise<unknown | null> {
+): Promise<HeroAbilityDetail | null> {
   if (!abilityFiles) abilityFiles = await readdir(abilityDir);
 
   const hero = await findHero(name);
@@ -127,5 +198,5 @@ export async function getHeroAbilityDetail(
 
   if (!match) return null;
   const raw = await readFile(join(abilityDir, match), "utf-8");
-  return JSON.parse(raw) as unknown;
+  return JSON.parse(raw) as HeroAbilityDetail;
 }

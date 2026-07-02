@@ -85,11 +85,17 @@ Each file exports one `tool({ … })`; `src/tools/index.ts` re-exports them. Too
 | Tool | File | Source / behavior |
 |------|------|-------------------|
 | `get_hero_info`   | `heroInfo.ts`   | `heroes_extend.json` |
+| `get_hero_abilities` | `heroAbilities.ts` | `data/heroes_abbility/<hero>-abilities.json` — cooldowns, mana, damage, talents |
 | `list_heroes`     | `heroList.ts`   | Full hero list |
 | `get_match_state` | `matchState.ts` | Latest parsed GSI state, incl. the CV draft and the player's position (`playerPosition`, 1-5) |
 | `set_player_position` | `setPlayerPosition.ts` | Records the player's position (1-5) in game state; asked for via the `ask_player_position` insight at draft start |
 | `get_matchups`    | `matchups.ts`   | STRATZ: win rate vs every hero (best/worst 5) |
 | `get_builds`      | `builds.ts`     | STRATZ: starting items, boots, core items by phase |
+| `get_skill_build` | `skillBuild.ts` | STRATZ: ability level-up priority + per-talent win rates |
+| `request_item_advice` | `itemAdvice.ts` | Delayed: background "what to buy now" subagent → `item_advice` insight |
+| `plan_item_build` | `buildPlan.ts`  | Delayed: background full-game ordered build subagent, keyed by position (1-5). Stores the structured plan in `buildStore` and delivers a `build_plan` insight |
+| `get_build_plan`  | `getBuildPlan.ts` | The saved build plan (purchase order) from `buildStore` |
+| `edit_build_plan` | `editBuildPlan.ts` | Synchronous edit of the saved build — add/remove/replace/move an item; returns the updated plan |
 
 ## Adding to the backend
 

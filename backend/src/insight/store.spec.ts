@@ -263,6 +263,19 @@ describe("insights", () => {
     });
   });
 
+  it("unique insight allows re-adding once the prior instance was used, even before expiry", () => {
+    withFixtureConfigs([[NON_UNIQUE, fixture(true)]], () => {
+      const first = addInsight(NON_UNIQUE, "first");
+      assert.ok(first);
+      assert.equal(addInsight(NON_UNIQUE, "blocked while pending"), null);
+
+      markUsed(first);
+      const second = addInsight(NON_UNIQUE, "second");
+      assert.ok(second, "should allow re-adding once the pending instance was delivered");
+      assert.equal(second.payload, "second");
+    });
+  });
+
   it("expired unique insight allows re-adding the same name", () => {
     withFixtureConfigs([[NON_UNIQUE, { ...fixture(true), ttlMs: -1 }]], () => {
       const first = addInsight(NON_UNIQUE, "first");

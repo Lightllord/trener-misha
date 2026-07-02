@@ -6,8 +6,11 @@
 import {
   queryStratz,
   findStratzHero,
+  findStratzItem,
   getItemsMap,
 } from "./stratzApi.js";
+import { RARE_PURCHASE_THRESHOLD_PCT } from "./consts/stratz.js";
+import type { ItemPurchaseRate } from "./types/stratz.js";
 
 interface PhasedPurchase {
   itemId: number;
@@ -22,15 +25,47 @@ interface FlatPurchase {
   winCount: number;
 }
 
+interface HeroStats {
+  itemFullPurchase?: PhasedPurchase[];
+  itemStartingPurchase?: FlatPurchase[];
+  itemBootPurchase?: FlatPurchase[];
+}
+
 interface BuildsResponse {
   data: {
-    heroStats: {
-      itemFullPurchase?: PhasedPurchase[];
-      itemStartingPurchase?: FlatPurchase[];
-      itemBootPurchase?: FlatPurchase[];
-    };
+    heroStats: HeroStats;
   };
   errors?: Array<{ message: string }>;
+}
+
+const HERO_BUILDS_QUERY = `
+  query GetHeroBuilds($heroId: Short!) {
+    heroStats {
+      itemFullPurchase(heroId: $heroId, matchLimit: 50) {
+        itemId time matchCount winCount
+      }
+      itemStartingPurchase(heroId: $heroId) {
+        itemId matchCount winCount
+      }
+      itemBootPurchase(heroId: $heroId) {
+        itemId matchCount winCount
+      }
+    }
+  }
+`;
+
+const heroStatsCache = new Map<number, Promise<HeroStats | null>>();
+
+function fetchHeroStats(heroId: number): Promise<HeroStats | null> {
+  if (!heroStatsCache.has(heroId)) {
+    heroStatsCache.set(
+      heroId,
+      queryStratz<BuildsResponse>(HERO_BUILDS_QUERY, { heroId }).then((d) =>
+        d.errors ? null : d.data?.heroStats ?? null,
+      ),
+    );
+  }
+  return heroStatsCache.get(heroId)!;
 }
 
 function aggregate(
@@ -56,26 +91,7 @@ export async function fetchBuildsSummary(heroName: string): Promise<string> {
   const hero = await findStratzHero(heroName);
   if (!hero) return `Hero "${heroName}" not found in STRATZ.`;
 
-  const query = `
-    query GetHeroBuilds($heroId: Short!) {
-      heroStats {
-        itemFullPurchase(heroId: $heroId, matchLimit: 50) {
-          itemId time matchCount winCount
-        }
-        itemStartingPurchase(heroId: $heroId) {
-          itemId matchCount winCount
-        }
-        itemBootPurchase(heroId: $heroId) {
-          itemId matchCount winCount
-        }
-      }
-    }
-  `;
-
-  const data = await queryStratz<BuildsResponse>(query, { heroId: hero.id });
-  if (data.errors) return `STRATZ error: ${data.errors[0]?.message}`;
-
-  const stats = data.data?.heroStats;
+  const stats = await fetchHeroStats(hero.id);
   if (!stats) return `No build data for ${hero.displayName}.`;
 
   const itemsMap = await getItemsMap();
@@ -102,4 +118,44 @@ export async function fetchBuildsSummary(heroName: string): Promise<string> {
   }
 
   return result;
+}
+
+/** Share of matches (on this hero) that included each requested item, per STRATZ. */
+export async function fetchItemPurchaseRates(
+  heroName: string,
+  itemNames: string[],
+): Promise<ItemPurchaseRate[]> {
+  const hero = await findStratzHero(heroName);
+  if (!hero || !itemNames.length) return [];
+
+  const stats = await fetchHeroStats(hero.id);
+  if (!stats) {
+    return itemNames.map((item) => ({ item, matchCount: 0, purchaseRate: 0, winRate: 0, rare: true }));
+  }
+
+  const combined = aggregate([
+    ...(stats.itemFullPurchase ?? []),
+    ...(stats.itemStartingPurchase ?? []),
+    ...(stats.itemBootPurchase ?? []),
+  ]);
+  const byId = new Map(combined.map((r) => [r.id, r]));
+
+  const bootTop = aggregate(stats.itemBootPurchase ?? [])[0]?.matchCount;
+  const samplesAnchor = bootTop || Math.max(...combined.map((r) => r.matchCount), 1);
+
+  const results: ItemPurchaseRate[] = [];
+  for (const name of itemNames) {
+    const item = await findStratzItem(name);
+    const row = item ? byId.get(item.id) : undefined;
+    const matchCount = row?.matchCount ?? 0;
+    const purchaseRate = (matchCount / samplesAnchor) * 100;
+    results.push({
+      item: item?.displayName ?? name,
+      matchCount,
+      purchaseRate,
+      winRate: row?.winRate ?? 0,
+      rare: purchaseRate < RARE_PURCHASE_THRESHOLD_PCT,
+    });
+  }
+  return results;
 }

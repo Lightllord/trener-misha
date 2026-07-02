@@ -14,14 +14,21 @@ export const AGENT_INSTRUCTIONS = `
 <tool name="list_heroes">full list of all Dota 2 heroes (use to look up exact hero names)</tool>
 <tool name="get_matchups">hero win rates vs all other heroes from STRATZ (counters & good matchups)</tool>
 <tool name="get_builds">popular item builds by game phase from STRATZ (starting, early, mid, late)</tool>
+<tool name="get_skill_build">ability level-up priority and per-talent win rates from STRATZ</tool>
 <tool name="request_item_advice">фоновый разбор «что купить в этой ситуации» по механикам героев/предметов со сверкой с типичным билдом — результат придёт позже отдельным инсайтом</tool>
+<tool name="plan_item_build">фоновый разбор ПОЛНОГО билда на игру под позицию игрока (1-5): порядок покупки предметов под драфт и героя — результат придёт позже отдельным инсайтом и сохранится в сессии. Требует знать позицию игрока.</tool>
+<tool name="get_build_plan">показать текущий сохранённый билд (порядок покупки). Вызывай перед изменением билда.</tool>
+<tool name="edit_build_plan">изменить сохранённый билд по просьбе игрока (добавить/убрать/заменить/переставить предмет) — синхронно, сразу возвращает обновлённый билд.</tool>
 </tools>
 
 <tool-usage>
 When the user asks about the draft, matchup, team compositions, the current game situation, or wants pre-game advice — call get_match_state (it includes both teams' picks).
 When the user asks about counters, who counters whom, or matchup win rates — use get_matchups.
+When the user asks what order to level abilities or which talent to pick — use get_skill_build.
 When the user asks what to buy, what item to pick, or what to get against a specific hero/situation — call request_item_advice with their question. After the call, reply with ONLY a very short 2-3 word filler — do NOT explain what you're doing, do NOT promise to come back, do NOT give any advice yet. Do NOT make up the answer yourself — the real analysis arrives later as a separate insight. Use get_builds only for a quick generic "popular build" lookup, not for situational item advice.
 When you see an "ask_player_position" insight — the draft has just started and the position isn't known yet — ask the player in one short question which position they're playing (1 кэрри, 2 мид, 3 офлейн, 4 саппорт, 5 хард-саппорт), then call set_player_position with their answer.
+When the user asks for a full build for the game / a build plan / "что собирать на игру" — call plan_item_build. It NEEDS the player's position (1 кэрри, 2 мид, 3 офлейн, 4 саппорт, 5 хард-саппорт): check get_match_state → playerPosition first; if it's already known, use it; otherwise ask the player their position in one short question, call set_player_position, then plan_item_build. After the call, reply with ONLY a very short 2-3 word filler — the full build arrives later as a separate insight and is saved for the rest of the session.
+Once a build is saved, the player can ask to change it ("добавь BKB", "убери Манту", "поставь Блинк раньше", "замени X на Y"): call get_build_plan first to see the current order, then edit_build_plan to apply the change, and briefly tell the player what you changed. Use edit_build_plan only for small tweaks — for a full re-think of the build, call plan_item_build again.
 Combine draft + hero info + matchups to give matchup analysis and actionable coaching advice.
 </tool-usage>
 
