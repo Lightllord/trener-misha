@@ -115,8 +115,8 @@ Non-obvious navigation only — files whose role isn't already implied by their 
 | `src/index.ts`           | HTTP + WS server, session lifecycle, `tryDeliver()` orchestration |
 | `src/agent.ts`           | `RealtimeAgent` — system instructions, voice, tool list |
 | `src/gameData.ts`        | In-memory, push-only store for the latest match state (the draft is a field on it) + the agent's manual draft corrections and player-position overlays — nothing polls it |
-| `src/gameEventQueue.ts`  | Event buffer + throttling + fallback-status generation |
-| `src/stateDiff.ts`       | `diffStates(prev, curr)` → `GameEvent[]` |
+| `src/gameEventQueue.ts`  | Event buffer + throttling + fallback-status generation; also fires `ask_player_position` on the phase transition into `hero_selection` if the position isn't known yet, and `excess_gold` while the player is sitting on 2000+ gold (2000 + buyback cost after 30 minutes). Kills/deaths are batched for `SCORE_CHANGE_BUFFER_MS` (10s) before delivering a single `score_change` insight, so a team fight lands as one report instead of one insight per kill/death. Enemy key-item pickups are batched per hero for `ENEMY_ITEM_BUFFER_MS` (6s) into one `enemy_key_item` report |
+| `src/stateDiff.ts`       | `diffStates(prev, curr)` → `GameEvent[]`; includes edge-triggered Tormentor warning/spawn at the 19:00/20:00 game clock and a repeating wisdom-altar warning every 7 minutes starting at 6:00 |
 | `src/draftAnalysis.ts`   | Background `gpt-5.4-mini` tool-use loop → produces a `draft_analysis` insight |
 | `src/insight/store.ts`   | In-memory insight store keyed by name. Per-name uniqueness from `INSIGHT_CONFIGS` — unique kinds replace in place, others append with an incrementing `number`; tracks used/unused so the picker claims each item once |
 | `src/insight/picker.ts`  | `InsightPicker` — picks what to deliver, owns background thinking, formats injections |

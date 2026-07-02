@@ -22,15 +22,16 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
     importance: "high",
     ttlMs: 300_000,
   },
-  hero_death: {
+  score_change: {
     unique: false,
-    description: "Player just died — deliver a short tactical tip on what likely went wrong and how to avoid it next life.",
+    description:
+      "The player's kills/deaths just changed — a single kill, a single death, or a short flurry of both (a team fight, batched into one report). React accordingly: acknowledge a kill, give a short tactical tip after a death, or summarize the fight when the payload covers several events.",
     importance: "high",
     ttlMs: 30_000,
   },
   hero_missing: {
     unique: false,
-    description: "An enemy hero has not been visible on the minimap for over a minute — warn the player it may be setting up a gank.",
+    description: "An enemy hero has not been visible on the minimap for over a minute — tell the player where the hero was last seen, then warn it may be setting up a gank.",
     importance: "medium",
     ttlMs: 30_000,
   },
@@ -45,12 +46,6 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
     description: "Three or more enemy heroes spotted near Roshan pit — they may be attempting to take Roshan.",
     importance: "high",
     ttlMs: 30_000,
-  },
-  player_kill: {
-    unique: false,
-    description: "Player got a kill — briefly acknowledge and give a follow-up tip if relevant.",
-    importance: "medium",
-    ttlMs: 20_000,
   },
   level_up: {
     unique: false,
@@ -85,7 +80,7 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
   enemy_key_item: {
     unique: false,
     description:
-      "An enemy hero acquired a key item — warn the player about its impact and how to play around it.",
+      "An enemy hero acquired one or more key items in the same shopping trip (batched into one report) — warn the player about their impact and how to play around them.",
     importance: "high",
     ttlMs: 30_000,
   },
@@ -114,5 +109,30 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
       "Draft has started and the player's position (1-5) is not yet known — ask the player which position they're playing and save it with set_player_position.",
     importance: "high",
     ttlMs: 180_000,
+  },
+  excess_gold: {
+    unique: false,
+    description:
+      "Player is holding a lot of unspent gold (2000+, or 2000+ plus buyback cost after 30 minutes) — remind them to go shop.",
+    importance: "medium",
+    ttlMs: 60_000,
+  },
+  tormentor_incoming: {
+    unique: true,
+    description: "Tormentor spawns in one minute (at the 20:00 game clock) in the bottom rift near the portal — give the player a heads-up.",
+    importance: "medium",
+    ttlMs: 60_000,
+  },
+  tormentor_spawned: {
+    unique: true,
+    description: "Tormentor just spawned — suggest the player try to group up with the team and take it.",
+    importance: "high",
+    ttlMs: 90_000,
+  },
+  wisdom_altar_incoming: {
+    unique: false,
+    description: "The wisdom altar spawns in one minute (every 7 minutes starting at 7:00) — suggest the player try to contest it.",
+    importance: "medium",
+    ttlMs: 60_000,
   },
 };

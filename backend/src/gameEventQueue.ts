@@ -12,6 +12,17 @@ const NEARBY_RADIUS = 1500;
 const ROSHAN_COOLDOWN_MS = 30_000;
 const INSPECT_REMINDER_THRESHOLD_S = 300;
 const INSPECT_REMINDER_COOLDOWN_MS = 120_000;
+const EXCESS_GOLD_THRESHOLD = 2000;
+const EXCESS_GOLD_BUYBACK_GAME_TIME_S = 30 * 60;
+const EXCESS_GOLD_REMINDER_COOLDOWN_MS = 120_000;
+
+// Kills and deaths landing within this window (a team fight) are batched into
+// one score_change report instead of firing an insight per event.
+const SCORE_CHANGE_BUFFER_MS = 10_000;
+
+// New key items on the same enemy hero landing within this window (one shopping
+// trip) are batched into one enemy_key_item report instead of firing per item.
+const ENEMY_ITEM_BUFFER_MS = 6_000;
 
 const ROSHAN_ZONES = new Set([
   "roshpit_bot",
@@ -25,11 +36,27 @@ const missingInsights = new Map<string, Insight>();
 let lastNearbyMs = 0;
 let lastRoshanMs = 0;
 let lastInspectReminderMs = 0;
+let lastExcessGoldMs = 0;
+
+interface ScoreEvent {
+  type: "kill" | "death";
+  kills: number;
+  deaths: number;
+  assists: number;
+  level?: number;
+  respawnSeconds?: number;
+}
+
+let scoreBuffer: ScoreEvent[] = [];
+let scoreBufferTimer: ReturnType<typeof setTimeout> | null = null;
 
 // Enemy hero name -> key items already reported, so a single pickup fires once
 // even as the hero flickers in and out of vision.
 const notifiedEnemyItems = new Map<string, Set<string>>();
 let keyItemSet: Set<string> | null = null;
+
+// Enemy hero name -> key items picked up in the current buffering window, flushed as one insight.
+const enemyItemBuffers = new Map<string, { items: string[]; timer: ReturnType<typeof setTimeout> }>();
 
 // Kick off loading at import so the set is ready before game states arrive;
 // both the enemy item-awareness check and the player item-purchase event filter
@@ -76,10 +103,12 @@ function checkHeroInsights(state: Record<string, unknown>): void {
         missingNotified.set(name, now);
         const shortName = name.replace("npc_dota_hero_", "");
         const missingFor = Math.floor(gameTime - h.lastSeen);
+        const lastZone = h.zone.replaceAll("_", " ");
         const insight = addInsight(
           "hero_missing",
-          `Вражеский герой ${shortName} не появлялся на карте ${missingFor} секунд` +
-            ` (последний раз замечен: ${h.zone}). Возможно готовит ганк — будь осторожен.`,
+          `Вражеский герой ${shortName} не появлялся на карте ${missingFor} секунд.` +
+            ` Последний раз его видели в районе: ${lastZone}.` +
+            ` Обязательно проговори игроку это последнее известное место, прежде чем предупредить — возможно, герой готовит ганк оттуда.`,
         );
         if (insight) missingInsights.set(name, insight);
       }
@@ -141,6 +170,33 @@ function checkInspectReminder(state: Record<string, unknown>): void {
   );
 }
 
+function checkExcessGold(state: Record<string, unknown>): void {
+  if ((state.phase as string | undefined) !== "playing") return;
+
+  const player = state.player as { gold?: number } | undefined;
+  const hero = state.hero as { buybackCost?: number } | undefined;
+  const gameTime = (state.gameTime as number | undefined) ?? 0;
+  if (typeof player?.gold !== "number") return;
+
+  // After 30 minutes buyback matters, so keep enough gold in reserve for it
+  // before flagging the rest as "excess" that should be spent.
+  const buybackReserve = gameTime >= EXCESS_GOLD_BUYBACK_GAME_TIME_S ? (hero?.buybackCost ?? 0) : 0;
+  const threshold = EXCESS_GOLD_THRESHOLD + buybackReserve;
+  if (player.gold < threshold) return;
+
+  const now = Date.now();
+  if (now - lastExcessGoldMs < EXCESS_GOLD_REMINDER_COOLDOWN_MS) return;
+  lastExcessGoldMs = now;
+
+  const reserveNote = buybackReserve > 0
+    ? ` (порог включает резерв на байбек: ${buybackReserve})`
+    : "";
+  addInsight(
+    "excess_gold",
+    `У игрока на руках ${player.gold} золота${reserveNote}. Напомни закупиться предметами, чтобы деньги не простаивали.`,
+  );
+}
+
 interface EnemyHero {
   name?: string;
   team?: string;
@@ -177,15 +233,85 @@ async function checkEnemyKeyItems(state: Record<string, unknown>): Promise<void>
     for (const item of heroItemNames(hero)) {
       if (!keyItemSet.has(item) || seen.has(item)) continue;
       seen.add(item);
-      const shortName = hero.name.replace("npc_dota_hero_", "");
-      const clean = item.replaceAll("_", " ");
-      addInsight(
-        "enemy_key_item",
-        `Вражеский герой ${shortName} собрал важный предмет: ${clean}.` +
-          ` Предупреди игрока о его влиянии и как против него играть.`,
-      );
+      bufferEnemyKeyItem(hero.name, item);
     }
   }
+}
+
+function bufferEnemyKeyItem(heroName: string, item: string): void {
+  const existing = enemyItemBuffers.get(heroName);
+  if (existing) {
+    existing.items.push(item);
+    clearTimeout(existing.timer);
+    existing.timer = setTimeout(() => flushEnemyItemBuffer(heroName), ENEMY_ITEM_BUFFER_MS);
+    return;
+  }
+  enemyItemBuffers.set(heroName, {
+    items: [item],
+    timer: setTimeout(() => flushEnemyItemBuffer(heroName), ENEMY_ITEM_BUFFER_MS),
+  });
+}
+
+function flushEnemyItemBuffer(heroName: string): void {
+  const buffer = enemyItemBuffers.get(heroName);
+  if (!buffer) return;
+  enemyItemBuffers.delete(heroName);
+
+  const shortName = heroName.replace("npc_dota_hero_", "");
+  const clean = buffer.items.map((i) => i.replaceAll("_", " "));
+
+  if (clean.length === 1) {
+    addInsight(
+      "enemy_key_item",
+      `Вражеский герой ${shortName} собрал важный предмет: ${clean[0]}.` +
+        ` Предупреди игрока о его влиянии и как против него играть.`,
+    );
+    return;
+  }
+
+  addInsight(
+    "enemy_key_item",
+    `Вражеский герой ${shortName} собрал сразу несколько важных предметов: ${clean.join(", ")}.` +
+      ` Предупреди игрока об их влиянии и как против них играть.`,
+  );
+}
+
+function bufferScoreEvent(event: ScoreEvent): void {
+  scoreBuffer.push(event);
+  if (scoreBufferTimer) clearTimeout(scoreBufferTimer);
+  scoreBufferTimer = setTimeout(flushScoreBuffer, SCORE_CHANGE_BUFFER_MS);
+}
+
+function flushScoreBuffer(): void {
+  scoreBufferTimer = null;
+  if (scoreBuffer.length === 0) return;
+
+  const batch = scoreBuffer;
+  scoreBuffer = [];
+
+  const kills = batch.filter((e) => e.type === "kill").length;
+  const deaths = batch.filter((e) => e.type === "death").length;
+  const last = batch[batch.length - 1];
+  const kda = `${last.kills}/${last.deaths}/${last.assists}`;
+
+  if (batch.length === 1) {
+    addInsight(
+      "score_change",
+      last.type === "kill"
+        ? `Убийство! Счёт ${kda}.`
+        : `Игрок только что погиб. KDA: ${kda}, уровень ${last.level ?? 0}, респаун через ${last.respawnSeconds ?? 0}с.` +
+            ` Дай короткий тактический совет — что скорее всего привело к смерти` +
+            ` и как избежать этого в следующей жизни. 1-2 предложения, без воды.`,
+    );
+    return;
+  }
+
+  const respawnNote = deaths > 0 ? ` Респаун через ${last.respawnSeconds ?? 0}с.` : "";
+  addInsight(
+    "score_change",
+    `Была стычка: убийств ${kills}, смертей ${deaths}. Счёт сейчас ${kda}.${respawnNote}` +
+      ` Дай короткий итог по драке${deaths > 0 ? " и совет на будущее" : ""}.`,
+  );
 }
 
 function checkDraftStart(prev: Record<string, unknown>, curr: Record<string, unknown>): void {
@@ -208,26 +334,26 @@ export function processStateUpdate(
   checkDraftStart(prev, curr);
   checkHeroInsights(curr);
   checkInspectReminder(curr);
+  checkExcessGold(curr);
   void checkEnemyKeyItems(curr).catch((err) =>
     log("insight", `enemy key-item check failed: ${String(err)}`),
   );
 
   const events = diffStates(prev, curr, keyItemSet ?? new Set());
   for (const e of events) {
-    if (e.type === "player_died") {
+    if (e.type === "player_died" || e.type === "player_kill") {
       const c = curr as {
         player?: { kills?: number; deaths?: number; assists?: number };
         hero?: { level?: number; respawnSeconds?: number };
       };
-      const kda = `${c.player?.kills ?? 0}/${c.player?.deaths ?? 0}/${c.player?.assists ?? 0}`;
-      const level = c.hero?.level ?? 0;
-      const respawn = c.hero?.respawnSeconds ?? 0;
-      addInsight(
-        "hero_death",
-        `Игрок только что погиб. KDA: ${kda}, уровень ${level}, респаун через ${respawn}с.` +
-          ` Дай короткий тактический совет — что скорее всего привело к смерти` +
-          ` и как избежать этого в следующей жизни. 1-2 предложения, без воды.`,
-      );
+      bufferScoreEvent({
+        type: e.type === "player_died" ? "death" : "kill",
+        kills: c.player?.kills ?? 0,
+        deaths: c.player?.deaths ?? 0,
+        assists: c.player?.assists ?? 0,
+        level: c.hero?.level,
+        respawnSeconds: c.hero?.respawnSeconds,
+      });
     } else {
       addInsight(e.type as InsightName, e.summary);
     }
@@ -241,4 +367,12 @@ export function clearEventQueue(): void {
   lastNearbyMs = 0;
   lastRoshanMs = 0;
   lastInspectReminderMs = 0;
+  lastExcessGoldMs = 0;
+  if (scoreBufferTimer) {
+    clearTimeout(scoreBufferTimer);
+    scoreBufferTimer = null;
+  }
+  scoreBuffer = [];
+  for (const buffer of enemyItemBuffers.values()) clearTimeout(buffer.timer);
+  enemyItemBuffers.clear();
 }

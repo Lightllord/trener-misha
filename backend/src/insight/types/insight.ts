@@ -2,11 +2,10 @@ export type InsightName =
   | "draft_analysis"
   | "item_advice"
   | "build_plan"
-  | "hero_death"
+  | "score_change"
   | "hero_missing"
   | "enemies_nearby"
   | "roshan_threat"
-  | "player_kill"
   | "level_up"
   | "respawned"
   | "aghs_scepter"
@@ -16,7 +15,11 @@ export type InsightName =
   | "enemy_inspect_reminder"
   | "ally_building_destroyed"
   | "enemy_building_destroyed"
-  | "ask_player_position";
+  | "ask_player_position"
+  | "excess_gold"
+  | "tormentor_incoming"
+  | "tormentor_spawned"
+  | "wisdom_altar_incoming";
 
 export type InsightImportance = "low" | "medium" | "high" | "critical";
 

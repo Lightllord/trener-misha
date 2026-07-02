@@ -6,6 +6,22 @@ export interface GameEvent {
 // Levels worth announcing — power spikes / ability unlocks, not every level
 const KEY_LEVELS = [6, 10, 12, 15, 18, 20, 25, 30];
 
+// Tormentor spawns at the 20:00 game clock — warn a minute ahead, then again on spawn.
+const TORMENTOR_WARNING_S = 19 * 60;
+const TORMENTOR_SPAWN_S = 20 * 60;
+
+// Wisdom altar spawns every 7 minutes starting at 7:00 — warn a minute ahead, repeating.
+const WISDOM_ALTAR_FIRST_WARNING_S = 6 * 60;
+const WISDOM_ALTAR_PERIOD_S = 7 * 60;
+
+/** True if the clock crossed `start`, `start+period`, `start+2*period`, … between prev and curr. */
+function crossedPeriodicThreshold(pClock: number, cClock: number, start: number, period: number): boolean {
+  if (cClock < start) return false;
+  const prevIndex = pClock < start ? -1 : Math.floor((pClock - start) / period);
+  const currIndex = Math.floor((cClock - start) / period);
+  return currIndex > prevIndex;
+}
+
 interface PlayerData {
   kills?: number;
   deaths?: number;
@@ -38,6 +54,7 @@ interface BuildingData {
 }
 
 interface MatchStateData {
+  phase?: string;
   clockTime?: number;
   score?: { radiant?: number; dire?: number };
   player?: PlayerData;
@@ -139,6 +156,31 @@ export function diffStates(
       events.push({
         type: "level_up",
         summary: `Уровень ${spike}.`,
+      });
+    }
+  }
+
+  // Tormentor warning / spawn — edge-triggered on the game clock crossing 19:00 / 20:00
+  if (c.phase === "playing") {
+    const pClock = p.clockTime ?? 0;
+    const cClock = c.clockTime ?? 0;
+    if (pClock < TORMENTOR_WARNING_S && cClock >= TORMENTOR_WARNING_S) {
+      events.push({
+        type: "tormentor_incoming",
+        summary: "Скоро терзатель появится в нижнем разломе, около портала.",
+      });
+    }
+    if (pClock < TORMENTOR_SPAWN_S && cClock >= TORMENTOR_SPAWN_S) {
+      events.push({
+        type: "tormentor_spawned",
+        summary: "Терзатель появился. Постарайтесь по возможности собраться командой и забрать его.",
+      });
+    }
+
+    if (crossedPeriodicThreshold(pClock, cClock, WISDOM_ALTAR_FIRST_WARNING_S, WISDOM_ALTAR_PERIOD_S)) {
+      events.push({
+        type: "wisdom_altar_incoming",
+        summary: "Через минуту появится алтарь мудрости — постарайтесь за него побороться.",
       });
     }
   }
