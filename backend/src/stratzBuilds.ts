@@ -120,6 +120,18 @@ export async function fetchBuildsSummary(heroName: string): Promise<string> {
   return result;
 }
 
+/** Match-count-weighted average purchase minute for one item, from timed full-purchase rows. */
+function averagePurchaseTime(rows: PhasedPurchase[], itemId: number): number | null {
+  let weight = 0;
+  let weightedTime = 0;
+  for (const r of rows) {
+    if (r.itemId !== itemId || !r.matchCount) continue;
+    weight += r.matchCount;
+    weightedTime += r.time * r.matchCount;
+  }
+  return weight ? weightedTime / weight : null;
+}
+
 /** Share of matches (on this hero) that included each requested item, per STRATZ. */
 export async function fetchItemPurchaseRates(
   heroName: string,
@@ -130,7 +142,14 @@ export async function fetchItemPurchaseRates(
 
   const stats = await fetchHeroStats(hero.id);
   if (!stats) {
-    return itemNames.map((item) => ({ item, matchCount: 0, purchaseRate: 0, winRate: 0, rare: true }));
+    return itemNames.map((item) => ({
+      item,
+      matchCount: 0,
+      purchaseRate: 0,
+      winRate: 0,
+      rare: true,
+      avgPurchaseTimeMin: null,
+    }));
   }
 
   const combined = aggregate([
@@ -155,6 +174,7 @@ export async function fetchItemPurchaseRates(
       purchaseRate,
       winRate: row?.winRate ?? 0,
       rare: purchaseRate < RARE_PURCHASE_THRESHOLD_PCT,
+      avgPurchaseTimeMin: item ? averagePurchaseTime(stats.itemFullPurchase ?? [], item.id) : null,
     });
   }
   return results;

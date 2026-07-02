@@ -5,4 +5,6 @@ export interface ItemPurchaseRate {
   purchaseRate: number;
   winRate: number;
   rare: boolean;
+  /** Match-count-weighted average purchase minute, or null if STRATZ has no timed purchase data for it. */
+  avgPurchaseTimeMin: number | null;
 }
