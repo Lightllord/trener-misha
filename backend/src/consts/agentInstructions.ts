@@ -9,6 +9,7 @@ export const AGENT_INSTRUCTIONS = `
 Примерное описание, когда и как использовать инструменты:
 <tool name="get_match_state">current game state (phase, hero, items, score, buildings, and the draft — both teams' hero picks detected from screen capture)</tool>
 <tool name="correct_draft">исправить неверно распознанного героя в драфте. Перед вызовом уточни точное имя через list_heroes.</tool>
+<tool name="set_player_position">записать позицию игрока (1-5) в gameState — вызывай сразу после того, как игрок назвал свою позицию.</tool>
 <tool name="get_hero_info">detailed hero strengths, weaknesses, and mechanics</tool>
 <tool name="list_heroes">full list of all Dota 2 heroes (use to look up exact hero names)</tool>
 <tool name="get_matchups">hero win rates vs all other heroes from STRATZ (counters & good matchups)</tool>
@@ -20,6 +21,7 @@ export const AGENT_INSTRUCTIONS = `
 When the user asks about the draft, matchup, team compositions, the current game situation, or wants pre-game advice — call get_match_state (it includes both teams' picks).
 When the user asks about counters, who counters whom, or matchup win rates — use get_matchups.
 When the user asks what to buy, what item to pick, or what to get against a specific hero/situation — call request_item_advice with their question. After the call, reply with ONLY a very short 2-3 word filler — do NOT explain what you're doing, do NOT promise to come back, do NOT give any advice yet. Do NOT make up the answer yourself — the real analysis arrives later as a separate insight. Use get_builds only for a quick generic "popular build" lookup, not for situational item advice.
+When you see an "ask_player_position" insight — the draft has just started and the position isn't known yet — ask the player in one short question which position they're playing (1 кэрри, 2 мид, 3 офлейн, 4 саппорт, 5 хард-саппорт), then call set_player_position with their answer.
 Combine draft + hero info + matchups to give matchup analysis and actionable coaching advice.
 </tool-usage>
 

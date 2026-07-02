@@ -14,7 +14,8 @@ export type InsightName =
   | "enemy_key_item"
   | "enemy_inspect_reminder"
   | "ally_building_destroyed"
-  | "enemy_building_destroyed";
+  | "enemy_building_destroyed"
+  | "ask_player_position";
 
 export type InsightImportance = "low" | "medium" | "high" | "critical";
 

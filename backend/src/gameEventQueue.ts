@@ -1,6 +1,7 @@
 import { diffStates } from "./stateDiff.js";
 import { addInsight, markUsed } from "./insight/store.js";
 import { getCandidateItems } from "./itemKnowledge.js";
+import { getPlayerPosition } from "./gameData.js";
 import { log } from "./observability/log.js";
 import type { Insight, InsightName } from "./insight/types/insight.js";
 
@@ -187,10 +188,24 @@ async function checkEnemyKeyItems(state: Record<string, unknown>): Promise<void>
   }
 }
 
+function checkDraftStart(prev: Record<string, unknown>, curr: Record<string, unknown>): void {
+  const prevPhase = prev.phase as string | undefined;
+  const currPhase = curr.phase as string | undefined;
+  if (currPhase !== "hero_selection" || prevPhase === "hero_selection") return;
+  if (getPlayerPosition() !== null) return;
+
+  addInsight(
+    "ask_player_position",
+    "Начался драфт. Спроси у игрока, на какой позиции он играет в этой игре" +
+      " (1 кэрри, 2 мид, 3 офлейн, 4 саппорт, 5 хард-саппорт), и сразу сохрани ответ через set_player_position.",
+  );
+}
+
 export function processStateUpdate(
   prev: Record<string, unknown>,
   curr: Record<string, unknown>,
 ): void {
+  checkDraftStart(prev, curr);
   checkHeroInsights(curr);
   checkInspectReminder(curr);
   void checkEnemyKeyItems(curr).catch((err) =>

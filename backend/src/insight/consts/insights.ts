@@ -101,4 +101,11 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
     importance: "high",
     ttlMs: 30_000,
   },
+  ask_player_position: {
+    unique: true,
+    description:
+      "Draft has started and the player's position (1-5) is not yet known — ask the player which position they're playing and save it with set_player_position.",
+    importance: "high",
+    ttlMs: 180_000,
+  },
 };

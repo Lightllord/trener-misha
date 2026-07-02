@@ -86,7 +86,8 @@ Each file exports one `tool({ … })`; `src/tools/index.ts` re-exports them. Too
 |------|------|-------------------|
 | `get_hero_info`   | `heroInfo.ts`   | `heroes_extend.json` |
 | `list_heroes`     | `heroList.ts`   | Full hero list |
-| `get_match_state` | `matchState.ts` | Latest parsed GSI state, incl. the CV draft |
+| `get_match_state` | `matchState.ts` | Latest parsed GSI state, incl. the CV draft and the player's position (`playerPosition`, 1-5) |
+| `set_player_position` | `setPlayerPosition.ts` | Records the player's position (1-5) in game state; asked for via the `ask_player_position` insight at draft start |
 | `get_matchups`    | `matchups.ts`   | STRATZ: win rate vs every hero (best/worst 5) |
 | `get_builds`      | `builds.ts`     | STRATZ: starting items, boots, core items by phase |
 
@@ -107,7 +108,7 @@ Non-obvious navigation only — files whose role isn't already implied by their 
 |------|------|
 | `src/index.ts`           | HTTP + WS server, session lifecycle, `tryDeliver()` orchestration |
 | `src/agent.ts`           | `RealtimeAgent` — system instructions, voice, tool list |
-| `src/gameData.ts`        | In-memory, push-only store for the latest match state (the draft is a field on it) + the agent's manual draft corrections overlay — nothing polls it |
+| `src/gameData.ts`        | In-memory, push-only store for the latest match state (the draft is a field on it) + the agent's manual draft corrections and player-position overlays — nothing polls it |
 | `src/gameEventQueue.ts`  | Event buffer + throttling + fallback-status generation |
 | `src/stateDiff.ts`       | `diffStates(prev, curr)` → `GameEvent[]` |
 | `src/draftAnalysis.ts`   | Background `gpt-5.4-mini` tool-use loop → produces a `draft_analysis` insight |

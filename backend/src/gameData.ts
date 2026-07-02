@@ -17,6 +17,10 @@ interface DraftData {
 let state: Record<string, unknown> | null = null;
 let prevState: Record<string, unknown> | null = null;
 
+// Position (1-5) the agent recorded after asking the player — not detected by
+// CV, so it must be re-applied to every incoming state like draft corrections.
+let playerPosition: number | null = null;
+
 // Slots manually corrected by the agent — keyed by slot index, re-applied to every state.
 const corrections: { radiant: Map<number, string>; dire: Map<number, string> } = {
   radiant: new Map(),
@@ -64,6 +68,16 @@ export function correctDraftSlot(team: "radiant" | "dire", slot: number, hero: s
   if (state) applyCorrections(state);
 }
 
+export function getPlayerPosition(): number | null {
+  return playerPosition;
+}
+
+export function setPlayerPosition(position: number): void {
+  playerPosition = position;
+  // Reflect immediately so get_match_state returns it without waiting for the next push.
+  if (state) state.playerPosition = position;
+}
+
 export function getState(): Record<string, unknown> | null {
   return state;
 }
@@ -74,6 +88,7 @@ export function getPrevState(): Record<string, unknown> | null {
 
 export function setState(data: Record<string, unknown>): void {
   applyCorrections(data);
+  data.playerPosition = playerPosition;
   prevState = state;
   state = data;
 }
@@ -83,4 +98,5 @@ export function clearGameData(): void {
   prevState = null;
   corrections.radiant.clear();
   corrections.dire.clear();
+  playerPosition = null;
 }
