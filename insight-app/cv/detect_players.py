@@ -48,7 +48,7 @@ class Box(NamedTuple):
 class Templates(NamedTuple):
     innate:          np.ndarray
     frame:           np.ndarray
-    skill_templates: dict[str, np.ndarray]
+    skill_templates: dict[str, list[np.ndarray]]
     level_templates: dict[int, np.ndarray]
     item_templates:  dict[str, np.ndarray]
 
@@ -70,13 +70,24 @@ def load_all_templates() -> Templates | None:
               file=sys.stderr)
         return None
 
-    skill_tmpls: dict[str, np.ndarray] = {}
+    skill_tmpls: dict[str, list[np.ndarray]] = {}
     skill_dir = SCRIPT_DIR / "skill_templates"
     if skill_dir.exists():
         for p in skill_dir.glob("*.png"):
             img = cv2.imread(str(p))
             if img is not None:
-                skill_tmpls[p.stem] = to_gray(img)
+                skill_tmpls[p.stem] = [to_gray(img)]
+
+    skill_variant_count = 0
+    skill_variants_dir = skill_dir / "variants"
+    if skill_variants_dir.exists():
+        for p in skill_variants_dir.glob("*.png"):
+            hero_name = p.stem.rsplit("_v", 1)[0]
+            img = cv2.imread(str(p))
+            if img is None:
+                continue
+            skill_tmpls.setdefault(hero_name, []).append(to_gray(img))
+            skill_variant_count += 1
 
     level_tmpls: dict[int, np.ndarray] = {}
     level_dir = SCRIPT_DIR / "level_templates"
@@ -96,7 +107,8 @@ def load_all_templates() -> Templates | None:
                 item_tmpls[p.stem] = to_gray(img)
 
     print(
-        f"Templates loaded: {len(skill_tmpls)} hero skills, "
+        f"Templates loaded: {len(skill_tmpls)} hero skills "
+        f"({skill_variant_count} variants), "
         f"{len(level_tmpls)} levels, {len(item_tmpls)} items",
         file=sys.stderr,
     )
@@ -191,18 +203,19 @@ SKILL_MATCH_THRESHOLD = 0.55
 
 def match_hero_skill(
     skill_img: np.ndarray,
-    skill_templates: dict[str, np.ndarray],
+    skill_templates: dict[str, list[np.ndarray]],
 ) -> tuple[str, float]:
     if skill_img.size == 0 or not skill_templates:
         return "unknown", 0.0
     sg = to_gray(skill_img)
     best_name, best_score = "unknown", 0.0
-    for hero, tmpl in skill_templates.items():
-        resized = cv2.resize(tmpl, (sg.shape[1], sg.shape[0]), interpolation=cv2.INTER_AREA)
-        _, val, _, _ = cv2.minMaxLoc(cv2.matchTemplate(sg, resized, cv2.TM_CCOEFF_NORMED))
-        if val > best_score:
-            best_score = val
-            best_name  = hero
+    for hero, tmpls in skill_templates.items():
+        for tmpl in tmpls:
+            resized = cv2.resize(tmpl, (sg.shape[1], sg.shape[0]), interpolation=cv2.INTER_AREA)
+            _, val, _, _ = cv2.minMaxLoc(cv2.matchTemplate(sg, resized, cv2.TM_CCOEFF_NORMED))
+            if val > best_score:
+                best_score = val
+                best_name  = hero
     return (best_name, best_score) if best_score >= SKILL_MATCH_THRESHOLD else ("unknown", best_score)
 
 
