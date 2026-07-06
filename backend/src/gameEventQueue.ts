@@ -3,7 +3,9 @@ import { addInsight, markUsed } from "./insight/store.js";
 import { getCandidateItems } from "./itemKnowledge.js";
 import { getPlayerPosition } from "./gameData.js";
 import { log } from "./observability/log.js";
+import { clearScoreInsightState, handleScoreEvent, updateLiveScore } from "./scoreInsight.js";
 import type { Insight, InsightName } from "./insight/types/insight.js";
+import type { ScoreKind } from "./scoreInsight.js";
 
 const MISSING_THRESHOLD_S = 60;
 const MISSING_REFIRE_MS = 120_000;
@@ -15,10 +17,6 @@ const INSPECT_REMINDER_COOLDOWN_MS = 120_000;
 const EXCESS_GOLD_THRESHOLD = 2000;
 const EXCESS_GOLD_BUYBACK_GAME_TIME_S = 30 * 60;
 const EXCESS_GOLD_REMINDER_COOLDOWN_MS = 120_000;
-
-// Kills and deaths landing within this window (a team fight) are batched into
-// one score_change report instead of firing an insight per event.
-const SCORE_CHANGE_BUFFER_MS = 10_000;
 
 // New key items on the same enemy hero landing within this window (one shopping
 // trip) are batched into one enemy_key_item report instead of firing per item.
@@ -37,18 +35,6 @@ let lastNearbyMs = 0;
 let lastRoshanMs = 0;
 let lastInspectReminderMs = 0;
 let lastExcessGoldMs = 0;
-
-interface ScoreEvent {
-  type: "kill" | "death";
-  kills: number;
-  deaths: number;
-  assists: number;
-  level?: number;
-  respawnSeconds?: number;
-}
-
-let scoreBuffer: ScoreEvent[] = [];
-let scoreBufferTimer: ReturnType<typeof setTimeout> | null = null;
 
 // Enemy hero name -> key items already reported, so a single pickup fires once
 // even as the hero flickers in and out of vision.
@@ -276,44 +262,6 @@ function flushEnemyItemBuffer(heroName: string): void {
   );
 }
 
-function bufferScoreEvent(event: ScoreEvent): void {
-  scoreBuffer.push(event);
-  if (scoreBufferTimer) clearTimeout(scoreBufferTimer);
-  scoreBufferTimer = setTimeout(flushScoreBuffer, SCORE_CHANGE_BUFFER_MS);
-}
-
-function flushScoreBuffer(): void {
-  scoreBufferTimer = null;
-  if (scoreBuffer.length === 0) return;
-
-  const batch = scoreBuffer;
-  scoreBuffer = [];
-
-  const kills = batch.filter((e) => e.type === "kill").length;
-  const deaths = batch.filter((e) => e.type === "death").length;
-  const last = batch[batch.length - 1];
-  const kda = `${last.kills}/${last.deaths}/${last.assists}`;
-
-  if (batch.length === 1) {
-    addInsight(
-      "score_change",
-      last.type === "kill"
-        ? `Убийство! Счёт ${kda}.`
-        : `Игрок только что погиб. KDA: ${kda}, уровень ${last.level ?? 0}, респаун через ${last.respawnSeconds ?? 0}с.` +
-            ` Дай короткий тактический совет — что скорее всего привело к смерти` +
-            ` и как избежать этого в следующей жизни. 1-2 предложения, без воды.`,
-    );
-    return;
-  }
-
-  const respawnNote = deaths > 0 ? ` Респаун через ${last.respawnSeconds ?? 0}с.` : "";
-  addInsight(
-    "score_change",
-    `Была стычка: убийств ${kills}, смертей ${deaths}. Счёт сейчас ${kda}.${respawnNote}` +
-      ` Дай короткий итог по драке${deaths > 0 ? " и совет на будущее" : ""}.`,
-  );
-}
-
 function checkDraftStart(prev: Record<string, unknown>, curr: Record<string, unknown>): void {
   const prevPhase = prev.phase as string | undefined;
   const currPhase = curr.phase as string | undefined;
@@ -325,6 +273,12 @@ function checkDraftStart(prev: Record<string, unknown>, curr: Record<string, unk
     "Начался драфт. Спроси у игрока, на какой позиции он играет в этой игре" +
       " (1 кэрри, 2 мид, 3 офлейн, 4 саппорт, 5 хард-саппорт), и сразу сохрани ответ через set_player_position.",
   );
+}
+
+const SCORE_EVENT_TYPES = new Set(["player_died", "player_kill", "player_assist"]);
+
+function scoreKindForEventType(type: string): ScoreKind {
+  return type === "player_died" ? "death" : type === "player_kill" ? "kill" : "assist";
 }
 
 export function processStateUpdate(
@@ -340,20 +294,23 @@ export function processStateUpdate(
   );
 
   const events = diffStates(prev, curr, keyItemSet ?? new Set());
+
+  // All score-changing events in this tick share the same final curr.player
+  // snapshot, so refresh liveScore exactly once, before any of this tick's
+  // own score insights are created.
+  if (events.some((e) => SCORE_EVENT_TYPES.has(e.type))) {
+    const c = curr as { player?: { kills?: number; deaths?: number; assists?: number } };
+    updateLiveScore({
+      kills: c.player?.kills ?? 0,
+      deaths: c.player?.deaths ?? 0,
+      assists: c.player?.assists ?? 0,
+    });
+  }
+
+  const c = curr as { hero?: { level?: number; respawnSeconds?: number } };
   for (const e of events) {
-    if (e.type === "player_died" || e.type === "player_kill") {
-      const c = curr as {
-        player?: { kills?: number; deaths?: number; assists?: number };
-        hero?: { level?: number; respawnSeconds?: number };
-      };
-      bufferScoreEvent({
-        type: e.type === "player_died" ? "death" : "kill",
-        kills: c.player?.kills ?? 0,
-        deaths: c.player?.deaths ?? 0,
-        assists: c.player?.assists ?? 0,
-        level: c.hero?.level,
-        respawnSeconds: c.hero?.respawnSeconds,
-      });
+    if (SCORE_EVENT_TYPES.has(e.type)) {
+      handleScoreEvent(scoreKindForEventType(e.type), c.hero?.level, c.hero?.respawnSeconds);
     } else {
       addInsight(e.type as InsightName, e.summary);
     }
@@ -368,11 +325,7 @@ export function clearEventQueue(): void {
   lastRoshanMs = 0;
   lastInspectReminderMs = 0;
   lastExcessGoldMs = 0;
-  if (scoreBufferTimer) {
-    clearTimeout(scoreBufferTimer);
-    scoreBufferTimer = null;
-  }
-  scoreBuffer = [];
+  clearScoreInsightState();
   for (const buffer of enemyItemBuffers.values()) clearTimeout(buffer.timer);
   enemyItemBuffers.clear();
 }

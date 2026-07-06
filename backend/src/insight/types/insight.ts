@@ -3,6 +3,7 @@ export type InsightName =
   | "item_advice"
   | "build_plan"
   | "score_change"
+  | "score_change_instant"
   | "hero_missing"
   | "enemies_nearby"
   | "roshan_threat"

@@ -9,7 +9,7 @@ import type {
 let insights: Insight[] = [];
 const counters = new Map<InsightName, number>();
 
-function isExpired(insight: Insight): boolean {
+export function isExpired(insight: Insight): boolean {
   return Date.now() > insight.createdAt + insight.ttlMs;
 }
 

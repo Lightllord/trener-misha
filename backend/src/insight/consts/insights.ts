@@ -25,9 +25,16 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
   score_change: {
     unique: false,
     description:
-      "The player's kills/deaths just changed — a single kill, a single death, or a short flurry of both (a team fight, batched into one report). React accordingly: acknowledge a kill, give a short tactical tip after a death, or summarize the fight when the payload covers several events.",
+      "The player's kills/deaths/assists changed and the event wasn't picked for an instant callout — a single death, or a short flurry of kills/deaths/assists (a team fight, batched into one report). A lone kill or lone assist never reaches this insight — those are either delivered instantly or dropped. React accordingly: give a short tactical tip after a death, or summarize the fight when the payload covers several events.",
     importance: "high",
-    ttlMs: 30_000,
+    ttlMs: 10_000,
+  },
+  score_change_instant: {
+    unique: false,
+    description:
+      "Immediate, low-latency reaction to a single kill, death, or assist that just happened, fired instead of waiting for the team-fight batching window. React the same way you would to the equivalent score_change event (kill ack, death + short tactical tip, or assist ack), just faster.",
+    importance: "high",
+    ttlMs: 5_000,
   },
   hero_missing: {
     unique: false,
@@ -39,25 +46,25 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
     unique: false,
     description: "Three or more enemy heroes are within 1500 units of the player — critical proximity warning.",
     importance: "critical",
-    ttlMs: 10_000,
+    ttlMs: 5_000,
   },
   roshan_threat: {
     unique: false,
     description: "Three or more enemy heroes spotted near Roshan pit — they may be attempting to take Roshan.",
     importance: "high",
-    ttlMs: 30_000,
+    ttlMs: 10_000,
   },
   level_up: {
     unique: false,
     description: "Player reached a key level (6, 10, 12, 15, 18, 20, 25, 30) — note the power spike or new ability.",
     importance: "low",
-    ttlMs: 15_000,
+    ttlMs: 5_000,
   },
   respawned: {
     unique: false,
     description: "Player respawned — brief reminder of nearest objective or safe farming spot.",
     importance: "low",
-    ttlMs: 20_000,
+    ttlMs: 8_000,
   },
   aghs_scepter: {
     unique: false,
@@ -75,7 +82,7 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
     unique: false,
     description: "Player purchased an item — acknowledge and give a brief usage tip if relevant.",
     importance: "low",
-    ttlMs: 30_000,
+    ttlMs: 10_000,
   },
   enemy_key_item: {
     unique: false,
@@ -101,7 +108,7 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
     unique: false,
     description: "An enemy building was destroyed — acknowledge the objective and suggest follow-up.",
     importance: "high",
-    ttlMs: 30_000,
+    ttlMs: 5_000,
   },
   ask_player_position: {
     unique: true,
@@ -121,18 +128,18 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
     unique: true,
     description: "Tormentor spawns in one minute (at the 20:00 game clock) in the bottom rift near the portal — give the player a heads-up.",
     importance: "medium",
-    ttlMs: 60_000,
+    ttlMs: 15_000,
   },
   tormentor_spawned: {
     unique: true,
     description: "Tormentor just spawned — suggest the player try to group up with the team and take it.",
     importance: "high",
-    ttlMs: 90_000,
+    ttlMs: 20_000,
   },
   wisdom_altar_incoming: {
     unique: false,
     description: "The wisdom altar spawns in one minute (every 7 minutes starting at 7:00) — suggest the player try to contest it.",
     importance: "medium",
-    ttlMs: 60_000,
+    ttlMs: 20_000,
   },
 };

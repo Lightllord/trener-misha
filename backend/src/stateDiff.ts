@@ -147,6 +147,15 @@ export function diffStates(
     });
   }
 
+  // Player got an assist
+  if ((cPlayer.assists ?? 0) > (pPlayer.assists ?? 0)) {
+    const kda = `${cPlayer.kills ?? 0}/${cPlayer.deaths ?? 0}/${cPlayer.assists ?? 0}`;
+    events.push({
+      type: "player_assist",
+      summary: `Ассист! Счёт ${kda}.`,
+    });
+  }
+
   // Level up — only on key power-spike levels
   if ((cHero.level ?? 0) > (pHero.level ?? 0)) {
     const prevLevel = pHero.level ?? 0;
