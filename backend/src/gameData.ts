@@ -1,8 +1,9 @@
 /**
  * In-memory store for game data pushed from insight-app, plus the derived
  * session state that rides alongside it (draft corrections, the planned
- * item build). All of it is scoped to one match and cleared together via
- * clearGameData() on WS close.
+ * item build). All of it is scoped to one match, not to any WS connection —
+ * ingestApp.ts calls clearGameData() only when a push reports a new matchId,
+ * so a browser reconnect mid-match leaves position/corrections/buildPlan intact.
  *
  * The draft lives inside the match state (pushed via /push/state). Manual
  * corrections from the agent are kept as an overlay here and re-applied to

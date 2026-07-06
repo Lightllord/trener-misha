@@ -1,10 +1,6 @@
 import type { WebSocket } from "ws";
 import { PICKER_CONTEXT_WINDOW_MS } from "../conversation/consts/log.js";
 import { clearConversation, getRecentConversation } from "../conversation/log.js";
-import { resetDraftAnalysis } from "../draftAnalysis.js";
-import { clearGameData } from "../gameData.js";
-import { clearEventQueue } from "../gameEventQueue.js";
-import { clearInsights } from "../insight/store.js";
 import { log, logError } from "../observability/log.js";
 import { ClientChannel } from "./clientChannel.js";
 import { createRealtimeSession } from "./createSession.js";
@@ -71,17 +67,18 @@ export class VoiceSession {
     log("ws", "session connected to OpenAI");
   }
 
+  // Game/match state (gameData, gameEventQueue, insights, draft analysis) is
+  // deliberately left alone here — it lives for as long as the match does,
+  // not for as long as this WS connection does, so a reconnect after a brief
+  // drop resumes the same match instead of losing position/build/draft
+  // progress. It's reset in ingestApp.ts when a push reports a new matchId.
   private dispose(): void {
     if (this.disposed) return;
     this.disposed = true;
     this.pickerAbort.abort();
     this.conductor?.dispose();
     this.turn?.dispose();
-    clearEventQueue();
-    resetDraftAnalysis();
-    clearInsights();
     clearConversation();
-    clearGameData();
     this.session.close();
   }
 }

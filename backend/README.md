@@ -33,7 +33,7 @@ The draft is part of the match state: `DraftDetector` feeds it into the insight-
 | `GET`  | `/`            | — | Health check |
 | `POST` | `/push/state`  | `MatchState` (from insight-app, incl. `draft`) | Store latest game state; runs `diffStates` to enqueue events; triggers `checkAndAnalyzeDraft()` |
 
-The backend never polls `insight-app`; data is pushed and held in-memory (`src/gameData.ts`).
+The backend never polls `insight-app`; data is pushed and held in-memory (`src/gameData.ts`). Match state (`gameData`, `gameEventQueue`, insights, `draftAnalysis`'s "already analyzed" flag) is scoped to the **match**, not the WS connection — it survives a browser reconnect (dropped internet, page reload) untouched, since insight-app keeps pushing the same match's state regardless of whether the voice WS is up. `/push/state` clears all of it only when the pushed `matchId` differs from the previously stored one, i.e. an actual new match started.
 
 ## WebSocket protocol (frontend ↔ backend)
 
@@ -76,7 +76,7 @@ In the `interrupt` band (`criticalOnly = true`, model mid-response) only step 1 
 
 The thinking step (private `think()` → `gpt-5.4-nano`, `reasoning_effort: "minimal"`, `PICKER_TIMEOUT_MS`) gets only the non-critical candidates plus the last ~60 s of dialogue. Importance is a soft preference; on parse/timeout failure it falls back to importance-then-freshness.
 
-**Lifecycle** — on WS close: `pickerAbort.abort()` cancels in-flight thinking; `deliveryWindow.dispose()` detaches transport listeners and broadcasts a final `isOpen=false`; `clearInsights()` + `clearConversation()` drop per-match state.
+**Lifecycle** — on WS close: `pickerAbort.abort()` cancels in-flight thinking; `deliveryWindow.dispose()` detaches transport listeners and broadcasts a final `isOpen=false`; `clearConversation()` drops the dialogue transcript. Insights themselves are match-scoped, not WS-scoped — see the `/push/state` note above — so a reconnect doesn't lose them.
 
 ## Voice tools (`src/tools/`)
 
