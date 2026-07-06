@@ -96,7 +96,7 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     function: {
       name: "get_item_details",
       description:
-        "Detailed item info (cost, ability descriptions, stat bonuses). Use to account for price and timing when ordering the build.",
+        "Detailed item info (cost, ability descriptions, stat bonuses, and notes/hint on stacking restrictions). Use to account for price and timing when ordering the build, and to check whether an item's bonus does not stack with another item already in the build (e.g. boots, Yasha-based items).",
       parameters: {
         type: "object",
         properties: { item_name: { type: "string", description: "Item display name" } },
