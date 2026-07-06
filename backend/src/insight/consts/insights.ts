@@ -13,7 +13,7 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
     description:
       "Answer to the player's item question — which item to buy and why, based on hero/item mechanics and typical builds.",
     importance: "high",
-    ttlMs: 120_000,
+    ttlMs: 90_000,
   },
   build_plan: {
     unique: true,
@@ -46,7 +46,7 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
     unique: false,
     description: "Three or more enemy heroes are within 1500 units of the player — critical proximity warning.",
     importance: "critical",
-    ttlMs: 5_000,
+    ttlMs: 7_000,
   },
   roshan_threat: {
     unique: false,
@@ -102,7 +102,7 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
     unique: false,
     description: "An allied building was destroyed — critical map event, comment on impact and next steps.",
     importance: "critical",
-    ttlMs: 30_000,
+    ttlMs: 20_000,
   },
   enemy_building_destroyed: {
     unique: false,

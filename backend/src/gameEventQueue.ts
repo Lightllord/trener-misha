@@ -115,11 +115,18 @@ function checkHeroInsights(state: Record<string, unknown>): void {
     );
     if (nearby.length >= 3) {
       lastNearbyMs = now;
-      const names = nearby.map(([n]) => n.replace("npc_dota_hero_", "")).join(", ");
-      addInsight(
-        "enemies_nearby",
-        `${nearby.length} вражеских героя в радиусе ${NEARBY_RADIUS} единиц от тебя: ${names}. Опасность!`,
-      );
+      if (nearby.length > 3) {
+        addInsight(
+          "enemies_nearby",
+          `ОСТОРОЖНО! Куча героев в радиусе ${NEARBY_RADIUS} от тебя.`,
+        );
+      } else {
+        const names = nearby.map(([n]) => n.replace("npc_dota_hero_", "")).join(", ");
+        addInsight(
+          "enemies_nearby",
+          `ОПАСНО! ${nearby.length} вражеских героя в радиусе ${NEARBY_RADIUS} единиц от тебя: ${names}.`,
+        );
+      }
     }
   }
 

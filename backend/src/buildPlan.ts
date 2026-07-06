@@ -141,7 +141,7 @@ ${stratzBlock}
     },
   ];
 
-  const openai = new OpenAI({ timeout: 60_000 });
+  const openai = new OpenAI({ timeout: 90_000 });
 
   for (let turn = 1; turn <= MAX_CHAT_TURNS; turn++) {
     if (turn === MAX_CHAT_TURNS) {

@@ -221,7 +221,8 @@ ${draftContext}
 
   for (;;) {
     const res = await openai.chat.completions.create({
-      model: "gpt-5.4-mini",
+      model: "gpt-5.5",
+      reasoning_effort: "medium",
       messages,
       tools,
     });

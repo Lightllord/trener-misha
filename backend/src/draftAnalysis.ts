@@ -331,7 +331,12 @@ ${playerContext}
       log("draft", "analysis ready — queued for delivery");
       addInsight(
         "draft_analysis",
-        `[Фоновый анализ драфта завершён]\n${msg.content}\n\nПредложи игроку: "У меня готов анализ драфта, рассказать?" Не рассказывай содержание сразу — дождись подтверждения.`,
+        [
+          "<draft-analysis>",
+          msg.content,
+          "</draft-analysis>",
+          "<how-to-deliver>Скажи игроку что-то вроде: «Вижу всех героев — рассказать тебе мой анализ драфта?». Само содержание анализа не раскрывай сразу — дождись, пока игрок согласится.</how-to-deliver>",
+        ].join("\n"),
       );
     }
     break;
