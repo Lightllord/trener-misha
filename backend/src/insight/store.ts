@@ -22,6 +22,7 @@ function getConfig(name: InsightName): InsightConfig {
 }
 
 export function addInsight(name: InsightName, payload: string): Insight | null {
+  log("insight", `try add ${name}`);
   const config = getConfig(name);
 
   if (config.unique && insights.some((i) => i.name === name && !i.used && !isExpired(i))) {
@@ -46,7 +47,8 @@ export function addInsight(name: InsightName, payload: string): Insight | null {
     ttlMs: config.ttlMs,
     createdAt: Date.now(),
   };
-  log("insight", `PUSHED: ${insight.name}: ${insight.importance}: ${insight.description}`);
+  const tail = number !== null ? ` #${number}` : "";
+  log("insight", `added ${insight.name}${tail} [${insight.importance}]`);
   insights.push(insight);
   return insight;
 }

@@ -69,7 +69,7 @@ ${glossary}`;
 }
 
 export function planItemBuild(position: number): void {
-  log("build-plan", `request: position ${position}`);
+  log("build-plan", `started — planning build for position ${position}`);
   analyzeInBackground(position).catch((err) => {
     logError("build-plan", "background analysis failed:", err);
     addInsight(
@@ -191,7 +191,6 @@ ${stratzBlock}
             updatedAt: new Date().toISOString(),
           };
           setBuildPlan(plan);
-          log("build-plan", `build stored — ${items.length} items`);
           addInsight(
             "build_plan",
             `[Билд на игру готов]\n${formatBuildPlan(plan)}\n\nОзвучь билд игроку по порядку покупки, кратко и по делу. Не вываливай всё сразу простынёй — назови порядок предметов с короткой причиной, детали по каждому давай, если игрок переспросит. Билд сохранён — игрок может попросить изменить его (add/remove/replace/move).`,
@@ -206,7 +205,6 @@ ${stratzBlock}
     }
 
     if (msg.content) {
-      log("build-plan", "build ready (text fallback — not stored) — queued for delivery");
       addInsight(
         "build_plan",
         `[Билд на игру готов]\n${msg.content}\n\nОзвучь билд игроку по порядку покупки, кратко и по делу. Не вываливай всё сразу простынёй — назови порядок предметов с короткой причиной, детали по каждому давай, если игрок переспросит.`,
@@ -216,7 +214,6 @@ ${stratzBlock}
     break;
   }
 
-  log("build-plan", "no result after max turns — apologizing");
   addInsight(
     "build_plan",
     `[Сборка билда не удалась] Извинись перед игроком, что не получилось продумать билд, и предложи попросить ещё раз.`,

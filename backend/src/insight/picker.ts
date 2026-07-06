@@ -137,7 +137,7 @@ export class InsightPicker {
     }
 
     this.thinkingInFlight = true;
-    log("picker", `started thinking — deliberating over ${candidates.length} insights`);
+    log("picker", `started — deliberating over ${candidates.length} insights`);
 
     this.think(candidates)
       .then((chosen) => {
@@ -145,7 +145,7 @@ export class InsightPicker {
           return;
         }
         if (chosen === null) {
-          log("picker", "thinking done — nothing to stash");
+          log("picker", "done — nothing to stash");
           return;
         }
         if (chosen.used) {

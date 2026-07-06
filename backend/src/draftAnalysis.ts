@@ -256,7 +256,7 @@ export function checkAndAnalyzeDraft(): void {
   const state = getState() as StateResponse | null;
 
   analyzed = true;
-  log("draft", "draft complete — starting background analysis");
+  log("draft", "started — analyzing completed draft");
 
   analyzeInBackground(draft, state).catch((err) => {
     logError("draft", "background analysis failed:", err);
@@ -328,7 +328,6 @@ ${playerContext}
 
     // No more tool calls — final answer
     if (msg.content) {
-      log("draft", "analysis ready — queued for delivery");
       addInsight(
         "draft_analysis",
         [

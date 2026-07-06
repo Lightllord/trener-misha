@@ -129,22 +129,30 @@ button:disabled {
   border: 1px solid #2a3a5e;
 }
 
-#log {
-  text-align: left;
-  background: #16213e;
-  border-radius: 8px;
-  padding: 16px;
-  max-height: 400px;
-  overflow-y: auto;
-  font-size: 0.85rem;
-  line-height: 1.6;
+#activity {
+  display: inline-block;
+  min-height: 1.6em;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  transition: background 0.15s, color 0.15s;
 }
 
-.log-entry {
-  border-bottom: 1px solid #1a1a2e;
-  padding: 4px 0;
+#activity.listening {
+  background: #4caf50;
+  color: #fff;
 }
 
-.log-entry:last-child {
-  border-bottom: none;
+#activity.speaking {
+  background: #3b7dd8;
+  color: #fff;
+}
+
+#activity.interrupted {
+  background: #e0a800;
+  color: #1a1a2e;
+}
+
+#activity.idle {
+  color: #888;
 }

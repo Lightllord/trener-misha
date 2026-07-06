@@ -42,7 +42,6 @@ export class VoiceSession {
       await this.session.connect({ apiKey: process.env.OPENAI_API_KEY! });
     } catch (err) {
       logError("ws", "failed to connect to OpenAI:", err);
-      this.channel.send({ type: "error", message: "Failed to connect to OpenAI" });
       this.dispose();
       return;
     }
@@ -63,7 +62,6 @@ export class VoiceSession {
     });
 
     insights.start();
-    this.channel.send({ type: "connected" });
     log("ws", "session connected to OpenAI");
   }
 

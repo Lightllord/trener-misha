@@ -9,7 +9,7 @@ import type { PttMode } from "./types/ptt";
 const connectBtn = document.querySelector<HTMLButtonElement>("#connect")!;
 const disconnectBtn = document.querySelector<HTMLButtonElement>("#disconnect")!;
 const statusEl = document.querySelector<HTMLParagraphElement>("#status")!;
-const logEl = document.querySelector<HTMLDivElement>("#log")!;
+const activityEl = document.querySelector<HTMLDivElement>("#activity")!;
 const micIndicatorEl = document.querySelector<HTMLDivElement>("#mic-indicator")!;
 const modeSelectEl = document.querySelector<HTMLSelectElement>("#ptt-mode")!;
 const rebindBtn = document.querySelector<HTMLButtonElement>("#ptt-rebind")!;
@@ -19,14 +19,33 @@ let ws: WebSocket | null = null;
 let mic: { stop: () => void } | null = null;
 let player: ReturnType<typeof createAudioPlayer> | null = null;
 let micGateOpen = false;
+let botSpeaking = false;
+let interruptedUntil = 0;
 let rebinding = false;
 let uiohookByName: Record<string, number> = {};
 
-function log(msg: string) {
-  const entry = document.createElement("div");
-  entry.className = "log-entry";
-  entry.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
-  logEl.prepend(entry);
+// The single "что сейчас происходит" line, derived entirely from local state:
+// mic gate (человек говорит), audio playback (бот говорит), and a short flash
+// after a barge-in. No server push needed beyond the audio + interrupt frames.
+function renderActivity() {
+  if (!ws) {
+    activityEl.textContent = "";
+    activityEl.className = "";
+    return;
+  }
+  if (Date.now() < interruptedUntil) {
+    activityEl.textContent = "⚡ Прервано";
+    activityEl.className = "interrupted";
+  } else if (micGateOpen) {
+    activityEl.textContent = "🎙️ Ты говоришь";
+    activityEl.className = "listening";
+  } else if (botSpeaking) {
+    activityEl.textContent = "🔊 Миша говорит";
+    activityEl.className = "speaking";
+  } else {
+    activityEl.textContent = "… Тишина";
+    activityEl.className = "idle";
+  }
 }
 
 function sendControl(msg: Record<string, unknown>) {
@@ -46,6 +65,7 @@ const ptt = new PttController((open) => {
   if (!open) sendControl({ type: "mic_close" });
   playCue(open ? "on" : "off");
   setMicIndicator(open);
+  renderActivity();
 });
 
 function setMicIndicator(open: boolean) {
@@ -66,7 +86,9 @@ function syncGlobalKey() {
   const name = codeToUiohookName(ptt.getSettings().code);
   const keycode = uiohookByName[name];
   if (typeof keycode !== "number") {
-    log(`⚠ Клавиша ${labelForCode(ptt.getSettings().code)} не поддерживается глобально (в фоне). Работает только при фокусе.`);
+    console.warn(
+      `Клавиша ${labelForCode(ptt.getSettings().code)} не поддерживается глобально (в фоне). Работает только при фокусе.`,
+    );
     void desktop.setKey(null);
     return;
   }
@@ -120,14 +142,14 @@ window.addEventListener("keyup", (e) => {
 async function initDesktop() {
   const desktop = window.desktopPtt;
   if (!desktop) {
-    log("⚠ Запусти как десктоп-приложение (npm run desktop) — глобальный хоткей живёт там.");
+    console.warn("Запусти как десктоп-приложение (npm run desktop) — глобальный хоткей живёт там.");
     return;
   }
   uiohookByName = await desktop.keymap();
   desktop.onDown(() => ptt.pressDown());
   desktop.onUp(() => ptt.pressUp());
   syncGlobalKey();
-  log(`PTT готов: клавиша ${labelForCode(ptt.getSettings().code)}, режим ${ptt.getSettings().mode}.`);
+  console.info(`PTT готов: клавиша ${labelForCode(ptt.getSettings().code)}, режим ${ptt.getSettings().mode}.`);
 }
 
 void initDesktop();
@@ -137,6 +159,7 @@ function setConnected(connected: boolean) {
   disconnectBtn.disabled = !connected;
   statusEl.textContent = connected ? "Connected" : "Disconnected";
   statusEl.className = connected ? "connected" : "";
+  renderActivity();
 }
 
 function disconnect() {
@@ -151,37 +174,19 @@ function disconnect() {
 }
 
 // --- Control message types from backend ---
+// The backend now only pushes audio (binary) and a single interrupt frame after
+// a barge-in; transcripts, tool use and errors live in the backend log.
 
 interface ControlMessage {
-  type: "connected" | "transcript" | "tool_call" | "tool_result" | "error" | "interrupt";
-  role?: string;
-  text?: string;
-  name?: string;
-  result?: string;
-  message?: string;
+  type: "interrupt";
 }
 
 function handleControlMessage(msg: ControlMessage) {
-  switch (msg.type) {
-    case "connected":
-      log("Session connected to OpenAI. Start speaking.");
-      break;
-    case "transcript":
-      if (msg.role === "user") log(`You: ${msg.text}`);
-      else log(`Миша: ${msg.text}`);
-      break;
-    case "tool_call":
-      log(`Tool call: ${msg.name}`);
-      break;
-    case "tool_result":
-      log(`Tool result [${msg.name}]: ${msg.result}`);
-      break;
-    case "interrupt":
-      player?.flush();
-      break;
-    case "error":
-      log(`Error: ${msg.message}`);
-      break;
+  if (msg.type === "interrupt") {
+    player?.flush();
+    interruptedUntil = Date.now() + 1200;
+    renderActivity();
+    window.setTimeout(renderActivity, 1300);
   }
 }
 
@@ -191,12 +196,15 @@ connectBtn.addEventListener("click", async () => {
   try {
     connectBtn.disabled = true;
     statusEl.textContent = "Connecting...";
-    log("Connecting to backend...");
+    console.info("Connecting to backend…");
 
     ws = new WebSocket("ws://localhost:3000/ws");
     ws.binaryType = "arraybuffer";
 
-    player = createAudioPlayer();
+    player = createAudioPlayer((speaking) => {
+      botSpeaking = speaking;
+      renderActivity();
+    });
 
     ws.onmessage = (event: MessageEvent) => {
       if (event.data instanceof ArrayBuffer) {
@@ -213,12 +221,11 @@ connectBtn.addEventListener("click", async () => {
 
     ws.onerror = (err) => {
       console.error("WebSocket error:", err);
-      log("WebSocket error");
       disconnect();
     };
 
     ws.onclose = () => {
-      log("WebSocket closed");
+      console.info("WebSocket closed");
       disconnect();
     };
 
@@ -227,7 +234,7 @@ connectBtn.addEventListener("click", async () => {
       ws!.onerror = () => reject(new Error("WebSocket connection failed"));
     });
 
-    log("WebSocket connected, starting microphone...");
+    console.info("WebSocket connected, starting microphone…");
 
     mic = await startMicCapture((pcm16: ArrayBuffer) => {
       if (micGateOpen && ws && ws.readyState === WebSocket.OPEN) {
@@ -241,10 +248,9 @@ connectBtn.addEventListener("click", async () => {
     connectBtn.blur();
     (document.activeElement as HTMLElement | null)?.blur?.();
     const { code, mode } = ptt.getSettings();
-    log(`Mic ready. ${mode === "hold" ? "Hold" : "Press"} ${labelForCode(code)} to talk.`);
+    console.info(`Mic ready. ${mode === "hold" ? "Hold" : "Press"} ${labelForCode(code)} to talk.`);
   } catch (err) {
     console.error(err);
-    log(`Error: ${err instanceof Error ? err.message : String(err)}`);
     disconnect();
   }
 });
@@ -252,5 +258,5 @@ connectBtn.addEventListener("click", async () => {
 disconnectBtn.addEventListener("click", () => {
   disconnectBtn.blur();
   disconnect();
-  log("Disconnected");
+  console.info("Disconnected");
 });

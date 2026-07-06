@@ -31,18 +31,18 @@ export class SessionEventBridge {
       channel.send({ type: "interrupt" });
     });
 
+    // Main-agent tool use — backend-log-only, one short line per tool. Sub-agent
+    // tool calls run in their own chat-completion loops and never reach here.
     session.on("agent_tool_start", (_ctx, _agent, toolDef, details) => {
       const toolCall = details.toolCall;
       const args = "arguments" in toolCall ? toolCall.arguments : undefined;
       const argsPreview =
         typeof args === "string" && args ? truncate(args, LOG_PREVIEW_MAX) : "";
       log("tool", `→ ${toolDef.name}(${argsPreview})`);
-      channel.send({ type: "tool_call", name: toolDef.name });
     });
 
-    session.on("agent_tool_end", (_ctx, _agent, toolDef, result) => {
-      log("tool", `← ${toolDef.name}: ${truncate(String(result), LOG_PREVIEW_MAX)}`);
-      channel.send({ type: "tool_result", name: toolDef.name, result: String(result) });
+    session.on("agent_tool_end", (_ctx, _agent, toolDef) => {
+      log("tool", `← ${toolDef.name} done`);
     });
 
     session.on("history_added", (item: Record<string, unknown>) => {
@@ -57,7 +57,6 @@ export class SessionEventBridge {
           .filter(Boolean)
           .join(" ");
         if (text && (role === "user" || status === "completed")) {
-          channel.send({ type: "transcript", role, text });
           logTranscript(role, text);
         }
       }
@@ -65,7 +64,6 @@ export class SessionEventBridge {
 
     session.on("error", (err) => {
       logError("session", "error:", err);
-      channel.send({ type: "error", message: String(err) });
     });
   }
 }

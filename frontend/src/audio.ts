@@ -44,10 +44,22 @@ interface AudioPlayer {
   stop: () => void;
 }
 
-export function createAudioPlayer(): AudioPlayer {
+export function createAudioPlayer(
+  onSpeakingChange?: (speaking: boolean) => void,
+): AudioPlayer {
   const ctx = new AudioContext({ sampleRate: SAMPLE_RATE });
   let nextStartTime = 0;
   const activeSources: AudioBufferSourceNode[] = [];
+  let speaking = false;
+
+  // "Speaking" = at least one scheduled chunk is still playing. Chunks are
+  // scheduled back-to-back (nextStartTime), so the queue stays non-empty for the
+  // whole utterance and only drains on the last chunk's onended (or flush).
+  function setSpeaking(value: boolean) {
+    if (speaking === value) return;
+    speaking = value;
+    onSpeakingChange?.(value);
+  }
 
   function play(pcm16: ArrayBuffer) {
     const int16 = new Int16Array(pcm16);
@@ -69,9 +81,11 @@ export function createAudioPlayer(): AudioPlayer {
     nextStartTime += buffer.duration;
 
     activeSources.push(source);
+    setSpeaking(true);
     source.onended = () => {
       const idx = activeSources.indexOf(source);
       if (idx !== -1) activeSources.splice(idx, 1);
+      if (activeSources.length === 0) setSpeaking(false);
     };
   }
 
@@ -81,6 +95,7 @@ export function createAudioPlayer(): AudioPlayer {
     }
     activeSources.length = 0;
     nextStartTime = 0;
+    setSpeaking(false);
   }
 
   function stop() {

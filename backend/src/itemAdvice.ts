@@ -6,8 +6,8 @@
  * as an item_advice insight for the voice agent to speak.
  */
 
-import OpenAI from "openai";
-import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
+import { Agent, run, tool } from "@openai/agents";
+import { z } from "zod";
 import { addInsight } from "./insight/store.js";
 import { getDraft, getState } from "./gameData.js";
 import {
@@ -48,121 +48,72 @@ function formatTags(name: string, entity: TaggedEntity): string {
   return lines.join("\n");
 }
 
-const tools: OpenAI.ChatCompletionTool[] = [
-  {
-    type: "function",
-    function: {
-      name: "get_hero_tags",
-      description:
-        "Mechanic tags for a hero's abilities (primary source). Use to understand what a hero does — disables, damage types, dispels, etc.",
-      parameters: {
-        type: "object",
-        properties: { hero_name: { type: "string", description: "Hero name in English" } },
-        required: ["hero_name"],
-      },
+const tools = [
+  tool({
+    name: "get_hero_tags",
+    description:
+      "Mechanic tags for a hero's abilities (primary source). Use to understand what a hero does — disables, damage types, dispels, etc.",
+    parameters: z.object({
+      hero_name: z.string().describe("Hero name in English"),
+    }),
+    execute: async ({ hero_name }) => {
+      const found = await getHeroTags(hero_name);
+      return found ? formatTags(found.key, found.entity) : `No tags for "${hero_name}".`;
     },
-  },
-  {
-    type: "function",
-    function: {
-      name: "get_item_tags",
-      description:
-        "Mechanic tags for an item's active/passive abilities (primary source). Use to check what counter-mechanic an item provides.",
-      parameters: {
-        type: "object",
-        properties: { item_name: { type: "string", description: "Item name (English or internal)" } },
-        required: ["item_name"],
-      },
+  }),
+  tool({
+    name: "get_item_tags",
+    description:
+      "Mechanic tags for an item's active/passive abilities (primary source). Use to check what counter-mechanic an item provides.",
+    parameters: z.object({
+      item_name: z.string().describe("Item name (English or internal)"),
+    }),
+    execute: async ({ item_name }) => {
+      const found = await getItemTags(item_name);
+      return found ? formatTags(found.key, found.entity) : `No tags for "${item_name}".`;
     },
-  },
-  {
-    type: "function",
-    function: {
-      name: "list_candidate_items",
-      description:
-        "List of relevant items worth recommending (internal names). Use to pick which items to inspect with get_item_tags.",
-      parameters: { type: "object", properties: {} },
+  }),
+  tool({
+    name: "list_candidate_items",
+    description:
+      "List of relevant items worth recommending (internal names). Use to pick which items to inspect with get_item_tags.",
+    parameters: z.object({}),
+    execute: async () => (await getCandidateItems()).join(", "),
+  }),
+  tool({
+    name: "get_item_details",
+    description:
+      "Detailed item info (cost, ability descriptions, stat bonuses). Use only when tags are not enough to decide.",
+    parameters: z.object({
+      item_name: z.string().describe("Item display name"),
+    }),
+    execute: async ({ item_name }) => {
+      const detail = await getItemDetail(item_name);
+      return detail ? JSON.stringify(detail) : `No details for "${item_name}".`;
     },
-  },
-  {
-    type: "function",
-    function: {
-      name: "get_item_details",
-      description:
-        "Detailed item info (cost, ability descriptions, stat bonuses). Use only when tags are not enough to decide.",
-      parameters: {
-        type: "object",
-        properties: { item_name: { type: "string", description: "Item display name" } },
-        required: ["item_name"],
-      },
+  }),
+  tool({
+    name: "get_hero_abilities",
+    description:
+      "Detailed hero ability numbers (cooldowns, damage, talents). Use only when tags are not enough.",
+    parameters: z.object({
+      hero_name: z.string().describe("Hero name in English"),
+    }),
+    execute: async ({ hero_name }) => {
+      const detail = await getHeroAbilityDetail(hero_name);
+      return detail ? JSON.stringify(detail) : `No ability details for "${hero_name}".`;
     },
-  },
-  {
-    type: "function",
-    function: {
-      name: "get_hero_abilities",
-      description:
-        "Detailed hero ability numbers (cooldowns, damage, talents). Use only when tags are not enough.",
-      parameters: {
-        type: "object",
-        properties: { hero_name: { type: "string", description: "Hero name in English" } },
-        required: ["hero_name"],
-      },
-    },
-  },
-  {
-    type: "function",
-    function: {
-      name: "get_player_builds",
-      description:
-        "What items are usually bought on a hero (STRATZ stats). Use at the end to compare your picks against the standard build.",
-      parameters: {
-        type: "object",
-        properties: { hero_name: { type: "string", description: "Hero name in English" } },
-        required: ["hero_name"],
-      },
-    },
-  },
+  }),
+  tool({
+    name: "get_player_builds",
+    description:
+      "What items are usually bought on a hero (STRATZ stats). Use at the end to compare your picks against the standard build.",
+    parameters: z.object({
+      hero_name: z.string().describe("Hero name in English"),
+    }),
+    execute: async ({ hero_name }) => fetchBuildsSummary(hero_name),
+  }),
 ];
-
-async function handleToolCall(
-  name: string,
-  args: Record<string, unknown>,
-): Promise<string> {
-  if (name === "list_candidate_items") {
-    return (await getCandidateItems()).join(", ");
-  }
-
-  if (name === "get_hero_tags") {
-    const hero = String(args.hero_name ?? "");
-    const found = await getHeroTags(hero);
-    return found ? formatTags(found.key, found.entity) : `No tags for "${hero}".`;
-  }
-
-  if (name === "get_item_tags") {
-    const item = String(args.item_name ?? "");
-    const found = await getItemTags(item);
-    return found ? formatTags(found.key, found.entity) : `No tags for "${item}".`;
-  }
-
-  if (name === "get_item_details") {
-    const item = String(args.item_name ?? "");
-    const detail = await getItemDetail(item);
-    return detail ? JSON.stringify(detail) : `No details for "${item}".`;
-  }
-
-  if (name === "get_hero_abilities") {
-    const hero = String(args.hero_name ?? "");
-    const detail = await getHeroAbilityDetail(hero);
-    return detail ? JSON.stringify(detail) : `No ability details for "${hero}".`;
-  }
-
-  if (name === "get_player_builds") {
-    return fetchBuildsSummary(String(args.hero_name ?? ""));
-  }
-
-  return "Unknown tool.";
-}
 
 async function buildSystemPrompt(): Promise<string> {
   const mechanics = await getMechanics();
@@ -183,12 +134,15 @@ ${glossary}`;
 }
 
 export function requestItemAdvice(question: string): void {
-  log("item-advice", `request: ${truncate(question, LOG_PREVIEW_MAX)}`);
+  log("item-advice", `started — ${truncate(question, LOG_PREVIEW_MAX)}`);
   analyzeInBackground(question).catch((err) => {
     logError("item-advice", "background analysis failed:", err);
     addInsight(
       "item_advice",
-      `[Анализ предметов не удался] Извинись перед игроком, что не получилось подобрать совет по предметам, и предложи спросить ещё раз.`,
+      `<item-advice-fallback>
+<say>Тяжёлый случай, не уверен на сто процентов, но думаю...</say>
+<instruction-for-agent>Не удалось найти точные данные по предметам. Не извиняйся и не упоминай ошибку. Начни примерно с фразы из <say>, затем ответь на вопрос игрока и предложи предмет, опираясь на историю сообщений и/или другую доступную информацию (герой игрока, драфт, общие механики). Дай лучший возможный совет — естественно и кратко.</instruction-for-agent>
+</item-advice-fallback>`,
     );
   });
 }
@@ -204,56 +158,29 @@ async function analyzeInBackground(question: string): Promise<void> {
     ? `Игрок на стороне ${state.player.team}, герой: ${state.hero.name}.`
     : "Герой игрока неизвестен — уточни в ответе, если это важно.";
 
-  const messages: ChatCompletionMessageParam[] = [
-    { role: "system", content: await buildSystemPrompt() },
-    {
-      role: "user",
-      content: `Вопрос игрока: "${question}"
+  const agent = new Agent({
+    name: "item-advisor",
+    instructions: await buildSystemPrompt(),
+    model: "gpt-5.5",
+    modelSettings: { reasoning: { effort: "medium" } },
+    tools,
+  });
+
+  const result = await run(
+    agent,
+    `Вопрос игрока: "${question}"
 
 ${playerContext}
 ${draftContext}
 
 Подбери 1-3 предмета под ситуацию и кратко (3-5 предложений) объясни ПОЧЕМУ через механики. В конце сверься со стандартным билдом героя игрока.`,
-    },
-  ];
+  );
 
-  const openai = new OpenAI();
-
-  for (;;) {
-    const res = await openai.chat.completions.create({
-      model: "gpt-5.5",
-      reasoning_effort: "medium",
-      messages,
-      tools,
-    });
-
-    const choice = res.choices[0];
-    if (!choice) break;
-
-    const msg = choice.message;
-    messages.push(msg);
-
-    if (msg.tool_calls?.length) {
-      for (const call of msg.tool_calls) {
-        if (call.type !== "function") continue;
-        const args = JSON.parse(call.function.arguments) as Record<string, unknown>;
-        log(
-          "item-advice",
-          `tool call: ${call.function.name}(${truncate(call.function.arguments, LOG_PREVIEW_MAX)})`,
-        );
-        const result = await handleToolCall(call.function.name, args);
-        messages.push({ role: "tool", tool_call_id: call.id, content: result });
-      }
-      continue;
-    }
-
-    if (msg.content) {
-      log("item-advice", "advice ready — queued for delivery");
-      addInsight(
-        "item_advice",
-        `[Совет по предметам готов]\nВопрос игрока: "${question}"\n${msg.content}\n\nОзвучь этот совет игроку естественно и кратко.`,
-      );
-    }
-    break;
+  const advice = result.finalOutput;
+  if (advice) {
+    addInsight(
+      "item_advice",
+      `[Совет по предметам готов]\nВопрос игрока: "${question}"\n${advice}\n\nОзвучь этот совет игроку естественно и кратко.`,
+    );
   }
 }
