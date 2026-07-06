@@ -3,6 +3,7 @@ import { AGENT_INSTRUCTIONS } from "./consts/agentInstructions.js";
 import {
   heroesTool,
   heroAbilitiesTool,
+  aghanimInfoTool,
   correctDraftTool,
   setPlayerPositionTool,
   matchStateTool,
@@ -23,6 +24,7 @@ export const agent = new RealtimeAgent({
   tools: [
     heroesTool,
     heroAbilitiesTool,
+    aghanimInfoTool,
     matchStateTool,
     correctDraftTool,
     setPlayerPositionTool,

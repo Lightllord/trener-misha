@@ -1,5 +1,6 @@
 export { heroesTool } from "./heroes.js";
 export { heroAbilitiesTool } from "./heroAbilities.js";
+export { aghanimInfoTool } from "./aghanimInfo.js";
 export { correctDraftTool } from "./correctDraft.js";
 export { setPlayerPositionTool } from "./setPlayerPosition.js";
 export { matchStateTool } from "./matchState.js";

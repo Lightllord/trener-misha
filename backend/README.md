@@ -86,6 +86,7 @@ Each file exports one `tool({ … })`; `src/tools/index.ts` re-exports them. Too
 |------|------|-------------------|
 | `heroes`          | `heroes.ts`     | `heroes_extend.json`: `list` (all heroes) / `info` (one hero's notes) |
 | `get_hero_abilities` | `heroAbilities.ts` | `data/heroes_abbility/<hero>-abilities.json` — cooldowns, mana, damage, talents |
+| `get_aghanim_info` | `aghanimInfo.ts` | `data/aghs_desc.json` — what Aghanim's Scepter/Shard give this specific hero |
 | `get_match_state` | `matchState.ts` | Latest parsed GSI state, incl. the CV draft and the player's position (`playerPosition`, 1-5) |
 | `set_player_position` | `setPlayerPosition.ts` | Records the player's position (1-5) in game state; asked for via the `ask_player_position` insight at draft start |
 | `get_matchups`    | `matchups.ts`   | STRATZ: win rate vs every hero (best/worst 5) |
