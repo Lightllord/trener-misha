@@ -6,7 +6,7 @@ type SessionOptions = NonNullable<ConstructorParameters<typeof RealtimeSession>[
 // normal turn-taking; near-field noise reduction trims room/game noise.
 export const SESSION_OPTIONS: SessionOptions = {
   transport: "websocket",
-  model: "gpt-realtime-2",
+  model: "gpt-realtime-2.1",
   config: {
     audio: {
       input: {
@@ -32,6 +32,6 @@ export const SESSION_OPTIONS: SessionOptions = {
 // raw session.update in SessionConductor instead.
 export const TRUNCATION_CONFIG = {
   type: "retention_ratio",
-  retention_ratio: 0.7,
+  retention_ratio: 0.4,
   token_limits: { post_instructions: 20_000 },
 } as const;

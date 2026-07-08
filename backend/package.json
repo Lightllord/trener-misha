@@ -11,14 +11,14 @@
     "test": "node --import tsx --test src/**/*.spec.ts src/*.spec.ts"
   },
   "dependencies": {
-    "@openai/agents": "^0.1.0",
+    "@openai/agents": "^0.13.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "openai": "^6.33.0",
+    "openai": "^6.45.0",
     "undici": "^7.24.7",
     "ws": "^8.18.0",
-    "zod": "^3.24.0"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
