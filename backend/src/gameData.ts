@@ -31,6 +31,13 @@ let buildPlan: BuildPlan | null = null;
 // CV, so it must be re-applied to every incoming state like draft corrections.
 let playerPosition: number | null = null;
 
+// Latest CV player-panel detections, pushed independently of /push/state (see
+// ingestApp.ts /push/player-detection) so they aren't throttled to the GSI
+// push cadence. Re-applied to every incoming state like corrections/position,
+// since insight-app's own full-state push always carries a stale/empty value.
+let otherHeroesOverlay: unknown[] = [];
+let lastEnemyInspectAtOverlay = 0;
+
 // Slots manually corrected by the agent — keyed by slot index, re-applied to every state.
 const corrections: { radiant: Map<number, string>; dire: Map<number, string> } = {
   radiant: new Map(),
@@ -88,6 +95,35 @@ export function setPlayerPosition(position: number): void {
   if (state) state.playerPosition = position;
 }
 
+function heroNameOf(entry: unknown): string | null {
+  if (typeof entry !== "object" || entry === null) return null;
+  const name = (entry as Record<string, unknown>).name;
+  return typeof name === "string" ? name : null;
+}
+
+// A hero the draft never picked is a CV misdetection (wrong template match),
+// not a tenth-plus player — drop it rather than let it into matchState. When
+// the draft itself hasn't been detected yet there is nothing to check against,
+// so everything passes through.
+function isHeroInDraft(heroName: string, draft: DraftData | null): boolean {
+  if (!draft) return true;
+  return draft.radiant.includes(heroName) || draft.dire.includes(heroName);
+}
+
+export function setOtherHeroes(heroes: unknown[], lastInspectGameTime: number): void {
+  const draft = getDraft();
+  otherHeroesOverlay = heroes.filter((h) => {
+    const name = heroNameOf(h);
+    return name !== null && isHeroInDraft(name, draft);
+  });
+  lastEnemyInspectAtOverlay = lastInspectGameTime;
+  // Reflect immediately so get_match_state returns it without waiting for the next push.
+  if (state) {
+    state.otherHeroes = otherHeroesOverlay;
+    state.lastEnemyInspectAt = lastEnemyInspectAtOverlay;
+  }
+}
+
 export function getState(): Record<string, unknown> | null {
   return state;
 }
@@ -99,6 +135,8 @@ export function getPrevState(): Record<string, unknown> | null {
 export function setState(data: Record<string, unknown>): void {
   applyCorrections(data);
   data.playerPosition = playerPosition;
+  data.otherHeroes = otherHeroesOverlay;
+  data.lastEnemyInspectAt = lastEnemyInspectAtOverlay;
   prevState = state;
   state = data;
 }
@@ -110,6 +148,8 @@ export function clearGameData(): void {
   corrections.dire.clear();
   buildPlan = null;
   playerPosition = null;
+  otherHeroesOverlay = [];
+  lastEnemyInspectAtOverlay = 0;
 }
 
 function normalizeItemName(value: string): string {

@@ -78,11 +78,13 @@ function scoreKda(): string {
 }
 
 function renderKillText(): string {
-  return `Убийство! Счёт ${scoreKda()}.`;
+  return "Игрок только что убил вражеского героя." +
+    ' Отреагируй только одним-двумя словами ("Хорош!", "Хороший килл!") — без счёта и деталей.';
 }
 
 function renderAssistText(): string {
-  return `Ассист! Счёт ${scoreKda()}.`;
+  return "Игрок только что засчитал ассист." +
+    ' Отреагируй только одним-двумя словами ("Хорош!", "Хороший ассист!") — без счёта и деталей.';
 }
 
 function renderDeathText(level: number | undefined, respawnSeconds: number | undefined): string {
@@ -112,18 +114,30 @@ function fireInstantScoreInsight(kind: ScoreKind, level?: number, respawnSeconds
 
 export function handleScoreEvent(kind: ScoreKind, level?: number, respawnSeconds?: number): void {
   const now = Date.now();
-  const onCooldown = now - lastInstantFiredMs < SCORE_INSTANT_COOLDOWN_MS;
-  // A batch is already accumulating (e.g. this tick's kill lost its own coin
-  // flip and got buffered) — join it instead of rolling a separate instant,
-  // otherwise the buffered event ends up orphaned or merged into an unrelated
-  // later batch once its deadline keeps getting extended.
-  const batchInProgress = scoreBuffer.length > 0;
-
   let instantFired = false;
-  if (!onCooldown && !batchInProgress && Math.random() < SCORE_INSTANT_CHANCE) {
-    lastInstantFiredMs = now;
-    fireInstantScoreInsight(kind, level, respawnSeconds);
-    instantFired = true;
+
+  const onCooldown = now - lastInstantFiredMs < SCORE_INSTANT_COOLDOWN_MS;
+
+  // Kills and assists skip the coin flip (always react if off cooldown), but
+  // still respect the shared cooldown so a fight's kill spam doesn't spam
+  // one-word acks back to back.
+  if (kind === "kill" || kind === "assist") {
+    if (!onCooldown) {
+      lastInstantFiredMs = now;
+      fireInstantScoreInsight(kind, level, respawnSeconds);
+      instantFired = true;
+    }
+  } else {
+    // A batch is already accumulating (e.g. this tick's death lost its own
+    // coin flip and got buffered) — join it instead of rolling a separate
+    // instant, otherwise the buffered event ends up orphaned or merged into
+    // an unrelated later batch once its deadline keeps getting extended.
+    const batchInProgress = scoreBuffer.length > 0;
+    if (!onCooldown && !batchInProgress && Math.random() < SCORE_INSTANT_CHANCE) {
+      lastInstantFiredMs = now;
+      fireInstantScoreInsight(kind, level, respawnSeconds);
+      instantFired = true;
+    }
   }
 
   // Buffer every event, even one already announced instantly — that way a

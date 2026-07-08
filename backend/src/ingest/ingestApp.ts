@@ -1,7 +1,7 @@
 import express, { type Express } from "express";
 import cors from "cors";
 import { checkAndAnalyzeDraft, resetDraftAnalysis } from "../draftAnalysis.js";
-import { setState, getState, clearGameData } from "../gameData.js";
+import { setState, getState, clearGameData, setOtherHeroes } from "../gameData.js";
 import { processStateUpdate, clearEventQueue } from "../gameEventQueue.js";
 import { clearInsights } from "../insight/store.js";
 
@@ -49,6 +49,21 @@ export function createIngestApp(): Express {
       processStateUpdate(prev, body);
     }
     checkAndAnalyzeDraft();
+    res.json({ status: "ok" });
+  });
+
+  // CV player-panel detections from insight-app, pushed on their own faster
+  // cadence — decoupled from /push/state, which only arrives as fast as GSI's
+  // own buffer/throttle allow. Misdetections are filtered against the draft
+  // inside setOtherHeroes before they ever reach matchState.
+  app.post("/push/player-detection", (req, res) => {
+    const body = req.body as Record<string, unknown>;
+    if (!body || !Array.isArray(body.otherHeroes)) {
+      res.status(400).json({ error: "Invalid player-detection payload" });
+      return;
+    }
+    const lastInspectGameTime = typeof body.lastEnemyInspectAt === "number" ? body.lastEnemyInspectAt : 0;
+    setOtherHeroes(body.otherHeroes, lastInspectGameTime);
     res.json({ status: "ok" });
   });
 

@@ -6,18 +6,14 @@
  * composes an ordered purchase plan. Delivers the result as a build_plan insight.
  */
 
-import OpenAI from "openai";
-import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
+import { Agent, run } from "@openai/agents";
 import { addInsight } from "./insight/store.js";
 import { getDraft, getState, setBuildPlan } from "./gameData.js";
 import { getMechanics } from "./itemKnowledge.js";
 import { fetchBuildsSummary } from "./stratzBuilds.js";
 import { formatBuildPlan } from "./buildMarkup.js";
-import { tools, handleToolCall, parseBuildItems, fetchHeroTagsBlock } from "./buildPlanTools.js";
-import type { BuildPlan } from "./types/build.js";
+import { createBuildPlanTools, fetchHeroTagsBlock } from "./buildPlanTools.js";
 import { log, logError } from "./observability/log.js";
-import { truncate } from "./observability/truncate.js";
-import { LOG_PREVIEW_MAX } from "./observability/consts/log.js";
 
 interface DraftResponse {
   radiant: string[];
@@ -32,7 +28,7 @@ interface StateResponse {
 // Hard cap on the tool-calling loop so a subagent that keeps exploring
 // (get_item_tags/get_item_details for every candidate, etc.) can't run
 // indefinitely and leave the player waiting with no delivered insight.
-const MAX_CHAT_TURNS = 16;
+const MAX_TURNS = 16;
 
 const ROLE_BY_POSITION: Record<number, string> = {
   1: "позиция 1 — кэрри (hard carry): фарм-зависимые кор-предметы, поздняя игра, тайминги фарма",
@@ -116,11 +112,18 @@ async function analyzeInBackground(position: number): Promise<void> {
     `pre-fetched tags (enemy ${enemyHeroes.length}, ally ${allyHeroes.length}, own ${ownHero.length}) and STRATZ build`,
   );
 
-  const messages: ChatCompletionMessageParam[] = [
-    { role: "system", content: await buildSystemPrompt() },
-    {
-      role: "user",
-      content: `Роль игрока: ${role}.
+  const { tools, submitted } = createBuildPlanTools(position, state?.hero?.name ?? null);
+
+  const agent = new Agent({
+    name: "build-planner",
+    instructions: await buildSystemPrompt(),
+    model: "gpt-5.4-mini",
+    tools,
+  });
+
+  const result = await run(
+    agent,
+    `Роль игрока: ${role}.
 
 ${playerContext}
 ${draftContext}
@@ -138,80 +141,24 @@ ${ownTagsBlock}
 ${stratzBlock}
 
 Продумай полный билд предметов на игру под этого героя, эту роль и этот драфт: сначала разбери, какие угрозы врага уже закрыты тегами союзников и твоего героя (gap-анализ), затем подбирай предметы под то, что осталось не закрыто, и сверяйся со стандартным билдом и частотой покупки предметов. В конце ОБЯЗАТЕЛЬНО вызови submit_build с финальным билдом в порядке покупки (у каждого предмета phase и короткая reason).`,
-    },
-  ];
+    { maxTurns: MAX_TURNS },
+  );
 
-  const openai = new OpenAI({ timeout: 90_000 });
+  if (submitted.plan) {
+    setBuildPlan(submitted.plan);
+    addInsight(
+      "build_plan",
+      `[Билд на игру готов]\n${formatBuildPlan(submitted.plan)}\n\nОзвучь билд игроку по порядку покупки, кратко и по делу. Не вываливай всё сразу простынёй — назови порядок предметов с короткой причиной, детали по каждому давай, если игрок переспросит. Билд сохранён — игрок может попросить изменить его (add/remove/replace/move).`,
+    );
+    return;
+  }
 
-  for (let turn = 1; turn <= MAX_CHAT_TURNS; turn++) {
-    if (turn === MAX_CHAT_TURNS) {
-      messages.push({
-        role: "user",
-        content:
-          "Это последний доступный шаг анализа. Прекрати уточнять детали и ОБЯЗАТЕЛЬНО вызови submit_build прямо сейчас с лучшим билдом, который у тебя уже есть.",
-      });
-    }
-
-    const res = await openai.chat.completions.create({
-      model: "gpt-5.4-mini",
-      messages,
-      tools,
-    });
-
-    const choice = res.choices[0];
-    if (!choice) break;
-
-    const msg = choice.message;
-    messages.push(msg);
-
-    if (msg.tool_calls?.length) {
-      for (const call of msg.tool_calls) {
-        if (call.type !== "function") continue;
-        const args = JSON.parse(call.function.arguments) as Record<string, unknown>;
-        log(
-          "build-plan",
-          `tool call: ${call.function.name}(${truncate(call.function.arguments, LOG_PREVIEW_MAX)})`,
-        );
-
-        if (call.function.name === "submit_build") {
-          const items = parseBuildItems(args.items);
-          if (!items.length) {
-            messages.push({
-              role: "tool",
-              tool_call_id: call.id,
-              content: "Пустой билд — добавь хотя бы один предмет и вызови submit_build снова.",
-            });
-            continue;
-          }
-          const plan: BuildPlan = {
-            hero: state?.hero?.name ?? null,
-            position,
-            items,
-            notes: typeof args.notes === "string" ? args.notes : null,
-            updatedAt: new Date().toISOString(),
-          };
-          setBuildPlan(plan);
-          addInsight(
-            "build_plan",
-            `[Билд на игру готов]\n${formatBuildPlan(plan)}\n\nОзвучь билд игроку по порядку покупки, кратко и по делу. Не вываливай всё сразу простынёй — назови порядок предметов с короткой причиной, детали по каждому давай, если игрок переспросит. Билд сохранён — игрок может попросить изменить его (add/remove/replace/move).`,
-          );
-          return;
-        }
-
-        const result = await handleToolCall(call.function.name, args);
-        messages.push({ role: "tool", tool_call_id: call.id, content: result });
-      }
-      continue;
-    }
-
-    if (msg.content) {
-      addInsight(
-        "build_plan",
-        `[Билд на игру готов]\n${msg.content}\n\nОзвучь билд игроку по порядку покупки, кратко и по делу. Не вываливай всё сразу простынёй — назови порядок предметов с короткой причиной, детали по каждому давай, если игрок переспросит.`,
-      );
-      return;
-    }
-    break;
+  if (result.finalOutput) {
+    addInsight(
+      "build_plan",
+      `[Билд на игру готов]\n${result.finalOutput}\n\nОзвучь билд игроку по порядку покупки, кратко и по делу. Не вываливай всё сразу простынёй — назови порядок предметов с короткой причиной, детали по каждому давай, если игрок переспросит.`,
+    );
+    return;
   }
 
   addInsight(

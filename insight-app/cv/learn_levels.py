@@ -25,6 +25,10 @@ import keyboard
 import numpy as np
 
 from detect_players import (
+    FRAME_SEARCH_X0,
+    FRAME_SEARCH_X1,
+    INNATE_SEARCH_X0,
+    INNATE_SEARCH_X1,
     capture_screen,
     crop,
     derive_regions,
@@ -56,11 +60,11 @@ def detect_level_region(monitor_num: int) -> np.ndarray | None:
         return None
 
     screen, _sw, _sh = capture_screen(monitor_num)
-    innate = find_template_multiscale(screen, innate_tmpl, INNATE_THRESHOLD)
+    innate = find_template_multiscale(screen, innate_tmpl, INNATE_THRESHOLD, INNATE_SEARCH_X0, INNATE_SEARCH_X1)
     if innate is None:
         print("  Innate icon not found.", file=sys.stderr)
         return None
-    frame = find_template_multiscale(screen, frame_tmpl, FRAME_THRESHOLD)
+    frame = find_template_multiscale(screen, frame_tmpl, FRAME_THRESHOLD, FRAME_SEARCH_X0, FRAME_SEARCH_X1)
     if frame is None:
         print("  Panel frame not found.", file=sys.stderr)
         return None

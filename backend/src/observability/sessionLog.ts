@@ -25,6 +25,15 @@ function num(x: unknown): number | undefined {
 // the relay's own transport listeners without touching state.
 export function attachSessionDiagnostics(session: RealtimeSession): void {
   const transport = session.transport;
+  let truncatedCount = 0;
+
+  // Fires for every item OpenAI's server-side truncation drops (as well as any
+  // manual delete, which this codebase never issues) — the only direct signal
+  // that the `truncation` config from sessionConductor.ts actually fired.
+  transport.on("item_deleted", (item) => {
+    truncatedCount += 1;
+    log("session", `context truncated: dropped item ${item.itemId} (total dropped: ${truncatedCount})`);
+  });
 
   transport.on("input_audio_buffer.speech_started", () => log("turn", "user started speaking"));
   transport.on("input_audio_buffer.speech_stopped", () => log("turn", "user stopped speaking"));
@@ -52,6 +61,18 @@ export function attachSessionDiagnostics(session: RealtimeSession): void {
   transport.on("conversation.item.input_audio_transcription.failed", (e: unknown) => {
     const message = str(rec(rec(e)?.error)?.message) ?? "unknown";
     log("turn", `user transcription failed: ${truncate(message, LOG_PREVIEW_MAX)}`);
+  });
+
+  // Realtime's prompt cache is prefix-based: a truncation event busts it near
+  // the start of the conversation, so the cached-token share on the next turn
+  // is the direct signal of how expensive that turn actually was.
+  transport.on("usage_update", (u: unknown) => {
+    const usage = rec(u);
+    const inputTokens = num(usage?.inputTokens);
+    if (inputTokens === undefined) return;
+    const cached = num(rec(usage?.inputTokensDetails)?.cached_tokens) ?? 0;
+    const pct = inputTokens > 0 ? Math.round((cached / inputTokens) * 100) : 0;
+    log("session", `usage: input ${inputTokens} (cached ${cached}, ${pct}%), output ${num(usage?.outputTokens) ?? "?"}`);
   });
 
   transport.on("rate_limits.updated", (e: unknown) => {

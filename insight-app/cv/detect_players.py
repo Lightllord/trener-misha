@@ -32,7 +32,13 @@ TEMPLATES_DIR = SCRIPT_DIR / "templates"
 ITEMS_DIR     = SCRIPT_DIR / "item_icons"
 DEBUG_DIR     = SCRIPT_DIR / "debug"
 
-PANEL_SEARCH_TOP = 0.60
+# Innate and frame are detected independently and sit in different, non-overlapping
+# columns of the HUD panel, so each gets its own (narrower) search box.
+INNATE_SEARCH_X0 = 0.34
+INNATE_SEARCH_X1 = 0.44
+FRAME_SEARCH_X0  = 0.72
+FRAME_SEARCH_X1  = 0.80
+PANEL_SEARCH_Y0  = 0.80
 
 
 # ── core types ────────────────────────────────────────────────────────────────
@@ -146,13 +152,17 @@ def find_template_multiscale(
     screen: np.ndarray,
     template: np.ndarray,
     threshold: float,
+    roi_x0: float,
+    roi_x1: float,
     scale_range: tuple[float, float] = (0.5, 2.5),
     steps: int = 40,
-    roi_top: float = PANEL_SEARCH_TOP,
+    roi_y0: float = PANEL_SEARCH_Y0,
 ) -> Box | None:
     sh, sw = screen.shape[:2]
-    roi_y  = int(sh * roi_top)
-    sg     = to_gray(screen[roi_y:, :])
+    roi_x0_px = int(sw * roi_x0)
+    roi_x1_px = int(sw * roi_x1)
+    roi_y_px  = int(sh * roi_y0)
+    sg     = to_gray(screen[roi_y_px:, roi_x0_px:roi_x1_px])
     tg     = to_gray(template)
     th, tw = tg.shape[:2]
     best: Box | None = None
@@ -165,7 +175,7 @@ def find_template_multiscale(
         result  = cv2.matchTemplate(sg, resized, cv2.TM_CCOEFF_NORMED)
         _, max_val, _, max_loc = cv2.minMaxLoc(result)
         if max_val > threshold and (best is None or max_val > best.score):
-            best = Box(max_loc[0], roi_y + max_loc[1], nw, nh, max_val)
+            best = Box(roi_x0_px + max_loc[0], roi_y_px + max_loc[1], nw, nh, max_val)
 
     return best
 
@@ -244,6 +254,43 @@ def _crop_vertical(img: np.ndarray, top_px: int, bottom_px: int) -> np.ndarray:
 
 ITEM_MATCH_THRESHOLD = 0.7
 
+# match_items compares equally-sized images, so TM_CCOEFF_NORMED reduces to a
+# single Pearson correlation coefficient per template — cheaper to batch as one
+# matrix-vector product than to call cv2.matchTemplate per item. Templates are
+# resized once per distinct slot size and cached, since that size is stable
+# across frames (it only tracks the detected panel scale, not per-frame noise).
+_ITEM_TEMPLATE_CACHE: dict[tuple[int, int, float, float], tuple[np.ndarray, list[str]]] = {}
+
+
+def _normalize_flat(img: np.ndarray) -> np.ndarray | None:
+    flat = img.astype(np.float32).ravel()
+    flat -= flat.mean()
+    norm = float(np.linalg.norm(flat))
+    return (flat / norm) if norm > 1e-6 else None
+
+
+def _build_item_template_cache(
+    item_templates: dict[str, np.ndarray],
+    target_w: int,
+    target_h: int,
+    top_frac: float,
+    bottom_frac: float,
+) -> tuple[np.ndarray, list[str]]:
+    names: list[str] = []
+    vecs:  list[np.ndarray] = []
+    for item_name, tmpl in item_templates.items():
+        th = tmpl.shape[0]
+        tmpl_cropped = _crop_vertical(tmpl, round(top_frac * th), round(bottom_frac * th))
+        resized = cv2.resize(tmpl_cropped, (target_w, target_h), interpolation=cv2.INTER_AREA)
+        vec = _normalize_flat(resized)
+        if vec is None:
+            continue
+        names.append(item_name)
+        vecs.append(vec)
+    matrix = np.stack(vecs) if vecs else np.zeros((0, target_w * target_h), dtype=np.float32)
+    return matrix, names
+
+
 def match_items(
     slot_imgs: list[np.ndarray],
     item_templates: dict[str, np.ndarray],
@@ -258,16 +305,24 @@ def match_items(
         sg_cropped  = _crop_vertical(sg, ITEM_CROP_TOP_PX, ITEM_CROP_BOTTOM_PX)
         top_frac    = ITEM_CROP_TOP_PX / sh
         bottom_frac = ITEM_CROP_BOTTOM_PX / sh
-        best_name, best_score = "unknown", 0.0
-        for item_name, tmpl in item_templates.items():
-            th = tmpl.shape[0]
-            tmpl_cropped = _crop_vertical(tmpl, round(top_frac * th), round(bottom_frac * th))
-            resized = cv2.resize(tmpl_cropped, (sg_cropped.shape[1], sg_cropped.shape[0]), interpolation=cv2.INTER_AREA)
-            _, val, _, _ = cv2.minMaxLoc(cv2.matchTemplate(sg_cropped, resized, cv2.TM_CCOEFF_NORMED))
-            if val > best_score:
-                best_score = val
-                best_name  = item_name
-        results.append((best_name if best_score >= ITEM_MATCH_THRESHOLD else "unknown", best_score))
+        target_h, target_w = sg_cropped.shape[:2]
+
+        cache_key = (target_w, target_h, round(top_frac, 4), round(bottom_frac, 4))
+        matrix, names = _ITEM_TEMPLATE_CACHE.setdefault(
+            cache_key,
+            _build_item_template_cache(item_templates, target_w, target_h, top_frac, bottom_frac),
+        )
+
+        query_vec = _normalize_flat(sg_cropped)
+        if query_vec is None or matrix.shape[0] == 0:
+            results.append(("unknown", 0.0))
+            continue
+
+        scores      = matrix @ query_vec
+        best_idx    = int(np.argmax(scores))
+        best_score  = float(scores[best_idx])
+        best_name   = names[best_idx] if best_score >= ITEM_MATCH_THRESHOLD else "unknown"
+        results.append((best_name, best_score))
     return results
 
 
@@ -278,12 +333,12 @@ def detect_once(
 ) -> dict | None:
     screen, _sw, _sh = capture_screen(monitor_num)
 
-    innate = find_template_multiscale(screen, tmpls.innate, INNATE_THRESHOLD)
+    innate = find_template_multiscale(screen, tmpls.innate, INNATE_THRESHOLD, INNATE_SEARCH_X0, INNATE_SEARCH_X1)
     if innate is None:
         return None
     print(f"Innate ({innate.score:.2f})", file=sys.stderr)
 
-    frame = find_template_multiscale(screen, tmpls.frame, FRAME_THRESHOLD)
+    frame = find_template_multiscale(screen, tmpls.frame, FRAME_THRESHOLD, FRAME_SEARCH_X0, FRAME_SEARCH_X1)
     if frame is None:
         return None
     print(f"Frame ({frame.score:.2f})", file=sys.stderr)

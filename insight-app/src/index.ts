@@ -53,8 +53,6 @@ function pushToBackend(path: string, data: unknown): void {
 function pushState(): void {
   const state = matchState.current;
   if (!state) return;
-  state.otherHeroes = playerDetector.getOtherPlayers().map(otherPlayerToHeroState);
-  state.lastEnemyInspectAt = playerDetector.getLastInspectGameTime();
   pushToBackend("/push/state", state);
 }
 
@@ -62,6 +60,16 @@ function pushState(): void {
 draftDetector.onDraftChange((draft) => {
   matchState.setDraft(draft);
   pushState();
+});
+
+// CV detections push straight to the backend as they happen, decoupled from the
+// GSI push cadence (Dota throttles GSI to `buffer`/`throttle` from the .cfg,
+// ~0.5s+) — otherwise polling the CV detector faster than that buys nothing.
+playerDetector.onDetection((otherHeroes, lastEnemyInspectAt) => {
+  pushToBackend("/push/player-detection", {
+    otherHeroes: otherHeroes.map(otherPlayerToHeroState),
+    lastEnemyInspectAt,
+  });
 });
 
 matchState.onPhaseChange((newPhase, prevPhase) => {

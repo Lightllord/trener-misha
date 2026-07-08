@@ -5,7 +5,7 @@ import type { OtherPlayerState, HeroPositions } from "./types.js"
 
 const INSIGHT_APP_ROOT = resolve(__dirname, "..")
 const SCRIPT_PATH      = resolve(INSIGHT_APP_ROOT, "cv", "detect_players.py")
-const POLL_INTERVAL_MS = 1000
+const POLL_INTERVAL_MS = 250
 const RESTART_DELAY_MS = 2000
 
 interface RawDetection {
@@ -13,6 +13,8 @@ interface RawDetection {
   level:    number
   items:    string[]
 }
+
+export type DetectionListener = (otherHeroes: OtherPlayerState[], lastInspectGameTime: number) => void
 
 function isClean(items: string[]): boolean {
   return items.every(name => name !== "unknown")
@@ -33,6 +35,8 @@ export class PlayerDetector {
 
   // gameTime последней валидной CV-детекции — игрок осматривал инвентарь врага.
   private lastInspectGameTime = 0
+
+  private detectionListeners: DetectionListener[] = []
 
   constructor(
     monitorNum: number | "auto",
@@ -73,6 +77,22 @@ export class PlayerDetector {
 
   getOtherPlayers(): OtherPlayerState[] {
     return Array.from(this.cache.values())
+  }
+
+  /** Подписаться на каждую успешную детекцию — пушится сразу, не дожидаясь GSI-тика. */
+  onDetection(listener: DetectionListener): void {
+    this.detectionListeners.push(listener)
+  }
+
+  private emitDetection(): void {
+    const heroes = this.getOtherPlayers()
+    for (const listener of this.detectionListeners) {
+      try {
+        listener(heroes, this.lastInspectGameTime)
+      } catch (err) {
+        console.error("[PlayerDetector] Detection listener error:", err)
+      }
+    }
   }
 
   // ── process lifecycle ──────────────────────────────────────────────────────
@@ -211,5 +231,6 @@ export class PlayerDetector {
     this.lastInspectGameTime = this.getGameTime()
     const itemList = raw.items.filter(i => i !== "empty").join(", ") || "—"
     console.log(`[PlayerDetector] ${raw.heroName} lvl${raw.level} [${team}] — ${itemList}`)
+    this.emitDetection()
   }
 }

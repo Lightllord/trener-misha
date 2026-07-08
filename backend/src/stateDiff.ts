@@ -241,7 +241,7 @@ export function diffStates(
   for (const b of allyDestroyed) {
     events.push({
       type: "ally_building_destroyed",
-      summary: `Наша ${buildingLabel(b)} уничтожена!`,
+      summary: `Упала наша ${buildingLabel(b)}, в этой зоне стало опаснее.`,
     });
   }
 
@@ -253,7 +253,7 @@ export function diffStates(
   for (const b of enemyDestroyed) {
     events.push({
       type: "enemy_building_destroyed",
-      summary: `Вражеская ${buildingLabel(b)} уничтожена.`,
+      summary: `Упала вражеская ${buildingLabel(b)}, в этой зоне стало безопаснее.`,
     });
   }
 

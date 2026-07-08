@@ -7,9 +7,11 @@ import { clearScoreInsightState, handleScoreEvent, updateLiveScore } from "./sco
 import type { Insight, InsightName } from "./insight/types/insight.js";
 import type { ScoreKind } from "./scoreInsight.js";
 
-const MISSING_THRESHOLD_S = 60;
-const MISSING_REFIRE_MS = 120_000;
-const NEARBY_COOLDOWN_MS = 30_000;
+const MISSING_THRESHOLD_S = 120;
+const MISSING_LATE_THRESHOLD_S = 300;
+const MISSING_LATE_GAME_TIME_S = 30 * 60;
+const MISSING_REFIRE_MS = 300_000;
+const NEARBY_COOLDOWN_MS = 60_000;
 const NEARBY_RADIUS = 1500;
 const ROSHAN_COOLDOWN_MS = 30_000;
 const INSPECT_REMINDER_THRESHOLD_S = 300;
@@ -72,29 +74,31 @@ function checkHeroInsights(state: Record<string, unknown>): void {
   if (!heroPositions) return;
 
   const player = state.player as { team?: string } | undefined;
-  const hero = state.hero as { position?: { x: number; y: number }; alive?: boolean } | undefined;
+  const hero = state.hero as { name?: string; position?: { x: number; y: number }; alive?: boolean } | undefined;
   const gameTime = (state.gameTime as number | undefined) ?? 0;
 
   if (!player?.team || !hero?.position) return;
 
   const enemyTeam = player.team === "radiant" ? "dire" : "radiant";
   const enemyEntries = Object.entries(heroPositions).filter(([, h]) => h.team === enemyTeam);
+  const allyEntries = Object.entries(heroPositions).filter(
+    ([name, h]) => h.team === player.team && name !== hero.name,
+  );
 
   const now = Date.now();
+  const missingThresholdS =
+    gameTime >= MISSING_LATE_GAME_TIME_S ? MISSING_LATE_THRESHOLD_S : MISSING_THRESHOLD_S;
 
   for (const [name, h] of enemyEntries) {
-    if (!h.visible && gameTime - h.lastSeen > MISSING_THRESHOLD_S) {
+    if (!h.visible && gameTime - h.lastSeen > missingThresholdS) {
       const lastFired = missingNotified.get(name) ?? 0;
       if (now - lastFired > MISSING_REFIRE_MS) {
         missingNotified.set(name, now);
         const shortName = name.replace("npc_dota_hero_", "");
-        const missingFor = Math.floor(gameTime - h.lastSeen);
         const lastZone = h.zone.replaceAll("_", " ");
         const insight = addInsight(
           "hero_missing",
-          `Вражеский герой ${shortName} не появлялся на карте ${missingFor} секунд.` +
-            ` Последний раз его видели в районе: ${lastZone}.` +
-            ` Обязательно проговори игроку это последнее известное место, прежде чем предупредить — возможно, герой готовит ганк оттуда.`,
+          `Вражеский герой ${shortName} пропал с карты. Последний раз его видели в районе: ${lastZone}.`,
         );
         if (insight) missingInsights.set(name, insight);
       }
@@ -110,21 +114,28 @@ function checkHeroInsights(state: Record<string, unknown>): void {
 
   if (hero.alive && now - lastNearbyMs > NEARBY_COOLDOWN_MS) {
     const { x: px, y: py } = hero.position;
-    const nearby = enemyEntries.filter(
+    const nearbyEnemies = enemyEntries.filter(
       ([, h]) => h.visible && heroDist(px, py, h.x, h.y) < NEARBY_RADIUS,
     );
-    if (nearby.length >= 3) {
+    const nearbyAllies = allyEntries.filter(
+      ([, h]) => h.visible && heroDist(px, py, h.x, h.y) < NEARBY_RADIUS,
+    );
+    // +1 accounts for the player themself, who isn't in heroPositions under their own entry.
+    const teammatesNearby = nearbyAllies.length + 1;
+    if (nearbyEnemies.length > teammatesNearby) {
       lastNearbyMs = now;
-      if (nearby.length > 3) {
+      if (nearbyEnemies.length > 3) {
         addInsight(
           "enemies_nearby",
-          `ОСТОРОЖНО! Куча героев в радиусе ${NEARBY_RADIUS} от тебя.`,
+          `ОСТОРОЖНО! Куча вражеских героев (${nearbyEnemies.length}) в радиусе ${NEARBY_RADIUS} от тебя,` +
+            ` а тиммейтов рядом только ${teammatesNearby}. Опасность, ты в меньшинстве!`,
         );
       } else {
-        const names = nearby.map(([n]) => n.replace("npc_dota_hero_", "")).join(", ");
+        const names = nearbyEnemies.map(([n]) => n.replace("npc_dota_hero_", "")).join(", ");
         addInsight(
           "enemies_nearby",
-          `ОПАСНО! ${nearby.length} вражеских героя в радиусе ${NEARBY_RADIUS} единиц от тебя: ${names}.`,
+          `${nearbyEnemies.length} вражеских героя в радиусе ${NEARBY_RADIUS} единиц от тебя,` +
+            ` а тиммейтов рядом только ${teammatesNearby}: ${names}. Опасность, ты в меньшинстве!`,
         );
       }
     }

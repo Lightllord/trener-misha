@@ -32,19 +32,19 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
   score_change_instant: {
     unique: false,
     description:
-      "Immediate, low-latency reaction to a single kill, death, or assist that just happened, fired instead of waiting for the team-fight batching window. React the same way you would to the equivalent score_change event (kill ack, death + short tactical tip, or assist ack), just faster.",
+      "Immediate, low-latency reaction to a single kill, death, or assist that just happened, fired instead of waiting for the team-fight batching window. For a kill or assist, follow the payload's instruction exactly: react with only 1-2 words, no score, no elaboration. For a death, give the short tactical tip described in the payload.",
     importance: "high",
     ttlMs: 5_000,
   },
   hero_missing: {
     unique: false,
-    description: "An enemy hero has not been visible on the minimap for over a minute — tell the player where the hero was last seen, then warn it may be setting up a gank.",
+    description: "An enemy hero has not been visible on the minimap for over 2 minutes (5 minutes after the 30-minute mark) — relay only the short fact already in the payload (that the hero disappeared and where it was last seen), one short sentence, no extra warning or speculation.",
     importance: "medium",
     ttlMs: 30_000,
   },
   enemies_nearby: {
     unique: false,
-    description: "Three or more enemy heroes are within 1500 units of the player — critical proximity warning.",
+    description: "More enemy heroes than teammates (including the player) are within 1500 units of the player — critical proximity warning, player is outnumbered.",
     importance: "critical",
     ttlMs: 7_000,
   },
@@ -100,13 +100,13 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
   },
   ally_building_destroyed: {
     unique: false,
-    description: "An allied building was destroyed — critical map event, comment on impact and next steps.",
+    description: "An allied building was destroyed — critical map event. Relay only the short fact already in the payload (which building, and that its area got more dangerous), one short sentence, no extra elaboration.",
     importance: "critical",
     ttlMs: 20_000,
   },
   enemy_building_destroyed: {
     unique: false,
-    description: "An enemy building was destroyed — acknowledge the objective and suggest follow-up.",
+    description: "An enemy building was destroyed. Relay only the short fact already in the payload (which building, and that its area got safer), one short sentence, no extra elaboration.",
     importance: "high",
     ttlMs: 5_000,
   },
