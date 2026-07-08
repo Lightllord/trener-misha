@@ -33,5 +33,5 @@ export const SESSION_OPTIONS: SessionOptions = {
 export const TRUNCATION_CONFIG = {
   type: "retention_ratio",
   retention_ratio: 0.7,
-  token_limits: { post_instructions: 8000 },
+  token_limits: { post_instructions: 20_000 },
 } as const;

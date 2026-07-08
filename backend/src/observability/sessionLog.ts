@@ -27,9 +27,11 @@ export function attachSessionDiagnostics(session: RealtimeSession): void {
   const transport = session.transport;
   let truncatedCount = 0;
 
-  // Fires for every item OpenAI's server-side truncation drops (as well as any
-  // manual delete, which this codebase never issues) — the only direct signal
-  // that the `truncation` config from sessionConductor.ts actually fired.
+  // Fires on conversation.item.deleted. This codebase never issues manual
+  // deletes today, and OpenAI's own truncation.retention_ratio config
+  // (sessionConductor.ts) doesn't appear to emit this either in practice —
+  // kept as a no-cost tripwire in case that changes, see
+  // docs/realtime-manual-context-truncation-plan.md.
   transport.on("item_deleted", (item) => {
     truncatedCount += 1;
     log("session", `context truncated: dropped item ${item.itemId} (total dropped: ${truncatedCount})`);
@@ -70,7 +72,11 @@ export function attachSessionDiagnostics(session: RealtimeSession): void {
     const usage = rec(u);
     const inputTokens = num(usage?.inputTokens);
     if (inputTokens === undefined) return;
-    const cached = num(rec(usage?.inputTokensDetails)?.cached_tokens) ?? 0;
+    // Usage.inputTokensDetails is an array wrapping the single raw details
+    // object (see @openai/agents-core's Usage constructor), not the object itself.
+    const detailsList = usage?.inputTokensDetails;
+    const details = Array.isArray(detailsList) ? rec(detailsList[0]) : null;
+    const cached = num(details?.cached_tokens) ?? 0;
     const pct = inputTokens > 0 ? Math.round((cached / inputTokens) * 100) : 0;
     log("session", `usage: input ${inputTokens} (cached ${cached}, ${pct}%), output ${num(usage?.outputTokens) ?? "?"}`);
   });

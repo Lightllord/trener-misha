@@ -23,7 +23,7 @@ export class SessionConductor {
   private configureTruncation(): void {
     this.session.transport.sendEvent({
       type: "session.update",
-      session: { truncation: TRUNCATION_CONFIG },
+      session: { type: "realtime", truncation: TRUNCATION_CONFIG },
     });
   }
 
