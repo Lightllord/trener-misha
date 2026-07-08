@@ -8,13 +8,6 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
     importance: "high",
     ttlMs: 120_000,
   },
-  item_advice: {
-    unique: false,
-    description:
-      "Answer to the player's item question — which item to buy and why, based on hero/item mechanics and typical builds.",
-    importance: "high",
-    ttlMs: 90_000,
-  },
   build_plan: {
     unique: true,
     description:

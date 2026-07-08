@@ -1,6 +1,5 @@
 export type InsightName =
   | "draft_analysis"
-  | "item_advice"
   | "build_plan"
   | "score_change"
   | "score_change_instant"

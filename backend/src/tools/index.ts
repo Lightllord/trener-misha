@@ -7,7 +7,6 @@ export { matchStateTool } from "./matchState.js";
 export { matchupsTool } from "./matchups.js";
 export { buildsTool } from "./builds.js";
 export { skillBuildTool } from "./skillBuild.js";
-export { itemAdviceTool } from "./itemAdvice.js";
 export { buildPlanTool } from "./buildPlan.js";
 export { getBuildPlanTool } from "./getBuildPlan.js";
 export { editBuildPlanTool } from "./editBuildPlan.js";
