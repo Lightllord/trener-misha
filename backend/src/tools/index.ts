@@ -11,3 +11,4 @@ export { buildPlanTool } from "./buildPlan.js";
 export { getBuildPlanTool } from "./getBuildPlan.js";
 export { editBuildPlanTool } from "./editBuildPlan.js";
 export { guidesTool } from "./guides.js";
+export { neutralItemsTool } from "./neutralItems.js";

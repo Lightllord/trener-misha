@@ -461,11 +461,6 @@
     "notes": "Gains charges for spells cast by visible enemies in 1200 range.\nCertain abilities and item abilities will not add charges."
   },
   {
-    "id": 35,
-    "displayName": "Magic Wand Recipe",
-    "cost": 150
-  },
-  {
     "id": 36,
     "displayName": "Magic Wand",
     "cost": 460,
@@ -617,11 +612,6 @@
     "notes": "If multiple heroes teleport to the same location in succession, the channeling time will be increased for each successive hero.\nTeleport can be prevented or canceled by Root abilities."
   },
   {
-    "id": 47,
-    "displayName": "Boots of Travel Recipe",
-    "cost": 2000
-  },
-  {
     "id": 48,
     "displayName": "Boots of Travel",
     "cost": 2500,
@@ -647,11 +637,6 @@
     "hint": [
       "Movement speed bonuses from multiple pairs of boots do not stack."
     ]
-  },
-  {
-    "id": 49,
-    "displayName": "",
-    "notFound": true
   },
   {
     "id": 50,
@@ -829,11 +814,6 @@
     ]
   },
   {
-    "id": 62,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 63,
     "displayName": "Power Treads",
     "cost": 1400,
@@ -872,11 +852,6 @@
     "notes": "Power Treads can be built using a Belt of Strength, Band of Elvenskin, or a Robe of the Magi."
   },
   {
-    "id": 64,
-    "displayName": "Hand of Midas Recipe",
-    "cost": 1750
-  },
-  {
     "id": 65,
     "displayName": "Hand of Midas",
     "cost": 2200,
@@ -895,11 +870,6 @@
       }
     ],
     "notes": "The gold given is unreliable gold (you do not get the normal creep bounty).\nExperience gained by using Transmute is not shared."
-  },
-  {
-    "id": 66,
-    "displayName": "",
-    "notFound": true
   },
   {
     "id": 67,
@@ -924,11 +894,6 @@
     ]
   },
   {
-    "id": 68,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 69,
     "displayName": "Perseverance",
     "cost": 1400,
@@ -946,11 +911,6 @@
     ]
   },
   {
-    "id": 70,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 71,
     "displayName": "Poor Man's Shield",
     "cost": 0,
@@ -962,11 +922,6 @@
       }
     ],
     "notes": "Multiple sources of damage block do not stack."
-  },
-  {
-    "id": 72,
-    "displayName": "Bracer Recipe",
-    "cost": 210
   },
   {
     "id": 73,
@@ -1001,11 +956,6 @@
     ]
   },
   {
-    "id": 74,
-    "displayName": "Wraith Band Recipe",
-    "cost": 210
-  },
-  {
     "id": 75,
     "displayName": "Wraith Band",
     "cost": 505,
@@ -1036,11 +986,6 @@
         "value": "1.75"
       }
     ]
-  },
-  {
-    "id": 76,
-    "displayName": "Null Talisman Recipe",
-    "cost": 210
   },
   {
     "id": 77,
@@ -1075,11 +1020,6 @@
     ]
   },
   {
-    "id": 78,
-    "displayName": "Mekansm Recipe",
-    "cost": 850
-  },
-  {
     "id": 79,
     "displayName": "Mekansm",
     "cost": 1775,
@@ -1107,11 +1047,6 @@
     "notes": "Restore does not affect units that have been affected by Restore or Guardian Greaves Mend within Mekansm's cooldown.\nMultiple instances of Mekansm Aura do not stack."
   },
   {
-    "id": 80,
-    "displayName": "Vladmir's Offering Recipe",
-    "notFound": true
-  },
-  {
     "id": 81,
     "displayName": "Vladmir's Offering",
     "cost": 2200,
@@ -1137,16 +1072,6 @@
     "notes": "Lifesteal on attacks against creeps is reduced to 12%."
   },
   {
-    "id": 84,
-    "displayName": "Flying Courier",
-    "notFound": true
-  },
-  {
-    "id": 85,
-    "displayName": "Buckler Recipe",
-    "cost": 250
-  },
-  {
     "id": 86,
     "displayName": "Buckler",
     "cost": 425,
@@ -1166,11 +1091,6 @@
     ]
   },
   {
-    "id": 87,
-    "displayName": "Ring of Basilius Recipe",
-    "cost": 250
-  },
-  {
     "id": 88,
     "displayName": "Ring of Basilius",
     "cost": 425,
@@ -1188,11 +1108,6 @@
         "description": "Grants 1 mana regeneration to allies. \n\nRadius: 1200"
       }
     ]
-  },
-  {
-    "id": 89,
-    "displayName": "Pipe of Insight Recipe",
-    "cost": 675
   },
   {
     "id": 90,
@@ -1227,11 +1142,6 @@
     "notes": "Barrier does not affect units that have been affected by Barrier within Pipe of Insight's cooldown.\nStacks multiplicatively with other sources of magic resistance."
   },
   {
-    "id": 91,
-    "displayName": "Urn of Shadows Recipe",
-    "cost": 320
-  },
-  {
     "id": 92,
     "displayName": "Urn of Shadows",
     "cost": 825,
@@ -1263,11 +1173,6 @@
     "notes": "Empty urns gain 2 charges.\nIf the allied unit is attacked by an enemy hero or Roshan, the effect is lost.\nDoes not trigger spell block or spell reflect."
   },
   {
-    "id": 93,
-    "displayName": "Headdress Recipe",
-    "cost": 250
-  },
-  {
     "id": 94,
     "displayName": "Headdress",
     "cost": 425,
@@ -1285,11 +1190,6 @@
         "description": "Grants 2 health regeneration to allies.\n\nRadius: 1200"
       }
     ]
-  },
-  {
-    "id": 95,
-    "displayName": "Scythe of Vyse Recipe",
-    "cost": 700
   },
   {
     "id": 96,
@@ -1317,11 +1217,6 @@
       }
     ],
     "notes": "The target will have a base movement speed of 140, but buffs granting maximum movement speed won't be disabled."
-  },
-  {
-    "id": 97,
-    "displayName": "Orchid Malevolence Recipe",
-    "cost": 300
   },
   {
     "id": 98,
@@ -1365,11 +1260,6 @@
     ]
   },
   {
-    "id": 99,
-    "displayName": "Eul's Scepter Recipe",
-    "cost": 675
-  },
-  {
     "id": 100,
     "displayName": "Eul's Scepter of Divinity",
     "cost": 2600,
@@ -1402,11 +1292,6 @@
     "notes": "You cannot cyclone allies.\nCyclones cast on yourself go through spell immunity.\nCyclone can dispel some buffs and debuffs.\nCyclone duration is unaffected by status resistance."
   },
   {
-    "id": 101,
-    "displayName": "Force Staff Recipe",
-    "cost": 950
-  },
-  {
     "id": 102,
     "displayName": "Force Staff",
     "cost": 2200,
@@ -1432,11 +1317,6 @@
       }
     ],
     "notes": "Self-cast will cause you to use Force on yourself.\nForce Staff doesn't interrupt the target's actions.\nWill not work on a unit inside Chronosphere, Duel, or Black Hole.\nForce Staff has 850 cast range when cast on enemies."
-  },
-  {
-    "id": 103,
-    "displayName": "Dagon Recipe",
-    "cost": 1150
   },
   {
     "id": 104,
@@ -1476,11 +1356,6 @@
     "notes": "Instantly kills illusions.\nCast Range bonuses from Aether Lens and Dagon do not stack."
   },
   {
-    "id": 105,
-    "displayName": "Necronomicon Recipe",
-    "cost": 1250
-  },
-  {
     "id": 106,
     "displayName": "Necronomicon",
     "cost": 2050,
@@ -1505,11 +1380,6 @@
         "manaCost": 150
       }
     ]
-  },
-  {
-    "id": 107,
-    "displayName": "",
-    "notFound": true
   },
   {
     "id": 108,
@@ -1539,11 +1409,6 @@
         "description": "Upgrades the ultimate, and some abilities, of all heroes."
       }
     ]
-  },
-  {
-    "id": 109,
-    "displayName": "Refresher Orb Recipe",
-    "cost": 1600
   },
   {
     "id": 110,
@@ -1577,11 +1442,6 @@
     ]
   },
   {
-    "id": 111,
-    "displayName": "Assault Cuirass Recipe",
-    "cost": 1300
-  },
-  {
     "id": 112,
     "displayName": "Assault Cuirass",
     "cost": 5125,
@@ -1604,11 +1464,6 @@
         "description": "Grants 30 attack speed and 5 armor to nearby allied units and structures, and decreases nearby enemy unit and structure armor by -5.\n\nRadius: 1200"
       }
     ]
-  },
-  {
-    "id": 113,
-    "displayName": "Heart of Tarrasque Recipe",
-    "cost": 600
   },
   {
     "id": 114,
@@ -1634,11 +1489,6 @@
       }
     ],
     "notes": "Multiple instances of Behemoth's Blood do not stack."
-  },
-  {
-    "id": 115,
-    "displayName": "Black King Bar Recipe",
-    "cost": 1450
   },
   {
     "id": 116,
@@ -1681,11 +1531,6 @@
     "notes": "Pronounced as ayy jis."
   },
   {
-    "id": 118,
-    "displayName": "Shiva's Guard Recipe",
-    "cost": 1350
-  },
-  {
     "id": 119,
     "displayName": "Shiva's Guard",
     "cost": 4500,
@@ -1721,11 +1566,6 @@
       }
     ],
     "notes": "The wave extends at a speed of 400 to a max size of 825.\nThe Arctic Blast follows its caster.\nMultiple instances of Freezing Aura do not stack.\nAoE bonuses from multiple Chasm Stones or its upgrades do not stack."
-  },
-  {
-    "id": 120,
-    "displayName": "Bloodstone Recipe",
-    "notFound": true
   },
   {
     "id": 121,
@@ -1774,11 +1614,6 @@
     "notes": "Spell Weakness Aura does not stack with Veil of Discord's Spell Weakness."
   },
   {
-    "id": 122,
-    "displayName": "Linken's Sphere Recipe",
-    "cost": 600
-  },
-  {
     "id": 123,
     "displayName": "Linken's Sphere",
     "cost": 4800,
@@ -1815,11 +1650,6 @@
     "notes": "Targeted abilities from neutral items do not trigger Spellblock."
   },
   {
-    "id": 124,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 125,
     "displayName": "Vanguard",
     "cost": 1700,
@@ -1843,11 +1673,6 @@
       }
     ],
     "notes": "Multiple sources of damage block do not stack."
-  },
-  {
-    "id": 126,
-    "displayName": "Blade Mail Recipe",
-    "cost": 450
   },
   {
     "id": 127,
@@ -1882,11 +1707,6 @@
     "notes": "Damage Return is calculated before any kind of reduction.\nReturned damage type is the same as it was received.\nDamage done by this item is considered reflected damage. Reflected damage does not provide any lifesteal and cannot be reflected."
   },
   {
-    "id": 128,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 129,
     "displayName": "Soul Booster",
     "cost": 3000,
@@ -1902,11 +1722,6 @@
         "value": "425"
       }
     ]
-  },
-  {
-    "id": 130,
-    "displayName": "",
-    "notFound": true
   },
   {
     "id": 131,
@@ -1936,11 +1751,6 @@
     "notes": "Stacks multiplicatively with other sources of magic resistance."
   },
   {
-    "id": 132,
-    "displayName": "Divine Rapier Recipe",
-    "notFound": true
-  },
-  {
     "id": 133,
     "displayName": "Divine Rapier",
     "cost": 5600,
@@ -1964,11 +1774,6 @@
       }
     ],
     "notes": "If Divine Rapier is dropped and picked up by an enemy of its original owner, it cannot be dropped again except by death."
-  },
-  {
-    "id": 134,
-    "displayName": "Monkey King Bar Recipe",
-    "cost": 900
   },
   {
     "id": 135,
@@ -2000,11 +1805,6 @@
     ]
   },
   {
-    "id": 136,
-    "displayName": "Radiance Recipe",
-    "notFound": true
-  },
-  {
     "id": 137,
     "displayName": "Radiance",
     "cost": 4700,
@@ -2027,11 +1827,6 @@
         "description": "When active, scorches enemies for 60 magical damage per second. Illusions deal 35 magical damage per second.\n\nRadius: 650"
       }
     ]
-  },
-  {
-    "id": 138,
-    "displayName": "",
-    "notFound": true
   },
   {
     "id": 139,
@@ -2062,11 +1857,6 @@
     "notes": "Stacks diminishingly with other sources of Evasion."
   },
   {
-    "id": 140,
-    "displayName": "Daedalus Recipe",
-    "cost": 900
-  },
-  {
     "id": 141,
     "displayName": "Daedalus",
     "cost": 5100,
@@ -2085,11 +1875,6 @@
       }
     ],
     "notes": "Critical Strike does not work against buildings."
-  },
-  {
-    "id": 142,
-    "displayName": "Skull Basher Recipe",
-    "cost": 825
   },
   {
     "id": 143,
@@ -2115,11 +1900,6 @@
       }
     ],
     "notes": "Does not stack with other sources of Bash.\nThe following heroes cannot trigger Bash on this item: Spirit Breaker, Faceless Void, Slardar, and Kez while in Sai mode.\nDoes not grant Bash to Clones and Tempest Doubles."
-  },
-  {
-    "id": 144,
-    "displayName": "Battle Fury Recipe",
-    "cost": 400
   },
   {
     "id": 145,
@@ -2161,11 +1941,6 @@
       }
     ],
     "notes": "Cleave damage goes through spell immunity.\nIf multiple sources of Cleave are present, each Cleave's damage is applied separately."
-  },
-  {
-    "id": 146,
-    "displayName": "Manta Style Recipe",
-    "cost": 1550
   },
   {
     "id": 147,
@@ -2210,11 +1985,6 @@
     "notes": "Has a 0.1 second cast time during which you are invulnerable.\nMany effects are removed upon using Manta.\nYasha based movement speed bonuses from multiple items do not stack."
   },
   {
-    "id": 148,
-    "displayName": "Crystalys Recipe",
-    "cost": 200
-  },
-  {
     "id": 149,
     "displayName": "Crystalys",
     "cost": 2000,
@@ -2233,11 +2003,6 @@
       }
     ],
     "notes": "Critical Strike does not work against buildings."
-  },
-  {
-    "id": 150,
-    "displayName": "Armlet of Mordiggian Recipe",
-    "cost": 625
   },
   {
     "id": 151,
@@ -2302,11 +2067,6 @@
     "notes": "Has a 0.3 second fade time.\nIf the invisibility ends without attacking, the bonus damage is lost."
   },
   {
-    "id": 153,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 154,
     "displayName": "Sange and Yasha",
     "cost": 4200,
@@ -2350,11 +2110,6 @@
     "notes": "Yasha-based movement speed bonuses from multiple items do not stack."
   },
   {
-    "id": 155,
-    "displayName": "Satanic Recipe",
-    "notFound": true
-  },
-  {
     "id": 156,
     "displayName": "Satanic",
     "cost": 5050,
@@ -2390,11 +2145,6 @@
     ]
   },
   {
-    "id": 157,
-    "displayName": "Mjollnir Recipe",
-    "cost": 550
-  },
-  {
     "id": 158,
     "displayName": "Mjollnir",
     "cost": 5500,
@@ -2427,11 +2177,6 @@
     "notes": "Static Charge cannot trigger more than once per second.\nStatic Charge's shock deals magical damage centered on hero with the Static Charge. Static Charge's targets cannot be more than 900 range away.\nStatic Charge procs will not bounce to heroes that are invisible or hidden by Fog of War."
   },
   {
-    "id": 159,
-    "displayName": "Eye of Skadi Recipe",
-    "notFound": true
-  },
-  {
     "id": 160,
     "displayName": "Eye of Skadi",
     "cost": 5900,
@@ -2461,11 +2206,6 @@
     ]
   },
   {
-    "id": 161,
-    "displayName": "Sange Recipe",
-    "cost": 650
-  },
-  {
     "id": 162,
     "displayName": "Sange",
     "cost": 2100,
@@ -2486,11 +2226,6 @@
         "value": "16"
       }
     ]
-  },
-  {
-    "id": 163,
-    "displayName": "Helm of the Dominator Recipe",
-    "cost": 1125
   },
   {
     "id": 164,
@@ -2525,11 +2260,6 @@
     "notes": "Cannot dominate more than one unit at a time. If a new unit is dominated, the old one will die.\nCan also Dominate enemy lane creeps and summoned units.\nSelling Helm of the Dominator will cause dominated units to die."
   },
   {
-    "id": 165,
-    "displayName": "Maelstrom Recipe",
-    "notFound": true
-  },
-  {
     "id": 166,
     "displayName": "Maelstrom",
     "cost": 2950,
@@ -2552,11 +2282,6 @@
         "description": "Grants a 25% chance on attack to release a bolt of electricity that leaps between 4 targets within a 650 radius, dealing 110 magical damage to each. Lightning proc pierces evasion."
       }
     ]
-  },
-  {
-    "id": 167,
-    "displayName": "",
-    "notFound": true
   },
   {
     "id": 168,
@@ -2584,11 +2309,6 @@
     "notes": "Armor reduction works on buildings."
   },
   {
-    "id": 169,
-    "displayName": "Yasha Recipe",
-    "cost": 650
-  },
-  {
     "id": 170,
     "displayName": "Yasha",
     "cost": 2100,
@@ -2610,11 +2330,6 @@
       }
     ],
     "notes": "Yasha-based movement speed bonuses from multiple items do not stack."
-  },
-  {
-    "id": 171,
-    "displayName": "Mask of Madness Recipe",
-    "notFound": true
   },
   {
     "id": 172,
@@ -2646,11 +2361,6 @@
         "description": "Heals the attacker for a percentage of physical damage dealt."
       }
     ]
-  },
-  {
-    "id": 173,
-    "displayName": "Diffusal Blade Recipe",
-    "cost": 1050
   },
   {
     "id": 174,
@@ -2685,11 +2395,6 @@
     "notes": "Does not stack with other diffusal blades."
   },
   {
-    "id": 175,
-    "displayName": "Ethereal Blade Recipe",
-    "cost": 900
-  },
-  {
     "id": 176,
     "displayName": "Ethereal Blade",
     "cost": 5200,
@@ -2710,11 +2415,6 @@
       }
     ],
     "notes": "Shares cooldown with Ghost Scepter and its upgrades.\nEthereal units take -30% bonus magic damage."
-  },
-  {
-    "id": 177,
-    "displayName": "Soul Ring Recipe",
-    "cost": 350
   },
   {
     "id": 178,
@@ -2741,11 +2441,6 @@
       }
     ],
     "notes": "If this mana is not used before the duration ends, the extra mana is lost."
-  },
-  {
-    "id": 179,
-    "displayName": "Arcane Boots Recipe",
-    "cost": 325
   },
   {
     "id": 180,
@@ -2813,16 +2508,6 @@
     "notes": "Multiple sources of damage block do not stack."
   },
   {
-    "id": 183,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 184,
-    "displayName": "Drum of Endurance Recipe",
-    "cost": 525
-  },
-  {
     "id": 185,
     "displayName": "Drum of Endurance",
     "cost": 1625,
@@ -2853,11 +2538,6 @@
     ]
   },
   {
-    "id": 186,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 187,
     "displayName": "Medallion of Courage",
     "cost": 0,
@@ -2882,11 +2562,6 @@
         "description": "Turns the caster and all allied player-controlled units in a 1200 radius invisible, and grants 15% bonus movement speed for 45 seconds. \n\n While the caster is still disguised, any allies that come within 300 range of them will also get the buff applied to them. Each smoke can only be applied once to allies. \n\nAttacking or moving within 1025 range of an enemy hero or tower, will break the invisibility. \n\nDisguise grants invisibility that is immune to True Sight. \n\nSmoke of Deceit is usable from the backpack and has no cooldown when swapped into the main inventory."
       }
     ]
-  },
-  {
-    "id": 189,
-    "displayName": "Veil of Discord Recipe",
-    "cost": 350
   },
   {
     "id": 190,
@@ -2919,16 +2594,6 @@
       }
     ],
     "notes": "Spell Weakness does not stack with Bloodstone's Spell Weakness Aura."
-  },
-  {
-    "id": 191,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 192,
-    "displayName": "",
-    "notFound": true
   },
   {
     "id": 193,
@@ -2983,11 +2648,6 @@
     ]
   },
   {
-    "id": 195,
-    "displayName": "Recipe: Diffusal Blade (level 2)",
-    "notFound": true
-  },
-  {
     "id": 196,
     "displayName": "Diffusal Blade (level 2)",
     "cost": 3850,
@@ -3004,26 +2664,6 @@
       }
     ],
     "notes": "Does not stack with other manabreak abilities."
-  },
-  {
-    "id": 197,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 198,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 199,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 200,
-    "displayName": "",
-    "notFound": true
   },
   {
     "id": 201,
@@ -3174,11 +2814,6 @@
     "notes": "Instantly kills illusions.\nCast Range bonuses from Aether Lens and Dagon do not stack."
   },
   {
-    "id": 205,
-    "displayName": "Rod of Atos Recipe",
-    "cost": 250
-  },
-  {
     "id": 206,
     "displayName": "Rod of Atos",
     "cost": 2250,
@@ -3203,11 +2838,6 @@
         "manaCost": 100
       }
     ]
-  },
-  {
-    "id": 207,
-    "displayName": "Abyssal Blade Recipe",
-    "cost": 1275
   },
   {
     "id": 208,
@@ -3252,11 +2882,6 @@
     "notes": "The stun is melee range.\nDoes not stack with other bashes, and does not grant bash to Clones and Tempest Doubles.\nMultiple sources of damage block do not stack.\nThe following heroes cannot trigger Bash on this item: Spirit Breaker, Faceless Void, Slardar, and Kez while in Sai mode."
   },
   {
-    "id": 209,
-    "displayName": "Heaven's Halberd Recipe",
-    "cost": 450
-  },
-  {
     "id": 210,
     "displayName": "Heaven's Halberd",
     "cost": 3400,
@@ -3286,56 +2911,6 @@
         "manaCost": 25
       }
     ]
-  },
-  {
-    "id": 211,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 212,
-    "displayName": "Ring of Aquila",
-    "cost": null,
-    "bonuses": [
-      {
-        "key": "bonus_damage",
-        "display": "+ 3 Damage",
-        "value": "3"
-      },
-      {
-        "key": "bonus_strength",
-        "display": "+ 3 Strength",
-        "value": "3"
-      },
-      {
-        "key": "bonus_agility",
-        "display": "+ 9 Agility",
-        "value": "9"
-      },
-      {
-        "key": "bonus_intellect",
-        "display": "+ 3 Intelligence",
-        "value": "3"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Aquila Aura",
-        "description": "Grants 1 mana regeneration and 2 armor to nearby allies.\n\nRadius: 1200"
-      },
-      {
-        "type": "toggle",
-        "title": "Aura",
-        "description": "Deactivate to stop affecting non-hero units."
-      }
-    ],
-    "notes": "Multiple instances of Aquila Aura do not stack."
-  },
-  {
-    "id": 213,
-    "displayName": "Tranquil Boots Recipe",
-    "notFound": true
   },
   {
     "id": 214,
@@ -3406,11 +2981,6 @@
     "notes": "Hold Control to use on a nearby allied hero."
   },
   {
-    "id": 217,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 218,
     "displayName": "Observer and Sentry Wards",
     "cost": 50,
@@ -3446,11 +3016,6 @@
     "notes": "Hold Control to give one ward to an allied hero."
   },
   {
-    "id": 219,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 220,
     "displayName": "Boots of Travel 2",
     "cost": 4500,
@@ -3481,16 +3046,6 @@
     "hint": [
       "Movement speed bonuses from multiple pairs of boots do not stack."
     ]
-  },
-  {
-    "id": 221,
-    "displayName": "Lotus Orb Recipe",
-    "cost": 250
-  },
-  {
-    "id": 222,
-    "displayName": "Meteor Hammer Recipe",
-    "cost": 300
   },
   {
     "id": 223,
@@ -3532,11 +3087,6 @@
         "manaCost": 75
       }
     ]
-  },
-  {
-    "id": 224,
-    "displayName": "Nullifier Recipe",
-    "notFound": true
   },
   {
     "id": 225,
@@ -3612,16 +3162,6 @@
     "notes": "Targeted abilities from neutral items do not trigger Echo Shell."
   },
   {
-    "id": 227,
-    "displayName": "Solar Crest Recipe",
-    "cost": 500
-  },
-  {
-    "id": 228,
-    "displayName": "Octarine Core Recipe",
-    "cost": 200
-  },
-  {
     "id": 229,
     "displayName": "Solar Crest",
     "cost": 2575,
@@ -3662,11 +3202,6 @@
       }
     ],
     "notes": "Shares cooldown with Pavise."
-  },
-  {
-    "id": 230,
-    "displayName": "Guardian Greaves Recipe",
-    "cost": 1175
   },
   {
     "id": 231,
@@ -3736,16 +3271,6 @@
     "notes": "Cast Range bonuses from Aether Lens and Dagon do not stack."
   },
   {
-    "id": 233,
-    "displayName": "Aether Lens Recipe",
-    "cost": 775
-  },
-  {
-    "id": 234,
-    "displayName": "Dragon Lance Recipe",
-    "cost": 450
-  },
-  {
     "id": 235,
     "displayName": "Octarine Core",
     "cost": 4900,
@@ -3813,11 +3338,6 @@
         "description": "Instantly restores 85 health."
       }
     ]
-  },
-  {
-    "id": 238,
-    "displayName": "Iron Talon Recipe",
-    "cost": 125
   },
   {
     "id": 239,
@@ -3896,11 +3416,6 @@
     "notes": "Multiple sources of damage block do not stack.\nWhen the Guard buff is applied to ranged heroes, Guard blocks 25 less damage.\nGuard does not affect units that have been affected by Guard within Crimson Guard's cooldown."
   },
   {
-    "id": 243,
-    "displayName": "Crimson Guard Recipe",
-    "cost": 1050
-  },
-  {
     "id": 244,
     "displayName": "Wind Lace",
     "cost": 225,
@@ -3914,16 +3429,6 @@
     "hint": [
       "Bonuses from multiple Wind Laces do not stack."
     ]
-  },
-  {
-    "id": 245,
-    "displayName": "Bloodthorn Recipe",
-    "cost": 600
-  },
-  {
-    "id": 246,
-    "displayName": "",
-    "notFound": true
   },
   {
     "id": 247,
@@ -3953,11 +3458,6 @@
         "description": "Grants bonus night vision."
       }
     ]
-  },
-  {
-    "id": 248,
-    "displayName": "Silver Edge Recipe",
-    "cost": 250
   },
   {
     "id": 249,
@@ -4032,11 +3532,6 @@
     ]
   },
   {
-    "id": 251,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 252,
     "displayName": "Echo Sabre",
     "cost": 2700,
@@ -4066,11 +3561,6 @@
     ]
   },
   {
-    "id": 253,
-    "displayName": "Glimmer Cape Recipe",
-    "cost": 800
-  },
-  {
     "id": 254,
     "displayName": "Glimmer Cape",
     "cost": 2150,
@@ -4090,11 +3580,6 @@
         "manaCost": 125
       }
     ]
-  },
-  {
-    "id": 255,
-    "displayName": "Aeon Disk Recipe",
-    "cost": 1200
   },
   {
     "id": 256,
@@ -4136,11 +3621,6 @@
         "description": "Grants you 750 experience plus 150 per tome consumed by your team after the first two."
       }
     ]
-  },
-  {
-    "id": 258,
-    "displayName": "Kaya Recipe",
-    "cost": 650
   },
   {
     "id": 259,
@@ -4207,11 +3687,6 @@
     ]
   },
   {
-    "id": 262,
-    "displayName": "Hurricane Pike Recipe",
-    "cost": 350
-  },
-  {
     "id": 263,
     "displayName": "Hurricane Pike",
     "cost": 4450,
@@ -4274,11 +3749,6 @@
     "notes": "Uses at most one charge per damage instance."
   },
   {
-    "id": 266,
-    "displayName": "Spirit Vessel Recipe",
-    "cost": 900
-  },
-  {
     "id": 267,
     "displayName": "Spirit Vessel",
     "cost": 2725,
@@ -4315,11 +3785,6 @@
     "notes": "Empty vessels gain 2 charges.\nOnly the closest Spirit Vessel to the dying hero will gain a charge.\nIf the allied unit is attacked by an enemy hero or Roshan, the effect is lost.\nDoes not trigger spell block or spell reflect."
   },
   {
-    "id": 268,
-    "displayName": "Holy Locket Recipe",
-    "cost": 1340
-  },
-  {
     "id": 269,
     "displayName": "Holy Locket",
     "cost": 2250,
@@ -4349,11 +3814,6 @@
     ]
   },
   {
-    "id": 270,
-    "displayName": "Aghanim's Blessing Recipe",
-    "cost": 1600
-  },
-  {
     "id": 271,
     "displayName": "Aghanim's Blessing",
     "cost": 5800,
@@ -4364,11 +3824,6 @@
         "description": "Upgrades the ultimate, and some abilities, of all heroes."
       }
     ]
-  },
-  {
-    "id": 272,
-    "displayName": "Kaya and Sange Recipe",
-    "notFound": true
   },
   {
     "id": 273,
@@ -4411,21 +3866,6 @@
         "value": "25"
       }
     ]
-  },
-  {
-    "id": 274,
-    "displayName": "Yasha and Kaya Recipe",
-    "notFound": true
-  },
-  {
-    "id": 275,
-    "displayName": "Trident Recipe",
-    "cost": 1
-  },
-  {
-    "id": 276,
-    "displayName": "",
-    "notFound": true
   },
   {
     "id": 277,
@@ -4487,116 +3927,6 @@
     "cost": 100
   },
   {
-    "id": 287,
-    "displayName": "Keen Optic",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "cast_range_bonus",
-        "display": "+ 75 Cast Range",
-        "value": "75"
-      },
-      {
-        "key": "bonus_mana_regen",
-        "display": "+ 1.25 Mana Regeneration",
-        "value": "1.25"
-      }
-    ]
-  },
-  {
-    "id": 288,
-    "displayName": "Grove Bow",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Magic Amp",
-        "description": "Reduces magic resistance of the attacked enemy by 20%."
-      }
-    ]
-  },
-  {
-    "id": 289,
-    "displayName": "Quickening Charm",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_cooldown",
-        "display": "+ 10% Cooldown Reduction",
-        "value": "10"
-      },
-      {
-        "key": "bonus_health_regen",
-        "display": "+ 10 Health Regeneration",
-        "value": "10"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Cooldown Reduction",
-        "description": "Reduces the cooldown time of all spells and items."
-      }
-    ]
-  },
-  {
-    "id": 290,
-    "displayName": "Philosopher's Stone",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_gpm",
-        "display": "+GPM BONUS 75 / 100",
-        "value": "75 / 100"
-      },
-      {
-        "key": "bonus_mana",
-        "display": "+ 200 / 250 Mana",
-        "value": "200 / 250"
-      },
-      {
-        "key": "bonus_damage",
-        "display": "- -30 / -60 Attack Damage",
-        "value": "-30 / -60"
-      }
-    ]
-  },
-  {
-    "id": 291,
-    "displayName": "Force Boots",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_movement_speed",
-        "display": "+ 115 Movement Speed",
-        "value": "115"
-      },
-      {
-        "key": "hp_regen",
-        "display": "+ 30 Health Regeneration",
-        "value": "30"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Force",
-        "description": "Pushes the target 750 units in the direction they are facing. Dispels if cast on an ally.\n\nDispel Type: Basic Dispel",
-        "cooldown": 8,
-        "manaCost": 75
-      },
-      {
-        "type": "passive",
-        "title": "Speed Unlock",
-        "description": "Completely removes the speed limit for the wearer"
-      }
-    ],
-    "hint": [
-      "Movement speed bonuses from multiple pairs of boots do not stack."
-    ],
-    "notes": "Does not trigger spell block or spell reflect."
-  },
-  {
     "id": 292,
     "displayName": "Stygian Desolator",
     "cost": 0,
@@ -4608,83 +3938,6 @@
       }
     ],
     "notes": "Armor reduction works on buildings."
-  },
-  {
-    "id": 293,
-    "displayName": "Phoenix Ash",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Rebirth",
-        "description": "Lethal damage is prevented and instead the wearer is healed to half health and non-ultimate ability cooldowns reset. Gets consumed on trigger."
-      }
-    ]
-  },
-  {
-    "id": 294,
-    "displayName": "Seer Stone",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "cast_range_bonus",
-        "display": "+ 350 Cast Range",
-        "value": "350"
-      },
-      {
-        "key": "vision_bonus",
-        "display": "+ 350 Bonus Vision",
-        "value": "350"
-      },
-      {
-        "key": "mana_regen",
-        "display": "+ 10 Mana Regeneration",
-        "value": "10"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Reveal",
-        "description": "Reveal a target 800 area of the map for 6 seconds.",
-        "cooldown": 60
-      }
-    ]
-  },
-  {
-    "id": 295,
-    "displayName": "",
-    "cost": 0
-  },
-  {
-    "id": 297,
-    "displayName": "Vampire Fangs",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "attack_lifesteal",
-        "display": "+ 12 / 16 / 20% Lifesteal",
-        "value": "12 / 16 / 20"
-      },
-      {
-        "key": "spell_lifesteal",
-        "display": "+ 8 / 12 / 16% Spell Lifesteal",
-        "value": "8 / 12 / 16"
-      }
-    ]
-  },
-  {
-    "id": 298,
-    "displayName": "Craggy Coat",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Toughen Up",
-        "description": "Grants you an extra 6 bonus armor at the cost of -20 movement speed. Lasts 6 seconds.",
-        "cooldown": 12
-      }
-    ]
   },
   {
     "id": 299,
@@ -4702,81 +3955,6 @@
         "type": "use",
         "title": "Imbue",
         "description": "Instantly restores 250 health."
-      }
-    ]
-  },
-  {
-    "id": 300,
-    "displayName": "Timeless Relic",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "debuff_amp",
-        "display": "+ 10 / 15% Debuff Duration",
-        "value": "10 / 15"
-      },
-      {
-        "key": "spell_amp",
-        "display": "+ 10 / 20% Spell Amplification",
-        "value": "10 / 20"
-      }
-    ],
-    "hint": [
-      "Increases all outgoing spell damage and debuff duration."
-    ]
-  },
-  {
-    "id": 301,
-    "displayName": "Mirror Shield",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "all_stats",
-        "display": "+ 0 All Attributes",
-        "value": "0"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Echo Shield",
-        "description": "Block and reflect most targeted spells back to their caster once every 12 seconds."
-      }
-    ]
-  },
-  {
-    "id": 302,
-    "displayName": "Elixir",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "use",
-        "title": "Consume",
-        "description": "Restores 500 health and 250 mana to the target over 6 seconds.\n\nIf the unit is attacked by an enemy hero or Roshan, the effect is lost."
-      }
-    ]
-  },
-  {
-    "id": 303,
-    "displayName": "Ironwood Tree Recipe",
-    "notFound": true
-  },
-  {
-    "id": 304,
-    "displayName": "Ironwood Tree",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_all_stats",
-        "display": "+ 5 All Attributes",
-        "value": "5"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "use",
-        "title": "Plant Tree",
-        "description": "Targets the ground to plant a happy little tree that lasts for 20 seconds."
       }
     ]
   },
@@ -4805,34 +3983,6 @@
     ]
   },
   {
-    "id": 306,
-    "displayName": "Pupil's Gift",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "secondary_stats",
-        "display": "+SECONDARY STATS 15",
-        "value": "15"
-      }
-    ],
-    "hint": [
-      "Increases both non-primary attributes."
-    ],
-    "notes": "Grants two-thirds value to each attribute for Universal Heroes"
-  },
-  {
-    "id": 307,
-    "displayName": "Tome of Aghanim",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "use",
-        "title": "Consume",
-        "description": "Temporarily grants an allied target the Aghanim's Scepter buff for 3 minutes."
-      }
-    ]
-  },
-  {
     "id": 308,
     "displayName": "Repair Kit",
     "cost": 0,
@@ -4852,117 +4002,6 @@
     ]
   },
   {
-    "id": 309,
-    "displayName": "Mind Breaker",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Silence Strike",
-        "description": "The next attack silences the hit enemy for 1.5 seconds."
-      }
-    ]
-  },
-  {
-    "id": 310,
-    "displayName": "Third Eye",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_vision",
-        "display": "+BONUS VISION 300",
-        "value": "300"
-      },
-      {
-        "key": "bonus_all_stats",
-        "display": "+ 7 All Attributes",
-        "value": "7"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "True Sight",
-        "description": "Grants the ability to see invisible units and wards to any allied vision within 500 range of its carrier."
-      },
-      {
-        "type": "passive",
-        "title": "Charge Loss",
-        "description": "Loses a charge on death. After all charges are lost, the item disappears."
-      }
-    ]
-  },
-  {
-    "id": 311,
-    "displayName": "Spell Prism",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_cooldown",
-        "display": "+ 12% Cooldown Reduction",
-        "value": "12"
-      },
-      {
-        "key": "bonus_all_stats",
-        "display": "+ 5 All Attributes",
-        "value": "5"
-      },
-      {
-        "key": "mana_regen",
-        "display": "+ 2 Mana Regeneration",
-        "value": "2"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Cooldown Reduction",
-        "description": "Reduces the cooldown time of all spells and items."
-      }
-    ]
-  },
-  {
-    "id": 312,
-    "displayName": "",
-    "cost": 0
-  },
-  {
-    "id": 313,
-    "displayName": "Fusion Rune",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "use",
-        "title": "Consume",
-        "description": "Grants the target the bonuses of every Power Rune for 50 seconds. Each use consumes a charge."
-      }
-    ]
-  },
-  {
-    "id": 317,
-    "displayName": "Recipe: Fallen Sky",
-    "notFound": true
-  },
-  {
-    "id": 325,
-    "displayName": "Prince's Knife",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "projectile_bonus",
-        "display": "+ 60% Attack Projectile Speed",
-        "value": "60"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Hex Strike",
-        "description": "The next attack hexes the hit enemy into a frog for 1.5 seconds."
-      }
-    ]
-  },
-  {
     "id": 326,
     "displayName": "Spider Legs",
     "cost": 0,
@@ -4972,18 +4011,6 @@
         "title": "Skitter",
         "description": "Grants you 20% bonus movement speed, 50% improved turn rate, and free pathing for 14 seconds. Walking over trees causes them to be destroyed.",
         "cooldown": 20
-      }
-    ]
-  },
-  {
-    "id": 327,
-    "displayName": "Helm of the Undying",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Death Delay",
-        "description": "Survive for an extra 6 seconds after receiving a killing blow. If any enemy heroes dies within 1200 units, the death delay effect is extended by 5 seconds. The hero cannot attack buildings during Death Delay."
       }
     ]
   },
@@ -5000,31 +4027,6 @@
     ]
   },
   {
-    "id": 329,
-    "displayName": "Vambrace Recipe",
-    "notFound": true
-  },
-  {
-    "id": 330,
-    "displayName": "Witless Shako",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "max_health",
-        "display": "+ 1350 Max Health Increase",
-        "value": "1350"
-      },
-      {
-        "key": "max_mana",
-        "display": "- 400 Max Mana",
-        "value": "400"
-      }
-    ],
-    "hint": [
-      "Increases the wearer's max health, while reducing their max mana."
-    ]
-  },
-  {
     "id": 331,
     "displayName": "Vambrace",
     "cost": 0,
@@ -5033,169 +4035,6 @@
         "type": "active",
         "title": "Switch Attributes",
         "description": "Activate to switch the active attribute between Strength, Agility, and Intelligence. Vambrace provides +10 of the selected attribute and +4 of the other two attributes."
-      }
-    ]
-  },
-  {
-    "id": 334,
-    "displayName": "Imp Claw",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Critical Strike",
-        "description": "Empowers your next attack, causing it to be a critical strike dealing 130% damage."
-      }
-    ]
-  },
-  {
-    "id": 335,
-    "displayName": "Flicker",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_movement_speed",
-        "display": "+ 35 Movement Speed",
-        "value": "35"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Flicker",
-        "description": "Dispells debuffs and blinks you in a random forward direction for a random distance between 200 and 600. If cast within 3 seconds of receiving player damage, it will blink in place.\n\nDispel Type: Basic Dispel",
-        "cooldown": 5
-      }
-    ]
-  },
-  {
-    "id": 336,
-    "displayName": "Telescope",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "scan_cooldown_reduction",
-        "display": "SCAN COOLDOWN REDUCTION: 50%",
-        "value": "50"
-      },
-      {
-        "key": "attack_range",
-        "display": "AURA BONUS ATTACK RANGE (RANGED ONLY): 75",
-        "value": "75"
-      },
-      {
-        "key": "cast_range",
-        "display": "AURA BONUS CAST RANGE: 100",
-        "value": "100"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Prescient Aura",
-        "description": "Lowers Scan cooldown by 50% . Increases attack range (Ranged only) and cast range of allies in a 1200 unit radius."
-      }
-    ]
-  },
-  {
-    "id": 349,
-    "displayName": "Arcane Ring",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Replenish Mana",
-        "description": "Restores mana equal to 30 + 3% of the caster's maximum mana pool to all nearby allies. \n\n Radius: 1200",
-        "cooldown": 60
-      }
-    ]
-  },
-  {
-    "id": 354,
-    "displayName": "Ocean Heart",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "all_stats",
-        "display": "+ 5 All Attributes",
-        "value": "5"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Water Regen",
-        "description": "Provides you with 10 HP regen and 5 mana regen while in the river."
-      }
-    ]
-  },
-  {
-    "id": 355,
-    "displayName": "Broom Handle",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "melee_attack_range",
-        "display": "+ 50 Attack Range (Melee Only)",
-        "value": "50"
-      },
-      {
-        "key": "bonus_damage",
-        "display": "+ 8 Damage",
-        "value": "8"
-      },
-      {
-        "key": "bonus_armor",
-        "display": "+ 4 Armor",
-        "value": "4"
-      }
-    ]
-  },
-  {
-    "id": 356,
-    "displayName": "Trusty Shovel",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Dig",
-        "description": "Channel for 1 second. \nCan find a Bounty Rune, a Healing Salve, an Enchanted Mango, or a Kobold. If digging in a river, always digs up a Water Rune.",
-        "cooldown": 70
-      }
-    ],
-    "notes": "16% chance for a Bounty Rune.\n28% chance each for a Flask, an Enchanted Mango, or a kobold.\nThe same Trusty Shovel cannot find the same reward twice in a row."
-  },
-  {
-    "id": 357,
-    "displayName": "Nether Shawl",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_magic_resistance",
-        "display": "+ 20% Magic Resistance",
-        "value": "20"
-      },
-      {
-        "key": "bonus_spell_amp",
-        "display": "+ 6% Spell Amplification",
-        "value": "6"
-      },
-      {
-        "key": "bonus_armor",
-        "display": "- 2 Armor",
-        "value": "2"
-      }
-    ]
-  },
-  {
-    "id": 358,
-    "displayName": "Dragon Scale",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Afterburn",
-        "description": "Causes attacks to burn the enemy, dealing 22 damage per second for 3 seconds. Affects buildings."
       }
     ]
   },
@@ -5211,252 +4050,6 @@
         "cooldown": 25,
         "manaCost": 160
       }
-    ]
-  },
-  {
-    "id": 360,
-    "displayName": "Clumsy Net",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Ensnare",
-        "description": "Ensnares the target enemy and yourself for 1.75 seconds.",
-        "cooldown": 25
-      }
-    ]
-  },
-  {
-    "id": 361,
-    "displayName": "Enchanted Quiver",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Certain Strike",
-        "description": "Empowers your next attack with 250 bonus magical damage and True Strike. Ranged Attackers have +350 bonus range for the attack."
-      }
-    ]
-  },
-  {
-    "id": 362,
-    "displayName": "Ninja Gear",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Solitary Disguise",
-        "description": "Casts Smoke of Deceit on yourself only that lasts for up to 15 seconds.",
-        "cooldown": 60,
-        "manaCost": 100
-      }
-    ]
-  },
-  {
-    "id": 363,
-    "displayName": "Illusionist's Cape",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "illusion_duration",
-        "display": "IMAGE DURATION: 30",
-        "value": "30"
-      },
-      {
-        "key": "outgoing_damage_tooltip",
-        "display": "IMAGE DAMAGE: 50%",
-        "value": "50"
-      },
-      {
-        "key": "tooltip_incoming_damage_total_pct",
-        "display": "IMAGE DAMAGE TAKEN: 200%",
-        "value": "200"
-      },
-      {
-        "key": "bonus_agi",
-        "display": "+ 14 Agility",
-        "value": "14"
-      },
-      {
-        "key": "bonus_str",
-        "display": "+ 14 Strength",
-        "value": "14"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Create Illusion",
-        "description": "Creates an image under your control.",
-        "cooldown": 30
-      },
-      {
-        "type": "passive",
-        "title": "Illusion Mastery",
-        "description": "Increases outgoing damage of all units and illusions controlled by the hero by 6%."
-      }
-    ]
-  },
-  {
-    "id": 364,
-    "displayName": "Havoc Hammer",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_damage",
-        "display": "+ 16 Damage",
-        "value": "16"
-      },
-      {
-        "key": "bonus_strength",
-        "display": "+ 14 Strength",
-        "value": "14"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Havoc",
-        "description": "Pulls enemies in a 400 range around you, slowing them by 50% for 3 seconds and dealing 175 + 1.5x your str as magical damage.",
-        "cooldown": 10
-      }
-    ]
-  },
-  {
-    "id": 365,
-    "displayName": "Magic Lamp",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Rejuvenate",
-        "description": "When the wearer's health falls below 20%, they will receive a strong dispel and be healed for 1500 health.Dispel Type: Strong Dispel"
-      }
-    ]
-  },
-  {
-    "id": 366,
-    "displayName": "Apex",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "primary_stat",
-        "display": "+ 40 Primary Attribute",
-        "value": "40"
-      }
-    ],
-    "notes": "Grants +24 to each attribute for Universal Heroes."
-  },
-  {
-    "id": 367,
-    "displayName": "Ballista",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "attack_range_bonus",
-        "display": "+ 250 Attack Range (Ranged Only)",
-        "value": "250"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Knockback",
-        "description": "Knocks back enemies 50 distance and deals 50 pure damage with every attack."
-      }
-    ]
-  },
-  {
-    "id": 368,
-    "displayName": "Woodland Striders",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_movement_speed",
-        "display": "+ 140 Movement Speed",
-        "value": "140"
-      },
-      {
-        "key": "bonus_hp_regen",
-        "display": "+ 60 Health Regeneration",
-        "value": "60"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Woodland Stride",
-        "description": "Create a path of trees behind you for 3 seconds. Trees last up to 15 seconds.",
-        "cooldown": 20
-      },
-      {
-        "type": "passive",
-        "title": "Tree Walking",
-        "description": "Removes movement speed limit and allows free pathing through trees."
-      }
-    ],
-    "hint": [
-      "Movement speed bonuses from multiple pairs of boots do not stack."
-    ]
-  },
-  {
-    "id": 369,
-    "displayName": "Trident",
-    "cost": 6301,
-    "bonuses": [
-      {
-        "key": "bonus_strength",
-        "display": "+ 30 Strength",
-        "value": "30"
-      },
-      {
-        "key": "bonus_agility",
-        "display": "+ 30 Agility",
-        "value": "30"
-      },
-      {
-        "key": "bonus_intellect",
-        "display": "+ 30 Intelligence",
-        "value": "30"
-      },
-      {
-        "key": "status_resistance",
-        "display": "+ 30% Status Resistance",
-        "value": "30"
-      },
-      {
-        "key": "bonus_attack_speed",
-        "display": "+ 30 Attack Speed",
-        "value": "30"
-      },
-      {
-        "key": "movement_speed_percent_bonus",
-        "display": "+ 10% Movement Speed",
-        "value": "10"
-      },
-      {
-        "key": "hp_regen_amp",
-        "display": "+ 30% Health Regen and Lifesteal Amp",
-        "value": "30"
-      },
-      {
-        "key": "mana_regen_multiplier",
-        "display": "+ 30% Mana Regen Amplification",
-        "value": "30"
-      },
-      {
-        "key": "spell_amp",
-        "display": "+ 30% Spell Amplification",
-        "value": "30"
-      },
-      {
-        "key": "magic_damage_attack",
-        "display": "+ 30 Magic Damage Attack",
-        "value": "30"
-      }
-    ],
-    "hint": [
-      "Combines Sange, Yasha and Kaya together."
     ]
   },
   {
@@ -5487,81 +4080,6 @@
     ]
   },
   {
-    "id": 372,
-    "displayName": "Pirate Hat",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Plunder",
-        "description": "Steals 150 gold from enemy heroes that die within 2400 units. If the wearer is the killer, there is no range limit and an additional 400 gold is stolen."
-      },
-      {
-        "type": "passive",
-        "title": "Buried Treasure",
-        "description": "Gold loss on death reduced by 100%."
-      }
-    ]
-  },
-  {
-    "id": 373,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 374,
-    "displayName": "Ex Machina",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Reset Cooldowns",
-        "description": "Reset the cooldown on all items (except Refresher Orb).",
-        "cooldown": 60,
-        "manaCost": 350
-      }
-    ]
-  },
-  {
-    "id": 375,
-    "displayName": "Faded Broach",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_mana",
-        "display": "+ 150 Mana",
-        "value": "150"
-      },
-      {
-        "key": "bonus_movement_speed",
-        "display": "+ 15 Movement Speed",
-        "value": "15"
-      }
-    ]
-  },
-  {
-    "id": 376,
-    "displayName": "Paladin Sword",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_damage",
-        "display": "+ 16 Damage",
-        "value": "16"
-      },
-      {
-        "key": "bonus_lifesteal",
-        "display": "+ 16% Lifesteal",
-        "value": "16"
-      },
-      {
-        "key": "bonus_spell_lifesteal",
-        "display": "+ 8% Spell Lifesteal",
-        "value": "8"
-      }
-    ]
-  },
-  {
     "id": 377,
     "displayName": "Minotaur Horn",
     "cost": 0,
@@ -5571,69 +4089,6 @@
         "title": "Lesser Avatar",
         "description": "Applies a basic dispel. Grants 50% magic resistance and immunity to reflected and pure damage for 2s. For the duration of the effect, any negative effect from enemy spells has no effect.\n\nDispel Type: Basic Dispel",
         "cooldown": 40
-      }
-    ]
-  },
-  {
-    "id": 378,
-    "displayName": "Orb of Destruction",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "armor_reduction",
-        "display": "ARMOR REDUCTION: 2",
-        "value": "2"
-      },
-      {
-        "key": "slow_melee",
-        "display": "SLOW (MELEE): 8%",
-        "value": "8"
-      },
-      {
-        "key": "slow_range",
-        "display": "SLOW (RANGE): 4%",
-        "value": "4"
-      },
-      {
-        "key": "duration",
-        "display": "DURATION: 3",
-        "value": "3"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Impeding Corruption",
-        "description": "Attacks reduce the target's armor and movement speed. Slow amount varies based on whether the wearer is melee or ranged."
-      }
-    ]
-  },
-  {
-    "id": 379,
-    "displayName": "The Leveller",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Level",
-        "description": "Attacks deal 35% more damage to buildings."
-      }
-    ]
-  },
-  {
-    "id": 381,
-    "displayName": "Titan Sliver",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "base_attack_damage",
-        "display": "+ 15 / 25% Base Attack Damage",
-        "value": "15 / 25"
-      },
-      {
-        "key": "status_resistance",
-        "display": "+ 10 / 15% Status Resistance",
-        "value": "10 / 15"
       }
     ]
   },
@@ -5668,11 +4123,6 @@
         "value": "35"
       }
     ]
-  },
-  {
-    "id": 533,
-    "displayName": "Witch Blade Recipe",
-    "cost": 300
   },
   {
     "id": 534,
@@ -5727,11 +4177,6 @@
     "notes": "Damage done by this item is considered reflected damage. Reflected damage does not provide any lifesteal and cannot be reflected."
   },
   {
-    "id": 566,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 569,
     "displayName": "Orb of Corrosion",
     "cost": 1050,
@@ -5752,46 +4197,6 @@
     "notes": "Armor reduction does not stack with its components, Desolator, or Stygian Desolator."
   },
   {
-    "id": 570,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 571,
-    "displayName": "Trickster Cloak",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Cloak",
-        "description": "Causes you to become invisible for 6 seconds.",
-        "cooldown": 25
-      }
-    ]
-  },
-  {
-    "id": 573,
-    "displayName": "Elven Tunic",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "attack_speed",
-        "display": "+ 26 Attack Speed",
-        "value": "26"
-      },
-      {
-        "key": "evasion",
-        "display": "+ 16% Evasion",
-        "value": "16"
-      },
-      {
-        "key": "movment",
-        "display": "+ 7% Movement Speed",
-        "value": "7"
-      }
-    ]
-  },
-  {
     "id": 574,
     "displayName": "Cloak of Flames",
     "cost": 0,
@@ -5802,16 +4207,6 @@
         "description": "Burns enemy units in a 375 unit radius for 40 damage per second. Illusions deal 25 damage per second."
       }
     ]
-  },
-  {
-    "id": 575,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 576,
-    "displayName": "",
-    "notFound": true
   },
   {
     "id": 577,
@@ -5834,16 +4229,6 @@
     "notes": "Grants 1/3rd of the value to each attribute for Universal Heroes."
   },
   {
-    "id": 578,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 582,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 585,
     "displayName": "Stormcrafter",
     "cost": 0,
@@ -5852,33 +4237,6 @@
         "type": "passive",
         "title": "Bottled Lightning",
         "description": "Zaps 2 enemy targets within 700 range, dealing 70 damage and a 40% slow for 0.4 seconds."
-      }
-    ]
-  },
-  {
-    "id": 588,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 589,
-    "displayName": "Fairy's Trinket",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_health",
-        "display": "+ 50 Health",
-        "value": "50"
-      },
-      {
-        "key": "spell_amp",
-        "display": "+ 5% Spell Amplification",
-        "value": "5"
-      },
-      {
-        "key": "manacost_reduction",
-        "display": "+ 5% Manacost Reduction",
-        "value": "5"
       }
     ]
   },
@@ -5917,11 +4275,6 @@
     ]
   },
   {
-    "id": 597,
-    "displayName": "Mage Slayer Recipe",
-    "notFound": true
-  },
-  {
     "id": 598,
     "displayName": "Mage Slayer",
     "cost": 3100,
@@ -5954,11 +4307,6 @@
         "description": "Places a debuff when you attack enemies, dealing 40 physical damage per second and causing them to do 40% less spell damage for 3 seconds."
       }
     ]
-  },
-  {
-    "id": 599,
-    "displayName": "Falcon Blade Recipe",
-    "cost": 250
   },
   {
     "id": 600,
@@ -6024,21 +4372,6 @@
     "notes": "Self-casting will cause you to teleport in the direction of your team's fountain."
   },
   {
-    "id": 606,
-    "displayName": "Arcane Blink Recipe",
-    "cost": 1750
-  },
-  {
-    "id": 607,
-    "displayName": "Swift Blink Recipe",
-    "cost": 1750
-  },
-  {
-    "id": 608,
-    "displayName": "Overwhelming Blink Recipe",
-    "cost": 1750
-  },
-  {
     "id": 609,
     "displayName": "Aghanim's Shard",
     "cost": 1400,
@@ -6083,16 +4416,6 @@
     "notes": "Cyclone can dispel some buffs and debuffs.\nWhen cast on yourself, the cyclone can be moved anywhere at a speed of 360.\nCyclone duration is unaffected by status resistance."
   },
   {
-    "id": 612,
-    "displayName": "Wind Waker Recipe",
-    "cost": 1400
-  },
-  {
-    "id": 633,
-    "displayName": "Helm of the Overlord Recipe",
-    "cost": 300
-  },
-  {
     "id": 635,
     "displayName": "Helm of the Overlord",
     "cost": 5650,
@@ -6125,55 +4448,6 @@
     "notes": "Can also Dominate enemy lane creeps and summoned units.\nSelling will cause dominated units to die."
   },
   {
-    "id": 637,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 638,
-    "displayName": "Penta-Edged Sword",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "damage",
-        "display": "+ 45 Damage",
-        "value": "45"
-      },
-      {
-        "key": "melee_attack_range",
-        "display": "+ 100 Attack Range (Melee Only)",
-        "value": "100"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Maim",
-        "description": "Each attack has a 25% chance to reduce enemy hero movement speed by 20% and attack speed by 60 for 3 seconds."
-      }
-    ]
-  },
-  {
-    "id": 640,
-    "displayName": "Orb of Corrosion Recipe",
-    "notFound": true
-  },
-  {
-    "id": 653,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 655,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 674,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 675,
     "displayName": "Psychic Headband",
     "cost": 0,
@@ -6186,112 +4460,6 @@
       }
     ],
     "notes": "Does not trigger spell block or spell reflect."
-  },
-  {
-    "id": 676,
-    "displayName": "Ceremonial Robe",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Ceremonial Aura",
-        "description": "Lowers enemy Status Resistance by 10% and Magic Resistance by 10%.\n\nRadius: 1200"
-      }
-    ]
-  },
-  {
-    "id": 677,
-    "displayName": "Book of Shadows",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Shadows",
-        "description": "Target an enemy, ally or self. Causes the target to become untargetable from enemies to the caster, but also silenced, muted and disarmed for 4 seconds. Applies a Basic Dispel.",
-        "cooldown": 8
-      }
-    ],
-    "hint": [
-      "Dispel Type: Basic Dispel"
-    ],
-    "notes": "Does not trigger spell block or spell reflect."
-  },
-  {
-    "id": 678,
-    "displayName": "Giant's Ring",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "model_scale",
-        "display": "+ 60% Model Scale",
-        "value": "60"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Giant's Foot",
-        "description": "Can path over any terrain and deals 100% of your strength per second to units you are standing ontop of."
-      }
-    ]
-  },
-  {
-    "id": 679,
-    "displayName": "Shadow of Vengeance",
-    "notFound": true
-  },
-  {
-    "id": 680,
-    "displayName": "Bullwhip",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Whip",
-        "description": "Grants 25% movement speed when cast on allies, and slows by 25% when cast on enemies. Lasts 4 seconds.",
-        "cooldown": 11
-      }
-    ],
-    "notes": "Does not trigger spell block or spell reflect."
-  },
-  {
-    "id": 686,
-    "displayName": "Quicksilver Amulet",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "base_movement",
-        "display": "+ 4% Movement Speed",
-        "value": "4"
-      },
-      {
-        "key": "base_attack",
-        "display": "+ 18 Attack Speed",
-        "value": "18"
-      },
-      {
-        "key": "anim_increase",
-        "display": "+ 40% Attack Animation Speed",
-        "value": "40"
-      },
-      {
-        "key": "projectile_increase",
-        "display": "+ 40% Attack Projectile Speed",
-        "value": "40"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Quicksilver",
-        "description": "Grants you a bonus 5% movement speed and 20 attack speed anytime one of your abilities are on cooldown."
-      }
-    ]
-  },
-  {
-    "id": 691,
-    "displayName": "Eternal Shroud Recipe",
-    "cost": 900
   },
   {
     "id": 692,
@@ -6352,120 +4520,6 @@
     ]
   },
   {
-    "id": 731,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 824,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 825,
-    "displayName": "Ascetic's Cap",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Endurance",
-        "description": "Whenever a debuff would be applied to the owner, grant %status_resistance% Status resistance and %slow_resistance%% Slow Resistance for %uration% seconds."
-      }
-    ]
-  },
-  {
-    "id": 826,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 827,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 828,
-    "displayName": "Brigand's Blade",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Dark Mercy",
-        "description": "Your attacks deal 3 more damage to enemies for each 7% HP they are missing."
-      }
-    ]
-  },
-  {
-    "id": 829,
-    "displayName": "Arcanist's Armor",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Mega Shield",
-        "description": "Force Field Aura Grants 25% Damage Reflection for 5 seconds.",
-        "cooldown": 35
-      },
-      {
-        "type": "passive",
-        "title": "Shield",
-        "description": "Grants +4 armor and +8% Magic Resistance to all other allies within 1200 radius."
-      }
-    ],
-    "notes": "Damage done by this item is considered reflected damage. Reflected damage does not provide any lifesteal and cannot be reflected."
-  },
-  {
-    "id": 833,
-    "displayName": "Bruiser's Maul Recipe",
-    "notFound": true
-  },
-  {
-    "id": 834,
-    "displayName": "Blast Rig",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_armor",
-        "display": "+ 7 Armor",
-        "value": "7"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Hair Trigger",
-        "description": "The next time you get attacked by a hero within 400 range, explode dealing 250 damage to all enemies within a 400 radius and causing them to miss 100% of their attacks for 2 seconds."
-      }
-    ]
-  },
-  {
-    "id": 835,
-    "displayName": "Fae Grenade",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "movespeed",
-        "display": "+ 20 Movement Speed",
-        "value": "20"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Shadow Brand",
-        "description": "Throws a Mark towards an enemy within 900 range applying a debuff that deals 40 damage every second and provides vision of the unit for 7 seconds.",
-        "cooldown": 20,
-        "manaCost": 25
-      }
-    ],
-    "notes": "Does not trigger spell block or spell reflect."
-  },
-  {
-    "id": 836,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 837,
     "displayName": "Witchbane",
     "cost": 0,
@@ -6485,24 +4539,6 @@
     ]
   },
   {
-    "id": 838,
-    "displayName": "Pig Pole",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Pig, Out!",
-        "description": "Turns your hero into a critter for 3 seconds and gives them +20% Movement Speed.",
-        "cooldown": 20
-      }
-    ]
-  },
-  {
-    "id": 839,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 840,
     "displayName": "Tumbler's Toy",
     "cost": 0,
@@ -6516,39 +4552,9 @@
     ]
   },
   {
-    "id": 849,
-    "displayName": "",
-    "cost": 0
-  },
-  {
-    "id": 859,
-    "displayName": "Voidwalker Scythe Recipe",
-    "notFound": true
-  },
-  {
-    "id": 904,
-    "displayName": "Voidwalker Scythe",
-    "notFound": true
-  },
-  {
-    "id": 906,
-    "displayName": "Bruiser's Maul",
-    "notFound": true
-  },
-  {
-    "id": 907,
-    "displayName": "",
-    "cost": 400
-  },
-  {
     "id": 908,
     "displayName": "Wraith Pact",
     "cost": 3800
-  },
-  {
-    "id": 910,
-    "displayName": "Revenant's Brooch Recipe",
-    "cost": 650
   },
   {
     "id": 911,
@@ -6574,21 +4580,6 @@
       }
     ],
     "notes": "Counts as a Critical Strike for purposes of stacking with other sources of Critical Strike.\nPhantom Critical does not work against buildings."
-  },
-  {
-    "id": 928,
-    "displayName": "\u0000",
-    "notFound": true
-  },
-  {
-    "id": 929,
-    "displayName": "Eagle Eye",
-    "notFound": true
-  },
-  {
-    "id": 930,
-    "displayName": "Boots of Bearing Recipe",
-    "notFound": true
   },
   {
     "id": 931,
@@ -6634,62 +4625,6 @@
     ]
   },
   {
-    "id": 938,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 939,
-    "displayName": "Harpoon",
-    "cost": 4700,
-    "bonuses": [
-      {
-        "key": "bonus_damage",
-        "display": "+ 25 Damage",
-        "value": "25"
-      },
-      {
-        "key": "bonus_strength",
-        "display": "+ 25 Strength",
-        "value": "25"
-      },
-      {
-        "key": "bonus_agility",
-        "display": "+ 10 Agility",
-        "value": "10"
-      },
-      {
-        "key": "bonus_intellect",
-        "display": "+ 10 Intelligence",
-        "value": "10"
-      },
-      {
-        "key": "bonus_mana_regen",
-        "display": "+ 2.0 Mana Regeneration",
-        "value": "2.0"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Draw Forth",
-        "description": "When targeting an enemy, fire a harpoon at them, that pulls you and the target closer together, up to 35% of the distance between you and your target. If the caster is melee, the hero and target are always pulled to within melee distance of each other. Targeting a tree always pulls you all the way to that tree.",
-        "cooldown": 19,
-        "manaCost": 50
-      },
-      {
-        "type": "passive",
-        "title": "Echo Strike",
-        "description": "Causes melee attacks to attack twice in quick succession. The double attacks apply a 100% movement slow for 1 seconds on the first strike. Echo Strike cooldown: 5s"
-      }
-    ]
-  },
-  {
-    "id": 940,
-    "displayName": "Wand of the Brine",
-    "notFound": true
-  },
-  {
     "id": 945,
     "displayName": "Seeds of Serenity",
     "cost": 0,
@@ -6699,25 +4634,6 @@
         "title": "Verdurous Dale",
         "description": "Target the ground with a 400 radius. Provides health regeneration to all allied units while they are in the area of effect equal to 8 + 25% of the caster's health regeneration at the time of casting. Lasts 8 seconds.",
         "cooldown": 35
-      }
-    ]
-  },
-  {
-    "id": 946,
-    "displayName": "Lance of Pursuit",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_mana",
-        "display": "+ 200 Mana",
-        "value": "200"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Hound",
-        "description": "Attacking from behind slows enemies by 16% (8% if Ranged) and deals 20 more damage. Slow lasts 2 second(s)."
       }
     ]
   },
@@ -6734,25 +4650,6 @@
     ]
   },
   {
-    "id": 948,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 949,
-    "displayName": "Ogre Seal Totem",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Ogre Seal Flop",
-        "description": "Flop forward like an ogre seal 2 times, dealing 250 damage and slowing enemies in a 275 radius by -100% for 1.5 second on each bounce. 400 bounce distance.",
-        "cooldown": 40,
-        "manaCost": 25
-      }
-    ]
-  },
-  {
     "id": 950,
     "displayName": "Defiant Shell",
     "cost": 0,
@@ -6763,63 +4660,6 @@
         "description": "When attacked, the hero counter-attacks a target within their attack range for 80% of their regular attack damage."
       }
     ]
-  },
-  {
-    "id": 964,
-    "displayName": "Diffusal Blade",
-    "notFound": true
-  },
-  {
-    "id": 965,
-    "displayName": "\u0000",
-    "notFound": true
-  },
-  {
-    "id": 968,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 969,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 990,
-    "displayName": "Eye of the Vizier",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "cast_range_bonus",
-        "display": "+ 125 / 135 Cast Range",
-        "value": "125 / 135"
-      },
-      {
-        "key": "bonus_mana_regen",
-        "display": "+ 1 / 1.5 Mana Regeneration",
-        "value": "1 / 1.5"
-      },
-      {
-        "key": "mana_reduction_pct",
-        "display": "- 15% Max Mana",
-        "value": "15"
-      }
-    ]
-  },
-  {
-    "id": 998,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 1000,
-    "displayName": "",
-    "cost": 0
-  },
-  {
-    "id": 1017,
-    "displayName": "",
-    "notFound": true
   },
   {
     "id": 1021,
@@ -6860,16 +4700,6 @@
     "id": 1028,
     "displayName": "Tombstone",
     "cost": 0
-  },
-  {
-    "id": 1029,
-    "displayName": "",
-    "cost": null
-  },
-  {
-    "id": 1030,
-    "displayName": "Pocket Tower",
-    "cost": null
   },
   {
     "id": 1032,
@@ -6926,68 +4756,6 @@
     ]
   },
   {
-    "id": 1090,
-    "displayName": "Mercy & Grace",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_cast_pct",
-        "display": "BONUS CAST RANGE 100%",
-        "value": "100"
-      },
-      {
-        "key": "bonus_spell_amp",
-        "display": "SPELL AMPLIFICATION 100%",
-        "value": "100"
-      },
-      {
-        "key": "health_pct_penalty",
-        "display": " 70% HEALTH PENALTY",
-        "value": "70"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Dead Shot",
-        "description": "Fires a ghostly bullet at an enemy unit or tree. When the bullet strikes it will deal 300 damage and slow the target by -100% for 0.5 seconds, then ricochet in the vector-targeted direction. The ricochet will damage all units that it passes through, stopping when it hits a hero. Heroes hit by the ricochet will be feared for 2 seconds in the direction of the shot.",
-        "cooldown": 10,
-        "manaCost": 160
-      }
-    ],
-    "notes": "Feared enemies are phased and unslowable.\nThe ricochet will travel 1x Dead Shot's cast range."
-  },
-  {
-    "id": 1091,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 1092,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 1093,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 1094,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 1095,
-    "displayName": "Lunar Crest",
-    "notFound": true
-  },
-  {
-    "id": 1096,
-    "displayName": "Disperser Recipe",
-    "cost": 800
-  },
-  {
     "id": 1097,
     "displayName": "Disperser",
     "cost": 6100,
@@ -7017,31 +4785,6 @@
         "description": "Each attack burns 40 mana from the target, and deals 1 physical damage per burned mana. \n\nIllusions do not burn mana."
       }
     ]
-  },
-  {
-    "id": 1098,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 1099,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 1100,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 1101,
-    "displayName": "Harpoon Recipe",
-    "cost": 1000
-  },
-  {
-    "id": 1106,
-    "displayName": "Phylactery Recipe",
-    "cost": 200
   },
   {
     "id": 1107,
@@ -7104,18 +4847,6 @@
     ]
   },
   {
-    "id": 1124,
-    "displayName": "Spark of Courage",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Courage",
-        "description": "Provides 10 damage when the hero is above 50% Health, and 5 armor when they are below that threshold."
-      }
-    ]
-  },
-  {
     "id": 1125,
     "displayName": "Cornucopia",
     "cost": 1200,
@@ -7136,11 +4867,6 @@
         "value": "7"
       }
     ]
-  },
-  {
-    "id": 1127,
-    "displayName": "Pavise Recipe",
-    "cost": 675
   },
   {
     "id": 1128,
@@ -7186,124 +4912,6 @@
     ]
   },
   {
-    "id": 1156,
-    "displayName": "Ancient Guardian",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_damage",
-        "display": "+ 50 Damage",
-        "value": "50"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Ancient Power",
-        "description": "Grants 50 extra bonus damage as long as the unit is within 2000 range of an ancient."
-      }
-    ]
-  },
-  {
-    "id": 1157,
-    "displayName": "Safety Bubble",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Bubbled Up",
-        "description": "Equipped Hero has a 100 HP Barrier against enemy damage. Barrier fully regenerates after not receiving damage for 8 seconds. Self-inflicted damage bypasses the barrier."
-      }
-    ]
-  },
-  {
-    "id": 1158,
-    "displayName": "Whisper of the Dread",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Tunnel Vision",
-        "description": "Equipped Hero has their daytime vision reduced by 15% but their Spell damage increased by 10%."
-      }
-    ]
-  },
-  {
-    "id": 1159,
-    "displayName": "Nemesis Curse",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Glass Cannon",
-        "description": "Hero takes 6% more damage from all sources."
-      },
-      {
-        "type": "passive",
-        "title": "Glassify",
-        "description": "When attacking a hero, apply a debuff increasing the damage received by that hero by 12% for 5 seconds. Only one target can be affected by Glassify at the same time."
-      }
-    ]
-  },
-  {
-    "id": 1160,
-    "displayName": "Aviana's Feather",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "evasion",
-        "display": "+ 25% Evasion",
-        "value": "25"
-      },
-      {
-        "key": "move_speed",
-        "display": "+ 30 Movement Speed",
-        "value": "30"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Free Bird",
-        "description": "When equipped hero is below 30% HP, they gain flying movement."
-      }
-    ]
-  },
-  {
-    "id": 1161,
-    "displayName": "Unwavering Condition",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "magic_resist",
-        "display": "+ 95% Magic Resistance",
-        "value": "95"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Unwavering",
-        "description": "Hero's Max Health is set to 1800 and can't be altered by other effects or attributes."
-      }
-    ]
-  },
-  {
-    "id": 1163,
-    "displayName": null,
-    "notFound": true
-  },
-  {
-    "id": 1164,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 1167,
-    "displayName": "Light Collector",
-    "cost": 0
-  },
-  {
     "id": 1168,
     "displayName": "Rattlecage",
     "cost": 0,
@@ -7315,26 +4923,6 @@
       }
     ],
     "notes": "Damage done by this item is considered reflected damage. Reflected damage does not provide any lifesteal and cannot be reflected."
-  },
-  {
-    "id": 1440,
-    "displayName": "Black Grimoire",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "use",
-        "title": "Profane Knowledge",
-        "description": "Hero kills and assists empower the Black Grimoire, granting it charges. Right-click to consume and grant 200 experience per charge. Starts on cooldown. \nThis item cannot be dropped."
-      }
-    ]
-  },
-  {
-    "id": 1441,
-    "displayName": "Gris-Gris",
-    "cost": 0,
-    "hint": [
-      "This item that cannot be dropped or placed in the backpack but can be put into normal inventory slots. When the owner dies, 100% of the gold lost from death is added to the item, and will be refunded when the item is consumed. Right-click to consume and permanently remove the item."
-    ]
   },
   {
     "id": 1466,
@@ -7374,11 +4962,6 @@
     "notes": "AoE bonuses from multiple Chasm Stones or its upgrades do not stack."
   },
   {
-    "id": 1565,
-    "displayName": "Gleipnir Recipe",
-    "cost": 400
-  },
-  {
     "id": 1575,
     "displayName": "Orb of Frost",
     "cost": 300,
@@ -7387,379 +4970,6 @@
         "type": "passive",
         "title": "Frost",
         "description": "Your attacks slow the target's movement by -13% (-6% against melee targets), and reduces Health Restoration by 13%. Lasts for 3 seconds."
-      }
-    ]
-  },
-  {
-    "id": 1576,
-    "displayName": "Vast",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "attack_range",
-        "display": "+ 60 / 90 / 120 Attack Range (Melee & Ranged)",
-        "value": "60 / 90 / 120"
-      },
-      {
-        "key": "bonus_damage",
-        "display": "+ 6 / 10 / 14 Damage",
-        "value": "6 / 10 / 14"
-      },
-      {
-        "key": "bonus_armor",
-        "display": "- -4 / -6 / -8 Armor",
-        "value": "-4 / -6 / -8"
-      }
-    ]
-  },
-  {
-    "id": 1577,
-    "displayName": "Quickened",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "movement_speed",
-        "display": "+ 15 / 20 / 25 / 30 Movement Speed",
-        "value": "15 / 20 / 25 / 30"
-      },
-      {
-        "key": "max_mana",
-        "display": "+ 0 / 100 / 160 / 220 Mana",
-        "value": "0 / 100 / 160 / 220"
-      },
-      {
-        "key": "evasion",
-        "display": "+ 0 / 0 / 0 / 15% Evasion",
-        "value": "0 / 0 / 0 / 15"
-      }
-    ]
-  },
-  {
-    "id": 1578,
-    "displayName": "Accursed",
-    "notFound": true
-  },
-  {
-    "id": 1579,
-    "displayName": "Restorative",
-    "notFound": true
-  },
-  {
-    "id": 1580,
-    "displayName": "Elusive",
-    "notFound": true
-  },
-  {
-    "id": 1581,
-    "displayName": "Audacious",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "attack_speed",
-        "display": "+ 100 Attack Speed",
-        "value": "100"
-      },
-      {
-        "key": "magic_damage",
-        "display": "+ 80 Magic Attack Damage",
-        "value": "80"
-      },
-      {
-        "key": "incoming_damage",
-        "display": "+ 10% Incoming Damage",
-        "value": "10"
-      }
-    ]
-  },
-  {
-    "id": 1582,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 1583,
-    "displayName": "Mystical",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "mana_regen",
-        "display": "+ 0.8 / 1.6 / 2.4 / 3.2 Mana Regeneration",
-        "value": "0.8 / 1.6 / 2.4 / 3.2"
-      },
-      {
-        "key": "magic_res",
-        "display": "+ 0 / 10 / 13 / 16% Magic Resistance",
-        "value": "0 / 10 / 13 / 16"
-      },
-      {
-        "key": "manacost_reduction",
-        "display": "+ 0 / 0 / 0 / 15% Mana Cost/Mana Loss Reduction",
-        "value": "0 / 0 / 0 / 15"
-      }
-    ]
-  },
-  {
-    "id": 1584,
-    "displayName": "Alert",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_attack_speed",
-        "display": "+ 7 / 15 / 23 / 31 Attack Speed",
-        "value": "7 / 15 / 23 / 31"
-      },
-      {
-        "key": "bonus_night_vision",
-        "display": "+ 0 / 150 / 225 / 300 Bonus Night Vision",
-        "value": "0 / 150 / 225 / 300"
-      },
-      {
-        "key": "bonus_attack_range",
-        "display": "+ 0 / 0 / 0 / 100 Attack Range (Melee & Ranged)",
-        "value": "0 / 0 / 0 / 100"
-      }
-    ]
-  },
-  {
-    "id": 1585,
-    "displayName": "Brawny",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "health_bonus",
-        "display": "+ 110 / 150 / 190 / 230 Health",
-        "value": "110 / 150 / 190 / 230"
-      },
-      {
-        "key": "health_regen",
-        "display": "+ 0 / 3 / 6 / 9 Health Regeneration",
-        "value": "0 / 3 / 6 / 9"
-      },
-      {
-        "key": "slow_resist",
-        "display": "+ 0 / 0 / 0 / 25% Slow Resistance",
-        "value": "0 / 0 / 0 / 25"
-      }
-    ]
-  },
-  {
-    "id": 1586,
-    "displayName": "Tough",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_damage",
-        "display": "+ 7 / 10 / 13 / 16 Damage",
-        "value": "7 / 10 / 13 / 16"
-      },
-      {
-        "key": "armor",
-        "display": "+ 0 / 4 / 6 / 8 Armor",
-        "value": "0 / 4 / 6 / 8"
-      },
-      {
-        "key": "knockback_resist",
-        "display": "+ 0 / 0 / 0 / 40% Knockback Resistance",
-        "value": "0 / 0 / 0 / 40"
-      }
-    ]
-  },
-  {
-    "id": 1587,
-    "displayName": "Feverish",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "cooldown_reduction",
-        "display": "+ 15% Cooldown Reduction",
-        "value": "15"
-      },
-      {
-        "key": "cost_increase",
-        "display": "+ 7% Mana Cost/Mana Loss Increase",
-        "value": "7"
-      }
-    ]
-  },
-  {
-    "id": 1588,
-    "displayName": "Fleetfooted",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "movespeed",
-        "display": "+ 115 Movement Speed",
-        "value": "115"
-      }
-    ],
-    "notes": "Does not stack with Movement Speed bonuses from boots"
-  },
-  {
-    "id": 1589,
-    "displayName": "Crude",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "health_restoration",
-        "display": "+ 10 / 15 / 20% Health Restoration",
-        "value": "10 / 15 / 20"
-      },
-      {
-        "key": "bat_reduce",
-        "display": "- 8 / 12 / 16% Base Attack Time",
-        "value": "8 / 12 / 16"
-      },
-      {
-        "key": "intelligence_pct",
-        "display": "- -6% Intelligence",
-        "value": "-6"
-      }
-    ]
-  },
-  {
-    "id": 1590,
-    "displayName": "Boundless",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_attack_range",
-        "display": "+ 150 Attack Range (Melee & Ranged)",
-        "value": "150"
-      },
-      {
-        "key": "bonus_cast_range",
-        "display": "+ 275 Cast Range",
-        "value": "275"
-      }
-    ]
-  },
-  {
-    "id": 1591,
-    "displayName": "Wise",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "max_mana_pct",
-        "display": "+ 15% Max Mana",
-        "value": "15"
-      }
-    ]
-  },
-  {
-    "id": 1592,
-    "displayName": "Timeless",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "debuff_amp",
-        "display": "+ 8 / 15% Debuff Duration",
-        "value": "8 / 15"
-      },
-      {
-        "key": "spell_amp",
-        "display": "+ 6 / 16% Spell Amplification",
-        "value": "6 / 16"
-      }
-    ]
-  },
-  {
-    "id": 1593,
-    "displayName": "Greedy",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_gpm",
-        "display": "+GPM BONUS 75 / 100",
-        "value": "75 / 100"
-      },
-      {
-        "key": "bonus_mana",
-        "display": "+ 200 / 250 Mana",
-        "value": "200 / 250"
-      },
-      {
-        "key": "bonus_damage",
-        "display": "- -30 / -60 Attack Damage",
-        "value": "-30 / -60"
-      }
-    ]
-  },
-  {
-    "id": 1594,
-    "displayName": "Vampiric",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "attack_lifesteal",
-        "display": "+ 30% Lifesteal",
-        "value": "30"
-      },
-      {
-        "key": "spell_lifesteal",
-        "display": "+ 20% Spell Lifesteal",
-        "value": "20"
-      },
-      {
-        "key": "bonus_night_vision",
-        "display": "+ 300 Night Vision",
-        "value": "300"
-      }
-    ]
-  },
-  {
-    "id": 1595,
-    "displayName": "Keen-eyed",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "cast_range_bonus",
-        "display": "+ 125 / 135 / 145 Cast Range",
-        "value": "125 / 135 / 145"
-      },
-      {
-        "key": "bonus_mana_regen",
-        "display": "+ 1 / 1.5 / 2 Mana Regeneration",
-        "value": "1 / 1.5 / 2"
-      },
-      {
-        "key": "mana_reduction_pct",
-        "display": "- 10 / 12 / 14% Max Mana",
-        "value": "10 / 12 / 14"
-      }
-    ]
-  },
-  {
-    "id": 1596,
-    "displayName": "Evolved",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "primary_stat",
-        "display": "+ 40 Primary Attribute",
-        "value": "40"
-      }
-    ],
-    "notes": "Grants +24 to each attribute for Universal Heroes."
-  },
-  {
-    "id": 1597,
-    "displayName": "Titanic",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "base_attack_damage",
-        "display": "+ 8 / 12 / 16% Base Attack Damage",
-        "value": "8 / 12 / 16"
-      },
-      {
-        "key": "status_resistance",
-        "display": "+ 10 / 12 / 14% Status Resistance",
-        "value": "10 / 12 / 14"
-      },
-      {
-        "key": "attack_speed",
-        "display": "- -10 / -12 / -14% Attack Speed",
-        "value": "-10 / -12 / -14"
       }
     ]
   },
@@ -7794,31 +5004,6 @@
     ]
   },
   {
-    "id": 1600,
-    "displayName": "Ripper's Lash",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_damage_hero",
-        "display": "BONUS DAMAGE (HEROES): 16",
-        "value": "16"
-      },
-      {
-        "key": "bonus_damage_creep",
-        "display": "BONUS DAMAGE (CREEPS): 4",
-        "value": "4"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Flay",
-        "description": "Embeds thorns into all enemies in a 200 unit radius. Affected units take additional damage when attacked for 10 seconds.",
-        "cooldown": 25
-      }
-    ]
-  },
-  {
     "id": 1601,
     "displayName": "Crippling Crossbow",
     "cost": 0,
@@ -7829,19 +5014,6 @@
         "description": "Hits an enemy for 25 damage, then slows them by 50% and reduces Health Restoration by 40% for 4 seconds. The slow gradually fades over the duration of the spell.",
         "cooldown": 30,
         "manaCost": 50
-      }
-    ]
-  },
-  {
-    "id": 1602,
-    "displayName": "Gale Guard",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Cyclonic Shield",
-        "description": "Envelops the caster in an all damage barrier that absorbs 75% of incoming damage up to a max of 225. Lasts for up to 10 seconds and while the barrier is active you have 50% Slow Resistance.",
-        "cooldown": 30
       }
     ]
   },
@@ -7896,32 +5068,6 @@
     ]
   },
   {
-    "id": 1607,
-    "displayName": "Magnifying Monocle",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Keen Eye",
-        "description": "Increases cast range by 100 and attack range by 100 (Melee & Ranged). Taking over 25 damage from a player controlled source or Roshan disables this effect for 6 seconds."
-      }
-    ]
-  },
-  {
-    "id": 1608,
-    "displayName": "Pyrrhic Cloak",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Retribution",
-        "description": "For the next 6 seconds, 75% of damage taken by the caster is reflected to the target unit as physical damage if they are within 1200 units away.",
-        "cooldown": 40
-      }
-    ],
-    "notes": "Damage done by this item is considered reflected damage. Reflected damage does not provide any lifesteal and cannot be reflected."
-  },
-  {
     "id": 1609,
     "displayName": "Madstone Bundle",
     "cost": 0,
@@ -7933,11 +5079,6 @@
     "id": 1610,
     "displayName": "",
     "cost": null
-  },
-  {
-    "id": 1636,
-    "displayName": "Crystal Raindrop",
-    "notFound": true
   },
   {
     "id": 1637,
@@ -7967,24 +5108,6 @@
     "notes": "Certain stats on the next artifact will be amplified. Will not amplify cooldown, mana cost, or cast range."
   },
   {
-    "id": 1639,
-    "displayName": "Sister's Shroud",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Veiled",
-        "description": "When falling below 50% HP, gain 150% evasion for 5 seconds. While active, dodging an attack decreases the evasion bonus by 75% of its current value."
-      },
-      {
-        "type": "passive",
-        "title": "Last Caress",
-        "description": "Veiled cooldown is only reset if the wearer dies or kills an enemy hero."
-      }
-    ],
-    "notes": "Does not trigger from damage by non-player controlled creeps"
-  },
-  {
     "id": 1640,
     "displayName": "Jidi Pollen Bag",
     "cost": 0,
@@ -7997,21 +5120,6 @@
       }
     ],
     "notes": "Damage is non-lethal and classified as HP Loss."
-  },
-  {
-    "id": 1641,
-    "displayName": "Outworld Staff",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Self-Exile",
-        "description": "Makes the caster completely invulnerable and disabled for 0.7 seconds. When returning to the world, the caster takes 5% of their maximum health as damage.",
-        "cooldown": 30,
-        "manaCost": 65
-      }
-    ],
-    "notes": "Damage taken when returning is non-lethal and disables Blink Dagger and other items that are muted upon taking damage."
   },
   {
     "id": 1642,
@@ -8048,136 +5156,6 @@
         "description": "Increases outgoing damage by 20%. Dying permanently disables this Neutral Item and the current Enchantment is lost."
       }
     ]
-  },
-  {
-    "id": 1645,
-    "displayName": "Disgraced Regalia",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Fallen",
-        "description": "You have died and thus get nothing."
-      }
-    ]
-  },
-  {
-    "id": 1646,
-    "displayName": "Circlet of the Flayed Twins",
-    "notFound": true
-  },
-  {
-    "id": 1647,
-    "displayName": "Fierce",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "movement_speed",
-        "display": "+ 30 Movement Speed",
-        "value": "30"
-      },
-      {
-        "key": "bonus_night_vision",
-        "display": "+ 250 Bonus Night Vision",
-        "value": "250"
-      },
-      {
-        "key": "bonus_damage",
-        "display": "+ 15 Damage",
-        "value": "15"
-      }
-    ]
-  },
-  {
-    "id": 1648,
-    "displayName": "Dominant",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "attack_speed",
-        "display": "+ 25 Attack Speed",
-        "value": "25"
-      },
-      {
-        "key": "magic_resist",
-        "display": "+ 15% Magic Resistance",
-        "value": "15"
-      },
-      {
-        "key": "bonus_health",
-        "display": "+ 205 Health",
-        "value": "205"
-      }
-    ]
-  },
-  {
-    "id": 1649,
-    "displayName": "Restorative",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_mana",
-        "display": "+ 200 Mana",
-        "value": "200"
-      },
-      {
-        "key": "bonus_hp_regen",
-        "display": "+ 8 Health Regeneration",
-        "value": "8"
-      },
-      {
-        "key": "heal_amp",
-        "display": "+ 10% Heal Amplification",
-        "value": "10"
-      }
-    ]
-  },
-  {
-    "id": 1650,
-    "displayName": "Thick",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "bonus_health",
-        "display": "+ 240 Health",
-        "value": "240"
-      },
-      {
-        "key": "bonus_mana_regen",
-        "display": "+ 3 Mana Regeneration",
-        "value": "3"
-      },
-      {
-        "key": "bonus_armor",
-        "display": "+ 7 Armor",
-        "value": "7"
-      }
-    ]
-  },
-  {
-    "id": 1651,
-    "displayName": "Unleashed",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "item_potency",
-        "display": "+ 30% Artifact Potency",
-        "value": "30"
-      }
-    ]
-  },
-  {
-    "id": 1652,
-    "displayName": "Bag of Gold",
-    "cost": 0,
-    "hint": [
-      "Contains gold"
-    ]
-  },
-  {
-    "id": 1715,
-    "displayName": "",
-    "cost": 550
   },
   {
     "id": 1716,
@@ -8262,11 +5240,6 @@
     ]
   },
   {
-    "id": 1800,
-    "displayName": null,
-    "notFound": true
-  },
-  {
     "id": 1801,
     "displayName": "",
     "cost": 5600
@@ -8280,18 +5253,6 @@
         "key": "bonus_mana_regen",
         "display": "+ 6 Mana Regeneration",
         "value": "6"
-      }
-    ]
-  },
-  {
-    "id": 1803,
-    "displayName": "Doubloon",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "toggle",
-        "title": "Flip",
-        "description": "Toggle to convert 30% of your Max Health to Max Mana, or 30% of your Max Mana to Max Health."
       }
     ]
   },
@@ -8318,11 +5279,6 @@
         "description": "Creates a banner at the target location. Lane creeps in the area of effect become damage immune while the Banner is up. Lasts 120 seconds.\n\n Can be destroyed. Melee hero attacks deal 2x damage to the banner."
       }
     ]
-  },
-  {
-    "id": 1805,
-    "displayName": "Parasma Recipe",
-    "cost": 400
   },
   {
     "id": 1806,
@@ -8369,11 +5325,6 @@
     ]
   },
   {
-    "id": 1807,
-    "displayName": "Khanda Recipe",
-    "notFound": true
-  },
-  {
     "id": 1808,
     "displayName": "Khanda",
     "cost": 5600,
@@ -8414,66 +5365,14 @@
     "notes": "The slow debuff is dispellable.\nThe break debuff is not dispellable."
   },
   {
-    "id": 2091,
-    "displayName": "Tier 1 Token",
-    "cost": null,
-    "hint": [
-      "Activate to redeem a Tier 1 Neutral Item. The resulting neutral item isn't shareable and a hero can only redeem a single token per tier."
-    ]
-  },
-  {
-    "id": 2092,
-    "displayName": "Tier 2 Token",
-    "cost": null,
-    "hint": [
-      "Activate to redeem a Tier 2 Neutral Item. The resulting neutral item isn't shareable and a hero can only redeem a single token per tier."
-    ]
-  },
-  {
-    "id": 2093,
-    "displayName": "Tier 3 Token",
-    "cost": null,
-    "hint": [
-      "Activate to redeem a Tier 3 Neutral Item. The resulting neutral item isn't shareable and a hero can only redeem a single token per tier."
-    ]
-  },
-  {
-    "id": 2094,
-    "displayName": "Tier 4 Token",
-    "cost": null,
-    "hint": [
-      "Activate to redeem a Tier 4 Neutral Item. The resulting neutral item isn't shareable and a hero can only redeem a single token per tier."
-    ]
-  },
-  {
-    "id": 2095,
-    "displayName": "Tier 5 Token",
-    "cost": null,
-    "hint": [
-      "Activate to redeem a Tier 5 Neutral Item. The resulting neutral item isn't shareable and a hero can only redeem a single token per tier."
-    ]
-  },
-  {
-    "id": 2096,
-    "displayName": "Vindicator's Axe",
-    "cost": 0,
+    "id": 1849,
+    "displayName": "Wizard Hat",
+    "cost": 250,
     "bonuses": [
       {
-        "key": "bonus_attack_speed",
-        "display": "+ 35 Attack Speed",
-        "value": "35"
-      },
-      {
-        "key": "bonus_slow_resist",
-        "display": "+ 20% Slow Resistance",
-        "value": "20"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Vengeance",
-        "description": "Provides 30 damage if equipped hero is Silenced and 20 armor if equipped hero is Stunned."
+        "key": "bonus_mana",
+        "display": "+ 125 Mana",
+        "value": "125"
       }
     ]
   },
@@ -8490,16 +5389,6 @@
     ]
   },
   {
-    "id": 2098,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 2099,
-    "displayName": "",
-    "notFound": true
-  },
-  {
     "id": 2190,
     "displayName": "Dandelion Amulet",
     "cost": 0,
@@ -8508,49 +5397,6 @@
         "type": "passive",
         "title": "Magical Damage Block",
         "description": "Every 12s, blocks up to 300 magic damage from damage instances over 75 damage."
-      }
-    ]
-  },
-  {
-    "id": 2191,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 2192,
-    "displayName": "Martyr's Plate",
-    "cost": 0,
-    "bonuses": [
-      {
-        "key": "magic_resist",
-        "display": "+ 25% Magic Resistance",
-        "value": "25"
-      },
-      {
-        "key": "hp_regen",
-        "display": "+ 7 Health Regeneration",
-        "value": "7"
-      }
-    ],
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Martyrdom",
-        "description": "Redirect 25% of all magic damage dealt to your allied heroes within 900 radius towards you for 10 seconds.",
-        "cooldown": 40
-      }
-    ],
-    "notes": "Damage done by this item is considered reflected damage. Reflected damage does not provide any lifesteal and cannot be reflected."
-  },
-  {
-    "id": 2193,
-    "displayName": "Gossamer Cape",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "passive",
-        "title": "Sixth Sense",
-        "description": "Automatically dodge an attack from an enemy hero."
       }
     ]
   },
@@ -8592,53 +5438,5 @@
       }
     ],
     "notes": "Hold Control to use on a nearby allied hero."
-  },
-  {
-    "id": 4207,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 4208,
-    "displayName": "",
-    "notFound": true
-  },
-  {
-    "id": 4300,
-    "displayName": "Beloved Memory",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Honor the Dead",
-        "description": "Place this Offering on an Altar to honor the dead with a memory from those they left behind.",
-        "cooldown": 3
-      }
-    ]
-  },
-  {
-    "id": 4301,
-    "displayName": "Scrying Shovel",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Dig",
-        "description": "Search the map for Offerings to the dead.",
-        "cooldown": 8
-      }
-    ]
-  },
-  {
-    "id": 4302,
-    "displayName": "Forebearer's Fortune",
-    "cost": 0,
-    "abilities": [
-      {
-        "type": "active",
-        "title": "Undying Promise",
-        "description": "Signal to the spirits of the other realm your commitment to honoring them. If everyone in the battle makes an Undying Promise before the fight begins, the dead might be willing to listen."
-      }
-    ]
   }
 ]

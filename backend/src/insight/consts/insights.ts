@@ -15,6 +15,13 @@ export const INSIGHT_CONFIGS: Record<InsightName, InsightConfig> = {
     importance: "high",
     ttlMs: 300_000,
   },
+  neutral_items: {
+    unique: false,
+    description:
+      "Neutral items and enchantments by tier for a hero, scraped live from dota2protracker.com (pick rate / win rate among top players). Voice the top pick per tier briefly.",
+    importance: "medium",
+    ttlMs: 120_000,
+  },
   score_change: {
     unique: false,
     description:

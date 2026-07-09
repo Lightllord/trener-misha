@@ -9,7 +9,8 @@
     "scrape:heroes": "node src/scrape-heroes.mjs",
     "apply": "node src/apply-patch-notes.mjs",
     "apply:dry": "node src/apply-patch-notes.mjs --dry-run",
-    "apply:resume": "node src/apply-patch-notes.mjs --resume"
+    "apply:resume": "node src/apply-patch-notes.mjs --resume",
+    "open:protracker": "node src/open-protracker.mjs"
   },
   "dependencies": {
     "puppeteer": "^24.9.0"
