@@ -24,11 +24,19 @@ export class SessionEventBridge {
       channel.sendAudio(event.data as ArrayBuffer);
     });
 
-    // Server-side VAD cut the model off (user barged in). Tell the browser to
-    // flush its buffered playback so the interruption is actually heard.
+    // Server-side VAD cut the model off mid-generation (user barged in). A hard
+    // signal: tell the browser to flush buffered playback unconditionally.
     session.transport.on("audio_interrupted", () => {
       log("turn", "audio interrupted — flushing frontend playback");
       channel.send({ type: "interrupt" });
+    });
+
+    // The user started a turn. Forwarded raw: the model may have already
+    // finished generating (so no audio_interrupted fires), yet the browser can
+    // still be draining seconds of buffered audio — realtime generates faster
+    // than it plays. The browser flushes that tail iff it's still playing.
+    session.transport.on("input_audio_buffer.speech_started", () => {
+      channel.send({ type: "speech_started" });
     });
 
     // Main-agent tool use — backend-log-only, one short line per tool. Sub-agent

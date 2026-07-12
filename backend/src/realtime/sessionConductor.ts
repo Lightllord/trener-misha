@@ -12,7 +12,15 @@ import { TRUNCATION_CONFIG } from "./consts/session.js";
 export class SessionConductor {
   readonly window: DeliveryWindow;
 
-  constructor(private readonly session: RealtimeSession) {
+  // onOutputPreempted fires when we cancel a live response to inject something
+  // more important (a critical insight). The response's audio may already be
+  // buffered on the client, so the caller uses this to flush that playback —
+  // otherwise the model "self-interrupts" on the server but keeps talking in the
+  // user's ear.
+  constructor(
+    private readonly session: RealtimeSession,
+    private readonly onOutputPreempted?: () => void,
+  ) {
     this.window = new DeliveryWindow(session);
     this.configureTruncation();
   }
@@ -31,6 +39,7 @@ export class SessionConductor {
     if (triggerResponse && this.window.isResponseActive()) {
       log("inject", "preempting active response (response.cancel)");
       this.session.transport.sendEvent({ type: "response.cancel" });
+      this.onOutputPreempted?.();
     }
     if (triggerResponse) this.window.setResponseActive(true);
     log(

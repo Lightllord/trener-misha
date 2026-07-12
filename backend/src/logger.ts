@@ -2,17 +2,18 @@ import { appendFile, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 import { inspect } from "node:util";
 
-// Two file sinks mirror everything that goes through console:
-//   logs/backend.log        — persistent, compact, appended across all runs.
-//   .temp/logs/<stamp>.log  — fresh per process start, verbose. Objects/Errors
-//                             are inspected (stack traces, nested fields) instead
-//                             of JSON.stringify'd, so an Error is never "{}" and
-//                             an object is never "[object Object]".
-const LOG_DIR = join(process.cwd(), "logs");
+// Logs live in the repo-root .temp/logs (one level up from the backend cwd), so
+// backend and frontend logs sit side by side and correlate by wall-clock time —
+// the frontend writes its own frontend-<stamp>.log there via the Electron main
+// process. Two backend sinks mirror everything that goes through console:
+//   backend.log           — persistent, compact, appended across all runs.
+//   backend-<stamp>.log   — fresh per process start, verbose. Objects/Errors are
+//                           inspected (stack traces, nested fields) instead of
+//                           JSON.stringify'd, so an Error is never "{}" and an
+//                           object is never "[object Object]".
+const LOG_DIR = join(process.cwd(), "..", ".temp", "logs");
 const LOG_FILE = join(LOG_DIR, "backend.log");
-
-const SESSION_DIR = join(process.cwd(), ".temp", "logs");
-const SESSION_FILE = join(SESSION_DIR, `session-${fileStamp()}.log`);
+const SESSION_FILE = join(LOG_DIR, `backend-${fileStamp()}.log`);
 
 // 2026-07-07T14-30-05 — filesystem-safe (no colons) and sorts chronologically.
 function fileStamp(): string {
@@ -22,10 +23,7 @@ function fileStamp(): string {
 let dirsReady: Promise<unknown> | null = null;
 function ensureDirs(): Promise<unknown> {
   if (!dirsReady) {
-    dirsReady = Promise.all([
-      mkdir(LOG_DIR, { recursive: true }),
-      mkdir(SESSION_DIR, { recursive: true }),
-    ]);
+    dirsReady = mkdir(LOG_DIR, { recursive: true });
   }
   return dirsReady;
 }

@@ -13,8 +13,15 @@ export interface DesktopPtt {
   onUp: (callback: () => void) => void;
 }
 
+// Log sink exposed by the Electron preload — mirrors renderer log lines to a
+// file in the repo-root .temp/logs. Fire-and-forget; absent outside Electron.
+export interface DesktopLog {
+  write: (line: string) => void;
+}
+
 declare global {
   interface Window {
     desktopPtt?: DesktopPtt;
+    desktopLog?: DesktopLog;
   }
 }

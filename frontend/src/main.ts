@@ -1,4 +1,5 @@
 import { startMicCapture, createAudioPlayer } from "./audio";
+import { flog } from "./log";
 import { PttController } from "./ptt";
 import { codeToUiohookName, isTypingTarget, labelForCode } from "./pttSettings";
 import { playCue } from "./sound";
@@ -59,6 +60,7 @@ function sendControl(msg: Record<string, unknown>) {
 
 const ptt = new PttController((open) => {
   micGateOpen = open;
+  flog("gate", `${open ? "open" : "close"} (mode=${ptt.getSettings().mode})`);
   // Closing the gate signals end-of-turn. Server VAD handles the normal case;
   // this forces a commit when the mic is cut mid-speech (no trailing silence
   // for VAD to detect), which would otherwise hang waiting for a response.
@@ -178,15 +180,46 @@ function disconnect() {
 // a barge-in; transcripts, tool use and errors live in the backend log.
 
 interface ControlMessage {
-  type: "interrupt";
+  type: "interrupt" | "speech_started";
+}
+
+// A soft speech_started flush waits this long: a brief blip / mumble that the
+// VAD picked up shouldn't cut the answer, but sustained speech still clears the
+// tail. The hard "interrupt" frame is never delayed.
+const SPEECH_FLUSH_DELAY_MS = 500;
+let pendingFlush: number | null = null;
+
+function clearPendingFlush() {
+  if (pendingFlush === null) return;
+  window.clearTimeout(pendingFlush);
+  pendingFlush = null;
+}
+
+function doFlush(source: string) {
+  flog(source, `flushing playback (mic ${micGateOpen ? "open" : "closed"})`);
+  player?.flush();
+  interruptedUntil = Date.now() + 1200;
+  renderActivity();
+  window.setTimeout(renderActivity, 1300);
 }
 
 function handleControlMessage(msg: ControlMessage) {
   if (msg.type === "interrupt") {
-    player?.flush();
-    interruptedUntil = Date.now() + 1200;
-    renderActivity();
-    window.setTimeout(renderActivity, 1300);
+    // Hard signal: the model's current output is void. Flush now, cancel any
+    // pending soft flush.
+    clearPendingFlush();
+    doFlush("interrupt");
+  } else if (msg.type === "speech_started") {
+    // Raw fact that the user began talking. If the bot is still draining
+    // buffered audio, the model is already listening — drop the tail, but after
+    // a short grace period so a blip doesn't cut the answer. Re-check botSpeaking
+    // when it fires: a no-op if playback already drained.
+    if (botSpeaking && pendingFlush === null) {
+      pendingFlush = window.setTimeout(() => {
+        pendingFlush = null;
+        if (botSpeaking) doFlush("speech_started (delayed)");
+      }, SPEECH_FLUSH_DELAY_MS);
+    }
   }
 }
 
@@ -203,6 +236,7 @@ connectBtn.addEventListener("click", async () => {
 
     player = createAudioPlayer((speaking) => {
       botSpeaking = speaking;
+      flog("bot", speaking ? "speaking" : "silent");
       renderActivity();
     });
 
@@ -226,6 +260,7 @@ connectBtn.addEventListener("click", async () => {
 
     ws.onclose = () => {
       console.info("WebSocket closed");
+      flog("ws", "closed");
       disconnect();
     };
 
@@ -235,6 +270,7 @@ connectBtn.addEventListener("click", async () => {
     });
 
     console.info("WebSocket connected, starting microphone…");
+    flog("ws", "connected");
 
     mic = await startMicCapture((pcm16: ArrayBuffer) => {
       if (micGateOpen && ws && ws.readyState === WebSocket.OPEN) {

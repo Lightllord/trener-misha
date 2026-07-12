@@ -1,8 +1,34 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
+const fs = require("node:fs");
 const path = require("node:path");
 const { uIOhook, UiohookKey } = require("uiohook-napi");
 
 const DEV_URL = "http://localhost:5173";
+
+// Mirror renderer logs to repo-root .temp/logs/frontend-<stamp>.log (two levels
+// up from electron/), alongside the backend log for wall-clock correlation. A
+// single append stream opened once; a failed write must never crash the app.
+const LOG_DIR = path.join(__dirname, "..", "..", ".temp", "logs");
+const LOG_STAMP = new Date().toISOString().replace(/:/g, "-").split(".")[0];
+let logStream = null;
+try {
+  fs.mkdirSync(LOG_DIR, { recursive: true });
+  logStream = fs.createWriteStream(path.join(LOG_DIR, `frontend-${LOG_STAMP}.log`), {
+    flags: "a",
+  });
+  logStream.on("error", (err) => console.error("[log] stream error:", err));
+} catch (err) {
+  console.error("[log] failed to open frontend log file:", err);
+}
+
+ipcMain.on("app-log", (_event, line) => {
+  if (typeof line !== "string" || !logStream) return;
+  try {
+    logStream.write(`${line}\n`);
+  } catch (err) {
+    console.error("[log] write failed:", err);
+  }
+});
 
 let win = null;
 // Keycode the global hook watches. -1 = nothing (renderer sets it on startup).

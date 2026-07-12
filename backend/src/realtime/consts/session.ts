@@ -12,7 +12,11 @@ export const SESSION_OPTIONS: SessionOptions = {
       input: {
         turnDetection: {
           type: "semantic_vad",
-          eagerness: "medium",
+          // "low" = strictest: the VAD waits for clearer, more complete speech
+          // before ending/interrupting a turn, so filler ("мычание") and brief
+          // noise don't flush the model mid-answer. Trade-off: it also waits a
+          // touch longer before replying to a genuine turn.
+          eagerness: "low",
         },
         noiseReduction: { type: "near_field" },
       },

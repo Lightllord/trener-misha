@@ -47,7 +47,9 @@ export class VoiceSession {
     }
     if (this.disposed) return;
 
-    const conductor = new SessionConductor(this.session);
+    const conductor = new SessionConductor(this.session, () =>
+      this.channel.send({ type: "interrupt" }),
+    );
     this.conductor = conductor;
     this.turn = new TurnController(this.session, conductor);
     const insights = new InsightDelivery(

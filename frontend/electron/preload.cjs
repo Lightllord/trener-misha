@@ -15,3 +15,9 @@ contextBridge.exposeInMainWorld("desktopPtt", {
     ipcRenderer.on("ptt:up", () => callback());
   },
 });
+
+// Exposed to the renderer as window.desktopLog (see src/types/desktop.ts).
+// Fire-and-forget line writer; the main process owns the file + path.
+contextBridge.exposeInMainWorld("desktopLog", {
+  write: (line) => ipcRenderer.send("app-log", line),
+});
