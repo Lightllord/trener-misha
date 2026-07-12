@@ -21,9 +21,9 @@ import mss
 
 from player_regions import (
     INNATE_THRESHOLD, FRAME_THRESHOLD,
-    SKILL_1, LEVEL, SLOT_W, SLOT_H, SLOT_GAP, SLOT_GAP_H_PX, ITEMS_OFFSET_X,
+    SKILL_1, LEVEL, SLOT_W, SLOT_H, SLOT_GAP, SLOT_GAP_H, ITEMS_OFFSET_X,
     FRAME_ITEMS_DX, FRAME_ITEMS_DY, NUM_ITEM_SLOTS,
-    ITEM_CROP_TOP_PX, ITEM_CROP_BOTTOM_PX,
+    ITEM_CROP_TOP_FRAC, ITEM_CROP_BOTTOM_FRAC,
 )
 from screen import resolve_monitor
 
@@ -180,33 +180,36 @@ def find_template_multiscale(
     return best
 
 
-def derive_regions(innate: Box, frame: Box) -> dict:
-    ih = float(innate.h)
+def derive_regions(innate: Box, frame: Box, screen_h: int) -> dict:
+    # Everything in fractions of SCREEN HEIGHT (see player_regions.py). Origin is
+    # the innate CENTRE for skill/level and the panel frame (right anchor) for items.
+    icx = innate.x + innate.w / 2.0
+    icy = innate.y + innate.h / 2.0
 
-    def region(off: dict, from_right: bool = False) -> tuple[int, int, int, int]:
-        ox = innate.x + innate.w if from_right else innate.x
+    def region_screen(off: dict) -> tuple[int, int, int, int]:
         return (
-            int(ox + off["dx"] * ih),
-            int(innate.y + off["dy"] * ih),
-            int(off["w"] * ih),
-            int(off["h"] * ih),
+            round(icx + off["dx"] * screen_h),
+            round(icy + off["dy"] * screen_h),
+            round(off["w"] * screen_h),
+            round(off["h"] * screen_h),
         )
 
-    slot_w_px = int(SLOT_W   * ih)
-    slot_h_px = int(SLOT_H   * ih)
-    gap_h_px  = int(SLOT_GAP * ih) + SLOT_GAP_H_PX
-    gap_v_px  = int(SLOT_GAP * ih)
-    col2_right = frame.x + int(FRAME_ITEMS_DX * ih)
-    row0_top   = frame.y + int(FRAME_ITEMS_DY * ih)
+    slot_w_px  = round(SLOT_W * screen_h)
+    slot_h_px  = round(SLOT_H * screen_h)
+    gap_h_px   = round((SLOT_GAP + SLOT_GAP_H) * screen_h)
+    gap_v_px   = round(SLOT_GAP * screen_h)
+    offset_x   = round(ITEMS_OFFSET_X * screen_h)
+    col2_right = frame.x + round(FRAME_ITEMS_DX * screen_h)
+    row0_top   = frame.y + round(FRAME_ITEMS_DY * screen_h)
 
     items = []
     for row in range(2):
         for col in range(3):
-            sx = col2_right - (3 - col) * slot_w_px - (2 - col) * gap_h_px + ITEMS_OFFSET_X
+            sx = col2_right - (3 - col) * slot_w_px - (2 - col) * gap_h_px + offset_x
             sy = row0_top + row * (slot_h_px + gap_v_px)
             items.append((sx, sy, slot_w_px, slot_h_px))
 
-    return {"skill_1": region(SKILL_1), "level": region(LEVEL), "items": items}
+    return {"skill_1": region_screen(SKILL_1), "level": region_screen(LEVEL), "items": items}
 
 
 SKILL_MATCH_THRESHOLD = 0.55
@@ -302,9 +305,11 @@ def match_items(
             continue
         sg = to_gray(slot_img)
         sh = sg.shape[0]
-        sg_cropped  = _crop_vertical(sg, ITEM_CROP_TOP_PX, ITEM_CROP_BOTTOM_PX)
-        top_frac    = ITEM_CROP_TOP_PX / sh
-        bottom_frac = ITEM_CROP_BOTTOM_PX / sh
+        top_px      = round(ITEM_CROP_TOP_FRAC * sh)
+        bottom_px   = round(ITEM_CROP_BOTTOM_FRAC * sh)
+        sg_cropped  = _crop_vertical(sg, top_px, bottom_px)
+        top_frac    = ITEM_CROP_TOP_FRAC
+        bottom_frac = ITEM_CROP_BOTTOM_FRAC
         target_h, target_w = sg_cropped.shape[:2]
 
         cache_key = (target_w, target_h, round(top_frac, 4), round(bottom_frac, 4))
@@ -343,7 +348,7 @@ def detect_once(
         return None
     print(f"Frame ({frame.score:.2f})", file=sys.stderr)
 
-    regions  = derive_regions(innate, frame)
+    regions  = derive_regions(innate, frame, _sh)
     skill_img = crop(screen, *regions["skill_1"])
     level_img = crop(screen, *regions["level"])
     item_imgs = [crop(screen, *r) for r in regions["items"]]

@@ -7,27 +7,43 @@ Re-run calibrate_player.py to recalibrate.
 INNATE_THRESHOLD = 0.75
 FRAME_THRESHOLD  = 0.9
 
-# All offsets relative to detected innate icon height (innate_h).
-# Origin: innate icon top-left. Positive = right / down.
-# pixel_offset = ratio * innate_h at detection time.
+# ── Region geometry ──────────────────────────────────────────────────────────
+# All offsets and sizes are fractions of SCREEN HEIGHT (the Dota HUD scales with
+# vertical resolution). At detection time: pixels = fraction * screen_height.
+# Using the exact screen height as the ruler — instead of the measured innate
+# height — keeps innate's ~1px detection error from being amplified over long
+# reaches (a big innate-height lever turned ±1px into ~10px on 1440p/4K).
+#
+#   skill_1 / level : origin = innate CENTRE   (robust to innate size error)
+#   items           : origin = detected panel frame (right anchor)
+#
+# Calibrated at 1920x1080; each comment shows the 1080p pixel value it came from.
 
-SKILL_1 = {'dx': 0.94, 'dy': 0.18, 'w': 1.08, 'h': 0.64}
-LEVEL   = {'dx': -5.54, 'dy': 1.8, 'w': 0.78, 'h': 0.72}
-ITEM_0  = {'dx': 8.74, 'dy': -0.1, 'w': 1.2, 'h': 0.9}  # from innate RIGHT edge — used by --update-frame
+SKILL_1 = {'dx': 0.025463, 'dy': -0.014815, 'w': 0.05, 'h': 0.02963}
+LEVEL   = {'dx': -0.274537, 'dy': 0.060185, 'w': 0.036111, 'h': 0.033333}
+
+# from innate RIGHT edge in innate-height units — used only by calibrate_player
+# --update-frame, which still runs in the old scheme (see note at EOF).
+ITEM_0  = {'dx': 8.74, 'dy': -0.1, 'w': 1.2, 'h': 0.9}
 
 # Item grid: 2 rows × 3 cols, anchored from the panel frame (right anchor).
-# FRAME_ITEMS_DX: from frame.x to right edge of column 2 (negative = items left of frame).
-# FRAME_ITEMS_DY: from frame.y to top of row 0.
-SLOT_W         = 1.2
-SLOT_H         = 0.9
-SLOT_GAP       = 0.08
-SLOT_GAP_H_PX  = 2     # extra horizontal gap in absolute pixels
-ITEMS_OFFSET_X = 3     # global horizontal shift for all item slots in absolute pixels
-FRAME_ITEMS_DX = -1.1
-FRAME_ITEMS_DY = -0.5
+# FRAME_ITEMS_DX: frame.x → right edge of column 2 (negative = items left of frame).
+# FRAME_ITEMS_DY: frame.y → top of row 0.
+SLOT_W         = 0.055556   # slot width           (60px @1080)
+SLOT_H         = 0.041667   # slot height          (45px @1080)
+SLOT_GAP       = 0.003704   # base gap between slots ( 4px @1080)
+SLOT_GAP_H     = 0.001852   # extra horizontal gap  ( 2px @1080)
+ITEMS_OFFSET_X = 0.002778   # global horizontal nudge (3px @1080)
+FRAME_ITEMS_DX = -0.050926  # -55px @1080
+FRAME_ITEMS_DY = -0.023148  # -25px @1080
 NUM_ITEM_SLOTS = 6
 
-# Crop off the charge-count/cooldown chrome baked into the in-game item slot
-# before matching, so only the item art is compared against the template.
-ITEM_CROP_TOP_PX    = 12
-ITEM_CROP_BOTTOM_PX = 16
+# Crop the charge-count/cooldown chrome baked into the in-game item slot before
+# matching, so only the item art is compared. Fractions of slot height, so the
+# same proportion is removed at any resolution (12px / 16px of a 45px slot @1080).
+ITEM_CROP_TOP_FRAC    = 0.266667
+ITEM_CROP_BOTTOM_FRAC = 0.355556
+
+# NOTE: calibrate_player.py still writes the OLD innate-height scheme, so a full
+# recalibration will overwrite these values with the pre-migration format. Until
+# the calibrator is migrated, re-derive these fractions by hand after calibrating.
