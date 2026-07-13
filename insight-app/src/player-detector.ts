@@ -16,10 +16,6 @@ interface RawDetection {
 
 export type DetectionListener = (otherHeroes: OtherPlayerState[], lastInspectGameTime: number) => void
 
-function isClean(items: string[]): boolean {
-  return items.every(name => name !== "unknown")
-}
-
 export class PlayerDetector {
   private cache    = new Map<string, OtherPlayerState>()
   private proc:    ChildProcess | null = null
@@ -205,10 +201,6 @@ export class PlayerDetector {
     if (raw.heroName === "unknown") return
     // Панель собственного героя игрока — данные уже приходят из GSI, не дублируем.
     if (`npc_dota_hero_${raw.heroName}` === this.getOwnHeroName()) return
-    if (!isClean(raw.items)) {
-      console.log(`[PlayerDetector] ${raw.heroName}: skipped (unknown items)`)
-      return
-    }
 
     const positions = this.getHeroPositions()
     const posKey    = `npc_dota_hero_${raw.heroName}`
